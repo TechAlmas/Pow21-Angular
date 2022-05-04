@@ -1,0 +1,50 @@
+<!-- Dashboard Main Nav Start -->
+<div class="dashboard-nav">
+   <div class="container clearfix">
+      <div class="row clearfix" style="float: left;">
+         <div class="col-md-12 col-lg-5">
+            <div class="dash-user-info" id="profile_image">
+               <!-- <div class="dash-img-wrap" (click)="uploadImage();">
+                  <span class="plus">
+                     <img src="assets/images/icon-default-photo.png" alt=""><em>+</em>
+                  </span>                  
+                  <span class="add-photo">Add your photo</span>
+               </div> -->
+             
+               <image-upload 
+                [beforeUpload]="onBeforeUpload"
+                [buttonCaption]="''"
+                (removed)="onRemoved($event)"
+                (uploadStateChanged)="onUploadStateChanged($event)"
+                (uploadFinished)="onUploadFinished($event)"
+                [uploadedFiles]="userImage.photo"
+                ></image-upload>      
+               <div class="dash-content-wrap">
+                  <h3>POW! It‘s {{this.uname[0]}}</h3>
+                  <p>Get a personalized experienced, see strains you might like, local deals and more. Simply browse and engage on POW and we'll do the rest.</p>
+              <!--    <a href="#"><img src="assets/images/connect-facebook-btn.png" alt=""></a>  -->
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12 col-lg-7">
+            <ul class="dash-nav">
+               <li>
+                  <a routerLink="/members/price-alert"><span class="icon nav-price-icon"></span><span class="text">My Price Alerts</span></a>
+               </li>
+               <li>
+                  <a routerLink="/members/strain-favorites"><span class="icon nav-strain-icon"></span><span class="text">My Strains</span></a>
+               </li>
+               <li>
+                  <a routerLink="/members/share-earn"><span class="icon nav-earn-icon"></span><span class="text">Share + Earn</span></a>
+               </li>
+               <li>
+                  <a routerLink="/members/profile"><span class="icon nav-member-icon"></span><span class="text">Profile</span></a>
+               </li>
+               <li *ngIf="this.privileges">
+                  <a routerLink="/members/business"><span class="icon nav-business-icon"></span><span class="text">Business</span></a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>

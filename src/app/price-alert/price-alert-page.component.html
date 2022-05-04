@@ -1,0 +1,94 @@
+<div class="content-wrap alert-box-wrap" >
+        <section class="alert-box">
+    <div class="container">
+      <h2><i class="icon-bell"></i> Price Alerts</h2>
+      <p>Get notified in real-time when marijuana prices change in your neighbourhood. Create one or <br>100 Price Alerts to get alerted of the best deals on your favourite strains.</p>
+      <div class="box-form">
+        <form id="priceAlertForm" #priceAlertForm="ngForm" (ngSubmit)="onFormSubmit(priceAlertForm)">
+          <div class="row">
+            <div class="col-md-6" *ngIf="display_fields">
+              <div class="form-group name">
+                <input id="price-alert-input" name="name" placeholder="Your name" class="sm-form-control" [ngModel]="price_alert.name" required #uName="ngModel">
+                <div *ngIf="uName.errors && priceAlertForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                    <div *ngIf="uName.errors.required"> 
+                     Please provide your name
+                    </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group select2 locations">
+                  <select  id="price-alert-location" name = "city" class="sm-form-control" [ngModel]="this.selectedLocation" [value]= "this.selectedLocation">
+                   
+              <!--   <optgroup label="{{this.state_label}}">
+                     <option [selected]="0==this.selectedLocation" *ngFor="let state of this.locations['user_state']" [value] = "0">{{state['name']}}</option>
+                   </optgroup> -->
+                  <optgroup label="My City">
+                     <option [selected]="city['id']==this.selectedLocation" *ngFor="let city of this.locations['user_location']" [value] = "city['id']">{{city['name']}}</option> 
+                    </optgroup>
+                    
+                    <!-- <optgroup label="{{this.state_label_other}}">
+                      <option [selected]="state['state_id']==this.selectedLocation" *ngFor="let state of this.locations['state']" [value] = "state['state_id']">{{state['state']}}</option>
+                    </optgroup> -->
+                    <optgroup label="Nearby Cities" *ngIf="nearByCities">
+                      <option [selected]="city.id==this.selectedLocation" *ngFor="let city of this.locations['near_cities']" [value] = "city.id">{{city.name}}</option>
+                    </optgroup>
+                    <optgroup label="{{this.locationSes['state']}}" *ngIf="nearByOtherCities">
+                      <option [selected]="0==this.selectedLocation" *ngFor="let state of this.locations['user_state']" [value] = "0">{{state['name']}}</option>
+                      <option [selected]="city.id==this.selectedLocation" *ngFor="let city of this.locations['near_other_cities']" [value] = "city.id">{{city.name}}</option>
+                    </optgroup>
+                    <optgroup label="{{state.state}}" *ngFor="let state of this.locations['state']">
+                      <option [selected]="state.state_id==this.selectedLocation" [value]="state.state_id" class="state_label">{{state.state}}</option>
+                      <ng-container *ngFor="let city of this.locations['new_state_array']">
+                      <option  [selected]="city.id==this.selectedLocation" *ngIf="city.state_id==state.state_id"  [value]="city.id">{{city.name}}</option>
+              </ng-container>
+
+               </optgroup>
+                   <!-- <optgroup label="{{this.locationSes['country']}}">
+                     <option [selected]="city.id==this.selectedLocation" *ngFor="let city of this.locations['rest_cities']" [value] = "city.id">{{city.name}}</option>
+                   </optgroup> -->
+              </select>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="display_fields">
+              <div class="form-group email">
+                <input id="price-alert-email" name="email" placeholder="Email address" class="sm-form-control" [ngModel]="price_alert.email" required [pattern]="emailPattern" #uEmail="ngModel">
+                 <div *ngIf="uEmail.errors && priceAlertForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                         <div *ngIf="uEmail.errors.required"> 
+                      Please provide your email address
+                   </div>        
+                         <div *ngIf="uEmail.errors.pattern"> 
+                      Please enter valid email address
+                   </div> 
+                       </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group select2 strains">
+                  <select id="price-alert-strn" name="strain" class="sm-form-control" [ngModel]="price_alert.strain">
+                  <option [selected] = "st.strain_id == price_alert.strain" *ngFor="let st of this.defaultStrain" [value] = "st.strain_id">{{st.name}}</option>
+                <option [selected] = "st.strain_id == price_alert.strain" *ngFor="let st of this.strains" [value] = "st.strain_id">{{st.name}}</option>
+                </select>
+                  
+              </div>
+            </div>
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Alert Me!</button>
+            </div>
+            <div class="col-md-12">
+              <p>Create as many cannabis Price Alerts as you like. Manage all your <a routerLink="/members/price-alert">Price Alerts</a> within your POW account.</p>
+            </div>
+          </div>
+        </form>
+        <div class="arrow_box"></div>
+      </div>
+      <mio-price-alert-detail></mio-price-alert-detail>
+      
+    </div>
+
+
+  </section>
+
+
+
+      </div>

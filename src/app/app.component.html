@@ -1,0 +1,23 @@
+<mio-layout></mio-layout>
+
+<div class="modal fade" id="ageValid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false">
+   <form class="center-align-popup">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-body">                        
+	                    <img alt="POW Logo" src="assets/images/logo.png">
+	                    <h3>{{display_title}}</h3>
+	                    <p style="white-space: pre-wrap">{{display_messge}}<span>Yes, I am</span></p>
+                        <!-- <p class="copyright">Yes, I agree to POW's <a href="http://www.pow21.com/blog/termsofuse/" target="_blank">Terms</a> and <a href="http://www.pow21.com/blog/privacy/" target="_blank">Privacy.</a></p> -->
+	                    <div class="button-popup-grp">
+                            <a href="javascript:void(0)" (click)="actionAgeValid(1)" class="button legal-btn">Yes, I'm Legal age</a>
+                            <a href="javascript:void(0)" (click)="actionAgeValid(0)" class="button unlegal-btn">No, I'm not</a>
+                        </div>
+                        <p style="font-size: 12px;padding: 0;">If you access POW21.com, you agree to the <a href="https://www.pow21.com/blog/termsofuse/" target="_blank">Terms</a> and <a href="https://www.pow21.com/blog/privacy/" target="_blank">Privacy Policy</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

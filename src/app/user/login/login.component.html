@@ -1,0 +1,25 @@
+<form #LoginForm="ngForm" (ngSubmit)="onFormSubmit(LoginForm)" class="nobottommargin">
+	<h3>Login to your POW Account</h3>
+	<div class="col_full">
+		<label for="login-form-username">Username:</label>
+		<input type="text" id="login-form-username" name="email" value="" class="form-control not-dark" [ngModel]="login_alert.email" required #uEmail="ngModel" />
+		<div *ngIf="uEmail.errors && LoginForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			<div *ngIf="uEmail.errors.required"> 
+					Please provide your Email
+			</div>  
+		</div>
+	</div>
+	<div class="col_full">
+		<label for="login-form-password">Password:</label>
+		<input type="password" id="login-form-password" name="password" value="" class="form-control not-dark" [ngModel]="login_alert.password" required #nPassword="ngModel"  />
+		<div *ngIf="nPassword.errors && LoginForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			<div *ngIf="nPassword.errors.required"> 
+					Please provide your Password
+			</div>  
+		</div>
+	</div>
+	<div class="col_full nobottommargin">
+		<button class="button nomargin" id="login-form-submit" name="login-form-submit" value="login" type="submit">Login</button>
+		<a routerLink="/forgotpassword" class="fright">Forgot Password?</a>
+	</div>
+</form>

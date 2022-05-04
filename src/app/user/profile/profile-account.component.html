@@ -1,0 +1,121 @@
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu></mio-profile-top-menu>
+<!-- Dashboard SubNav Start -->
+<mio-profile-sub-menu></mio-profile-sub-menu>
+<!-- Dashboard SubNav End -->
+<div class="content-wrap grey-bg">
+  <div class="container clearfix">
+    <div class="row clearfix">
+      <div class="col-md-8">
+        <!-- Account Setting Section start-->
+        <div class="white-box">
+          <div class="white-box-title"><h3>Account and Settings <i class="icon-angle-right"></i></h3>
+          </div>
+          <div class="white-box-content">
+            <form #EditForm="ngForm" enctype="multipart/form-data" (ngSubmit)="onFormSubmit(EditForm)">
+              <div class="login-section">
+                <div class="form-group row">
+                  <label for="" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="edit-form-email" name="email" value="{{email}}" class="form-control" [ngModel]="edit_alert.email" required [pattern]="emailPattern" #uEmail="ngModel" (change) = "checkEmail()" />
+                    <div *ngIf="uEmail.errors && EditForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                      <div *ngIf="uEmail.errors.required">
+                        Please provide your Email
+                      </div>
+                      <div *ngIf="uEmail.errors.pattern">
+                        Please enter valid email address
+                      </div>
+                    </div>
+                    <div id="email_error" style="display: none;" class="error" > 
+                           Oops. An account already exists with provided email address.
+                    </div> 
+                    <small id="" class="form-text text-muted">Important: Your email is required for your account login. We won't share this without your permission.</small>
+                  </div>
+                </div>
+
+                <h3>Change Password</h3>
+
+                <div class="form-group row">
+                  <label for="" class="col-sm-2 col-form-label">Password</label>
+                  <div class="col-sm-8">
+                    <input type="password" id="edit-form-password" name="password" value="" minlength="6" class="form-control" required={{isRequired}} [ngModel]="edit_alert.password" #nPassword="ngModel" (input)="onConfirmPwd(EditForm)" (blur)="onPasswordRequired(EditForm)" />
+                    <div *ngIf="nPassword.errors && EditForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                      <div *ngIf="nPassword.errors.required">
+                        Please enter password
+                      </div>
+                      <div *ngIf="nPassword.errors.minlength">
+                        Password must be at least 6 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="" class="col-sm-2 col-form-label">Confirm Password</label>
+                  <div class="col-sm-8">
+                    <input type="password" id="edit-form-repassword" name="cpassword" value="" class="form-control" [ngModel]="edit_alert.cpassword" validateEqual="password" required={{isRequired}} #uCpassword="ngModel" (input)="onConfirmPwd(EditForm)" />
+                    <div *ngIf="uCpassword.errors && EditForm.submitted && !isValidFormSubmitted" [ngClass]="'error'">
+                      <div *ngIf="uCpassword.errors.required">
+                        Please enter confirm password
+                      </div>
+                    </div>
+                    <div id="pcp_error" class="error" *ngIf="this.validateEqual">
+                      Password & Confirm password do not match.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="settings-section">
+                <h3>Settings</h3>
+                <div class="form-group row">
+                  <!-- <label for="" class="col-sm-2 col-form-label">Updates</label> -->
+                  <div class="col-sm-8">
+                    <label class="toggle">
+                      <input type="checkbox" id="edit-form-is_updates" name="is_updates" value="1" class="form-control" [ngModel]="edit_alert.is_updates" #uIsUpdates="ngModel">
+                      <div class="slide-toggle"></div>
+                      <div class="slide-toggle-content">Yes, I want to hear about special updates, news and exclusive offers.</div>
+                    </label>
+                  </div>
+                </div>
+                <!-- <div class="form-group row">
+                         
+                           <div class="col-sm-8">
+                              <label class="toggle">
+                                <input type="checkbox" id="edit-form-is_terms" name="is_terms"  value="1" class="form-control" [ngModel]="edit_alert.is_terms" #uIsUpdates="ngModel" disabled="disabled">
+                                <div class="slide-toggle"></div>
+                                <div class="slide-toggle-content">By using POW, I agree to the Terms of Use and Privacy Policy.</div>
+                              </label>
+                           </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                          
+                           <div class="col-sm-8">
+                              <label class="toggle">
+                                <input type="checkbox" id="edit-form-is_age_validation" name="is_age_validation"  value="1" class="form-control" [ngModel]="edit_alert.is_age_validation" #uIsUpdates="ngModel" disabled="disabled">
+                                <div class="slide-toggle"></div>
+                                <div class="slide-toggle-content">Are you 21+ or a valid medical marijuana patient?.</div>
+                              </label>
+                           </div>
+                        </div> -->
+              </div>
+              <div class="form-group row">
+                <div class="ml-auto col-sm-9">
+                  <button id="edit-form-submit" name="edit-form-submit" type="submit" class="btn btn-primary save-btn">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Account Setting Section End-->
+      </div>
+      <div class="col-md-4">
+        <!---  <div class="white-box">
+               <div class="white-box-title"><h3>Connect <i class="icon-angle-right"></i></h3></div>
+               <div class="white-box-content">
+                  <p>Want a more personalized and tailored experience? Help us tailor and recommend strains you might like, local deals and much more. Connect with your social profiles and we’ll do the rest. <span class="link mt-2"><a href="#"><img src="assets/images/connect-facebook-btn.png" alt=""></a></span></p>
+               </div>
+            </div>  -->
+        <mio-share-link></mio-share-link>
+      </div>
+    </div>
+  </div>

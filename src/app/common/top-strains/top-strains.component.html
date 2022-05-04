@@ -1,0 +1,61 @@
+<div class="col_full">  
+    <div class="top-strains-compare">
+        <div class="head-wrap">
+            <h3>Compare Cannabis Strains</h3>
+            <p>July 21, 2018 10:05 UTC <span>(updated daily)</span></p>
+        </div>
+        <ul class="top-strains-compare-list">
+            <li class="head">
+                <div class="loc-col">
+                    <span>Vancouver, BC</span>
+                </div>
+                <div class="retail-avg-head-col">
+                    <span>Avg. ( 1 gram )</span>
+                </div>             
+                <div class="compare-price-head-col">
+                    <span>Dispensaries & Retailers</span>
+                </div>
+                
+                <div class="open-market-head-col">                   
+                    <span>Open Market</span>
+                </div>
+            </li>
+            
+            <li class="item" *ngFor="let strain of this.top_strains">
+                <div class="notification-col">
+                    <a href="#"><i class="bell-icon"></i></a>
+                </div>
+                <div class="brand-col">
+                    <span class="mob-label">Vancouver, BC</span>
+                    <div class="content-wrap">
+                        <!-- Kushy brand -->
+                        <strong>{{strain.strain_name}}</strong>
+                    </div>
+                </div>
+                <div class="retail-avg-col">
+                    <span class="mob-label">Avg. ( 1 gram )</span>
+                    <div class="price">
+                        <span class="current-status">{{strain.avg_price  | currency}} <span class="up">(<em>{{strain.differ_price  | currency}}</em>)</span></span>
+                    </div>
+                </div>
+                <div class="compare-price-col">
+                    <span class="mob-label">Dispensaries & Retailers</span>
+                    <div class="price" *ngFor="let disp of strain.disp">
+                        <span class="current-status">{{disp.price | currency}} <span class="down">(<em>$0.10</em>)</span></span>
+                        {{disp.name}}
+                    </div>                    
+                </div>
+                
+                <div class="open-market-col">
+                    <span class="mob-label">Open Market</span>
+                    <span class="status-h">H {{strain.high_price  | currency}} <!-- <span class="up">(<em>$0.20</em>)</span> --></span>
+                    <span class="status-m">L {{strain.low_price  | currency}} <!-- <span class="down">(<em>$0.20</em>)</span> --></span>
+                </div>
+            </li>
+        </ul>
+        <div class="compare-list-add-change">
+            <a href="#"><img src="assets/images/add-icon.png"/> Add / Change your favourite marijuana strains</a>
+            <p>Retail average prices are corrected for a standard deviation from the mean. Retail dispensary and provincial, state or territory public figures are published per most recent data provided and may differ in-store or online. Open market figures are crowd sourced from the public open market and are average marijuana prices by quality. All data and prices are for informational purposes only. To obtain a data feed for latest prices, please visit our Developer area for commercial or free cannabis API acccess.</p>
+        </div>
+    </div>
+</div>

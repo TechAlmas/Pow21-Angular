@@ -1,0 +1,14 @@
+
+.converter-box .tabs .tab-content#tabs-9 {
+    margin-top: -1px;
+    height: auto;
+}
+.tabs-nav-wrap .container {
+    width: 100%;
+    padding: 0px;
+    margin: auto;
+}
+.converter-box .tabs ul.tab-nav.tab-nav2{
+ z-index: 0;
+ position: relative;
+ }

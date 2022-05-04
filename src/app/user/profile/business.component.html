@@ -1,0 +1,214 @@
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu></mio-profile-top-menu>
+<!-- Dashboard SubNav Start -->
+<mio-business-sub-menu></mio-business-sub-menu>
+<div class="content-wrap grey-bg">
+	<!-- Manage price Section start -->
+	<div class="container clearfix">
+		<h2>Manage Your Stores</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="white-box">
+					<div class="white-box-title">
+						<h3>Business List
+							<div class="btn-group-sm" style="display: inline;margin-left: 10px;vertical-align: middle;">
+								<button class="btn btn-primary save-btn" style="width: 10%;" routerLink="/members/business/edit/add">Add</button>
+							</div><i class="icon-angle-right"></i>
+						</h3>
+					</div>
+					<div class="white-box-content">
+						<table class="table table-striped stores">
+							<thead>
+								<tr>
+									<th>Verified</th>
+									<th></th>
+									<th>Name</th>
+									<!-- <th>Address</th> -->
+									<th>City</th>
+									<!-- <th>State</th>
+									<th>Zip Code</th> -->
+									<th>Country</th>
+									<th>Contributors</th>
+									<th>Social</th>
+									<th>Insights</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let rv of listdispLists">
+									<td class="status">
+										<div *ngIf="rv.status else elseBlock">
+											<img src="/assets/images/icon-verified-yes.png">
+										</div>
+										<ng-template #elseBlock>
+											<a routerLink="/members/business/edit/{{rv.slug}}">
+												<img src="/assets/images/icon-verified-no.png" >
+											</a>
+										</ng-template>
+									</td>
+									<td>
+										<a routerLink="/{{globals.location_global_url}}/dispensary/{{rv.slug}}">
+											<img  src="https://www.pow21.com/admin/storage/app/{{rv.logoUrl}}" alt="" draggable="false" style="">
+										</a>
+									</td>
+									<td>{{rv.name}}</td>
+									<!-- <td></td> -->
+									<td>
+										{{rv.city}}, {{rv.state}} <br/>
+										({{rv.address}}, {{rv.zip_code}})
+									</td>
+									<!-- <td></td>
+									<td></td> -->
+									<td>{{rv.country}}</td>
+									<td>
+										<span *ngFor="let cb of rv.contributors">{{cb.name}}, </span>
+									</td>
+									<td>{{rv.social}}<a href="#">4.7</a>  | <a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
+									<td class="status">
+										<a routerLink="/members/business/insights">
+											<img src="/assets/images/icon-insights.png">
+										</a>
+									</td>
+									<td style="text-align: center;">
+										<a title="Edit your business" style="margin-right: 10px;" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
+										<a title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv)" ><i class="fa fa-trash" ></i></a>
+									</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Manage price Section End -->
+</div>
+<div class="modal fade" id="add_edit_store" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-body">
+			<form #submitStore="ngForm" (ngSubmit)="onSubmitStore(submitStore.value)">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Title here</h4>
+						<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+						<input type = "hidden" id="id" name="id" class="sm-form-control" placeholder="" ngModel>
+					</div>
+					<div class="modal-body">  
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Name</label>
+							<input type = "text" id="name" name="name" class="sm-form-control required" placeholder="" ngModel>
+						</div>
+						<!-- Add new form fields here -->
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Address</label>
+							<input type = "text" id="address" name="address" class="sm-form-control address required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Address 2</label>
+							<input type = "text" id="address2" name="address2" class="sm-form-control address2 required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">City</label>
+							<input type = "text" id="city" name="city" class="sm-form-control city required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">State</label>
+							<input type = "text" id="state" name="state" class="sm-form-control state required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Zip Code</label>
+							<input type = "text" id="zip_code" name="zip_code" class="sm-form-control zip_code required" placeholder="" ngModel>
+						</div>
+
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Country</label>
+							<input type = "text" id="country" name="country" class="sm-form-control country required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Tags</label>
+							<input type = "text" id="license_type" name="license_type" class="sm-form-control license_type required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Website</label>
+							<input type = "text" id="website" name="website" class="sm-form-control website required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Email</label>
+							<input type = "email" id="email" name="email" class="sm-form-control email required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Email 2</label>
+							<input type = "email" id="email2" name="email2" class="sm-form-control email2 required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Phone</label>
+							<input type = "Phone" id="phone" name="phone" class="sm-form-control phone required" placeholder="" ngModel>
+						</div>
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Logo</label>
+							<!-- <input type = "file" id="logo" name="logo" class="sm-form-control logo required" placeholder="" ngModel> -->
+							<input (change)="this.onFilechange($event)" class="form-control" type="file" id="formFile">
+						</div>
+
+						<div class="form-group whitebgs">
+							<div class="wait-layer" *ngIf="waitLayer"></div>
+							<label for="paid-for-quality">Assign User</label>
+							<select id="assign_user" name="assign_user" class="sm-form-control assign_user required">
+								<option *ngFor="let ul of userList" value="{{ul.id}}" >{{ul.name}}</option>
+							</select>
+							<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="store_status_change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-body">
+			<form #submitStore="ngForm" (ngSubmit)="onSubmitStore(submitStore.value)">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Change Status</h4>
+						<button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+						<input type = "hidden" id="id" name="id" class="sm-form-control" placeholder="" ngModel>
+					</div>
+					<div class="modal-body">  
+						<div class="form-group whitebgs">
+                        	<div class="wait-layer" *ngIf="waitLayer"></div>
+                        	<label for="paid-for-quality">Status</label>
+	                        <div>
+	                           <input id="status_1" class="radio-style" name="status" type="radio" value="1" required>
+	                           <label for="status_1" class="radio-style-2-label">Active</label>
+	                           <input id="status_0" class="radio-style" name="status" type="radio" value="0" required >
+	                           <label for="status_0" class="radio-style-2-label">Suspend</label>
+	                        </div>
+                     	</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,138 @@
+
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu></mio-profile-top-menu>
+<!-- Dashboard SubNav Start -->
+<mio-business-sub-menu></mio-business-sub-menu>
+<div class="content-wrap grey-bg">
+
+<!-- Manage price Section start -->
+   <div class="container clearfix">
+      <h2>Manage your Business</h2>
+      <div class="row">
+         <div class="col-md-12">
+            <div class="white-box">
+               <div class="white-box-title">                  
+                  <h3>Business List<div class="btn-group-sm" style="display: inline;margin-left: 10px;vertical-align: middle;"><button class="btn btn-primary save-btn" style="width: 10%;" routerLink="/members/business/user/add">Add</button></div><i class="icon-angle-right"></i></h3>
+
+               </div>
+               <div class="white-box-content">
+                  <table class="table table-striped">
+                     <thead>
+                        <tr>                           
+                           <th>Name</th>
+                           <th>Email</th>
+                           <th>Actions</th>
+                        </tr>
+                     </thead>  
+                     <tbody>
+                        <tr *ngFor="let rv of listUserLists">
+                           <td>{{rv.name}}</td>
+                           <td>{{rv.email}}</td>
+                           <td style="text-align: centers;"><a title="Edit your business" style="margin-right: 10px;" href="javascript:void(0)" routerLink="/members/business/user/edit/{{rv.id}}"><i class="fa fa-edit" ></i></a>
+                           <a title="Delete your business" href="javascript:void(0)" ><i class="fa fa-trash" ></i></a></td>
+                        </tr>
+                     </tbody>                   
+                  </table>
+               </div>
+            </div>
+         </div>
+
+      
+         <div class="col-md-6"></div>
+
+      </div>
+   </div>
+   <!-- Manage price Section End -->
+   </div>
+   <div class="modal fade" id="add_edit_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+         <div class="modal-body">
+            <form #submitUser="ngForm" (ngSubmit)="onSubmitUser(submitUser.value)">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h4 class="modal-title" id="myModalLabel">Title here</h4>
+                     <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                     <input type = "hidden" id="id" name="id" class="sm-form-control" placeholder="" ngModel>
+                  </div>
+                  <div class="modal-body">  
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Name</label>
+                        <input type ="text" id="name" name="name" class="sm-form-control name required" placeholder="" ngModel>
+                     </div>
+                     <!-- Add new form fields here -->
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Email </label>
+                        <input type ="email" id="email" name="email" class="sm-form-control email  required" placeholder="" ngModel readonly>
+                     </div>
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Gender </label>
+                        <div>
+                           <input id="gender_male" class="radio-style" name="gender" type="radio" value="Male" required>
+                           <label for="gender_male" class="radio-style-2-label">Male</label>
+                           <input id="gender_female" class="radio-style" name="gender" type="radio" value="Female" required >
+                           <label for="gender_female" class="radio-style-2-label">Female</label>
+                        </div>
+                     </div>
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Birthday </label>
+                        <input type ="date" id="birthday" name="birthday" class="sm-form-control birthday  required" placeholder="" ngModel>
+                     </div>
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Country </label>
+                        <input type ="text" id="country" name="country" class="sm-form-control country  required" placeholder="" ngModel>
+                     </div>
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">State</label>
+                        <input type ="text" id="state" name="state" class="sm-form-control state required" placeholder="" ngModel>
+                     </div>
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">City </label>
+                        <input type ="text" id="city" name="city" class="sm-form-control city required" placeholder="" ngModel>
+                     </div>
+      
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Photo </label>
+                        <input type ="file" id="photo" name="photo" class="sm-form-control photo  required" placeholder="" ngModel>
+                     </div>
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Privileges</label>
+                        <!-- <input type ="select" id="cms_privileges" name="cms_privileges" class="sm-form-control cms_privileges required" placeholder="" ngModel> -->
+                        <select id="cms_privileges" name="cms_privileges" class="sm-form-control cms_privileges required">
+                           <option value="">-- Select Privillage --</option>
+                           <option value="6">Business Owner</option>
+                           <option value="7">Business Contributor</option>
+                        </select>
+                     </div>
+                     <!-- <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Terms and Privacy</label>
+                        <label class="toggle">
+                         <input type="checkbox" id="edit-form-terms_and_privacy" name="terms_and_privacy" value="1" class="form-control">
+                         <div class="slide-toggle"></div>
+                         <div class="slide-toggle-content">Yes, I agree to POW's Terms and Privacy.</div>
+                       </label>
+                     </div> -->
+                     <div class="form-group whitebgs">
+                        <div class="wait-layer" *ngIf="waitLayer"></div>
+                        <label for="paid-for-quality">Password </label>
+                        <input type ="password" id="password" name="password" class="sm-form-control password  required" placeholder="" ngModel>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>

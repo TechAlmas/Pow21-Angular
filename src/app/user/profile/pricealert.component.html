@@ -1,0 +1,73 @@
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu *ngIf="this.user_data != null"></mio-profile-top-menu>
+<div class="content-wrap grey-bg">
+<!-- Manage price Section start -->
+   <div class="container clearfix">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="white-box">
+               <div class="white-box-title">
+                  <a routerLink="/{{this.geoLocations}}/price-alert" class="btn btn-primary create-btn">Create price alert</a>
+                  <h3>Manage price alerts <i class="icon-angle-right"></i></h3>
+               </div>
+               <div class="white-box-content">
+                  <table class="table table-striped">
+                     <thead>
+                        <tr>
+                           <th></th>
+                           <th>Strain</th>
+                           <th>Location</th>
+                           <th>Price Set</th>
+                           <th>Today</th>
+                           <th>Change</th>
+                           <th>52-week L/H</th>
+                           <th>Set Target</th>
+                           <th></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let st of strain">
+                           <td class="date-td"><span class="month">{{st.set_date | date: 'MMM'}}</span><span class="date">{{st.set_date | date: 'dd'}}</span></td>
+                           <td class="strain"><span><a routerLink="/{{globals.location_global_url}}/strain/{{st.slug}}">{{st.strain}}</a></span></td>
+                           <td class="location" *ngIf="st.city">{{st.location}}</td>
+                           <td class="location" *ngIf="!st.city">{{st.state_name}}</td>
+                           <td class="price-set" *ngIf = "st.set_price != 0.00">{{ st.set_price|currency}}<br/>per gram</td>
+                           <td class="price-set" *ngIf = "st.set_price == 0.00">-</td>
+                           <td class="today"  *ngIf = "st.today_price != 0.00">{{st.today_price|currency}}<br/>per gram</td>
+                           <td class="today"  *ngIf = "st.today_price == 0.00">-</td>
+                           <td class="change up" *ngIf = "st.set_price != 0.00"><span>{{st.different_price|currency}}</span><br/><span>({{st.different_percent}}%)</span></td>
+                           <td class="change up" *ngIf = "st.set_price == 0.00">-</td>
+
+                           <td class="week-l-h" *ngIf = "st.set_price != 0.00"><span>{{st.week_low_price|currency}}L</span>  <span>{{st.week_high_price|currency}}H</span></td>
+
+                           <td class="week-l-h" *ngIf = "st.set_price == 0.00">-</td>
+                           <td>
+                              <form *ngIf="st.type==2 && change_display" style="margin:0;padding: 0;font-size: 12px;width:120px;">
+                                 <select id="action_{{st.alert_id}}" style="width:55px;float: left;height: 25px;">
+                                    <option [selected] = "st.target_action == 'Up'" (value)="Up">Up</option>
+                                    <option [selected] = "st.target_action == 'Down'" (value)="Down">Down</option>
+                                 </select>
+                                 <input style="width:55px;float: left;height: 25px;font-size: 11px;margin: 0;" id="priceCheck_{{st.alert_id}}" type="number" maxlength='5' name="target_price" value ="{{st.target_price}}" required class="form-control quantity" placeholder="" (input)="checkPriceValue($event,st.alert_id)" min="0.01" max="100" step="0.01" ><br/>
+                                 <a style="float: left;clear: both;" *ngIf="st.type==2 && change_display" href="javascript:void(0)" (click) = "changePrice(st.alert_id)">Set</a>
+                              </form>
+                              <span *ngIf="st.type==2 && !change_display">
+                              <span id="view_action_{{st.alert_id}}">{{st.target_action}}</span>&nbsp;&nbsp; 
+                              <span id="view_price_{{st.alert_id}}">{{st.target_price|currency}}</span>
+                              </span><br/><a *ngIf="st.type==2 && !change_display" href="javascript:void(0)" (click) = "change_display = !change_display">Change</a>
+                           </td>
+                           <td class="action"><a title="Remove price alert" href="javascript:void(0)" (click) = "removeAlert(st.type,st.alert_id,st.strain,st.location)"><i class="icon-minus remove" style=""></i></a></td>
+                        </tr>
+                        <tr *ngIf="no_data">
+                           <td colspan="8">
+                              <p>Oops, you've not created any Price Alerts yet. <a routerLink="/{{this.geoLocations}}/price-alert">Create</a> your first cannabis Price Alert.</p>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Manage price Section End -->
+   </div>

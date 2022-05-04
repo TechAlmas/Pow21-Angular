@@ -1,0 +1,123 @@
+<div class="container">
+
+				<!-- Footer Widgets
+				============================================= -->
+				<div class="footer-widgets-wrap clearfix">
+
+					<div class="col_three_fifth">
+
+						<div class="col_half">
+
+							<div class="widget clearfix">							
+								<h4 style="margin-bottom: 10px;">About Us</h4>
+								<p style="margin-bottom: 10px;">Compare thousands of cannabis strain prices and brands in one place. The easiest way to find your favourite marijuana, compare prices and get the best local deal.</p>
+								<p style="margin-bottom: 10px;">We also believe every experience matters. So together, we help recreational and medical cannabis consumers with smart and easy ways to create their desired experience from thousands of marijuana strains, dispensaries, and retailers in one place.</p>
+								<p style="margin-bottom: 10px;">That’s Pu-pow! <a href="https://www.pow21.com/blog/about-pow/" target="_blank">Learn more about POW</a>. </p>
+								
+
+							</div>
+
+						</div>
+
+						<div class="col_half col_last">
+
+							<div class="widget clearfix">
+								<h4>Recent Posts</h4>
+
+								<div id="post-list-footer">
+									<div class="spost clearfix" *ngFor="let post of this.posts">
+										<div class="entry-c">
+											<div class="entry-title">
+												<h4><a target="_blank" href="{{post.link}}" [innerHTML]="post.title.rendered"></a></h4>
+											</div>
+											<ul class="entry-meta">
+												<li></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="col_two_fifth col_last">
+
+						<div class="widget clearfix" style="margin-bottom: -20px;">
+
+							<div class="row">
+								<div class="col-lg-6 bottommargin-sm">
+									<div class="counter counter-small">{{this.st_count}}</div>
+									<h5 class="nobottommargin">Strains and counting</h5>
+									<h4 style="margin-bottom: 10px;margin-top: 50px;">Business & Advertising</h4>
+									<span><a href="https://www.pow21.com/blog/business/" target="_blank">Business solutions</a></span><br/>
+									<span><a href="https://www.pow21.com/blog/business/form-add-a-business-listing/" target="_blank">Add a free business listing</a></span><br/>
+									<span><a href="https://www.pow21.com/blog/business/dispensary-solutions/" target="_blank">Dispensary & retailer solutions</a></span><br/>
+									<span><a href="https://www.pow21.com/blog/business/brand-solutions/" target="_blank">Brand solutions</a></span><br/><br/>
+									<abbr title="Email Address"><strong>Email:</strong></abbr> pupow@pow21.com
+								</div>
+
+								<div class="col-lg-6 bottommargin-sm">
+									<div class="counter counter-small">{{this.disp_count}}</div>
+									<h5 class="nobottommargin">Dispensaries and retailers</h5>
+									<h4 style="margin-bottom: 10px;margin-top: 50px;">Media & Press</h4>
+									<abbr title="Email Address"><strong>Email:</strong></abbr> press@pow21.com
+								</div>
+
+							</div>
+
+						</div>
+
+						<div>									
+							
+							<br/><br/>
+							
+						</div>
+
+						<div class="widget clearfix" style="margin-bottom: 0px; margin-top: 20px;">
+
+							<div class="row">
+
+								<div class="social-icon-wrap col-lg-6 clearfix bottommargin-sm">
+									<a href="#" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
+										<i class="icon-facebook"></i>
+										<i class="icon-facebook"></i>
+									</a>
+									<a href="#"><small style="display: block; margin-top: 3px;"><strong>Friend us</strong><br>on Facebook</small></a>
+								</div>
+								<div class="social-icon-wrap col-lg-6 clearfix">
+									<a href="https://twitter.com/pupow21" class="social-icon si-dark si-colored si-twitter nobottommargin" style="margin-right: 10px;" target="_blank">
+										<i class="icon-twitter"></i>
+										<i class="icon-twitter"></i>
+									</a>
+									<a href="https://twitter.com/pupow21" target="_blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Twitter</small></a>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div><!-- .footer-widgets-wrap end -->
+				
+			</div>
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+
+				<div class="container clearfix">
+					<p style="color: #CCC; font-size: 12px;">Important Notice: Content on this website is intended strictly for informational and educational purposes only. Marijuana is illegal in some Jurisdictions and is your responsibility to check your local regulations to comply by the law. POW purpose, content and context are intended for both industry reporting, and opinion expression. POW does not promote or endorse any product or represent that the products mentioned on POW’s website are a treatment for any kind of medical condition or symptom. POW cannot guarantee that the information provided is error-free or complete and is not responsible for the quality of the information provided by users and sources. POW does not endorse any user-reported information, any particular strain, product, producer, organization, treatment or medical or non-medical therapy. POW does not make representations regarding the use of cannabis and does not provide any of its own views on the use of cannabis, its benefits, or promotes its use. </p>
+					<div class="col_half nomargin">
+						Copyrights &copy; 2019 All Rights Reserved by POW Inc.
+					</div>
+					
+					<div class="copyright-links col_half nomargin" style="text-align: right;float: right;"><a href="https://www.pow21.com/blog/termsofuse/" target="_blank">Terms of Use</a> / <a href="https://www.pow21.com/blog/privacy/" target="_blank">Privacy Policy</a> / <a routerLink="/" (click)="Logout()">Logout</a></div>
+					
+				</div>
+
+				
+
+			</div><!-- #copyrights end -->

@@ -1,0 +1,169 @@
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu *ngIf="this.user_data != null"></mio-profile-top-menu>
+<mio-profile-sub-menu></mio-profile-sub-menu>
+
+<div class="content-wrap grey-bg">
+
+<!-- Manage price Section start -->
+   <div class="container clearfix">
+      <h2>Manage your reviews</h2>
+      <div class="row">
+         <div class="col-md-6">
+            <div class="white-box">
+               <div class="white-box-title">                  
+                  <h3>Strain Reviews<i class="icon-angle-right"></i></h3>
+               </div>
+               <div class="white-box-content">
+                  <table class="table table-striped">
+                     <thead>
+                        <tr>                           
+                           <th>Strain</th>
+                           <th>Review</th>
+                           <th>Status</th>
+                           <th>Action</th>
+                        </tr>
+                     </thead>  
+                     <tbody>
+                        <tr *ngFor="let rv of reviews">
+                           <td>{{rv.strain_name}}<br/><span style="font-size: 11px;">{{rv.created_at | date: 'MMM d, y'}}</span></td>
+                           <td>
+                            <!-- <p class="review" style="width: 50%;">  
+                              <span class="rating-wrap" *ngIf="{'width': (rv.rating*100)/5+'%'}; let variable">
+                                <span class="rating" [ngStyle]="variable"></span>
+                              </span>
+                            </p>    -->
+                            <span>{{rv.message.substring(0,40)}}
+                              <span id="dots1_{{rv.id}}"></span>
+                              <span id="more1_{{rv.id}}" style="display: none">{{rv.message.substring(40)}}</span>
+                            </span>
+                            <a href="Javascript:void(0)" (click) = "readmorestrain(rv.id)" id="myBtn1_{{rv.id}}" *ngIf="rv.message.length>40">...Read more</a>
+                            </td>       
+                           <td *ngIf="rv.status == 0">Pending review</td>
+                           <td *ngIf="rv.status == 1">Published</td>
+                           <td *ngIf="rv.status == 0"><!-- <span class="row"><a title="Remove Your Review" href="javascript:void(0)" (click) = "removeReview(rv.id,rv.strain_name)" class="col-sm-6"><i class="icon-minus remove" style=""></i></a><a href="javascript:void(0);" (click)="getReviewdetail(rv.id)" data-toggle="modal" data-target="#myModal_fav" class="col-sm-6"><i class="i-plain i-medium icon-edit"></i></a></span> --><i class="fa fa-times"></i></td>
+                           <td *ngIf="rv.status == 1"><a title="unpublish your review" href="javascript:void(0)" (click)="unpublishreview(rv.id,rv.strain_name)"><i class="fa fa-check" ></i></a></td>
+
+                        </tr>
+                     </tbody>                   
+                  </table>
+               </div>
+            </div>
+         </div>
+
+      
+         <div class="col-md-6">
+            <div class="white-box">
+               <div class="white-box-title">                  
+                  <h3>Dispensary Reviews<i class="icon-angle-right"></i></h3>
+               </div>
+               <div class="white-box-content">
+                  <table class="table table-striped">
+                     <thead>
+                        <tr>                           
+                           <th>Dispensary</th>
+                           <th>Review</th>
+                           <th>Status</th>
+                           <th>Action</th>
+                        </tr>
+                     </thead>  
+                     <tbody>
+                        <tr *ngFor="let disp of dispreviews">
+                           <td>{{disp.disp_name}}<br/><span style="font-size: 11px;">{{disp.created_at | date: 'MMM d, y'}}</span></td>
+                           <td width="40%"><span>{{disp.message.substring(0,40)}}<span id="dots_{{disp.id}}"></span><span id="more_{{disp.id}}" style="display: none">{{disp.message.substring(40)}}</span></span><a href="Javascript:void(0)" (click) = "readmoredisp(disp.id)" id="myBtn_{{disp.id}}" *ngIf="disp.message.length>40" >...Read more</a></td>       
+                           <td *ngIf="disp.status == 0">Pending review</td>
+                           <td *ngIf="disp.status == 1">Published</td>
+                           <td *ngIf="disp.status == 0"><!-- <span class="row"><a title="Remove Your Review" href="javascript:void(0)" (click) = "removedispReview(disp.id,disp.disp_name)" class="col-sm-6"><i class="icon-minus remove" style=""></i></a><a href="javascript:void(0);" (click)="getdispReviewdetail(disp.id)" data-toggle="modal" data-target="#myModal_fav1" class="col-sm-6"><i class="i-plain i-medium icon-edit"></i></a></span> --><i class="fa fa-times"></i></td>
+                           <td *ngIf="disp.disp_name.status == 1"><i class="fa fa-check" style=""></i></td>
+                           <td *ngIf="disp.status == 1"><a title="unpublish your review" href="javascript:void(0)" (click)="unpublishdispreview(disp.id,disp.disp_name)"><i class="fa fa-check" ></i></a></td>
+                        </tr>
+                     </tbody>                   
+                  </table>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div>
+   <!-- Manage price Section End -->
+   </div>
+
+   <div class="modal fade" id="myModal_fav" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form #StrainReview="ngForm" (ngSubmit)="onSreviewsubmit(StrainReview)">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Edit Review For {{this.strain_name}}</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-body">  
+                       
+                        <input type="hidden" name="id" [ngModel]="this.review_alert.id">
+                        <div class="form-group" >
+                            <label for="converter-alert-review" class="sr-only"> Review</label>
+                         <textarea name="review" [ngModel]="this.review_alert.message" required #uName="ngModel" class="form-control" placeholder="Enter your name"></textarea>
+                            <div *ngIf="uName.errors && StrainReview.submitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uName.errors.required"> 
+                                   Please provide your Review
+                                 </div>       
+                                
+                            </div>
+                        </div>
+                       <!--   <div class="form-group" *ngIf="!this.checkUser">
+                        <span class="review">
+                           <input id="starrating" type="number" class="rating" min="1" max="5" data-size="sm" data-step="1" name="starrating"  value="{{this.review_alert.rating}}">
+                           <input type="text" name="text" value="{{this.review_alert.rating}}">
+                      </span>
+                       <div *ngIf="rating_req" [ngClass] = "'error'"> 
+                                  <div *ngIf="rating_req"> 
+                                   Please select your rating
+                                 </div>
+                        </div>
+                      </div> -->
+                      
+                       
+                    </div>
+                    <div class="modal-footer">
+                     <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="myModal_fav1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form #DispReview="ngForm" (ngSubmit)="onDispreviewupdate(DispReview)">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Edit Dispensary Review</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-body">  
+                       
+                        <input type="hidden" name="id" [ngModel]="dispreview_alert.id">
+                        <div class="form-group">
+                            <label for="converter-alert-name" class="sr-only">Name</label>
+                            <textarea name="disp_review" [ngModel]="dispreview_alert.message" required #uName="ngModel" class="form-control" placeholder="Enter your name"></textarea>
+                            <div *ngIf="uName.errors && DispReview.submitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uName.errors.required"> 
+                                   Please provide your Review
+                                 </div>       
+                                
+                            </div>
+                        </div>
+                      
+                       
+                    </div>
+                    <div class="modal-footer">
+                     <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

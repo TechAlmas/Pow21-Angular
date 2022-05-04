@@ -1,0 +1,35 @@
+<div class="dashboard-subnav">
+   <div class="container clearfix">
+      <div class="row clearfix">
+         <ul class="dash-subnav">
+            <li class="profile">
+               <a routerLink="/members/business">
+                  <span class="icon-wrap"></span>
+                  <span class="menu-text">
+                     <span class="menu">Dispensaries</span> 
+                     <span>Edit you business details</span>
+                  </span>
+               </a>
+            </li>
+            <li class="your-reviews" *ngIf="this.subPrivileges">
+               <a routerLink="/members/business/users">
+                  <span class="icon-wrap"><img src="assets/images/your-reviews.png" alt="Your Reviews"></span>
+                  <span class="menu-text">
+                     <span class="menu">Users</span>
+                     <span>Manage your users</span>
+                  </span>
+               </a>
+            </li>
+            <li class="account">
+               <a routerLink="/members/account">
+                  <span class="icon-wrap"><img src="assets/images/account-icon.png" alt="Account"></span>
+                  <span class="menu-text">
+                     <span class="menu">Account</span>
+                     <span>Change password + settings</span>
+                  </span>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,113 @@
+<div id="top-bar" class="transparent-topbar">
+    <div class="container clearfix">
+        
+        <div class="col_half nobottommargin clearfix all-cities-wraps">
+            <!-- Top Links
+            ============================================= -->
+            <div class="dropdown">
+                 <ul>
+                    <li><a href="Javascript:void(0)" (click) = "this.dispContent = !this.dispContent">{{(globals.location_global_url == "us")?"United States":"Canada"}} &nbsp;&nbsp; <img width="20px" src="assets/images/{{globals.location_global_url}}.png">&nbsp;&nbsp;<i class="icon-angle-down"></i></a></li>
+                    <ul class="dropdown-content" *ngIf="dispContent">
+                        <li (click) = "redirectTo('us/main')"><a href="Javascript:void(0)"  >United States</a></li>
+                        <li (click) = "redirectTo('canada/main')"><a href="Javascript:void(0)" >Canada</a></li>
+                    </ul>
+                 </ul> 
+            </div>
+        </div>
+
+        <div class="col_half fright col_last clearfix nobottommargin top-links-wraps">
+            <!-- Top Links
+            ============================================= -->
+            <div class="top-links">
+                <ul>
+                    <!-- Member Login Begain -->
+                        <!-- After-->
+                        
+                        <!-- <li class="username">
+                            welcome to Username
+                        </li>
+                        <li>
+                            <a href="#"><i class="icon-signout"></i> Logout</a>
+                        </li> -->
+                        
+                        <!-- Before Member Login -->
+
+                        <li *ngIf="this.globals.user_data"> 
+                            <a routerLink="/members/dashboard"><i class="icon-user"></i><span class="user-name">{{this.globals.user_name}}</span></a>
+                        </li>
+
+                        <li *ngIf="!this.globals.user_data">
+                            <a routerLink="/login"><i class="icon-lock3"></i> <span>Login</span></a>
+                        </li>
+                        <li *ngIf="!this.globals.user_data">
+                            <a routerLink="/register"><i class="icon-user"></i> <span>Join Today</span></a>
+                        </li>
+
+                       
+
+                    <!-- Member Login End -->
+                    
+                    <li *ngIf="this.favstrain > 0">
+                        <a routerLink="/members/strain-favorites"><i class="icon-heart3" style="color: red"></i> <span>Fav Strains</span></a>
+                    </li>
+
+                     <li *ngIf="this.favstrain == null">
+                        <a routerLink="/members/strain-favorites"><i class="icon-heart3" ></i> <span>Fav Strains</span></a>
+                    </li>
+                    <!-- <li *ngIf="user_data == null"> 
+                        <a [attr.href]="null"><i class="icon-dollar"></i> <span>My Price Alerts</span></a>
+                    </li> -->
+                    <li> 
+                        <a routerLink="/members/price-alert"><i class="icon-bell"></i> <span>({{this.globals.price_alert_count}}) Price Alerts</span></a>
+                    </li>
+                    <li *ngIf="this.globals.user_data"> 
+                        <a routerLink="/members/logout"><i class="icon-line2-logout"></i><span>Logout</span></a>
+                    </li>
+                </ul>
+            </div><!-- .top-links end -->
+        </div>
+
+    </div>
+</div><!-- #top-bar end -->
+
+
+<header id="header" class="full-header" data-sticky-class="not-dark">
+    <div id="header-wrap" style="background-color:#FFF; ">
+        <div class="container clearfix">
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+            <!-- Logo
+            ============================================= -->
+            <div id="logo" [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['current']">
+                <a routerLink="/" class="standard-logo" data-dark-logo="assets/images/logo-dark.png"><img src="assets/images/logo.png" alt="Canvas Logo"></a>
+                <a routerLink="/" class="retina-logo" data-dark-logo="assets/images/logo-dark@2x.png"><img src="assets/images/logo@2x.png" alt="Canvas Logo"></a> 
+            </div><!-- #logo end -->
+
+            <nav id="primary-menu" class="sub-title">
+                <ul>
+                    <li [routerLinkActive]="['current']" >
+                        <a routerLink="{{globals.location_global_url}}/cannabis-converter"><div>Cannabis Converter</div><span>Calculate the price of weed</span></a>
+                    </li>
+                    <li [routerLinkActive]="['current']" >
+                        <a routerLink="{{globals.location_global_url}}/price-alert"><div>Price Alert</div><span>Get notified if price changes</span></a>
+                    </li>
+                    <li [routerLinkActive]="['current']" >
+                        <a routerLink="{{globals.location_global_url}}/compare-marijuana-moods"><div>I Feel Like</div><span>Personalize your experience</span></a>
+                    </li>
+                    <li [routerLinkActive]="['current']" >
+                        <a routerLink="{{globals.location_global_url}}/compare-price"><div>Compare</div><span>Find the best deal</span></a>
+                    </li>
+                    <li [routerLinkActive]="['current']" >
+                        <a routerLink="{{globals.location_global_url}}/developers"><div>Free Widget + API</div><span>Canabis widget + developers</span></a>
+                    </li>
+                    <!-- <li *ngIf="user_data == null" [routerLinkActive]="['current']">
+                        <a routerLink="/user-login"><div>User section</div><span>Login + SignUp</span></a>
+                    </li> -->
+                    <!-- <li *ngIf="user_data != null" [routerLinkActive]="['current']">
+                        <a routerLink="/user-profile"><div>My Account</div><span>Profile + Subscriptions</span></a>
+                    </li>  -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

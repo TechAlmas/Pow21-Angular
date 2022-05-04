@@ -1,0 +1,69 @@
+.modal-body.formcontant {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 0px;
+}
+.modal-footer {
+    width: 65%;
+    margin: auto;
+    display: inline;
+    padding: 1rem;
+    border-top: none;
+
+}
+button.btn.btn-primary {
+    height: 46px;
+    width: 110px;
+    padding: 0px 15px;
+    line-height: normal;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 7px;
+    letter-spacing: 1px;
+    background: #0088cc;
+}
+.sm-form-control {
+    width: 80%;
+    float: right;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+.white-box-content .form-group .form-control {
+    border-color: #a0a0a0;
+    width: 80%;
+    float: right;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 2px solid #ccc;
+    display: inline-block;
+    padding: 9px 8px;
+    cursor: pointer;
+}
+label.custom-file-upload {
+    width: 80%;
+    float: right;
+}
+.form-group.whitebgs label {
+    padding-top: 12px;
+    vertical-align: middle;
+}
+.genderbox {
+    width: 80%;
+    float: right;
+}
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 0px;
+}
+.statusrbox {
+    width: 80%;
+    float: right;
+}
+label.radio-style-2-label {
+    text-transform: capitalize;
+}

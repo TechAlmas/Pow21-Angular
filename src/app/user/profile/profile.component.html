@@ -1,0 +1,34 @@
+
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu></mio-profile-top-menu>
+
+<!-- Dashboard SubNav End -->
+
+<div class="content-wrap grey-bg">
+   
+   <div class="container clearfix">
+      <div class="row clearfix">
+         <div class="col-md-8">
+            <!-- About me Section start -->
+            <div class="white-box">
+               <div class="white-box-title"><h3>Dashboard <i class="icon-angle-right"></i></h3></div>
+               <div class="white-box-content">
+                  <div class="h5" *ngIf="this.user_data['id_cms_privileges'] == 6 || this.user_data['id_cms_privileges'] == 7">Hello {{this.user_data['cms_privileges_name']}},</div>
+                  <p>Welcome back to your POW account.  In your account you can track and manage your cannabis Price Alerts, quickly access those Favourite Strains you love, share your personal link with friends and earn POW points, and much more still to come.  The POW Team</p>
+               </div>
+            </div>
+            <!-- About me Section End -->
+           
+         </div>
+         <div class="col-md-4">
+           <!--  <div class="white-box">
+               <div class="white-box-title"><h3>Connect <i class="icon-angle-right"></i></h3></div>
+               <div class="white-box-content">
+                  <p>Want a more personalized and tailored experience? Help us tailor and recommend strains you might like, local deals and much more. Connect with your social profiles and we’ll do the rest. <span class="link mt-2"><a href="#"><img src="assets/images/connect-facebook-btn.png" alt=""></a></span></p>
+               </div>
+            </div> -->
+            <mio-share-link></mio-share-link>
+         </div>
+      </div>
+   </div>
+</div>

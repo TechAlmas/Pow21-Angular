@@ -1,0 +1,793 @@
+<div class="modal fade" id="myModal_paid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+   <form #paidForStrain="ngForm" (ngSubmit)="onPaidSubmit()">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">How much did you pay for {{strainDetails["name"]}}?</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-body">  
+                        
+                        <div class="form-group whitebg">
+                          <div class="wait-layer" *ngIf="waitLayer"></div>
+                            <label for="converter-location">I'm located in</label>
+                            <div class="select-wrap">
+                              <span class="location-icon"></span>
+                              <select  id="paid-for-location" name = "location" class="sm-form-control" [(ngModel)]= "this.selectedPaidLocation" [value]= "this.selectedPaidLocation">
+                                <optgroup label="My City">
+                                  <option [selected]="city['id']==this.selectedLocation" *ngFor="let city of this.locations['user_location']" [value] = "city['id']">{{city['name']}}</option>
+                                </optgroup>
+                                <optgroup label="Nearby Cities" *ngIf="nearByCities">
+                                  <option [selected]="city.id==this.selectedLocation" *ngFor="let city of this.locations['near_cities']" [value] = "city.id">{{city.name}}</option>
+                                </optgroup>
+                                <optgroup label="{{this.locationSes['state']}}" *ngIf="nearByOtherCities">
+                                  <option [selected]="city.id==this.selectedLocation" *ngFor="let city of this.locations['near_other_cities']" [value] = "city.id">{{city.name}}</option>
+                                </optgroup>
+                               <optgroup label="{{this.locationSes['country']}}">
+                                 <option [selected]="city.id==this.selectedLocation" *ngFor="let city of this.locations['rest_cities']" [value] = "city.id">{{city.name}}</option>
+                               </optgroup>
+                              </select>
+                            </div>
+                          </div>                        
+
+                          <div class="form-group whitebg">
+                              <div class="wait-layer" *ngIf="waitLayer"></div>
+                                <label for="paid-for-quality">I Paid</label>
+                                <div class="select-wrap">
+                                  <span class="cash-icon"></span>
+                                  <span class="sign">$</span>
+                                  <input id="priceCheck" type="number" maxlength='5' name="paid-price" [ngModel]="this.paidPrice" value="this.paidPrice" required #pPrice="ngModel" class="sm-form-control required" placeholder="Enter your price" (input)="checkPriceValue($event)" min="0.01" max="100" step="0.01" style="padding-left: 60px;" >
+                                <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div>  
+                              </div>
+                            </div> 
+
+                          <div class="form-group whitebg">
+                            <div class="wait-layer" *ngIf="waitLayer"></div>
+                              <label for="paid-for-mass">I Bought </label>
+                              <div class="select-wrap">
+                                <span class="gram-icon"></span>                                
+                                <select id="paid-for-mass" name="mass" class="sm-form-control required" [(ngModel)]= "this.selectedPaidMass" [value]= "this.selectedPaidMass">
+                                  <!--<option [selected] = "st.mass_id == this.selectedMass" *ngFor="let st of this.defaultMass" [value] = "st.mass_id">{{st.name}}</option>-->
+                                <option [selected] = "st.mass_id == this.selectedPaidMass" *ngFor="let st of this.mass" [value] = "st.mass_id">{{st.name}}</option>
+                                </select>
+                              </div>  
+                            </div>
+
+                            <div class="form-group whitebg">
+                              <div class="wait-layer" *ngIf="waitLayer"></div>
+                                <label for="paid-for-quality">Quality was</label>
+                                <div class="select-wrap">
+                                  <span class="cash-icon"></span>
+                                  <select id="paid-for-quality" name="mass" class="sm-form-control required" [(ngModel)]= "this.selectedPaidQuality" [value]= "this.selectedPaidQuality" required>
+                                  <option [selected] = "st.id == this.selectedPaidQuality" *ngFor="let st of this.quality" [value] = "st.id">{{st.name}}</option>
+                                  </select>
+                                </div>  
+                              </div>
+                    </div>
+                    <div class="modal-footer">                        
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form #converterAlert="ngForm" (ngSubmit)="onConverterAlertSubmit(converterAlert)">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Price Alert</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal" (click) = "offpricealert()">Close</button>
+                    </div>
+                    <div class="modal-body">  
+                        <p><b>Create a price alert for {{ strainName }} in {{this.selectedLocName}}</b> <br/> If the price for {{ strainName }} changes, we'll let you know. You can manage all your Price Alerts <a href="javascript:void(0)" (click) = "redirectToPage('login','myModal')">in your account.</a></p>      
+                        <p *ngIf="this.checkUser">Name: {{this.converter_alert.name}}</p>
+                        <p *ngIf="this.checkUser">Email: {{this.converter_alert.email}}</p>     
+
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-name" class="sr-only">Name</label>
+                            <input name="name" [ngModel]="this.converter_alert.name" required #uName="ngModel" class="form-control" placeholder="Enter your name">
+                            <div *ngIf="uName.errors && converterAlert.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uName.errors.required"> 
+                                   Please provide your name
+                                 </div>       
+                                
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-email" class="sr-only">Email</label>
+                            <input name="email" [ngModel]="this.converter_alert.email" required [pattern]="emailPattern" #uEmail="ngModel" class="form-control" placeholder="Enter your e-mail">
+                            <div *ngIf="uEmail.errors && converterAlert.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uEmail.errors.required"> 
+                                   Please provide your email address
+                                 </div>        
+                                 <div *ngIf="uEmail.errors.pattern"> 
+                                   Please enter valid email address
+                                 </div> 
+                            </div>
+                        </div>
+                        <p *ngIf="this.checkUser"><a href="javascript:void()" (click) = "this.checkUser = !this.checkUser">Change</a></p>
+                    </div>
+                    <div class="modal-footer" *ngIf="!this.check_price_alert">
+                        <button type="submit" class="btn btn-primary">Create Alert</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal" (click) = "offpricealert()">Cancel</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="myModal_fav" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form #favStrain="ngForm" (ngSubmit)="onFavstrainSubmit(favStrain)">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Favourite Strains</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-body">  
+                        <p>Save your favourite strains for quick access to check the strain price, publish or check consumers reviews, or save for your next Dispensary visit.</p>   
+                        <p *ngIf="this.checkUser">Name: {{this.favstrain.name}}</p>
+                        <p *ngIf="this.checkUser">Email: {{this.favstrain.email}}</p>              
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-name" class="sr-only">Name</label>
+                            <input name="name" [ngModel]="this.favstrain.name" required #uName="ngModel" class="form-control" placeholder="Enter your name">
+                            <div *ngIf="uName.errors && favStrain.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uName.errors.required"> 
+                                   Please provide your name
+                                 </div>       
+                                
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-email" class="sr-only">Email</label>
+                            <input name="email" [ngModel]="this.favstrain.email" required [pattern]="emailPattern" #uEmail="ngModel" class="form-control" placeholder="Enter your e-mail">
+                            <div *ngIf="uEmail.errors && favStrain.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uEmail.errors.required"> 
+                                   Please provide your email address
+                                 </div>        
+                                 <div *ngIf="uEmail.errors.pattern"> 
+                                   Please enter valid email address
+                                 </div> 
+                            </div>
+                        </div>
+                        <p *ngIf="this.checkUser"><a href="javascript:void()" (click) = "this.checkUser = !this.checkUser">Change</a></p>
+                    </div>
+                    <div class="modal-footer">
+                    	<button type="submit" class="btn btn-primary">Save Favorite</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form #Login="ngForm" (ngSubmit)="onLogin(Login)">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Login Heare</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-body">  
+                        <p>You have already account with pow enter your password for login</p>   
+
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-email" class="sr-only">Email</label>
+                            <input name="email" [ngModel]="this.login_alert.email" required [pattern]="emailPattern" #uEmail="ngModel" class="form-control" placeholder="Enter your e-mail">
+                            <div *ngIf="uEmail.errors && Login.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uEmail.errors.required"> 
+                                   Please provide your password
+                                 </div>        
+                                
+                            </div>
+                        </div>
+                                      
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-name" class="sr-only">Name</label>
+                            <input name="password" [ngModel]="this.login_alert.password" required #uPass="ngModel" class="form-control" placeholder="Enter your password" type="password">
+                            <div *ngIf="uPass.errors && Login.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uName.errors.required"> 
+                                   Please provide your name
+                                 </div>       
+                                
+                            </div>
+                        </div>
+                        
+                     
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content-wrap product-content-wrap">
+	<!-- <h1 class="page-title-heading">{{strainDetails.name}}</h1> -->
+    <div class="container clearfix">
+	    <div class="single-product">
+			<div class="product row">
+				<div class="col product-image">
+					<img *ngIf="this.image_strain != ''" src="assets/default-stain-images/{{this.image_strain}}" alt="" draggable="false">
+					<!---  <div class="sale-flash">Sale!</div>  -->
+				</div>
+				<div class="col product-info">
+					<div class="product-name">
+						<h1>{{strainDetails.name}}</h1>
+						<div class="icons-wraps" *ngIf="priceDataAvailable" >
+							<a *ngIf="check_price_alert" href="javascript:void(0);" (click)="priceAlertDelete()" class="active"><i class="bell-icon"></i></a>
+			                <a *ngIf="!check_price_alert && !this.checkUser" href="javascript:void(0);" (click)="convertModel=true" data-toggle="modal" data-target="#myModal"><i class="bell-icon"></i></a>
+			               <a *ngIf="!check_price_alert && this.checkUser" href="javascript:void(0);" (click)="addPriceAlert()" ><i class="bell-icon"></i></a>
+
+			               <a *ngIf="check_fav_strain" href="#" href="javascript:void(0);" (click)="favStrainDelete()" class="active"><i class="fav-add-icon"></i></a>
+			              <a *ngIf="(!check_fav_strain && !this.checkUser)" href="javascript:void(0);" (click)="convertModel=true" data-toggle="modal" data-target="#myModal_fav"><i class="fav-add-icon"></i></a>
+			              <a *ngIf="!check_fav_strain && this.checkUser" href="javascript:void(0);" (click)="addFavStrain()"><i class="fav-add-icon"></i></a>
+							<!-- <a href="javascript:void(0);"><i class="fav-add-icon"></i></a> 
+							<a href="javascript:void(0);"><i class="bell-icon"></i></a>-->
+						</div>
+					</div>
+					<div class="product-category-name">{{strainDetails.category}} </div>
+					<div class="product-review">  
+						    <span class="review" *ngIf="strainDetails.ratings">
+					        <span class="rating-wrap" *ngIf="{'width': (strainDetails.ratings*100)/5+'%'}; let variable">
+					        	<span class="rating" [ngStyle]="variable"></span>
+					        </span>
+				        </span>
+				        <span class="write-a-review" *ngIf="strainDetails.name">
+			        		<span class="review-count" *ngIf="strainDetails.name"> {{strainDetails.reviews}} reviews</span> | 
+			        		<a href="javascript:void(0)" (click) = "linkClicked('reviews'); ">share your experience</a>
+			        	</span>
+			    	</div>
+            <div class="pos_effect" *ngIf="strainDetails.name">
+              <b style="font-size: 16px; margin-right: 10px;" >Make you feel:</b>
+              <span class="pos_effect_links" *ngFor="let effect of positiveEffects; let last = last"><div *ngIf='!last'><a routerLink="/{{this.globals.location_global_url}}/compare-marijuana-moods/positive-{{effect.slug}}">{{effect.name}}</a>,&nbsp;</div><div *ngIf='last'><a routerLink="/{{this.globals.location_global_url}}/compare-marijuana-moods/positive-{{effect.slug}}">{{effect.name}}</a></div></span>
+              <!-- {{this.positive_effects}} -->
+            </div>
+            <div class="pos_effect"  *ngIf="strainDetails.name">
+              <b style="font-size: 16px; margin-right: 10px;">Availability:</b>Coming soon
+            </div>
+             <div class="pos_effect"  *ngIf="flavour_message">
+              <b style="font-size: 16px; margin-right: 10px;">Tastes like:</b>Coming soon
+            </div>
+			    	<div class="flavours"  *ngIf="flavourList.length > 0">
+
+			    		<span class="label">Tastes like:</span>
+             
+         
+			    		<span class="flours-list" *ngFor="let flavour of flavourList">
+			    			<img src="assets/images/icons/strain/{{flavour.name | lowercase}}.png">
+                <span class="flavour-name"><a routerLink = "/{{this.globals.location_global_url}}/compare-marijuana-moods/flavour-{{flavour.slug}}">{{flavour.name}}</a></span>
+			    		</span>
+            
+			    	</div>
+					<div class="product-description" [innerHTML]="strainDetails.our_description"></div>
+					<div class="product-advitise" *ngIf="adbanner">
+						<div class="product-advitise-col add-col-1">
+							<img src="assets/images/advertise-sample-1.png" alt="">
+						</div>
+						<div class="product-advitise-col add-col-2">
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+						</div>
+						<div class="product-advitise-col add-col-3">
+							<img src="assets/images/advertise-sample-2.png" alt="">
+						</div>
+						<div class="product-advitise-col add-col-4">
+							<img src="assets/images/advertise-sample-2.png" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="col product-extra-info">
+          <div class="track-price-change" >
+            <h3>Track price changes</h3>
+            <label class="toggle">
+                    <input type="checkbox" id="track_price_alert" name="is_updates"  value="1" class="form-control" [ngModel]="check_price_alert" #uIsUpdates="ngModel" (click) = "trackBucttonClick(1);" >
+                    <div class="slide-toggle"></div>
+                    <div class="slide-toggle-content">on</div>
+                  </label>
+                 
+                </div>
+					<div class="card product-meta" *ngIf="this.strainHistory.length>0">
+						<h3>Retail Price</h3>
+						<div class="d-flex">
+							<div class="col-left" *ngFor= "let sth of this.strainHistory">
+								<div *ngIf = "sth.country != null"><span  class="price">
+								${{sth.avg_price}}
+								</span> in {{this.locationSes["country"]}}</div>
+                <div *ngIf = "sth.state_id != 0"><span  class="price">
+                ${{sth.avg_price}}
+                </span> in {{this.locationSes["state"]}}</div>
+                <div *ngIf = "sth.city_id != 0"><span  class="price">
+                ${{sth.avg_price}}
+                </span> in {{this.locationSes["name"]}}</div>	
+							</div>
+							
+							<div class="col-full">
+								<span>avg.price per gram</span>
+								<!-- <a class="historical-price" href="javascript:void()" (click) = "linkClicked('prices')">historical price</a> -->
+								
+							</div>
+						</div>
+						<div class="strainSocial-price" *ngIf="this.strainSocial.price">
+							<span>Street Price</span>
+							<span class="price">${{this.strainSocial.price}}</span>
+							<span style="font-size: 12px;font-weight: normal;">avg. marijuana price per gram</span>
+						</div>
+
+            
+
+					</div>
+
+          <div class="card product-meta" *ngIf="this.strainHistory.length == 0 ">
+            <h3>{{this.locationSes["city"]}} Retail Price</h3>
+            <div class="d-flex">
+              
+              <div class="col-full">
+                <span>Retain pricing unavailable for your location. Track Price to create a Price Alert and get notidied when the strain becomes available near you.</span>
+                
+              </div>
+            </div>
+            <div class="strainSocial-price" *ngIf="this.strainSocial.price">
+              <span>Street Price</span>
+              <span class="price">${{this.strainSocial.price}}</span>
+              <span style="font-size: 12px;font-weight: normal;">avg. marijuana price per gram</span>
+            </div>
+
+          </div>
+
+					<div class="track-price-change btn-wrap" *ngIf="priceDataAvailable">
+            
+           <a routerLink="/{{globals.location_global_url}}/{{this.locationSes['state'].split(' ').join('-').toLowerCase()}}/compare-price/{{strainDetails.slug}}" ><button class="mt-1 btn" type="button">Check local prices </button></a>				
+			            <!-- <button class="mt-1 btn">Check local prices</button> -->			            
+		      </div>
+          <div class="track-price-change btn-wrap">
+              <button class="mt-1 btn" (click)="convertModel=true" data-toggle="modal" data-target="#myModal_paid">What did you pay?</button>
+          </div>
+				</div>
+			</div>					
+		</div>
+    </div>
+</div>
+<div class="product-tabs">
+	<div class="container clearfix">
+		<ul class="nav nav-tabs">
+		    <li><a href="javascript:void(0)" (click) = "linkClicked('about')">About {{strainDetails.name}}</a></li>		    
+		    <!-- <li><a href="javascript:void(0)" (click) = "linkClicked('prices')">Prices</a></li> -->
+		    <li><a href="javascript:void(0)" (click) = "linkClicked('reviews')">Reviews & Experiences</a></li>
+		</ul>
+	</div>
+	<div class="tab-content">
+		<h3 class="mob-tab-title">{{strainDetails.name}} Reviews & Experiences</h3>
+		<div id="about">
+			<div class="container">
+				<ul class="about-list">
+					<li class="list-item">
+						<h2 class="tab-content-title effect-title">{{strainDetails.name}} Effects and Attributes</h2>
+						<div class="col-left">
+							<p>{{strainDetails.name}} is a {{strainDetails.category}} recreational marijuana strain available in {{this.locationSes["name"]}} that cannabis consumers have found to give a feeling of {{positive_effects}} and more. However, be aware some consumers have found this strain can leave varying negative effects of {{negative_effects}}.</p>
+							<button class="btn share-exper-btn" (click) = "write_review = true; linkClicked('reviews')">Share your experience</button>
+							
+							<ul class="effects-list">
+								<li>
+									<span class="effects-label"><!-- <img src="assets/images/icon-happyface.png" alt="" class="icon">  -->Positive Effects</span>
+                  <h5 *ngIf="this.positive_message">{{this.positive_message}}</h5>
+									<span class="effects-content">
+										<ul class="effects-percent positive">
+											<li [attr.data-percent]="effect['percent_value']" *ngFor="let effect of positiveEffects">
+												<span><a routerLink="/{{this.globals.location_global_url}}/compare-marijuana-moods/positive-{{effect.slug}}">{{effect.name}}</a></span>
+												<div class="progress">
+													<div class="progress-percent"><div class="counter counter-inherit counter-instant"><span data-from="0" [attr.data-to]="effect['percent_value']" data-refresh-interval="30" data-speed="1100"></span>%</div></div>
+												</div>
+											</li>
+										</ul>
+									</span>
+								</li>
+								<li>
+									<span class="effects-label"><!-- <img src="assets/images/icon-unhappyface.png" alt="" class="icon">  -->Negative Effects</span>
+									<span class="effects-content">
+                    <h5 *ngIf="this.negative_message">{{this.negative_message}}</h5>
+										<ul class="effects-percent negative">
+											<li [attr.data-percent]="effect['percent_value']"  *ngFor="let effect of negativeEffects">
+												<span><a routerLink="/{{this.globals.location_global_url}}/compare-marijuana-moods/negative-{{effect.slug}}">{{effect.name}}</a></span>
+												<div class="progress">
+													<div class="progress-percent"><div class="counter counter-inherit counter-instant"><span data-from="0" [attr.data-to]="effect['percent_value']" data-refresh-interval="30" data-speed="1100"></span>%</div></div>
+												</div>
+											</li>
+										</ul>
+									</span>
+								</li>
+								<!-- <li>
+									<span class="effects-label">Flavours</span>
+									<span class="effects-content"></span>
+								</li>-->
+							</ul>
+						</div>
+						<div class="col-right">
+							<span class="advertising-wrap" *ngIf="adbanner">advertising</span>
+						</div>
+					</li>
+					<li class="list-item">
+						<h2 class="tab-content-title medical-title">Medical and Health Effects of {{strainDetails.name}}</h2>
+						<div class="col-left">
+							<p>Consumers of {{strainDetails.name}} have found the marijuana strain to have properties that may have helped with the below medical symptoms and conditions. This information is gathered from the social community of cannabis users, and is non-scientific, tested or proven by an industry recognized medical or health research authority. Always consult a doctor first before using cannabis to help with any medical purpose. This is for informational purposes only and not meant to constitute or be a substitute for professional medical advice.</p>
+							<ul class="effects-list">
+								<li id="medical_effects">	
+									<span class="effects-label"><!-- <img src="assets/images/icon-happyface.png" alt="" class="icon">  -->Medical Symptoms</span>		
+                  			<h5 *ngIf="this.medical_message">{{this.medical_message}}</h5>			
+									<span class="effects-content">
+										<ul class="effects-percent medical">
+											<li [attr.data-percent]="effect['percent_value']" *ngFor="let effect of medicalEffects">
+												<span><a routerLink="/{{this.globals.location_global_url}}/compare-medical-marijuana/medical-{{effect.slug}}">{{effect.name}}</a></span>
+												<div class="progress">
+													<div class="progress-percent"><div class="counter counter-inherit counter-instant"><span data-from="0" [attr.data-to]="effect['percent_value']" data-refresh-interval="30" data-speed="1100"></span>%</div></div>
+												</div>
+											</li>
+										</ul>
+									</span>
+								</li>								
+							</ul>
+						</div>
+						<div class="col-right">
+							<span class="advertising-wrap" *ngIf="adbanner">advertising</span>
+						</div>				
+					</li>
+					<li class="list-item" >
+						<h2 class="tab-content-title flavors-title">{{strainDetails.name}} Flavours</h2>
+						<div class="col-left">
+              <h5 *ngIf = "flavour_message">{{this.flavour_message}}</h5>
+							<ul class="flavours-list" *ngIf="flavourList.length > 0">
+								<li class="flavour-list-icon {{flavour.name | lowercase}}" *ngFor="let flavour of flavourList">
+									<a routerLink="/{{this.globals.location_global_url}}/compare-marijuana-moods/flavour-{{flavour.slug}}"><span>{{flavour.name}}</span></a>
+								</li>
+								<!-- <li class="flavour-list-icon apple"><span>apple</span></li>
+								<li class="flavour-list-icon apricot"><span>apricot</span></li>
+								<li class="flavour-list-icon berry"><span>berry</span></li>
+								<li class="flavour-list-icon blueberry"><span>blueberry</span></li>
+								<li class="flavour-list-icon blue-cheese"><span>blue-cheese</span></li>
+								<li class="flavour-list-icon buttery"><span>buttery</span></li>
+								<li class="flavour-list-icon cheese"><span>cheese</span></li>
+								<li class="flavour-list-icon chemical"><span>chemical</span></li>
+								<li class="flavour-list-icon chestnut"><span>chestnut</span></li>
+								<li class="flavour-list-icon citrus"><span>citrus</span></li>
+								<li class="flavour-list-icon coffee"><span>coffee</span></li>
+								<li class="flavour-list-icon diesel"><span>diesel</span></li>
+								<li class="flavour-list-icon earthy"><span>earthy</span></li>
+								<li class="flavour-list-icon flowery"><span>flowery</span></li>
+								<li class="flavour-list-icon fruittree"><span>fruittree</span></li>
+								<li class="flavour-list-icon grape"><span>grape</span></li>
+								<li class="flavour-list-icon grapefruit"><span>grapefruit</span></li>
+								<li class="flavour-list-icon herbal-spicy"><span>herbal-spicy</span></li>
+								<li class="flavour-list-icon honey"><span>honey</span></li>
+								<li class="flavour-list-icon lemon"><span>lemon</span></li>
+								<li class="flavour-list-icon levender"><span>levender</span></li>
+								<li class="flavour-list-icon lime"><span>lime</span></li>
+								<li class="flavour-list-icon mango"><span>mango</span></li>
+								<li class="flavour-list-icon methol "><span>methol </span></li>
+								<li class="flavour-list-icon mint"><span>mint</span></li>
+								<li class="flavour-list-icon nutty"><span>nutty</span></li>
+								<li class="flavour-list-icon orange"><span>orange</span></li>
+								<li class="flavour-list-icon peach"><span>peach</span></li>
+								<li class="flavour-list-icon pear"><span>pear</span></li>
+								<li class="flavour-list-icon pepper"><span>pepper</span></li>
+								<li class="flavour-list-icon pine"><span>pine</span></li>
+								<li class="flavour-list-icon pineapple"><span>pineapple</span></li>
+								<li class="flavour-list-icon plum"><span>plum</span></li>
+								<li class="flavour-list-icon pungent"><span>pungent</span></li>
+								<li class="flavour-list-icon rose"><span>rose</span></li>
+								<li class="flavour-list-icon sage"><span>sage</span></li>
+								<li class="flavour-list-icon skunk"><span>skunk</span></li>
+								<li class="flavour-list-icon strawberry"><span>strawberry</span></li>
+								<li class="flavour-list-icon sweet"><span>sweet</span></li>
+								<li class="flavour-list-icon tar"><span>tar</span></li>
+								<li class="flavour-list-icon tea"><span>tea</span></li>
+								<li class="flavour-list-icon tobacco"><span>tobacco</span></li>
+								<li class="flavour-list-icon tropical-2"><span>tropical-2</span></li>
+								<li class="flavour-list-icon vanilla"><span>vanilla</span></li>
+								<li class="flavour-list-icon violet"><span>violet</span></li>
+								<li class="flavour-list-icon woody"><span>woody</span></li> -->
+							</ul>
+						</div>		
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- <h3 class="mob-tab-title">Prices</h3>
+		<div id="prices">
+			<div class="container">
+				<div class="price-detail">
+					<h2 class="tab-content-title">price for {{strainDetails.name}} in {{this.locationSes["name"]}}</h2>
+					<div class="price-detail-content">
+						<p>Sed at eros viverra, tristique turpis vitae, elementum sapien. Sed tincidunt eget metus a dictum. Proin volutpat blandit eros, sed tristique ligula lacinia quis. Integer in eros sit amet est iaculis mollis dapibus quis felis. Nulla sit amet magna sit amet diam placerat fermentum. Praesent tempor et justo interdum vestibulum.</p>
+						<button class="btn check-price">Check your prices</button> <button class="btn what-did-you-pay">What did you pay?</button>
+						
+						<div class="retail-street-price">
+							<div class="price-table-wrap retail-price"> 
+								<h3>Retail price (avg.in {{this.locationSes["name"]}})</h3>
+								<table class="price-table">
+									<thead>
+										<tr>
+											<th></th>
+											<th>1 gram</th>
+											<th>Eigth</th>
+											<th>Ounce</th>
+										</tr>
+									</thead>
+									<tbody *ngIf="this.strainPricesDetail">
+										<tr *ngFor="let price of this.strainPricesDetail">
+											<td>{{price["date"] | date : "MMM dd"}}</td>
+											<td>{{price["1"]}}</td>
+											<td>{{price["7"]}}</td>
+											<td>{{price["10"]}}</td>
+										</tr>										
+									</tbody>
+								</table>
+							</div>
+							<div class="price-table-wrap street-price"> 
+								<h3>Street Price (In {{this.locationSes["name"]}})</h3>
+								<table class="price-table">
+									<thead>
+										<tr>
+											<th></th>
+											<th>1 gram</th>
+											<th>Eigth</th>
+											<th>Ounce</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Oct 1</td>
+											<td>$8.00</td>
+											<td>$15.00</td>
+											<td>$23.00</td>
+										</tr>
+										<tr>
+											<td>Oct 1</td>
+											<td>$8.00</td>
+											<td>$15.00</td>
+											<td>$23.00</td>
+										</tr>
+										<tr>
+											<td>Oct 1</td>
+											<td>$8.00</td>
+											<td>$15.00</td>
+											<td>$23.00</td>
+										</tr>
+										<tr>
+											<td>Oct 1</td>
+											<td>$8.00</td>
+											<td>$15.00</td>
+											<td>$23.00</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+		
+						<div class="track-price-change" *ngIf="priceDataAvailable">
+							<h3>Track price changes</h3>
+							<label class="toggle">
+					            <input type="checkbox" id="track_price_alert" name="is_updates"  value="1" class="form-control" [ngModel]="check_price_alert" #uIsUpdates="ngModel" (click) = "trackBucttonClick(2);" >
+					            <div class="slide-toggle"></div>
+					            <div class="slide-toggle-content">on</div>
+				            </label>
+				            <button class="btn btn-success">Check local prices</button>
+			            </div>
+		
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<h3 class="mob-tab-title">Reviews & Experiences</h3>
+		<div id="reviews">
+			<div class="container">
+				<h2 class="tab-content-title review-title">Reviews & Experiences</h2>
+       
+				<div class="review-detail">				
+             <div class="col-left">
+              <p style="padding-top: 5px;">Have you tried {{strainDetails.name}} before? Share your opinion and experience below to help other cannabis consumers determine if this marijuana strain is the right choice</p>
+            </div>
+            <a href="javascript:void(0)" (click) = "enableReviewForm();" class="btn write-a-review">Write a review</a> 
+					<div class="review-head">
+						<span class="rating" *ngIf="strainDetails.ratings">
+							<span class="total">{{strainDetails.ratings}}</span>
+							<span class="outof">
+								<span>out of 5.0</span>
+								<span class="review-wrap">
+									<span class="review" *ngIf="strainDetails.ratings">
+								        <span class="rating-wrap" *ngIf="{'width': (strainDetails.ratings*100)/5+'%'}; let variable">
+								        	<span class="rating" [ngStyle]="variable"></span>
+								        </span>
+							        </span>
+									<!-- <span class="review">
+									        <span class="rating-wrap" style="width: 100%;">
+									        	<span class="rating" style="width: 100%;"></span>
+									        </span>
+								        </span> -->
+							        <span class="review-count" *ngIf="strainDetails.reviews">{{strainDetails.reviews}} reviews</span>
+						        </span>
+							</span>
+						</span>
+						
+					</div>
+					<div class="Write-a-review-form" *ngIf="write_review">
+						<h3>Add Review</h3>
+						<form #reviewForm="ngForm" (ngSubmit)="onSubmitReviewForm(reviewForm)">
+						<div class="review-form-head">
+							<div class="left-col">
+								<h4>How would you rate {{strainDetails.name}}?</h4>
+								<span class="review">
+							        <input id="starrating" type="number" class="rating" min="0" max="5" data-size="sm" data-step="0.5" name="starrating">
+						        </span>
+						        <div *ngIf="rating_req" [ngClass] = "'error'"> 
+                                  <div *ngIf="rating_req"> 
+                                   Please select your rating
+                                 </div>
+								</div>
+
+					        </div>
+					        <div class="right-col">
+								<!-- <button class="btn outline-btn">Full Review</button> -->
+							</div>
+						</div>
+						<div class="review-form-body">
+              <div class="form-group">
+                  <h3>Overall experience</h3>
+                    <div class="review-form-head">
+                  <div class="left-col">
+                      <div class="row">
+                        <div class="col-sm-6">
+                        <span class="review">
+                            Appearance <input id="apperance" type="number" class="rating" min="0" max="5" data-size="sm" data-step="0.5" name="apperance">
+                      </span>
+                  
+                      <span class="review">
+                          Aroma <input id="aroma" type="number" class="rating" min="0" max="5" data-size="sm" data-step="0.5" name="aroma">
+                    </span>
+                    <span class="review">
+                        High <input id="high" type="number" class="rating" min="0" max="5" data-size="sm" data-step="0.5" name="high">
+                    </span>
+                    
+
+                </div>
+                <div class="col-sm-6">
+                  <span class="review">
+                     Quality <input id="quality" type="number" class="rating" min="0" max="5" data-size="sm" data-step="0.5" name="quality">
+                  </span>
+                   
+                  <span class="review">
+                     Flavour <input id="flavor" type="number" class="rating" min="0" max="5" data-size="sm" data-step="0.5" name="flavor">
+                  </span>
+                    
+                  <span class="review">
+                     Value <input id="value" type="number" class="rating" min="0" max="5" data-size="sm" data-step="0.5" name="value">
+                </span>
+                    
+              </div>
+            </div>
+
+                  </div>
+                  <div class="right-col">
+                  
+              </div>
+            </div>
+
+                </div>
+							<h3>Review Guidelines</h3>					 
+
+								<div class="form-group" *ngIf="!this.checkUser">
+									<input name="name" [ngModel]="this.review.name" required #rName="ngModel" class="form-control" placeholder="Provide your name...">
+									<div *ngIf="rName.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+	                                  <div *ngIf="rName.errors.required"> 
+	                                   Please provide your name
+	                                 </div>
+									</div>	
+								</div>
+
+								<div class="form-group" *ngIf="!this.checkUser">
+									<input type="email" name="email" [ngModel]="this.review.email" required #rEmail="ngModel" [pattern]="emailPattern" class="form-control" placeholder="Add your email address. Helps us verify you're human">
+									<div *ngIf="rEmail.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+	                                  <div *ngIf="rEmail.errors.required"> 
+	                                   Please provide your email
+	                                 </div>
+	                                 <div *ngIf="rEmail.errors.pattern"> 
+	                                   Please enter valid email address
+	                                 </div> 
+									</div>	
+								</div>
+
+								<div class="form-group">
+									<input type="text" name="title" [ngModel]="this.review.title" required #rTitle="ngModel" class="form-control" placeholder="Type your title here...">
+									<div *ngIf="rTitle.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+	                                  <div *ngIf="rTitle.errors.required"> 
+	                                   Please provide review title
+	                                 </div>
+									</div>	
+								</div>
+								<div class="form-group">
+									<textarea name="message" id="review_message" [ngModel]="this.review.message" required="true" cols="30" rows="4" class="form-control" #rMessage="ngModel" placeholder="Type your review here..."></textarea>
+									<div *ngIf="rMessage.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+		                                  <div *ngIf="rMessage.errors.required"> 
+		                                   Please provide review description
+		                                 </div>
+									</div>
+								</div>	
+                <div class="form-group text-center" *ngIf="!this.checkUser">
+                  By leaving a review you are creating a free member account at POW and accept the <a href="https://www.pow21.com/blog/termsofuse/" target="_blank">terms and conditions</a>
+                </div>
+								<div class="form-group text-center">
+									<button class="btn">Post Review</button>
+									<button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button>
+									
+								</div>							
+							</div>
+						</form>
+					</div>
+					<div class="review-list">
+						<ul>
+							<li *ngFor="let review of reviews">
+								<img src="assets/images/icons/avatar.jpg" alt="" class="user-img">
+								<div class="review-body">
+									<div class="review-body-header">
+										<h3>{{review.user_name}} <span>{{review.title}}</span> </h3>
+										<span class="date-wrap">
+											<span class="date">{{review.created_at | date}}</span>
+											<span class="review-wrap">
+										        <span class="review" *ngIf="review.rating">
+											        <span class="rating-wrap" *ngIf="{'width': (review.rating*100)/5+'%'}; let variable">
+											        	<span class="rating" [ngStyle]="variable"></span>
+											        </span>
+										        </span>
+										        <span class="review-count">{{review.rating}}</span>
+									        </span>
+										</span>
+									</div>
+									<div class="review-body-content">
+										<p>{{review.message}} </p>
+									</div>
+									<!-- <div class="review-body-footer">
+										<a href="#">Was this helpful ?</a>
+									</div> -->
+								</div>
+							</li>
+							<!-- <li>
+								<img src="assets/images/icons/avatar.jpg" alt="" class="user-img">
+								<div class="review-body">
+									<div class="review-body-header">
+										<h3>overdosetime <span>Love it</span> </h3>
+										<span class="date-wrap">
+											<span class="date">December 12, 2018</span>
+											<span class="review-wrap">
+												<span class="review">
+											        <span class="rating-wrap" style="width: 100%;">
+											        	<span class="rating" style="width: 100%;"></span>
+											        </span>
+										        </span>
+										        <span class="review-count">5.0</span>
+									        </span>
+										</span>
+									</div>
+									<div class="review-body-content">
+										<p>I hit a joint and woke up in a bungalow owned by a small midget porch monkey. Best experience of my life, widened my opportunities. YOU NEED TO BUT THIS. (Hits nae nae) </p>
+									</div>
+									<div class="review-body-footer">
+										<a href="#">Was this helpful ?</a>
+									</div>
+								</div>
+							</li> -->
+						</ul>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,82 @@
+
+<div class="result-box">	
+	<form id="priceAlertDetailForm" #priceAlertDetailForm="ngForm" (ngSubmit)="onFormSubmitDetail(priceAlertDetailForm)">
+	<div class="result-box-wrap">
+		<h3><i class="icon-goal"></i> Got a target price in mind?</h3>
+		<div class="inline-form">
+			<span style="margin-right: 15px;">In</span>
+			<div class="select-style city">
+				<select  id="price-alert-detail-location" name = "city" class="sm-form-control" [ngModel]="this.selectedLocation" [value]= "this.selectedLocation">
+		           <optgroup label="My City">
+                     <option [selected]="city['id']==this.selectedLocation" *ngFor="let city of this.locations['user_location']" [value] = "city['id']">{{city['name']}}</option> 
+                    </optgroup>
+                    
+                    <!-- <optgroup label="{{this.state_label_other}}">
+                      <option [selected]="state['state_id']==this.selectedLocation" *ngFor="let state of this.locations['state']" [value] = "state['state_id']">{{state['state']}}</option>
+                    </optgroup> -->
+                    <optgroup class="dispLable" label="Nearby Cities" *ngIf="nearByCities">
+                      <option [selected]="city.id==this.selectedLocation" *ngFor="let city of this.locations['near_cities']" [value] = "city.id">{{city.name}}</option>
+                    </optgroup>
+                    <optgroup label="{{this.locationSes['state']}}" *ngIf="nearByOtherCities">
+                    <option [selected]="0==this.selectedLocation" *ngFor="let state of this.locations['user_state']" [value] = "0">{{state['name']}}</option>
+                      <option [selected]="city.id==this.selectedLocation" *ngFor="let city of this.locations['near_other_cities']" [value] = "city.id">{{city.name}}</option>
+                    </optgroup>
+                    <optgroup label="{{state.state}}" *ngFor="let state of this.locations['state']">
+                      <option [selected]="state.state_id==this.selectedLocation" [value]="state.state_id" class="state_label">{{state.state}}</option>
+                      <ng-container *ngFor="let city of this.locations['new_state_array']">
+                      <option  [selected]="city.id==this.selectedLocation" *ngIf="city.state_id==state.state_id"  [value]="city.id">{{city.name}}</option>
+              </ng-container>
+
+               </optgroup>
+		          </select>
+			</div>
+			<span style="margin-right: 15px;margin-left: 15px;"> if the market price for 1 gram of </span>
+			<div class="select-style strain">
+				<select id="price-alert-detail-strn" name="strain" class="sm-form-control" [ngModel]="price_alert.strain">
+		            <option [selected] = "st.strain_id == price_alert.strain" *ngFor="let st of this.defaultStrain" [value] = "st.strain_id">{{st.name}}</option>
+		            <option [selected] = "st.strain_id == price_alert.strain" *ngFor="let st of this.strains" [value] = "st.strain_id">{{st.name}}</option>
+		        </select>
+			</div>						
+		</div>
+		<div class="inline-form">
+			<span style="margin-right: 15px;">goes</span> 
+			<div class="select-style">				
+				<select name="action" class="sm-form-control" [ngModel]="price_alert.action">
+					<option [selected] = "st.value == price_alert.action" *ngFor="let st of this.defaultAction" [value] = "st.value">{{st.label}}</option>
+				</select>
+			</div>
+			<span style="margin-right: 15px;margin-left: 15px;">by at least $</span>
+			<div class="select-style">
+				<!-- <input type="text" name="price" class="form-control target-price-box" [ngModel]="price_alert.price" required [pattern]="pricePattern" step="0.01" min="0.01" max="100"  #uPrice="ngModel">	 -->	
+				<!-- <input type="number" name="price" placeholder="" class="form-control target-price-box" [ngModel]="price_alert.price" required step="0.01" min="0.01" max="100" > -->					
+				<input id="priceCheck" type="number" name="price" maxlength='5' max='100' class="form-control target-price-box quantity" [ngModel]="price_alert.price" required (input)="checkPriceValue($event)" min="0" step="0.01" />
+			</div>			
+			<span style="margin-right: 15px;margin-left: 15px;">then alert me.</span>
+		</div>
+	</div>
+	<div class="form-wrap">
+		<div class="form-group name" *ngIf="display_fields">			
+			<input name="name" placeholder="First name" class="form-control" [ngModel]="price_alert.name" required #uName1="ngModel">
+        	<div *ngIf="uName1.errors && priceAlertDetailForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+            	<div *ngIf="uName1.errors.required"> 
+             		Please provide your name
+            	</div>  
+        	</div>
+		</div>
+		<div class="form-group email" *ngIf="display_fields">			
+			<input name="email" placeholder="Email address" class="form-control" [ngModel]="price_alert.email" required [pattern]="emailPattern" #uEmail1="ngModel">
+       		<div *ngIf="uEmail1.errors && priceAlertDetailForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+               <div *ngIf="uEmail1.errors.required"> 
+	            Please provide your email address
+	           </div>        
+               <div *ngIf="uEmail1.errors.pattern"> 
+            		Please enter valid email address
+         		</div> 
+            </div>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary" value="Aler Me!">Alert Me!</button>
+		</div>
+	</div>
+	</form>
+</div>

@@ -1,0 +1,207 @@
+
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu></mio-profile-top-menu>
+<mio-profile-sub-menu></mio-profile-sub-menu>
+<!-- Dashboard SubNav End -->
+
+<div class="content-wrap grey-bg">
+   
+   <div class="container clearfix">
+      <div class="row clearfix">
+         <div class="col-md-8">
+            <!-- About me Section start -->
+            <div class="white-box">
+               <div class="white-box-title"><h3>About me <i class="icon-angle-right"></i></h3></div>
+               <div class="white-box-content">
+                 
+                 <form #EditForm="ngForm" enctype="multipart/form-data" (ngSubmit)="onFormSubmit(EditForm)">
+
+
+                     <div class="form-group row">
+
+                        <label for="" class="col-sm-2 col-form-label">First Name</label>
+                        <div class="col-sm-8">
+                          <input type="text" id="edit-form-first-name" name="first_name" value="" class="form-control" [ngModel]="edit_alert.first_name" required #fName="ngModel" />
+                        <div *ngIf="fName.errors && EditForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                           <div *ngIf="fName.errors.required"> 
+                              Please provide your first name
+                           </div>  
+                        </div>
+                           <!-- <small id="" class="form-text text-muted">Others will see this</small> -->
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Last Name</label>
+                        <div class="col-sm-8">
+                          <input type="text" id="edit-form-last-name" name="last_name" value="" class="form-control" [ngModel]="edit_alert.last_name" required #lName="ngModel" />
+                        <div *ngIf="lName.errors && EditForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                           <div *ngIf="lName.errors.required"> 
+                              Please provide your last name
+                           </div>  
+                        </div>
+                           <!-- <small id="" class="form-text text-muted">Others will see this</small> -->
+                        </div>
+                     </div>
+                     <!-- <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-8">
+                           <input type="text" id="edit-form-email" name="email" value="{{email}}" class="form-control" [ngModel]="edit_alert.email" required [pattern]="emailPattern" #uEmail="ngModel"/>
+                                     <div *ngIf="uEmail.errors && EditForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                      <div *ngIf="uEmail.errors.required"> 
+                        Please provide your Email
+                      </div> 
+                      <div *ngIf="uEmail.errors.pattern"> 
+                        Please enter valid email address
+                                       </div>  
+                                         </div>
+                        </div>
+                     </div> -->
+                    
+                     <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Location</label>
+                        <div class="col-sm-8">
+                          <div class="row">
+                            <div class="col-sm-12" *ngIf="!change_location">
+                              <span class="location-info">Location:&nbsp;&nbsp;{{this.edit_alert.city}}, {{this.edit_alert.state}}, {{this.edit_alert.country}}</span>&nbsp;&nbsp;<a href="javascript:void(0)" (click)="showhide()">Change</a>
+                            </div>
+                          </div>
+                          <div class="row" *ngIf="change_location">
+                            <!-- <div class="col-sm-4">
+                              
+                               <select id="converter-city" name = "city" class="form-control" [(ngModel)]= "edit_alert.city" [value]= "edit_alert.city" >
+                                 <optgroup label="City">
+                                   <option [selected]="city.city_name==this.edit_alert.city"  *ngFor="let city of this.city_data" [value] = "city.city_name">{{city.city_name}}</option></optgroup>
+                                </select>
+                                <div id="city_error" style="display: none;" class="error" > 
+                                      Please select city
+                                </div>
+
+                              
+                            </div> -->
+                            <!-- <div class="col-sm-4">
+                                <select  id="converter-state" name = "state" class="form-control" [(ngModel)]= "edit_alert.state" [value]= "edit_alert.state" >
+                                   <optgroup label= "State">
+                                  <option [selected]="state.subdivision_1_name==this.edit_alert.state"  *ngFor="let state of this.state_data" [value] = "state.subdivision_1_name">{{state.subdivision_1_name}}</option></optgroup>
+                                </select>
+                                <div id="state_error" style="display: none;" class="error" > 
+                                   Please select state
+                                </div>
+                              
+
+                             </div> -->
+                             <div class="col-sm-8">
+                              
+                              <ng2-completer  [datasource]="actorDS" id="auto_state" [ngModel]="edit_alert.auto_state" [minSearchLength]="3" name="auto_state"  required #auto="ngModel" class=""></ng2-completer>
+                              
+                              <div *ngIf="auto.errors && EditForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                           <div *ngIf="auto.errors.required"> 
+                              Please provide your location
+                           </div>  
+                        </div>
+                             </div>
+                             <div class="col-sm-4">
+                             <input type="text" name="country" class="sm-form-control" value="{{this.edit_alert.country}}" readonly>
+                             </div>
+                          </div>
+                           <!--  -->
+                           
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Gender</label>
+                        <div class="col-sm-8">
+                        <div>
+                          <input id="gender_male" class="radio-style" name="gender" type="radio" value="Male" [(ngModel)]="edit_alert.gender" required #uGender="ngModel">
+                          <label for="gender_male" class="radio-style-2-label">Male</label>
+                          <input id="gender_female" class="radio-style" name="gender" type="radio" value="Female" [(ngModel)]="edit_alert.gender" required #uGender="ngModel">
+                          <label for="gender_female" class="radio-style-2-label">Female</label>
+                        </div>                          
+
+                        <!--   <input type="radio" name="gender" [ngModel]="edit_alert.gender" required #uGender="ngModel" value="Male"> Male
+                        <input type="radio" name="gender" [ngModel]="edit_alert.gender" required #uGender="ngModel" value="Female"> Female -->
+                           <!-- <select id="edit-form-gender" name="gender" value="{{gender}}" class="form-control" [ngModel]="edit_alert.gender" required #uGender="ngModel">
+                              <option [selected] = "st.value == edit_alert.gender" *ngFor="let st of this.genderOption" [value] = "st.value">{{st.label}}</option>
+                           
+                           </select> -->
+                           <div *ngIf="uGender.errors && EditForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                            <div *ngIf="uGender.errors.required"> 
+                              Please select your Gender
+                            </div> 
+                          </div> 
+                           <!-- <small id="" class="form-text text-muted">This helps us understand who's using leafly</small> -->
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Birthday</label>
+                        <div class="col-sm-2">
+                           <label for="" class="col-sm-2 col-form-label">Month</label>
+                             <input type="text" value="{{this.bMonth}}" id="bMonth" name="bMonth" class="form-control" placeholder="04" maxlength="2" (input)="checkMonthValue($event);">
+                       <!-- <div id="month_error" style="display: none;" class="error" > 
+                             Month value must be 01 to 12.
+                        </div> -->
+                        </div>
+
+                        <div class="col-sm-2">
+                           <label for="" class="col-sm-2 col-form-label">Day</label>
+                          <input type="text" value="{{this.bDay}}" id="bDay" name="bDay" class="form-control" placeholder="20" maxlength="2" (input)="checkDayValue($event);" /><!--  <div id="day_error" style="display: none;" class="error" > 
+                                Day value must be 01 to 31
+                          </div> -->
+                        </div>
+                        <div class="col-sm-2">
+                           <label for="" class="col-sm-2 col-form-label">year</label>
+                          <input type="text" value="{{this.bYear}}" id="bYear" name="bYear"  class="form-control"  maxlength="4" placeholder="2004" (input)="checkYearValue($event);"/> 
+                           <!-- <div id="year_error" style="display: none;" class="error" > 
+                                 Year value must be 4 digits
+                          </div> -->
+
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                       <div class="col-sm-2">
+                       </div>
+                       <div id="month_error" style="display: none;" class="col-sm-4 error" > 
+                             Month value must be 01 to 12.
+                        </div>
+                        <div id="day_error" style="display: none;" class="col-sm-4 error" > 
+                             Day value must be 01 to 31.
+                        </div>
+                        <div id="day_error1" style="display: none;" class="col-sm-4 error" > 
+                             Day value must be 01 to 29 in Feb.
+                        </div>
+                        <div id="year_error" style="display: none;" class="col-sm-4 error" > 
+                             Year value must be 4 digits.
+                        </div>
+                         <div id="year_error1" style="display: none;" class="col-sm-4 error" > 
+                             Please enter valid value for year
+                        </div>
+                         <div class="col-sm-2">
+                       </div>
+                     </div>
+
+                     <div class="form-group row">
+                        <div class="ml-auto col-sm-10">
+                           <button id="edit-form-submit" name="edit-form-submit" type="submit" class="btn btn-primary save-btn">Save</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- About me Section End -->
+           
+         </div>
+         <div class="col-md-4">
+           <!--  <div class="white-box">
+               <div class="white-box-title"><h3>Connect <i class="icon-angle-right"></i></h3></div>
+               <div class="white-box-content">
+                  <p>Want a more personalized and tailored experience? Help us tailor and recommend strains you might like, local deals and much more. Connect with your social profiles and we’ll do the rest. <span class="link mt-2"><a href="#"><img src="assets/images/connect-facebook-btn.png" alt=""></a></span></p>
+               </div>
+            </div> -->
+                        
+              <mio-share-link></mio-share-link>
+         </div>
+      </div>
+
+
+      
+   </div>
+</div>

@@ -1,0 +1,59 @@
+
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu *ngIf="this.user_data != null"></mio-profile-top-menu>
+<div class="content-wrap grey-bg">
+<!-- Manage price Section start -->
+   <div class="container clearfix">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="white-box">
+               <div class="white-box-title">
+                  <!-- <a href="#" class="btn btn-primary create-btn">Add Strain</a> -->
+                  <h3>Manage your following dispensaries <i class="icon-angle-right"></i></h3>
+               </div>
+               <div class="white-box-content">
+                  <table class="table table-striped">
+                     <thead>
+                        <tr>
+                           <th></th>
+                           <th>Dispensary</th>
+                           <th>Location</th>
+                           <th>Rating</th>
+                           <th>Reviews</th>
+                           <!-- <th>Where to buy</th> -->
+                           <th></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let st of favstrain">
+                           <td class="date-td"><span class="month">{{st.created_at | date: 'MMM'}}</span><span class="date">{{st.created_at | date: 'dd'}}</span></td>
+                           <td class="strain"><span><a routerLink="/{{globals.location_global_url}}/dispensary/{{st.slug}}">{{st.name}}</a></span></td>
+                           <td class="location" *ngIf="st.city">{{st.city}}, {{st.state}}</td>
+                           <td class="location" *ngIf="!st.city">{{st.state}}</td>
+                           <td>
+                              <span class="review">
+                                 <span class="rating-wrap" *ngIf="{'width': (st.ratings*100)/5+'%'}; let variable">
+                                 <span class="rating" [ngStyle]="variable"></span>
+                                </span>
+                             </span>
+                    
+                           </td>
+                          <td class="change up" *ngIf="st.reviews != null">{{st.reviews}}</td>
+                           <td class="change up" *ngIf="st.reviews == null">0 reviews</td>
+                           <td class="week-l-h"><a routerLink="/{{globals.location_global_url}}/{{this.locationSes.state.split(' ').join('-').toLowerCase()}}/{{this.locationSes.city.split(' ').join('-').toLowerCase()}}/compare-price/{{st.slug}}">Where to buy</a></td>                          
+                           <td class="action"><a title="Remove dispensary from your followings" href="javascript:void(0)" (click) = "removeFavStrain(st.id)"><i class="icon-minus remove" style=""></i></a></td>
+                        </tr>
+                        <tr *ngIf="no_data">
+                           <td colspan="8">
+                              <p>Oops, you've not saved any strain yet in your favorite list.</p>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Manage price Section End -->
+</div>

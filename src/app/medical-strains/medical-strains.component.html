@@ -1,0 +1,212 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form #converterAlert="ngForm" (ngSubmit)="onConverterAlertSubmit(converterAlert)">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Price Alert</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-body">  
+                        <p *ngIf="this.strain"><b>Create a price alert for {{ this.strain.name }} in {{this.locationSes.name}}</b> <br/> If the price for {{ strainName }} changes, we'll let you know. You can manage all your Price Alerts <a href="javascript:void(0)" (click) = "redirectToPage('login','myModal')">in your account.</a></p>      
+                        <p *ngIf="this.checkUser">Name: {{this.converter_alert.name}}</p>
+                        <p *ngIf="this.checkUser">Email: {{this.converter_alert.email}}</p>     
+
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-name" class="sr-only">Name</label>
+                            <input name="name" [ngModel]="this.converter_alert.name" required #uName="ngModel" class="form-control" placeholder="Enter your name">
+                            <div *ngIf="uName.errors && converterAlert.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uName.errors.required"> 
+                                   Please provide your name
+                                 </div>       
+                                
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-email" class="sr-only">Email</label>
+                            <input name="email" [ngModel]="this.converter_alert.email" required [pattern]="emailPattern" #uEmail="ngModel" class="form-control" placeholder="Enter your e-mail">
+                            <div *ngIf="uEmail.errors && converterAlert.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uEmail.errors.required"> 
+                                   Please provide your email address
+                                 </div>        
+                                 <div *ngIf="uEmail.errors.pattern"> 
+                                   Please enter valid email address
+                                 </div> 
+                            </div>
+                        </div>
+                        <p *ngIf="this.checkUser"><a href="javascript:void()" (click) = "this.checkUser = !this.checkUser">Change</a></p>
+                    </div>
+                    <div class="modal-footer" *ngIf="!this.check_price_alert">
+                        <button type="submit" class="btn btn-primary">Create Alert</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="myModal_fav" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form #favStrain="ngForm" (ngSubmit)="onFavstrainSubmit(favStrain)">              
+        <div class="modal-dialog">
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Favourite Strains</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-body">  
+                        <p>Save your favourite strains for quick access to check the strain price, publish or check consumers reviews, or save for your next Dispensary visit.</p>   
+                        <p *ngIf="this.checkUser">Name: {{this.favstrain.name}}</p>
+                        <p *ngIf="this.checkUser">Email: {{this.favstrain.email}}</p>              
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-name" class="sr-only">Name</label>
+                            <input name="name" [ngModel]="this.favstrain.name" required #uName="ngModel" class="form-control" placeholder="Enter your name">
+                            <div *ngIf="uName.errors && favStrain.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uName.errors.required"> 
+                                   Please provide your name
+                                 </div>       
+                                
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!this.checkUser">
+                            <label for="converter-alert-email" class="sr-only">Email</label>
+                            <input name="email" [ngModel]="this.favstrain.email" required [pattern]="emailPattern" #uEmail="ngModel" class="form-control" placeholder="Enter your e-mail">
+                            <div *ngIf="uEmail.errors && favStrain.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                  <div *ngIf="uEmail.errors.required"> 
+                                   Please provide your email address
+                                 </div>        
+                                 <div *ngIf="uEmail.errors.pattern"> 
+                                   Please enter valid email address
+                                 </div> 
+                            </div>
+                        </div>
+                        <p *ngIf="this.checkUser"><a href="javascript:void()" (click) = "this.checkUser = !this.checkUser">Change</a></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Save Favourite</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content-wrap nopadding">
+
+        <div class="container clearfix">      
+
+        <h1 class="converter-box-heading" style="padding: 50px 0px 20px;">Medical cannabis {{feel_like_title}}</h1>
+       <!--  <p>Explore marijuana strains the public has found made a difference for {{sub_text}}. Always consult a doctor first before using cannabis to help with {{sub_text}}. This is for informational purposes only and not meant to constitute or be a substitute for professional medical advice. Read our <a href="https://www.pow21.com/blog/termsofuse/" target="_blank">Terms of Use</a>.</p>  -->
+
+         <p>Explore marijuana strains other people have found made a difference for a medical purpose. Always consult a doctor first before using cannabis to help with any medical purpose. This content is for informational and educational purposes only and not meant to constitute or be a substitute for professional medical advice, or represent are a treatment for any kind of medical condition or symptom. <a href="https://www.pow21.com/blog/termsofuse/" target="_blank">Terms of Use</a>.</p> 
+          <!-- Sidebar
+          ============================================= -->
+          <div class="sidebar nobottommargin clearfix">
+            <div class="sidebar-widgets-wrap">             
+              
+
+              <div class="widget clearfix">                
+
+                <div class="bottommargin-sm green-select-box">
+                  <label for="">Symptoms</label>
+                  <div class="select-with-icon">
+                    <img src="assets/images/icon-medicalface.png" class="icon">
+                    <select id="feel-like-medical" multiple="" name="medical" aria-hidden="true" class="select-tags form-control" [(ngModel)]= "this.selectedMedical" [value]= "this.selectedMedical">
+                      <option *ngFor="let st of this.medical" [value] = "st.name.replace(' ','-')|lowercase">{{st.name}}</option>
+                    </select> 
+                  </div>
+                </div>
+
+                <div class="bottommargin-sm sidebar-medical-cannabis" style="padding-top: 0px;">
+                  <ul class="extra-links">
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('medical','stress')">Stress</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('medical','depression')">Depression</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('medical','insomnia')">Insomnia</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('medical','cramps')">Cramps</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('medical','headaches')">Headaches</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('medical','nausea')">Nausea</a></li>
+                  </ul>
+                </div>
+
+                <div class="bottommargin-sm green-select-box">
+                  <label for="">Flavour</label>
+                  <div class="select-with-icon">
+                    <img src="assets/images/icon-tasteface.png" class="icon">
+                    <select id="feel-like-flavour" multiple="" name="flavour" aria-hidden="true" class="select-tags form-control" [(ngModel)]= "this.selectedFlavour" [value]= "this.selectedFlavour">
+                      <option *ngFor="let st of this.flavour" [value] = "st.name.replace(' ','-')|lowercase">{{st.name}}</option>
+                    </select> 
+                  </div>
+                </div>
+
+                <div class="bottommargin-sm sidebar-medical-cannabis" style="padding-top: 0px;">
+                  <ul class="extra-links">
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('flavour','strawberry')">Strawberry</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('flavour','coffee')">Coffee</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('flavour','grape')">Grape</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('flavour','butter')">Buttery</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('flavour','apple')">Apple</a></li>
+                    <li><a href="javascript:void(0)" (click) = "addFilterByLink('flavour','flowery')">Flowery</a></li>
+                  </ul>
+                </div>
+                
+                
+              </div>
+              <p align="left" style="font-size: 10px;">Always consult a doctor first before using cannabis to help with any medical purpose. This content is for informational and educational purposes only and not meant to constitute or be a substitute for professional medical advice. POW does not promote any product or represent that the products mentioned are a treatment for any kind of medical condition or symptom. POW cannot guarantee that the information provided is error-free or complete and is not responsible for the quality of the information provided by users and sources. POW does not endorse any user-reported information, any particular strain, product, producer, organization, treatment or therapy. POW does not make representations regarding the use of cannabis or medical cannabis and does not provide any of its own views on the use of cannabis, its benefits, or promotes its use.</p>
+            </div>
+
+          </div>
+
+          <!-- Post Content
+          ============================================= -->
+          <div class="postcontent nobottommargin col_last clearfix">
+            <span class="resDisp" *ngIf="this.total_count_flag">({{this.total_count| number : fractionSize}} strain results)</span>
+            <!-- Posts
+            ============================================= -->
+            <div id="strain-list" class="small-thumbs">
+                <div *ngIf="this.total_count_flag && this.total_count == 0">Sorry, there are no cannabis strains available yet that match your filter. Try another filter combination, or check back soon.</div>
+                <div class="col_one_third with-details nopadding" *ngFor="let strain of strains">
+                  <div class="feature-box fbox-center fbox-effect"> 
+                    <div class="strain-list-icon">
+                      <h3><a style="width: 100%;" routerLink="/{{globals.location_global_url}}/strain/{{strain.slug}}">{{strain.name}}</a></h3>
+                      <div class="icons-wraps"> 
+                      <!-- <div class="fbox-icon-wrap">
+                        <div class="fbox-icon"> -->
+                          <a attr.data-id="{{strain.alert_id}}" id="alert_{{strain.id}}_active" href="javascript:void(0);" (click)="priceAlertDelete(strain)" [ngClass]="(strain.alert_id)?'active act':'active iact'"><i class="bell-icon"></i></a>
+                          <a attr.data-id="{{strain.alert_id}}" id="alert_{{strain.id}}" href="javascript:void(0);" (click)="addPriceAlert(strain)" [ngClass]="(!strain.alert_id)?'inactive act':'inactive iact'"><i class="bell-icon"></i></a>                          
+
+                          <!-- <a href="javascript:void(0);" (click)="addPriceAlert()" ><i class="bell-icon"></i></a> -->
+                        <!-- </div>
+                        <div class="fbox-icon"> -->
+                          <a attr.data-id="{{strain.fav_id}}" id="fav_{{strain.id}}_active" href="javascript:void(0);" (click)="favStrainDelete(strain)" [ngClass]="(strain.fav_id)?'active act':'active iact'" ><i class="fav-add-icon"></i></a>
+                          <a attr.data-id="{{strain.fav_id}}" id="fav_{{strain.id}}" href="javascript:void(0);" (click)="addToFavoriteList(strain)" [ngClass]="(!strain.fav_id)?'inactive act':'inactive iact'"><i class="fav-add-icon"></i></a>
+                          
+                        <!-- </div>
+                      </div> -->
+                      </div>
+                    </div>
+                    
+                    <div class="image-wrap"><a routerLink="/{{globals.location_global_url}}/strain/{{strain.slug}}"><img src="assets/default-stain-images/{{strain.image}}" /></a></div>
+                    <!-- <p style="text-transform: capitalize;">{{strain.category}}</p> -->
+                    <p class="review">  
+                       <span class="rating-wrap" *ngIf="{'width': (strain.ratings*100)/5+'%'}; let variable">
+                        <span class="rating" [ngStyle]="variable"></span>
+                      </span>
+                       <span class="review-count" *ngIf="strain.reviews">{{strain.reviews}} reviews</span>
+                    </p>                    
+                    <span *ngIf="false" class="sponsor"></span>
+                  </div>                  
+                  <a href="#" class="where-to-buy">See where to buy local</a>
+                </div>                 
+                
+            </div>  
+
+              <div class="col_full" style="text-align:center;">
+                <a *ngIf="loadMoreButton" href="javascript:void(0)" class="btn btn-primary" (click)="loadMoreStrain()">More strains</a> 
+              </div>                      
+
+          </div>
+
+        </div>
+
+      </div>

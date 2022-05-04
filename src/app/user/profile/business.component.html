@@ -78,7 +78,7 @@
 									<td><a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
 									<td class="status">
 										<a routerLink="/members/business/insights">
-											<img src="/assets/images/icon-insights.png">
+											<img src="/assets/images/icon-insight.png">
 										</a>
 									</td>
 									<td><span *ngIf="rv.status else elseStatus">Active</span><ng-template #elseStatus><a title="Edit your business" style="margin-right: 10px;" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)">Inactive</a></ng-template></td>

@@ -22,27 +22,16 @@
 								<tr>
 									<th>Verified</th>
 									<th></th>
-									<th>Store</th>
+									<th>Name</th>
+									<!-- <th>Address</th> -->
 									<th>City</th>
-									<!-- <th>Country</th> -->
+									<!-- <th>State</th>
+									<th>Zip Code</th> -->
+									<th>Country</th>
 									<th>Contributors</th>
-									<th colspan="2">Social</th>
+									<th>Social</th>
 									<th>Insights</th>
-									<th>Status</th>
 									<th>Actions</th>
-								</tr>
-								<tr>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<!-- <th></th> -->
-									<th></th>
-									<th>Review</th>
-									<th>Follow</th>
-									<th></th>
-									<th></th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -57,31 +46,29 @@
 											</a>
 										</ng-template>
 									</td>
-									<td>
-										<a routerLink="/{{globals.location_global_url}}/dispensary/{{rv.slug}}">
+									<td class="imgsection">
+										<a routerLink ="/{{globals.location_global_url}}/dispensary/{{rv.slug}}">
 											<img  src="https://www.pow21.com/admin/storage/app/{{rv.logoUrl}}" alt="" draggable="false" style="">
 										</a>
 									</td>
-									<td>{{rv.name}}</td>
+									<td class="contantsection">{{rv.name}}</td>
 									<!-- <td></td> -->
-									<td>
+									<td class="contantsection">
 										{{rv.city}}, {{rv.state}} <br/>
 										({{rv.address}}, {{rv.zip_code}})
 									</td>
 									<!-- <td></td>
 									<td></td> -->
-									<!-- <td>{{rv.country}}</td> -->
-									<td>
+									<td class="contantsection">{{rv.country}}</td>
+									<td class="contantsection">
 										<span *ngFor="let cb of rv.contributors">{{cb.name}}, </span>
 									</td>
-									<td><a href="#">{{rv.ratings}}<br/>({{rv.reviews}} reviews)</a></td>
-									<td><a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
+									<td>{{rv.social}}<a href="#">4.7</a>  | <a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
 									<td class="status">
 										<a routerLink="/members/business/insights">
-											<img src="/assets/images/icon-insight.png">
+											<img src="/assets/images/icon-insights.png">
 										</a>
 									</td>
-									<td><span *ngIf="rv.status else elseStatus">Active</span><ng-template #elseStatus><a title="Edit your business" style="margin-right: 10px;" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)">Inactive</a></ng-template></td>
 									<td style="text-align: center;">
 										<a title="Edit your business" style="margin-right: 10px;" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
 										<a title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv)" ><i class="fa fa-trash" ></i></a>

@@ -5,7 +5,8 @@
 <div class="content-wrap grey-bg">
 	<!-- Manage price Section start -->
 	<div class="container clearfix">
-		<h2>Add Your store</h2>
+		<h2 *ngIf="dispDetails.disp_id else elseBlock">Edit Your store</h2>
+		<ng-template #elseBlock><h2>Add Your store</h2></ng-template>
 		<div class="row">
 			<div class="col-md-8">
 				<div class="white-box">

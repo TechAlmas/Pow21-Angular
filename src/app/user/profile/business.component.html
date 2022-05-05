@@ -55,12 +55,10 @@
 										</ng-template>
 									</td>
 									<td>
-										<span *ngIf="rv.status else inactive">
-											Active
-										</span>
-										<ng-template #inactive>
-											Inactive		
-										</ng-template>
+										<ng-container [ngTemplateOutlet]="rv.status == 0 ? first : rv.status == 1 ? second : third"></ng-container>
+										<ng-template #first>Inactive</ng-template>
+										<ng-template #second>Active</ng-template>
+										<ng-template #third>Suspended</ng-template>
 									</td>
 									<td class="imgsection">
 										<a routerLink ="/{{globals.location_global_url}}/dispensary/{{rv.slug}}">
@@ -83,12 +81,7 @@
 									<td><a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
 									<td class="status">
 										<a routerLink="/members/business/insights">
-<<<<<<< HEAD
-
 											<img src="/assets/images/icon-insight.png">
-=======
-											<img src="/assets/images/icon-insights.png">
->>>>>>> main
 										</a>
 									</td>
 									<td style="text-align: center;">

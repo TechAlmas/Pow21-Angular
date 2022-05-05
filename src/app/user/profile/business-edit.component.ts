@@ -237,7 +237,7 @@ export class BusinessEditComponent implements OnInit {
 		});
 	}
 	onFilechange(event: any) {
-		this.file = event.target.files[0]
+		this.file = event.target.files;
 	}
 	onSubmitStore(data){
 		// var postdata = {
@@ -256,8 +256,12 @@ export class BusinessEditComponent implements OnInit {
 		// 	'id': jQuery('#id').val(),
 		// 	'file': this.file
 		// }
+		console.log(this.file);
 		const formData = new FormData();
-		formData.append('file', this.file);
+		jQuery.each(this.file, function(index,value){
+			formData.append('file[]', value);
+		});
+		
 		formData.append('name',jQuery('#name').val());
     	formData.append('address', jQuery('#address').val());
 		formData.append('address2', jQuery('#address2').val());

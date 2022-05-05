@@ -5,7 +5,8 @@
 <div class="content-wrap grey-bg">
 	<!-- Manage price Section start -->
 	<div class="container clearfix">
-		<h2>Add Your store</h2>
+		<h2 *ngIf="dispDetails.disp_id else elseBlock">Edit Your store</h2>
+		<ng-template #elseBlock><h2>Add Your store</h2></ng-template>
 		<div class="row">
 			<div class="col-md-8">
 				<div class="white-box">
@@ -87,8 +88,8 @@
 										<div class="" ></div>
 										<label for="paid-for-quality">Logo</label>
 										<label for="file-upload" class="custom-file-upload"><i class="fa fa-cloud" aria-hidden="true"></i> Custom files Upload</label>
-										<input id="file-upload" type="file"/>
-										<input (change)="this.onFilechange($event)" class="form-control" type="file" id="formFile">
+										<input id="file-upload" type="file" (change)="this.onFilechange($event)" multiple />
+										<!-- <input  class="form-control" type="file" id="formFile"> -->
 									</div>
 									<div class="form-group whitebgs">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
@@ -96,21 +97,23 @@
 		                           </div>
 
 
-		                           <div class="form-group whitebgs">
+		                           <div class="form-group whitebgs labelalignmentt">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
-		                              <span>Monday</span>
+		                              <span class="dayalign">Monday</span>
 		                              <input type = "time" id="monday_start" name="monday_start" class="sm-form-control monday_start required" value="{{dispDetails.license_type}}"  placeholder="" ngModel>
-		                              <span>To</span>
-		                              <input type = "time" id="monday_end" name="monday_end" class="sm-form-control monday_end required" value=""  placeholder="" ngModel>
-		                              <label class="toggle">
+		                              <span class="tocontant">To</span><br>
+		                              <input type = "time" id="monday_end" name="monday_end" class="sm-form-control monday_end required dau" value=""  placeholder="" ngModel>
+		                             
+									  <label class="toggle">
+										  <div class="togglebox">
 		                              	<input type="checkbox" id="monday_close" name="monday_close" value="1" class="form-control">
 		                              	<div class="slide-toggle"></div>
-		                              	<div class="slide-toggle-content">Close</div>
+		                              	<div class="slide-toggle-content">Close</div></div>
 		                              </label>
 		                           </div>
-		                           <div class="form-group whitebgs">
-		                              <div class="wait-layer" *ngIf="waitLayer"></div>
+		                           <div class="form-group whitebgs labelalignmentt">
+		                              <div class="wait-layer" *ngIf="waitLayer "></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Tuesday</span>
 		                              <input type = "time" id="tuesday_start" name="tuesday_start" class="sm-form-control tuesday_start required" value=""  placeholder="" ngModel>
@@ -122,7 +125,7 @@
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
 		                           </div>
-		                           <div class="form-group whitebgs">
+		                           <div class="form-group whitebgs labelalignmentt	">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Wednesday</span>
@@ -135,7 +138,7 @@
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
 		                           </div>
-		                           <div class="form-group whitebgs">
+		                           <div class="form-group whitebgs labelalignmentt">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Thursday</span>
@@ -148,7 +151,7 @@
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
 		                           </div>
-		                           <div class="form-group whitebgs">
+		                           <div class="form-group whitebgs labelalignmentt">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Friday</span>
@@ -161,7 +164,7 @@
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
 		                           </div>
-		                           <div class="form-group whitebgs">
+		                           <div class="form-group whitebgs labelalignmentt">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Saturday</span>
@@ -174,7 +177,7 @@
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
 		                           </div>
-		                           <div class="form-group whitebgs">
+		                           <div class="form-group whitebgs labelalignmentt">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Sunday</span>
@@ -188,7 +191,7 @@
 		                              </label>
 		                           </div>
 
-									<div class="form-group whitebgs">
+									<div class="form-group whitebgs assign_user">
 										<div class="" ></div>
 										<label for="paid-for-quality">Assign User</label>
 										<select id="assign_user" name="assign_user" class="sm-form-control assign_user required">

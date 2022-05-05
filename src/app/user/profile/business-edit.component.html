@@ -5,7 +5,8 @@
 <div class="content-wrap grey-bg">
 	<!-- Manage price Section start -->
 	<div class="container clearfix">
-		<h2>Add Your store</h2>
+		<h2 *ngIf="dispDetails.disp_id else elseBlock">Edit Your store</h2>
+		<ng-template #elseBlock><h2>Add Your store</h2></ng-template>
 		<div class="row">
 			<div class="col-md-8">
 				<div class="white-box">
@@ -87,8 +88,8 @@
 										<div class="" ></div>
 										<label for="paid-for-quality">Logo</label>
 										<label for="file-upload" class="custom-file-upload"><i class="fa fa-cloud" aria-hidden="true"></i> Custom files Upload</label>
-										<input id="file-upload" type="file"/>
-										<input (change)="this.onFilechange($event)" class="form-control" type="file" id="formFile">
+										<input id="file-upload" type="file" (change)="this.onFilechange($event)" multiple />
+										<!-- <input  class="form-control" type="file" id="formFile"> -->
 									</div>
 									<div class="form-group whitebgs">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>

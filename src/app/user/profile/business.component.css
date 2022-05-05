@@ -5,6 +5,27 @@
 tr td:nth-child(9){width: 10%;}
 tr td:nth-child(9) a{padding: 5px;font-size: 17px;}
 
-@media (min-width: 1200px) { 
-    td.imgsection a img {max-width: 70%;}
+
+
+
+
+.table.table.table-striped.stores td.contantsection {
+    text-align: justify ;
+}
+.table.table.table-striped.stores td.contantsection span {
+    text-align: justify;
+}
+
+th.topspaccing {
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+th.trtopspaccings {
+    padding-bottom: 0px;
+}
+@media (min-width: 1400px) { 
+    td.imgsection a img {
+        max-width: 50%;
+       
+        }
  }

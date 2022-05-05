@@ -20,43 +20,26 @@
 						<table class="table table-striped stores">
 							<thead>
 								<tr>
-									<th>Verified</th>
-									<th></th>
-									<th>Name</th>
-									<!-- <th>Address</th> -->
-									<th>City</th>
-									<!-- <th>State</th>
-									<th>Zip Code</th> -->
-									<th>Country</th>
-									<th>Contributors</th>
-									<th>Social</th>
-									<th>Insights</th>
-									<th>Actions</th>
+									<th class="trtopspaccings">Verified</th>
+									<th class="trtopspaccings">Status</th>
+									<th class="trtopspaccings"></th>
+									<th class="trtopspaccings">Name</th>
+									<th class="trtopspaccings">City</th>
+									<th class="trtopspaccings">Contributors</th>
+									<th colspan="2">Social</th>
+									<th class="trtopspaccings">Insights</th>
+									<th class="trtopspaccings">Actions</th>
 								</tr>
 								<tr>
-									
 									<th></th>
-
 									<th></th>
-
 									<th></th>
-
 									<th></th>
-
-									<!-- <th></th> -->
-
 									<th></th>
-
-									<th>Review</th>
-
-									<th>Follow</th>
-
 									<th></th>
-
+									<th class="topspaccing">Review</th>
+									<th class="topspaccing">Follow</th>
 									<th></th>
-
-									<th></th>
-
 								</tr>
 							</thead>
 							<tbody>
@@ -71,6 +54,12 @@
 											</a>
 										</ng-template>
 									</td>
+									<td>
+										<ng-container [ngTemplateOutlet]="rv.status == 0 ? first : rv.status == 1 ? second : third"></ng-container>
+										<ng-template #first>Inactive</ng-template>
+										<ng-template #second>Active</ng-template>
+										<ng-template #third>Suspended</ng-template>
+									</td>
 									<td class="imgsection">
 										<a routerLink ="/{{globals.location_global_url}}/dispensary/{{rv.slug}}">
 											<img  src="https://www.pow21.com/admin/storage/app/{{rv.logoUrl}}" alt="" draggable="false" style="">
@@ -84,12 +73,13 @@
 									</td>
 									<!-- <td></td>
 									<td></td> -->
-									<td class="contantsection">{{rv.country}}</td>
+									<!-- <td class="contantsection">{{rv.country}}</td> -->
 									<td class="contantsection">
 										<span *ngFor="let cb of rv.contributors">{{cb.name}}, </span>
 									</td>
-									<td>{{rv.social}}<a href="#">4.7</a>  | <a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
-									<td class="statuss">
+									<td>{{rv.social}}<a href="#">4.7</a></td>
+									<td><a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
+									<td class="status">
 										<a routerLink="/members/business/insights">
 											<img src="/assets/images/icon-insight.png">
 										</a>

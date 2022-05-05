@@ -89,15 +89,15 @@
 										<span *ngFor="let cb of rv.contributors">{{cb.name}}, </span>
 									</td>
 									<td>{{rv.social}}<a href="#">4.7</a>  | <a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
-									<td class="status">
+									<td class="statuss">
 										<a routerLink="/members/business/insights">
 											<img src="/assets/images/icon-insight.png">
 										</a>
 									</td>
-									<td style="text-align: center;">
-										<a title="Edit your business" style="margin-right: 10px;" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
-										<a href="javascript:void(0)" (click)="suspendStore(rv,3)" *ngIf="this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6"><i class="fa fa-pause" ></i></a>
-										<a title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv,0)" *ngIf="this.user_data.id_cms_privileges === 6"><i class="fa fa-trash" ></i></a>
+									<td class="">
+										<a class="text-primary" title="Edit your business" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
+										<a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,3)" *ngIf="this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6"><i class="fa fa-pause" ></i></a>
+										<a class="text-danger" title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv,0)" *ngIf="this.user_data.id_cms_privileges === 6"><i class="fa fa-trash" ></i></a>
 									</td>
 									</tr>
 								</tbody>

@@ -32,6 +32,7 @@ export class BusinessComponent implements OnInit {
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
 		this.user_data = JSON.parse(localStorage.getItem('userData'));
+		console.log(this.user_data);
 		//console.log(this.router.url);
 		if(this.user_data == null){
 			this.router.navigate(['/']);
@@ -151,48 +152,48 @@ export class BusinessComponent implements OnInit {
 			console.log(err.message);
 		});
 	}
-	editStore(id,slug){
-		var modal = jQuery('#add_edit_store');
-		if(slug){
-			this.getStoreDetails(slug).subscribe(data => {
-				//console.log(data['data']);
-				modal.find('#name').val(data['data']['name']);
-				modal.find('#address').val(data['data']['address']);
-				modal.find('#address2').val(data['data']['address2']);
-				modal.find('#city').val(data['data']['city']);
-				modal.find('#state').val(data['data']['state']);
-				modal.find('#zip_code').val(data['data']['zip_code']);
-				modal.find('#country').val(data['data']['country']);
-				modal.find('#website').val(data['data']['website']);
-				modal.find('#email').val(data['data']['email']);
-				modal.find('#email2').val(data['data']['email2']);
-				modal.find('#phone').val(data['data']['phone']);
-				modal.find('#license_type').val(data['data']['license_type']);
-				modal.find('#id').val(data['data']['disp_id']);
-				//modal.find('#name').val(data['data']['name']);
-				modal.find('.modal-title').text('Edit your store "'+data['data']['name']+'"');
-				jQuery('#add_edit_store').modal('show');
-			}, (err) => {
-				console.log(err.message);
-			});
-		}else{
-			modal.find('.modal-title').text('Add new store');
-			jQuery('#add_edit_store').modal('show');	
-		}
-	}
-	changeStatus(id,slug){
-		var modal = jQuery('#store_status_change');
-		if(slug){
-			this.getStoreDetails(slug).subscribe(data => {
-				modal.find('#id').val(data['data']['disp_id']);
-				modal.find('#status_'+data['data']['status']).attr('checked','checked');
-				modal.modal('show');
-			}, (err) => {
-				console.log(err.message);
-			});
-		}
-	}
-	suspendStore(storeset){
+	// editStore(id,slug){
+	// 	var modal = jQuery('#add_edit_store');
+	// 	if(slug){
+	// 		this.getStoreDetails(slug).subscribe(data => {
+	// 			//console.log(data['data']);
+	// 			modal.find('#name').val(data['data']['name']);
+	// 			modal.find('#address').val(data['data']['address']);
+	// 			modal.find('#address2').val(data['data']['address2']);
+	// 			modal.find('#city').val(data['data']['city']);
+	// 			modal.find('#state').val(data['data']['state']);
+	// 			modal.find('#zip_code').val(data['data']['zip_code']);
+	// 			modal.find('#country').val(data['data']['country']);
+	// 			modal.find('#website').val(data['data']['website']);
+	// 			modal.find('#email').val(data['data']['email']);
+	// 			modal.find('#email2').val(data['data']['email2']);
+	// 			modal.find('#phone').val(data['data']['phone']);
+	// 			modal.find('#license_type').val(data['data']['license_type']);
+	// 			modal.find('#id').val(data['data']['disp_id']);
+	// 			//modal.find('#name').val(data['data']['name']);
+	// 			modal.find('.modal-title').text('Edit your store "'+data['data']['name']+'"');
+	// 			jQuery('#add_edit_store').modal('show');
+	// 		}, (err) => {
+	// 			console.log(err.message);
+	// 		});
+	// 	}else{
+	// 		modal.find('.modal-title').text('Add new store');
+	// 		jQuery('#add_edit_store').modal('show');	
+	// 	}
+	// }
+	// changeStatus(id,slug){
+	// 	var modal = jQuery('#store_status_change');
+	// 	if(slug){
+	// 		this.getStoreDetails(slug).subscribe(data => {
+	// 			modal.find('#id').val(data['data']['disp_id']);
+	// 			modal.find('#status_'+data['data']['status']).attr('checked','checked');
+	// 			modal.modal('show');
+	// 		}, (err) => {
+	// 			console.log(err.message);
+	// 		});
+	// 	}
+	// }
+	suspendStore(storeset,status){
 		Swal({
 			title: 'Suspend your store profile?',
 			html: 'Please confirm you wish to suspend your retail store profile. The store profile will become inactive and not be accessible to any customers searching for your store, or allow to follow, browse products, leave a review and more. Please confirm below. Should you wish to delete the store listing altogether, please <a href="https://www.pow21.com/blog/contact-us">send us an email.</a>',
@@ -203,7 +204,9 @@ export class BusinessComponent implements OnInit {
 		}).then((result) => {
 			if (result.value) {
 				var postdata = storeset;
-				postdata.status = 0;
+				postdata.status = status;
+				delete postdata["contributors"];
+				delete postdata["follow_count"];
 				postdata.id = postdata.dispansary_id;
 				
 				delete postdata.user_id;
@@ -284,7 +287,7 @@ export class BusinessComponent implements OnInit {
 						"hideMethod": "fadeOut",
 						"positionClass": "toast-top-full-width",
 					});
-					jQuery('#add_edit_store').modal('hide');
+					//jQuery('#add_edit_store').modal('hide');
 				}else{
 					toastr.error(data["api_message"], "", {
 						"closeButton": true,

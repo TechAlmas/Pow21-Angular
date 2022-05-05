@@ -87,8 +87,12 @@ export class LoginComponent implements OnInit {
                       (err: any) => console.log(err),
                       () => {}
                     ); 
-                   
-                   this.router.navigate(['/members/dashboard']);
+                   console.log(this.user_data);
+                   if(this.user_data['id_cms_privileges'] == 6 || this.user_data['id_cms_privileges'] == 7){
+                    this.router.navigate(['/members/business']);
+                   }else{
+                    this.router.navigate(['/members/dashboard']);
+                   }
 
                    //localStorage.setItem('remember_token',data["remember_token"]);
           		  form.resetForm();

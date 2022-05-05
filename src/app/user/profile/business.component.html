@@ -84,9 +84,10 @@
 											<img src="/assets/images/icon-insight.png">
 										</a>
 									</td>
-									<td style="text-align: center;">
-										<a title="Edit your business" style="margin-right: 10px;" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
-										<a title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv)" ><i class="fa fa-trash" ></i></a>
+									<td class="">
+										<a class="text-primary" title="Edit your business" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
+										<a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,3)" *ngIf="this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6"><i class="fa fa-pause" ></i></a>
+										<a class="text-danger" title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv,0)" *ngIf="this.user_data.id_cms_privileges === 6"><i class="fa fa-trash" ></i></a>
 									</td>
 									</tr>
 								</tbody>
@@ -98,7 +99,7 @@
 		</div>
 		<!-- Manage price Section End -->
 </div>
-<div class="modal fade" id="add_edit_store" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<!-- <div class="modal fade" id="add_edit_store" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog">
 		<div class="modal-body">
 			<form #submitStore="ngForm" (ngSubmit)="onSubmitStore(submitStore.value)">
@@ -114,7 +115,6 @@
 							<label for="paid-for-quality">Name</label>
 							<input type = "text" id="name" name="name" class="sm-form-control required" placeholder="" ngModel>
 						</div>
-						<!-- Add new form fields here -->
 						<div class="form-group whitebgs">
 							<div class="wait-layer" *ngIf="waitLayer"></div>
 							<label for="paid-for-quality">Address</label>
@@ -174,7 +174,6 @@
 						<div class="form-group whitebgs">
 							<div class="wait-layer" *ngIf="waitLayer"></div>
 							<label for="paid-for-quality">Logo</label>
-							<!-- <input type = "file" id="logo" name="logo" class="sm-form-control logo required" placeholder="" ngModel> -->
 							<input (change)="this.onFilechange($event)" class="form-control" type="file" id="formFile">
 						</div>
 
@@ -184,7 +183,6 @@
 							<select id="assign_user" name="assign_user" class="sm-form-control assign_user required">
 								<option *ngFor="let ul of userList" value="{{ul.id}}" >{{ul.name}}</option>
 							</select>
-							<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -195,8 +193,8 @@
 			</form>
 		</div>
 	</div>
-</div>
-<div class="modal fade" id="store_status_change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+</div> -->
+<!-- <div class="modal fade" id="store_status_change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog">
 		<div class="modal-body">
 			<form #submitStore="ngForm" (ngSubmit)="onSubmitStore(submitStore.value)">
@@ -226,4 +224,4 @@
 			</form>
 		</div>
 	</div>
-</div>
+</div> -->

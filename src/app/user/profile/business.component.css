@@ -5,14 +5,14 @@
 
 
 .table.table.table-striped.stores td.contantsection {
-    text-align: left;
+    text-align: justify ;
 }
 .table.table.table-striped.stores td.contantsection span {
     text-align: left;
 }
 @media (min-width: 1200px) { 
     td.imgsection a img {
-        max-width: 70%;
+        max-width: 50%;
        
         }
  }

@@ -20,15 +20,15 @@
 						<table class="table table-striped stores">
 							<thead>
 								<tr>
-									<th>Verified</th>
-									<th>Status</th>
-									<th></th>
-									<th>Name</th>
-									<th>City</th>
-									<th>Contributors</th>
+									<th class="trtopspaccings">Verified</th>
+									<th class="trtopspaccings">Status</th>
+									<th class="trtopspaccings"></th>
+									<th class="trtopspaccings">Name</th>
+									<th class="trtopspaccings">City</th>
+									<th class="trtopspaccings">Contributors</th>
 									<th colspan="2">Social</th>
-									<th>Insights</th>
-									<th>Actions</th>
+									<th class="trtopspaccings">Insights</th>
+									<th class="trtopspaccings">Actions</th>
 								</tr>
 								<tr>
 									<th></th>
@@ -36,9 +36,10 @@
 									<th></th>
 									<th></th>
 									<th></th>
+									<th class="topspaccing">Reviews</th>
+									<th class="topspaccing">Followers</th>
 									<th></th>
-									<th>Review</th>
-									<th>Follow</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</thead>
@@ -61,8 +62,8 @@
 										<ng-template #third>Suspended</ng-template>
 									</td>
 									<td class="imgsection">
-										<a routerLink ="/{{globals.location_global_url}}/dispensary/{{rv.slug}}">
-											<img  src="https://www.pow21.com/admin/storage/app/{{rv.logoUrl}}" alt="" draggable="false" style="">
+										<a routerLink ="/{{globals.location_global_url}}/dispensary/{{rv.slug}}" target="_blank">
+											<img  src="https://www.pow21.com/admin/storage/app/{{rv.logoUrl}} "target="_blank" alt="" draggable="false" style="">
 										</a>
 									</td>
 									<td class="contantsection">{{rv.name}}</td>

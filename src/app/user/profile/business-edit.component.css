@@ -132,9 +132,9 @@ input#tuesday_start {
 }
 
 input#tuesday_end {
-    width: 25%;
+    width: 30%;
     float: left;
-    margin-left: -27px;
+    margin-left: -50px;
    
 }
 
@@ -146,9 +146,9 @@ input#wednesday_start{
 }
 
 input#wednesday_end {
-    width: 25%;
+    width: 30%;
     float: left;
-    margin-left: -27px;
+    margin-left: -50px;
    
 }
 input#thursday_start{
@@ -159,9 +159,9 @@ input#thursday_start{
 }
 /*  */
 input#thursday_end {
-    width: 25%;
+    width: 30%;
     float: left;
-    margin-left: -27px;
+    margin-left: -50px;
    
 }
 
@@ -173,9 +173,9 @@ input#friday_start{
 
 }
 input#friday_end {
-    width: 25%;
+    width: 30%;
     float: left;
-    margin-left: -27px;
+    margin-left: -50px;
    
 }
 
@@ -186,9 +186,9 @@ input#saturday_start{
 
 }
 input#saturday_end {
-    width: 25%;
+    width: 30%;
     float: left;
-    margin-left: -27px;
+    margin-left: -50px;
    
 }
 
@@ -199,9 +199,9 @@ input#sunday_start{
 
 }
 input#sunday_end {
-    width: 25%;
+    width: 30%;
     float: left;
-    margin-left: -27px;
+    margin-left: -50px;
 }
 .form-group.whitebgs.assign_user {
     margin-top: 37px;

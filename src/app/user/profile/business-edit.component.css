@@ -87,7 +87,7 @@ label.radio-style-2-label {
  input#monday_start {
     width: 33%;
     float: left;
-    margin-left: 19px;
+    margin-left: 1px;
 }
 input#monday_end {
     width: 32%;
@@ -115,13 +115,13 @@ input#monday_end {
 .form-group.whitebgs.labelalignmentt span {
     float: left;
     margin-left: 2%;
-    width: 12%;
+    width: 13%;
     margin-top: 19px;
 }
 input#tuesday_start {
     width: 33%;
     float: left;
-    margin-left: 19px;
+    margin-left: 1px;
 }
 input#tuesday_end {
     width: 32%;
@@ -131,7 +131,7 @@ input#tuesday_end {
 input#wednesday_start{
     width: 33%;
     float: left;
-    margin-left: 19px;
+    margin-left: 1px;
 }
 input#wednesday_end {
     width: 32%;
@@ -141,7 +141,7 @@ input#wednesday_end {
 input#thursday_start{
     width: 33%;
     float: left;
-    margin-left: 19px;
+    margin-left: 1px;
 }
 input#thursday_end {
     width: 32%;
@@ -151,7 +151,7 @@ input#thursday_end {
 input#friday_start{
     width: 33%;
     float: left;
-    margin-left: 19px;
+    margin-left: 1px;
 }
 input#friday_end {
     width: 32%;
@@ -161,7 +161,7 @@ input#friday_end {
 input#saturday_start{
     width: 33%;
     float: left;
-    margin-left: 19px;
+    margin-left: 1px;
 }
 input#saturday_end {
     width: 32%;
@@ -171,7 +171,7 @@ input#saturday_end {
 input#sunday_start{
     width: 33%;
     float: left;
-    margin-left: 19px;
+    margin-left: 1px;
 }
 input#sunday_end {
     width: 32%;

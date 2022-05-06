@@ -123,6 +123,7 @@ input#monday_end {
     float: left;
     margin-left: 4%;
     width:10%;
+    margin-top: 25px;
 }
 
 input#tuesday_start {

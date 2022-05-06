@@ -126,9 +126,9 @@ input#monday_end {
 }
 
 input#tuesday_start {
-    width: 24%;
+    width: 30%;
     float: left;
-    margin-left: 42px;
+    margin-left: 30px;
 }
 
 input#tuesday_end {
@@ -139,9 +139,9 @@ input#tuesday_end {
 }
 
 input#wednesday_start{
-    width: 24%;
+    width: 30%;
     float: left;
-    margin-left: 42px;
+    margin-left: 30px;
 
 }
 
@@ -152,9 +152,9 @@ input#wednesday_end {
    
 }
 input#thursday_start{
-    width: 24%;
+    width: 30%;
     float: left;
-    margin-left: 42px;
+    margin-left: 30px;
 
 }
 /*  */
@@ -167,9 +167,9 @@ input#thursday_end {
 
 input#friday_start{
 
-    width: 24%;
+    width: 30%;
     float: left;
-    margin-left: 42px;
+    margin-left: 30px;
 
 }
 input#friday_end {
@@ -180,9 +180,9 @@ input#friday_end {
 }
 
 input#saturday_start{
-    width: 24%;
+    width: 30%;
     float: left;
-    margin-left: 42px;
+    margin-left: 30px;
 
 }
 input#saturday_end {
@@ -193,9 +193,9 @@ input#saturday_end {
 }
 
 input#sunday_start{
-    width: 24%;
+    width: 30%;
     float: left;
-    margin-left: 42px;
+    margin-left: 30px;
 
 }
 input#sunday_end {

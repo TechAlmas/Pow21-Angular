@@ -95,10 +95,10 @@ input#monday_end {
     margin-left: -50px;
     margin-top: -3%;
 }
-.form-group.whitebgs.labelalignmentt {
+.labelalignmentt {
     margin-top: 35px;
 }
-.form-group.whitebgs.labelalignmentt label.toggle {
+.labelalignmentt label.toggle {
     width: 15%;
     float: right;
     margin: -68px auto;

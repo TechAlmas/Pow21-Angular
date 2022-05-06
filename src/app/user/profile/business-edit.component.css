@@ -97,7 +97,7 @@ label.radio-style-2-label {
 input#monday_end {
     width: 30%;
     float: left;
-    margin-left: -4%;
+    margin-left: -50px;
     margin-top: -3%;
 }
 .form-group.whitebgs.labelalignmentt {

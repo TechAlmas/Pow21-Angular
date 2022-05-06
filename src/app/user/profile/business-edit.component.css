@@ -105,9 +105,9 @@ input#monday_end {
 }
 .form-group.whitebgs.labelalignmentt label.toggle {
     /* margin-left: 20%; */
-    width: 18%;
+    width: 15%;
     float: right;
-    margin: -8px auto;
+    margin: -68px auto;
 }
 .form-group.whitebgs.labelalignmentt span {
     float: left;

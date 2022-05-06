@@ -17,7 +17,6 @@
     display: inline;
     padding: 1rem;
     border-top: none;
-
 }
 button.btn.btn-primary {
     height: 46px;
@@ -71,10 +70,8 @@ label.radio-style-2-label {
     float: left;
     margin-left: 10%;
     width:10%;
-    margin-top: 9px;
-    
+    margin-top: 9px;  
 }
-
 .form-group.whitebgs.labelalignment label.toggle {
     /* margin-left: 20%; */
     width: 15%;
@@ -91,9 +88,7 @@ label.radio-style-2-label {
     width: 30%;
     float: left;
     margin-left: 30px;
-    
 }
-
 input#monday_end {
     width: 30%;
     float: left;
@@ -104,7 +99,6 @@ input#monday_end {
     margin-top: 42px;
 }
 .form-group.whitebgs.labelalignmentt label.toggle {
-    /* margin-left: 20%; */
     width: 15%;
     float: right;
     margin: -68px auto;
@@ -118,86 +112,66 @@ input#monday_end {
 .slide-toggle-content {
     margin-top: 5px;
 }
-
 .form-group.whitebgs.labelalignmentt span {
     float: left;
     margin-left: 2%;
     width: 12%;
     margin-top: 25px;
 }
-
 input#tuesday_start {
     width: 30%;
     float: left;
     margin-left: 30px;
 }
-
 input#tuesday_end {
     width: 30%;
     float: left;
-    margin-left: -50px;
-   
+    margin-left: -50px; 
 }
-
 input#wednesday_start{
     width: 30%;
     float: left;
     margin-left: 30px;
-
 }
-
 input#wednesday_end {
     width: 30%;
     float: left;
-    margin-left: -50px;
-   
+    margin-left: -50px;  
 }
 input#thursday_start{
     width: 30%;
     float: left;
     margin-left: 30px;
-
 }
-/*  */
 input#thursday_end {
     width: 30%;
     float: left;
-    margin-left: -50px;
-   
+    margin-left: -50px; 
 }
-
 input#friday_start{
-
     width: 30%;
     float: left;
     margin-left: 30px;
-
 }
 input#friday_end {
     width: 30%;
     float: left;
     margin-left: -50px;
-   
 }
-
 input#saturday_start{
     width: 30%;
     float: left;
     margin-left: 30px;
-
 }
 input#saturday_end {
     width: 30%;
     float: left;
     margin-left: -50px;
-   
 }
-
 input#sunday_start{
     width: 30%;
     float: left;
     margin-left: 30px;
-
 }
 input#sunday_end {
     width: 30%;
@@ -207,7 +181,6 @@ input#sunday_end {
 .form-group.whitebgs.assign_user {
     margin-top: 37px;
 }
-
 .toggle .slide-toggle-content {
     display: inline-block;
     vertical-align: top;
@@ -225,36 +198,24 @@ input[type=time] {
   font-family: helvetica;
   width: 160px;
 }
-
-/* Wrapper around the hour, minute, second, and am/pm fields as well as 
-the up and down buttons and the 'X' button */
 input[type=time]::-webkit-datetime-edit-fields-wrapper {
   display: flex;
 }
-
-/* The space between the fields - between hour and minute, the minute and 
-second, second and am/pm */
 input[type=time]::-webkit-datetime-edit-text {
   padding: 19px 4px;
 }
-
-/* The naming convention for the hour, minute, second, and am/pm field is
-`-webkit-datetime-edit-{field}-field` */
-
 /* Hour */
 input[type=time]::-webkit-datetime-edit-hour-field {
   background-color: #f2f4f5;
   border-radius: 15%;
   padding: 19px 13px;
 }
-
 /* Minute */
 input[type=time]::-webkit-datetime-edit-minute-field {
   background-color: #f2f4f5;
   border-radius: 15%;
   padding: 19px 13px;
 }
-
 /* AM/PM */
 input[type=time]::-webkit-datetime-edit-ampm-field {
   background-color: #7155d3;
@@ -262,12 +223,10 @@ input[type=time]::-webkit-datetime-edit-ampm-field {
   color: #fff;
   padding: 19px 13px;
 }
-
 /* 'X' button for resetting/clearing time */
 input[type=time]::-webkit-clear-button {
   display: none;
 }
-
 /* Up/Down arrows for incrementing/decrementing the value */
 input[type=time]::-webkit-inner-spin-button {
   display: none;

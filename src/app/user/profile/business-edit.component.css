@@ -206,9 +206,7 @@ input#sunday_end {
 .form-group.whitebgs.assign_user {
     margin-top: 37px;
 }
-.togglebox {
-    margin-top: -20px;
-}
+
 .toggle .slide-toggle-content {
     display: inline-block;
     vertical-align: top;

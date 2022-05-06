@@ -207,13 +207,13 @@ input[type=time]::-webkit-datetime-edit-text {
 /* Hour */
 input[type=time]::-webkit-datetime-edit-hour-field {
   background-color: #f2f4f5;
-  border-radius: 15%;
+  /* border-radius: 15%; */
   padding: 19px 13px;
 }
 /* Minute */
 input[type=time]::-webkit-datetime-edit-minute-field {
   background-color: #f2f4f5;
-  border-radius: 15%;
+  /* border-radius: 15%; */
   padding: 19px 13px;
 }
 /* AM/PM */

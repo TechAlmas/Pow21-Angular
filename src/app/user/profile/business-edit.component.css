@@ -218,7 +218,7 @@ input[type=time]::-webkit-datetime-edit-minute-field {
 }
 /* AM/PM */
 input[type=time]::-webkit-datetime-edit-ampm-field {
-  background-color: #7155d3;
+  background-color: #ECCB00;
   border-radius: 15%;
   color: #fff;
   padding: 19px 13px;

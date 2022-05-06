@@ -209,6 +209,15 @@ input#sunday_end {
 .togglebox {
     margin-top: -20px;
 }
+.toggle .slide-toggle-content {
+    display: inline-block;
+    vertical-align: top;
+    width: calc( 100% - 80px);
+    margin-left: 10px;
+    text-transform: initial;
+    font-weight: 600;
+    font-size: 16px;
+}
 /* timer design */
 input[type=time] {
   border: none;

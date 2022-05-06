@@ -85,14 +85,14 @@ label.radio-style-2-label {
     margin-top: -5px;
 }
  input#monday_start {
-    width: 30%;
+    width: 33%;
     float: left;
-    margin-left: 30px;
+    margin-left: 19px;
 }
 input#monday_end {
-    width: 30%;
+    width: 32%;
     float: left;
-    margin-left: -50px;
+    margin-left: -70px;
     margin-top: -3%;
 }
 .form-group.whitebgs.labelalignmentt {
@@ -116,67 +116,67 @@ input#monday_end {
     float: left;
     margin-left: 2%;
     width: 12%;
-    margin-top: 25px;
+    margin-top: 19px;
 }
 input#tuesday_start {
-    width: 30%;
+    width: 33%;
     float: left;
-    margin-left: 30px;
+    margin-left: 19px;
 }
 input#tuesday_end {
-    width: 30%;
+    width: 32%;
     float: left;
-    margin-left: -50px; 
+    margin-left: -70px;
 }
 input#wednesday_start{
-    width: 30%;
+    width: 33%;
     float: left;
-    margin-left: 30px;
+    margin-left: 19px;
 }
 input#wednesday_end {
-    width: 30%;
+    width: 32%;
     float: left;
-    margin-left: -50px;  
+    margin-left: -70px; 
 }
 input#thursday_start{
-    width: 30%;
+    width: 33%;
     float: left;
-    margin-left: 30px;
+    margin-left: 19px;
 }
 input#thursday_end {
-    width: 30%;
+    width: 32%;
     float: left;
-    margin-left: -50px; 
+    margin-left: -70px;
 }
 input#friday_start{
-    width: 30%;
+    width: 33%;
     float: left;
-    margin-left: 30px;
+    margin-left: 19px;
 }
 input#friday_end {
-    width: 30%;
+    width: 32%;
     float: left;
-    margin-left: -50px;
+    margin-left: -70px;
 }
 input#saturday_start{
-    width: 30%;
+    width: 33%;
     float: left;
-    margin-left: 30px;
+    margin-left: 19px;
 }
 input#saturday_end {
-    width: 30%;
+    width: 32%;
     float: left;
-    margin-left: -50px;
+    margin-left: -70px;
 }
 input#sunday_start{
-    width: 30%;
+    width: 33%;
     float: left;
-    margin-left: 30px;
+    margin-left: 19px;
 }
 input#sunday_end {
-    width: 30%;
+    width: 32%;
     float: left;
-    margin-left: -50px;
+    margin-left: -70px;
 }
 .form-group.whitebgs.assign_user {
     margin-top: 60px;
@@ -199,7 +199,9 @@ input[type=time] {
   width: 160px;
 }
 input[type=time]::-webkit-datetime-edit-fields-wrapper {
-  display: flex;
+  /* display: flex; */
+  display: flow-root;
+    padding: 12px;
 }
 input[type=time]::-webkit-datetime-edit-text {
   padding: 19px 4px;

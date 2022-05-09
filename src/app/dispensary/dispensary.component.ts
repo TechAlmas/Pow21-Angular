@@ -104,7 +104,7 @@ getDispensaryDetail(disp_slug)
         this.image_disp = "https://www.pow21.com/admin/storage/app/"+this.dispDetails.logoUrl;
         this.mapUrl = "https://www.google.com/maps/place/"+this.dispDetails.address+','+this.dispCity+','+this.dispState+' '+data['data'].zip_code+','+data['data'].country;
         //1353 E 41st Ave, Vancouver, BC V5W 3R8, Canada
-        this.schedule = JSON.parse(this.dispDetails.schedule);
+        //this.schedule = JSON.parse(this.dispDetails.schedule);
         //console.log(this.dispDetails.state.replace(/\s/g, "-"));
 
       }),
@@ -305,7 +305,11 @@ onSubmitReviewForm(form: NgForm) {
 
 getDispensaryDetailData(disp_slug): Observable<any> {
    // var postData = {"url":currentUrl};
-    return this._http.get<any>('dispensary_detail?slug='+disp_slug+'&user_id='+this.user_data["id"]);
+    if(this.user_data){
+      return this._http.get<any>('dispensary_detail?slug='+disp_slug+'&user_id='+this.user_data["id"]);
+    }else{
+      return this._http.get<any>('dispensary_detail?slug='+disp_slug);
+    }
   }
 
   postReview(){

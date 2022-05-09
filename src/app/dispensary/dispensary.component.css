@@ -27,7 +27,7 @@ span.review-count {margin-left: 5px;}
 /*.follow span:hover ~ .tooltip-contentfollow{visibility: visible;opacity: 1;}*/
 .headingfollowtooltip i.fa.fa-user {font-size: 14px;color: #fff;vertical-align: middle;padding: 0px;}
 a.headingfollowtooltip span {color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;}
-.tooltip-contentfollow:after {content: "";position: absolute;border-width: 10px;border-style: solid;top: 100%;left: 40%;border-color: #2384bc transparent transparent transparent;}
+.tooltip-contentfollow:after {content: "";position: absolute;border-width: 8px;border-style: solid;top: 100%;left: 40%;border-color: #2384bc transparent transparent transparent;}
 .tooltip-contentfollow.user_follow:after{left: 30%;}
 .experience{font-size: 18px;}
 .col.retail-meta {flex: 0 0 50%;max-width: 50%;padding: 0;}

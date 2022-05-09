@@ -186,3 +186,6 @@ img.img-responsive1 {
     padding: 5px;
     text-transform: capitalize;
 }
+.claim_listing a {
+    color: #fff;
+}

@@ -20,7 +20,7 @@
 a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;}
 .col.follow {flex: 0 0 16%;max-width: 16%;padding: 0;margin: auto 0;text-align: center;}
 .col.title {flex: 0 0 84%;max-width: 84%;padding: 0;}
-.tooltip-contentfollow {display: flex;flex-direction: column;align-items: center;justify-content: center;visibility: visible;opacity: 1;position: absolute;background: #2384bc;left: -9px;padding: 0px;margin-top: 0;font-size: 15px;width: auto;/*transition: 0.25s all ease;transition-delay: 0.25s;*/z-index: 2;border-radius: 4px;top: -50px;padding: 5px 5px;}
+.tooltip-contentfollow {cursor: pointer;display: flex;flex-direction: column;align-items: center;justify-content: center;visibility: visible;opacity: 1;position: absolute;background: #2384bc;left: -9px;padding: 0px;margin-top: 0;font-size: 15px;width: auto;/*transition: 0.25s all ease;transition-delay: 0.25s;*/z-index: 2;border-radius: 4px;top: -50px;padding: 5px 5px;}
 .tooltip-contentfollow.user_follow {left: 30%;}
 .follow span {padding: 0px 0;cursor: pointer;}
 span.review-count {margin-left: 5px;}

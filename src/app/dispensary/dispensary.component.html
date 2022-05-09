@@ -107,7 +107,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col follow">
-								<span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span>
+								<!-- <span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span> -->
 								<div class="tooltip-contentfollow" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'">
 	                <a class="headingfollowtooltip">
 	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status">&nbsp;&nbsp;|&nbsp;&nbsp;Follow</span></a>

@@ -91,7 +91,7 @@ getDispensaryDetail(disp_slug)
         //   this.routes.navigate(['/']);
         // }
         //console.log(this.cookieService.get('fav_disp'));
-        console.log(this.user_data);
+        //console.log(this.user_data);
         if(this.user_data){
 
         }else{
@@ -129,7 +129,7 @@ linkClicked(id){
      }
   }		
 onFilechange(event: any) {
-  //this.file = event.target.files[0];
+  this.file = event.target.files;
 }
 enableReviewForm(){
     this.write_review = true;
@@ -137,16 +137,33 @@ enableReviewForm(){
  }
 onClickSubmit(data) {
   console.log(data);
-    var postdata = {
-      "listing_id" : this.dispDetails.id,
-      "first_name" : data.fname,
-      "last_name":data.lname,
-      "telephone":data.telnum,
-      "e_mail":data.email,
-      'verification_details':data.notes,
-    };
+    // var postdata = {
+    //   "listing_id" : this.dispDetails.id,
+    //   "first_name" : data.fname,
+    //   "last_name":data.lname,
+    //   "telephone":data.telnum,
+    //   "e_mail":data.email,
+    //   'verification_details':data.notes,
+    // };
+    if(data.email != data.reemail){
+      toastr.error("&nbsp;&nbsp;Both emails are not matching!", "", {
+         "closeButton": true,
+          "timeOut": "8000",
+          "extendedTImeout": "0",
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "extendedTimeOut": "0",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut",
+          "positionClass": "toast-top-full-width",
+        });
+    }
     const formData = new FormData();
-    //formData.append('file', this.file);
+    $.each(this.file, function(index, value){
+      formData.append('file[]', value);
+    });
     formData.append("listing_id",this.dispDetails.id);
     formData.append("first_name",data.fname);
     formData.append("last_name",data.lname);
@@ -178,8 +195,25 @@ onClickSubmit(data) {
           $('#myModal_paid').modal('hide');
 
       }),
-      (err: any) => console.log(err),
-      () => {}
+      (err: any) => {console.log(err)
+        toastr.error(err.message, "", {
+         "closeButton": true,
+          "timeOut": "8000",
+          "extendedTImeout": "0",
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "extendedTimeOut": "0",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut",
+          "positionClass": "toast-top-full-width",
+        });
+      },
+      () => {
+        console.log(err.message);
+        
+      }
      );
  }
  postPaidFor(postdata){

@@ -87,11 +87,14 @@
 		<div class="single-product dispensary">
 			<div class="product row">
 				<div class="col product-image" *ngIf="this.image_disp">
+					<div class="claim_listing">
+					<span>| <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
+				</div>
 					<img  src="{{this.image_disp}}" alt="" draggable="false">
 					<section class="blowimg">
 						<div data-testid="listing-type" class="location-icon">
 							<i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-							<a href="{{this.mapUrl}}">Get directions</a>
+							<a href="{{this.mapUrl}}"target="_blank">Get directions</a>
 						</div>
 						<div data-testid="listing-type" class="calling-icon">
 							<i class="fa fa-phone-volume" aria-hidden="true"></i>
@@ -107,8 +110,8 @@
 					<div class="container">
 						<div class="row">
 							<div class="col follow">
-								<span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span>
-								<div class="tooltip-contentfollow" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'">
+								<!-- <span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span> -->
+								<div class="tooltip-contentfollow" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" (click)="followStore(dispDetails.disp_id)">
 	                <a class="headingfollowtooltip">
 	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status">&nbsp;&nbsp;|&nbsp;&nbsp;Follow</span></a>
 	            	</div>

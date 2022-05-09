@@ -178,3 +178,11 @@ img.img-responsive1 {
     color: #fff;
     margin-top: 5px;
 }
+.claim_listing {
+    z-index: 999999;
+    position: absolute;
+    color: #ffff;
+    margin-left: 140px;
+    padding: 5px;
+    text-transform: capitalize;
+}

@@ -197,10 +197,10 @@ img.img-responsive1 {
         font-size: 10px;
         vertical-align: middle;
         font-weight: 700;
-        /* margin-left: 5px; */
+        /*   */
     }
     .tooltip-contentfollow{
-        margin-top: 0px;
+        margin-top: -5px;
         left: -16px;
     }
     .headingfollowtooltip  i.fa.fa-user{

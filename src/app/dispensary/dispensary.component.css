@@ -197,7 +197,7 @@ img.img-responsive1 {
         font-size: 10px;
         vertical-align: middle;
         font-weight: 700;
-        margin-left: 5px;
+        /* margin-left: 5px; */
     }
     .tooltip-contentfollow{
         margin-top: 0px;

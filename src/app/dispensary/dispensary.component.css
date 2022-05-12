@@ -194,7 +194,7 @@ img.img-responsive1 {
 @media (min-width: 767px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;
-        font-size: 12px;
+        font-size: 10px;
         vertical-align: middle;
         font-weight: 700;
         margin-left: 5px;
@@ -204,9 +204,9 @@ img.img-responsive1 {
         left: -16px;
     }
     .headingfollowtooltip  i.fa.fa-user{
-        font-size: 12px;
+        font-size: 10px;
     }
     a.headingfollowtooltip span{
-        font-size: 12px;
+        font-size: 10px;
     }
  }

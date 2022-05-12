@@ -190,3 +190,17 @@ img.img-responsive1 {
 .claim_listing a {
     color: #fff;
 }
+
+@media (min-width: 992px) and (max-width: 1199px) { 
+    a.headingfollowtooltip{
+        color: #ffff;
+        font-size: 12px;
+        vertical-align: middle;
+        font-weight: 700;
+        margin-left: 5px;
+    
+    }
+    .tooltip-contentfollow{
+        margin-top: -11px;
+    }
+ }

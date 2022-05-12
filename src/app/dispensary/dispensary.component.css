@@ -203,4 +203,10 @@ img.img-responsive1 {
     .tooltip-contentfollow{
         margin-top: -11px;
     }
+    .headingfollowtooltip  i.fa.fa-user{
+        font-size: 12px;
+    }
+    a.headingfollowtooltip span{
+        font-size: 12px;
+    }
  }

@@ -190,6 +190,9 @@ img.img-responsive1 {
 .claim_listing a {
     color: #fff;
 }
+#reviews {
+    float: left;
+}
 
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{

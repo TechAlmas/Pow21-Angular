@@ -145,9 +145,7 @@ span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
     /* margin-left: -14px; */
     margin-top: 3px;
 }
-/* .col.store-image span {
-    margin-left: -15px;
-} */
+
 .columnimage {
     padding-top: 5px;
 }
@@ -227,5 +225,8 @@ img.img-responsive1 {
         vertical-align: baseline;
            font-size: 14px;
        }
+       .col.store-image span {
+        font-size: 12px;
+    }
 
  }

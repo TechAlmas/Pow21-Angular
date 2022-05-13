@@ -87,13 +87,8 @@
 		<div class="single-product dispensary">
 			<div class="product row">
 				<div class="col product-image" *ngIf="this.image_disp">
-					<div class="unverified">
-						<span>Unverified| </span> <span class="imgunverid"><img src="/assets/images/question.svg"></span>
-					</div>
-					
 					<div class="claim_listing">
-					<span>
-						<a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
+					<span>| <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
 				</div>
 					<img  src="{{this.image_disp}}" alt="" draggable="false">
 					<section class="blowimg">
@@ -118,7 +113,7 @@
 								<!-- <span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span> -->
 								<div class="tooltip-contentfollow" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" (click)="followStore(dispDetails.disp_id)">
 	                <a class="headingfollowtooltip">
-	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status">&nbsp;&nbsp;<br>&nbsp;&nbsp;Follow</span></a>
+	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status">&nbsp;&nbsp;|&nbsp;&nbsp;Follow</span></a>
 	            	</div>
 							</div>
 							<div class="col title">
@@ -258,14 +253,14 @@
 		<div class="col store-image">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div col-md-12>
 			
    <span style="text-align:left;">Browser our store </span>
    
       <div class="columnimage">
          <a href="https://via.placeholder.com/300x600/e59494/1.png" data-lightbox="image-1" class="popupimage"><img class="img-responsive1" src="https://via.placeholder.com/300x600/e59494/1.png"></a>
       </div>
-	</div>
+	  </div>
       <br/>
       <div class="col-md-4">
          <div class="imagesthumb">

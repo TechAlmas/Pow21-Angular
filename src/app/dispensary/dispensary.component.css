@@ -212,4 +212,20 @@ img.img-responsive1 {
     a.headingfollowtooltip span{
         font-size: 10px;
     }
+    .iconboxsize {
+        font-size: 14px;
+        vertical-align: revert;
+    }
+    .textcontant span {
+        font-size: 14px;
+        letter-spacing: 0.7;
+        margin-left: 8px;
+        font-weight: 400;
+        vertical-align: baseline;
+    }
+    .iconboxcheck {
+        vertical-align: baseline;
+           font-size: 14px;
+       }
+
  }

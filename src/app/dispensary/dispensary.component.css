@@ -191,7 +191,7 @@ img.img-responsive1 {
     color: #fff;
 }
 
-@media (min-width: 767px) and (max-width: 1199px) { 
+@media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;
         font-size: 10px;

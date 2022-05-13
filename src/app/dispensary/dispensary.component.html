@@ -88,7 +88,8 @@
 			<div class="product row">
 				<div class="col product-image" *ngIf="this.image_disp">
 					<div class="claim_listing">
-					<span>| <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
+.single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 0px;font-size: 11px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 92%;height: auto;text-align: left;padding: 5px 0px 5px 23px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: center;background-position-y: center;text-transform: capitalize;}
+					<span>Unverified| <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
 				</div>
 					<img  src="{{this.image_disp}}" alt="" draggable="false">
 					<section class="blowimg">

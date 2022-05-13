@@ -170,7 +170,7 @@ img.img-responsive2 {
 
 img.img-responsive1 {
     height: 230px;
-     width: 216px;
+     width: auto;
 }
 
 .lb-data .lb-details .lb-caption span.lb-number {

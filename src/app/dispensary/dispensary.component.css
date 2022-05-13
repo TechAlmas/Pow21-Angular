@@ -203,6 +203,9 @@ img.img-responsive1 {
     padding: 0px 2px;
     /* margin: 0px; */
 }
+.storemainimg {
+    padding: 0px;
+}
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;

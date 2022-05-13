@@ -142,12 +142,12 @@ span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
 
 .imagesthumb {
     width: 162%;
-    margin-left: -14px;
+    /* margin-left: -14px; */
     margin-top: 3px;
 }
-.col.store-image span {
+/* .col.store-image span {
     margin-left: -15px;
-}
+} */
 .columnimage {
     padding-top: 5px;
 }

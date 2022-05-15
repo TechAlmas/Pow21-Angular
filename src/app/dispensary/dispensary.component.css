@@ -20,14 +20,16 @@
 a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;}
 .col.follow {flex: 0 0 16%;max-width: 16%;padding: 0;margin: auto 0;text-align: center;}
 .col.title {flex: 0 0 84%;max-width: 84%;padding: 0;}
-.tooltip-contentfollow {cursor: pointer;display: flex;flex-direction: column;align-items: center;justify-content: center;visibility: visible;opacity: 1;position: absolute;background: #2384bc;left: -9px;padding: 0px;margin-top: 0;font-size: 15px;width: auto;/*transition: 0.25s all ease;transition-delay: 0.25s;*/z-index: 2;border-radius: 4px;top: -50px;padding: 5px 5px;}
-.tooltip-contentfollow.user_follow {left: 30%;}
+.tooltip-contentfollow {cursor: pointer;display: flex;flex-direction: column;align-items: center;justify-content: center;visibility: visible;opacity: 1;position: absolute;background: #2384bc;left: -9px;padding: 0px;margin-top: 2px;font-size: 15px;width: auto;/*transition: 0.25s all ease;transition-delay: 0.25s;*/z-index: 2;border-radius: 4px;top: -50px;padding: 5px 5px;}
+.tooltip-contentfollow.user_follow {left: 15%;}
 .follow span {padding: 0px 0;cursor: pointer;}
 span.review-count {margin-left: 5px;}
 /*.follow span:hover ~ .tooltip-contentfollow{visibility: visible;opacity: 1;}*/
-.headingfollowtooltip i.fa.fa-user {font-size: 14px;color: #fff;vertical-align: middle;padding: 0px;}
+.headingfollowtooltip i.fa.fa-user {font-size: 14px;color: #fff;vertical-align: middle;padding: 0px;margin-left: 10px;}
 a.headingfollowtooltip span {color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;}
-.tooltip-contentfollow:after {content: "";position: absolute;border-width: 8px;border-style: solid;top: 100%;left: 40%;border-color: #2384bc transparent transparent transparent;}
+a.headingfollowtooltip span.nocount{color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;}
+a.headingfollowtooltip span.nocount:before {content: "|";position: relative;display: inline-block;width: auto;margin-right: 5px;}
+.tooltip-contentfollow:after {content: "";position: absolute;border-width: 8px;border-style: solid;top: 100%;left: 35%;border-color: #2384bc transparent transparent transparent;}
 .tooltip-contentfollow.user_follow:after{left: 30%;}
 .experience{font-size: 18px;}
 .col.retail-meta {flex: 0 0 50%;max-width: 50%;padding: 0;}
@@ -141,13 +143,11 @@ span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
 }
 
 .imagesthumb {
-    width: 162%;
-    margin-left: -14px;
+    width: 100%;
+    /* margin-left: -14px; */
     margin-top: 3px;
 }
-.col.store-image span {
-    margin-left: -15px;
-}
+
 .columnimage {
     padding-top: 5px;
 }
@@ -159,18 +159,15 @@ span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
     font-size: 15px !important;
     color: rgb(255, 255, 255) !important;
 }
-
-
-
-
 img.img-responsive2 {
     height: 75px;
-    width: 70px;
+    width: 100%;
 }
 
 img.img-responsive1 {
-    height: 230px;
-     width: 216px;
+    height: 250px;
+    height: auto;
+    width: 100%;
 }
 
 .lb-data .lb-details .lb-caption span.lb-number {
@@ -185,7 +182,79 @@ img.img-responsive1 {
     margin-left: 140px;
     padding: 5px;
     text-transform: capitalize;
+   
 }
 .claim_listing a {
     color: #fff;
 }
+#reviews {
+    float: left;
+}
+.unverified {
+    z-index: 999999;
+    position: absolute;
+    color: #ffff;
+    margin-left: 18px;
+    padding: 5px;
+    text-transform: capitalize;
+}
+.storeimg {
+    padding: 0px 1px;
+    /* margin: 0px; */
+}
+.storemainimg {
+    padding: 0px;
+}
+@media (min-width: 991px) and (max-width: 1199px) { 
+    a.headingfollowtooltip{
+        color: #ffff;
+        font-size: 10px;
+        vertical-align: middle;
+        font-weight: 700;
+        /*   */
+    }
+    .tooltip-contentfollow{
+        margin-top: -0px;
+        left: 4px;
+        padding: 7px;
+    }
+    .headingfollowtooltip  i.fa.fa-user{
+        /*font-size: 10px;*/
+        margin-left: 0;
+    }
+    a.headingfollowtooltip span{
+        /*font-size: 10px;*/
+    }
+    a.headingfollowtooltip span.nocount{display: block;margin-left: 0;margin-top: 5px;}
+    a.headingfollowtooltip span.nocount:before{display: none;}
+    .iconboxsize {
+        font-size: 14px;
+        vertical-align: revert;
+    }
+    .textcontant span {
+        font-size: 14px;
+        letter-spacing: 0.7;
+        margin-left: 8px;
+        font-weight: 400;
+        vertical-align: baseline;
+    }
+    .iconboxcheck {
+        vertical-align: baseline;
+           font-size: 14px;
+       }
+       .col.store-image span {
+        font-size: 12px;
+    }
+.single-product.dispensary .product .product-image:before {content: '';background: url('/assets/images/icon-verified-no.png');width: 100%;height: 220px;position: absolute;background-repeat: no-repeat;background-size: 15%;top: -10px;left: -12px;z-index: 1;}
+.single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 1px;font-size: 11px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 92%;height: auto;text-align: left;padding: 5px 0px 5px 23px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: 77px;background-position-y: center;text-transform: capitalize;}
+.claim_listing {
+    z-index: 999999;
+    position: absolute;
+    color: #ffff;
+    margin-left: 94px;
+    padding: 5px;
+    text-transform: capitalize;
+    font-size: 11px;
+}
+
+ }

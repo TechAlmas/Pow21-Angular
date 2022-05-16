@@ -89,11 +89,6 @@ label.radio-style-2-label {
     width: 33%;
     float: left;
     margin-left: 1px;
-    border: none;
-  color: #2a2c2d;
-  font-size: 14px;
-  font-family: helvetica;
-  width: 160px;
 }
 input#monday_end {
     width: 32%;
@@ -197,13 +192,13 @@ input#sunday_end {
     font-size: 16px;
 }
 /* timer design */
-/* input[type=time] {
+input[type=time] {
   border: none;
   color: #2a2c2d;
   font-size: 14px;
   font-family: helvetica;
   width: 160px;
-} */
+}
 input[type=time]::-webkit-datetime-edit-fields-wrapper {
   /* display: flex; */
   display: flow-root;

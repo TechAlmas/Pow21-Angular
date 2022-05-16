@@ -188,6 +188,10 @@ img.img-responsive1 {
 .claim_listings a {
     color: #fff;
 }
+.spaccing_products {
+    padding: 0px;
+    margin: 0px;
+}
 #reviews {
     float: left;
 }

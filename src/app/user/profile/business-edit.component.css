@@ -234,3 +234,16 @@ input[type=time]::-webkit-inner-spin-button {
   display: none;
 }
 /*  */
+input[type=time] {
+    background-color: #f2f4f5;
+    border: none;
+    border-radius: 10px;
+    color: #2a2c2d;
+    font-size: 14px;
+    font-family: helvetica;
+    overflow: hidden;
+    padding: 19px 13px;
+    width: 90px;
+    clip-path: inset(0 26px 0 0);
+  }
+  

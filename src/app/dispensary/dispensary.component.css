@@ -27,6 +27,8 @@ span.review-count {margin-left: 5px;}
 /*.follow span:hover ~ .tooltip-contentfollow{visibility: visible;opacity: 1;}*/
 .headingfollowtooltip i.fa.fa-user {font-size: 14px;color: #fff;vertical-align: middle;padding: 0px;margin-left: 10px;}
 a.headingfollowtooltip span {color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;}
+a.headingfollowtooltip span.nocount{color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;}
+a.headingfollowtooltip span.nocount:before {content: "|";position: relative;display: inline-block;width: auto;margin-right: 5px;}
 .tooltip-contentfollow:after {content: "";position: absolute;border-width: 8px;border-style: solid;top: 100%;left: 35%;border-color: #2384bc transparent transparent transparent;}
 .tooltip-contentfollow.user_follow:after{left: 30%;}
 .experience{font-size: 18px;}
@@ -157,10 +159,6 @@ span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
     font-size: 15px !important;
     color: rgb(255, 255, 255) !important;
 }
-
-
-
-
 img.img-responsive2 {
     height: 75px;
     width: 100%;
@@ -168,7 +166,8 @@ img.img-responsive2 {
 
 img.img-responsive1 {
     height: 250px;
-     width: 230px;
+    height: auto;
+    width: 100%;
 }
 
 .lb-data .lb-details .lb-caption span.lb-number {
@@ -226,13 +225,17 @@ img.img-responsive1 {
     .tooltip-contentfollow{
         margin-top: -0px;
         left: 4px;
+        padding: 7px;
     }
     .headingfollowtooltip  i.fa.fa-user{
-        font-size: 10px;
+        /*font-size: 10px;*/
+        margin-left: 0;
     }
     a.headingfollowtooltip span{
-        font-size: 10px;
+        /*font-size: 10px;*/
     }
+    a.headingfollowtooltip span.nocount{display: block;margin-left: 0;margin-top: 5px;}
+    a.headingfollowtooltip span.nocount:before{display: none;}
     .iconboxsize {
         font-size: 14px;
         vertical-align: revert;

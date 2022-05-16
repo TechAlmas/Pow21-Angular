@@ -135,7 +135,7 @@
 								<!-- <span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span> -->
 								<div class="tooltip-contentfollow" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" (click)="followStore(dispDetails.disp_id)">
 	                <a class="headingfollowtooltip">
-	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status">&nbsp;&nbsp;<br>&nbsp;Follow</span></a>
+	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status">Follow</span></a>
 	            	</div>
 							</div>
 							<div class="col title">

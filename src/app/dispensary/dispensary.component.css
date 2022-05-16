@@ -65,7 +65,6 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
     /*margin-top: -20px;
     margin-left: 134px;*/
 }
-
 .tooltip-contents {
     display: flex;
     flex-direction: column;
@@ -100,7 +99,6 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
 .content-a span a {
     color: rgb(0, 168, 163);
 }
-
 .iconboxsize {
     font-size: 18px;
     vertical-align: revert;
@@ -112,7 +110,6 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
 span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Licensespace {
     margin-right: 7px;
 }
-
 span.header-info__OpenStatusLabel-sc-1heoxjr-5.Storefrontspace.hlUpkp {
     margin-left: 0px;
 }
@@ -125,27 +122,22 @@ span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
 .iconboxsizethumb {
     font-size: 22px;
 }
-
 .col.retail-other-info {
     margin-top: 5px;
 }
-
 .blowimg {
     width: 85%;
     margin: 0 auto;
     margin-top: 20px;
 }
-
 .retailspace h5 {
     margin-bottom: 0px;
 }
-
 .imagesthumb {
     width: 100%;
     /* margin-left: -14px; */
     margin-top: 3px;
 }
-
 .columnimage {
     padding-top: 5px;
 }
@@ -157,20 +149,14 @@ span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
     font-size: 15px !important;
     color: rgb(255, 255, 255) !important;
 }
-
-
-
-
 img.img-responsive2 {
     height: 75px;
     width: 100%;
 }
-
 img.img-responsive1 {
     height: 250px;
      width: 230px;
 }
-
 .lb-data .lb-details .lb-caption span.lb-number {
     font-size: 15px;
     color: #fff;
@@ -182,8 +168,7 @@ img.img-responsive1 {
     color: #ffff;
     padding: 5px;
     text-transform: capitalize;
-    font-size: 14px;
-   
+    font-size: 14px;  
 }
 .claim_listings a {
     color: #fff;
@@ -254,5 +239,4 @@ img.img-responsive1 {
     margin-left: -7px;
 
 }
-
  }

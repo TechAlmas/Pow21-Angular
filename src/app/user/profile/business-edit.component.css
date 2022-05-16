@@ -234,16 +234,540 @@ input[type=time]::-webkit-inner-spin-button {
   display: none;
 }
 /*  */
-input[type=time] {
-    background-color: #f2f4f5;
-    border: none;
-    border-radius: 10px;
-    color: #2a2c2d;
-    font-size: 14px;
-    font-family: helvetica;
-    overflow: hidden;
-    padding: 19px 13px;
-    width: 90px;
-    clip-path: inset(0 26px 0 0);
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans&display=swap);
+
+/**
+  Demo styling
+*/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-top: 0;
+  padding-bottom: 30px;
+}
+
+body {
+  background: #fff;
+  font-family: "Noto Sans", sans-serif;
+
+  font-size: 1.1em;
+  line-height: 1.4;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 1.4em 2em;
+}
+
+.parent {
+  width: 1000px;
+}
+
+@media screen and (min-width: 50em) {
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
   }
-  
+
+  .flex--center {
+    align-items: center;
+  }
+
+  .flex__child {
+    flex: 1 0 auto;
+    max-width: 100%;
+    padding: 2em;
+  }
+  .flex__child {
+    padding: 0.5em 2em;
+  }
+}
+
+/**
+ * Selected rulesets from normalize.css
+ * https://necolas.github.io/normalize.css/8.0.1/normalize.css
+ */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/* ***********
+  Styled controls
+************ */
+.styled fieldset {
+  border: 1px solid;
+  margin: 0;
+}
+
+.styled input,
+.styled select,
+.styled textarea {
+  color: inherit;
+  font: inherit;
+  position: relative;
+}
+
+.styled input[type="time"],
+.styled .unsupported {
+  background: #eaeff1;
+  border: none;
+  border-bottom: 4px solid #c9d6da;
+  display: block;
+  margin-bottom: 0.625em;
+  margin-top: 0.3em;
+  outline-offset: 3px;
+  padding: 0.45em 0.45em 0.45em 0.65em;
+  width: 100%;
+}
+
+input[type="time"]:before {
+  content: attr(placeholder) !important;
+  color: #aaa;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.no-stepper {
+  input[type="time"]::-webkit-inner-spin-button {
+    display: none;
+  }
+}
+
+/**
+ * Checkbox specific
+ */
+.styled input[type="checkbox"] {
+  -moz-appearance: none;
+  -o-appearance: none;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid;
+  border-radius: 4px;
+  height: 2em;
+  width: 2em;
+  font-size: inherit;
+  line-height: 1;
+  vertical-align: bottom;
+  position: relative;
+}
+
+.styled input[type="checkbox"]:before,
+.styled input[type="checkbox"]:after {
+  border-bottom: 3px solid green;
+  border-right: 3px solid green;
+  bottom: 0;
+  content: "";
+  height: 1em;
+  margin: auto;
+  position: absolute;
+  right: 0.5em;
+  top: -0.5em;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.2s ease-in-out;
+  width: 0.625em;
+}
+
+.styled input[type="checkbox"]:checked:before {
+  transform: rotate(45deg) scale(1);
+}
+
+.styled input[type="checkbox"]:checked:after {
+  animation: expand 0.8s;
+}
+
+.styled input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 1px;
+  border: 2px solid;
+  outline: none;
+  /*
+    can use outline none here because revised box-shadow
+    and border-width adjustments are made to replace
+    the default outline indicator.
+  */
+}
+
+@keyframes expand {
+  0% {
+    transform: rotate(45deg) scale(0);
+    opacity: 1;
+  }
+  50% {
+    top: -30px;
+    transform: rotate(45deg) scale(2.25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    top: -30px;
+    transform: rotate(45deg) scale(2.25);
+  }
+}
+
+/* -ms-check will affect both checkboxes and radio buttons, so you have to be specific */
+.styled input[type="checkbox"]::-ms-check {
+  border: 2px solid #888;
+  border-radius: 2px;
+  color: green;
+  /*
+    disabled and required/invalid
+    styles would be good to add too!
+  */
+}
+
+/**
+ * Styles for the wrapping element and
+ * the custom down arrow / background
+ */
+.styled .select {
+  background-color: #2a2a2a;
+  position: relative;
+}
+
+.styled .select:after,
+.styled .select:before {
+  bottom: 0;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+}
+
+.styled .select:before {
+  right: 0;
+  width: 1.85em;
+}
+
+.styled .select:after {
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+  height: 0.5em;
+  margin: auto;
+  right: 0.75em;
+  transform-origin: center right;
+  transform: rotate(45deg);
+  width: 0.5em;
+  z-index: 2;
+}
+
+.styled .select:focus-within:before {
+  background-color: #015f9f;
+}
+
+/**
+ * Target only select elements that are
+ * child elements of the custom style.
+ * These styles could really mess up other
+ * selects that aren't within the parent wrapper.
+ */
+.styled .select select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border-radius: 0;
+  border: 1px solid #000;
+  color: #fff;
+  line-height: normal;
+  max-width: 100%;
+  padding: 0.75em 2em 0.75em 0.75em;
+  width: 100%;
+}
+
+/*.styled .select select:focus-visible*/
+.styled .select select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #fff;
+}
+
+.styled .select select:focus {
+  border-color: #015f9f;
+  box-shadow: inset 0 0 0 1px #015f9f, 0 0 0 2px #015f9f;
+  outline: none;
+}
+
+.styled .select select[disabled] {
+  color: rgba(255, 255, 255, 0.75);
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+/**
+ * 1. remove background focus style from IE11 while keeping
+ *    focus style available on option elements
+ * 2. remove the default down arrow in IE/Edge
+ */
+.styled .select select::-ms-value {
+  background: transparent; /* 1 */
+}
+
+.styled .select select::-ms-expand {
+  display: none; /* 2 */
+}
+
+/* Label */
+.styled label {
+  display: block;
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
+/**
+ * Focus
+ */
+.styled input[type="time"]:focus {
+  outline: none;
+  background: #e6f8ff;
+  border-bottom: 4px solid #00b8ff;
+}
+
+/**
+ * read only
+ */
+.styled input[type="time"]:read-only {
+  background: #eaeff1;
+  border-bottom: 4px solid #c9d6da;
+}
+
+input[type="time"][readonly]:focus {
+  background: #e6f8ff;
+  border-bottom: none;
+}
+
+.styled input[type="checkbox"]:focus {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: transparent;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 6px #036fe2;
+}
+
+/**
+ * Invalid
+ */
+
+.styled input[type="time"]:invalid {
+  background: #e6f8ff;
+  border-bottom: 4px solid #ef0000;
+}
+
+.styled input[type="time"]:disabled {
+  background: #e6f8ff;
+  border-bottom: none;
+}
+
+/**
+ * Just a listing of selectors
+ */
+input[type="text"] {
+}
+input[type="search"] {
+}
+input[type="url"] {
+}
+input[type="email"] {
+}
+input[type="tel"] {
+}
+input[type="password"] {
+}
+input[type="radio"] {
+}
+input[type="checkbox"] {
+}
+input[type="date"] {
+}
+input[type="month"] {
+}
+input[type="week"] {
+}
+input[type="time"] {
+}
+input[type="datetime-local"] {
+}
+input[type="file"] {
+}
+input[type="number"] {
+}
+input[type="range"] {
+}
+input[type="submit"] {
+}
+input[type="reset"] {
+}
+textarea {
+}
+
+/**
+ * States
+ * CSS Selectors Level 4
+ * Form States
+ */
+
+:enabled {
+}
+.styled :disabled {
+  opacity: 0.5;
+}
+:indeterminate {
+}
+:read-write {
+}
+:read-only {
+}
+:placeholder-shown {
+}
+:default {
+}
+:checked {
+}
+:blank {
+}
+:valid {
+}
+:invalid {
+}
+:user-invalid {
+}
+:in-range {
+}
+:out-of-range {
+}
+:required {
+}
+:optional {
+}
+
+/* containing label */
+.toggle-switch {
+  display: block;
+  font-size: 0.9em;
+  line-height: 1;
+  overflow: hidden;
+  margin: 1em 0 0;
+  padding: 1em;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  width: 16em;
+  padding-right: 4em;
+  margin-bottom: 1em;
+  margin-top: -1em;
+}
+
+.toggle-switch:focus {
+  outline: none;
+}
+
+/* negate 'flash' of text color when pressing a button in some browsers */
+.toggle-switch:active {
+  color: inherit;
+}
+
+/* using the before/after pseudo elements of the span to create the "switch" */
+.toggle-switch__ui:before,
+.toggle-switch__ui:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* styling specific to the knob of the switch */
+.toggle-switch__ui:after {
+  background: #fff;
+  border-radius: 100%;
+  height: 1.5em;
+  right: 1.5em;
+  transition: right 0.1825s ease-in-out;
+  width: 1.5em;
+}
+
+/* styling specific to the knob "container" */
+.toggle-switch__ui:before {
+  background: #eee;
+  border-radius: 1.75em;
+  height: 1.75em;
+  right: 0.25em;
+  transition: background 0.2s ease-in-out;
+  width: 2.75em;
+}
+
+.toggle-switch span {
+  pointer-events: none;
+}
+
+.toggle-switch:focus .toggle-switch__ui:before {
+  outline: 2px solid #2196f3;
+}
+
+/* change the position of the knob to indicate it has been checked*/
+.toggle-switch[aria-pressed="true"] .toggle-switch__ui:after {
+  right: 0.25em;
+}
+
+/* update the color of the "container" to further visually indicate state */
+.toggle-switch[aria-pressed="true"] .toggle-switch__ui:before {
+  background: #2196f3;
+}
+
+/**
+ * Toggle switch modifications for displaying On/Off labels
+ */
+.toggle-switch--labels span:before {
+  content: "Off";
+  color: rgba(10, 10, 10, 1);
+  line-height: 1.6;
+  text-indent: 1.625em;
+  width: 3.5em;
+}
+
+.toggle-switch--labels[aria-pressed="false"] span:after {
+  right: 2.2em;
+}
+
+.toggle-switch--labels[aria-pressed="true"] span:before {
+  color: rgba(255, 255, 255, 1);
+  content: "On";
+  text-indent: 0.25em;
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .toggle-switch__ui:after {
+    background-color: windowText;
+  }
+}

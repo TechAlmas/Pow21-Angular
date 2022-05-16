@@ -255,3 +255,11 @@ img.img-responsive1 {
 } */
 
  }
+ .single_product {
+    z-index: 999999;
+    position: absolute;
+    color: #ffff;
+    padding: 5px 15px;
+    text-transform: capitalize;
+    font-size: 11px;
+}

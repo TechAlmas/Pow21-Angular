@@ -1,4 +1,4 @@
-.dispensary.single-product .product .product-image {flex: 0 0 25.6%;max-width: 25.6%;overflow: revert;}
+.dispensary.single-product .product .product-image {flex: 0 0 25%;max-width: 25%;overflow: revert;}
 .dispensary.single-product .product .product-info {flex: 0 0 55%;max-width: 55%;padding: 0;}
 .dispensary.single-product .product .store-images{flex: 0 0 20%;max-width: 20%;padding: 0;}
 .single-product.dispensary .product .product-image img{width: auto;max-height: 220px;margin: 0 auto;}

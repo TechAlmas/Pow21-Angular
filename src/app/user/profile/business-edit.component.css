@@ -113,18 +113,18 @@ input#monday_end {
 .slide-toggle-content {
     margin-top: 5px;
 }
-.form-group.whitebgs.labelalignmentt span {
+.styled.form-group.whitebgs.labelalignmentt span {
     float: left;
     margin-left: 2%;
     width: 13%;
     margin-top: 19px;
 }
-input#tuesday_start {
+.styled input#tuesday_start {
     width: 33%;
     float: left;
     margin-left: 1px;
 }
-input#tuesday_end {
+.styled input#tuesday_end {
     width: 32%;
     float: left;
     margin-left: -70px;

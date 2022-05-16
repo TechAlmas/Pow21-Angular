@@ -113,18 +113,18 @@ input#monday_end {
 .slide-toggle-content {
     margin-top: 5px;
 }
-.styled.form-group.whitebgs.labelalignmentt span {
+.form-group.whitebgs.labelalignmentt span {
     float: left;
     margin-left: 2%;
     width: 13%;
     margin-top: 19px;
 }
-.styled input#tuesday_start {
+input#tuesday_start {
     width: 33%;
     float: left;
     margin-left: 1px;
 }
-.styled input#tuesday_end {
+input#tuesday_end {
     width: 32%;
     float: left;
     margin-left: -70px;
@@ -192,46 +192,46 @@ input#sunday_end {
     font-size: 16px;
 }
 /* timer design */
-.styled input[type=time] {
+input[type=time] {
   border: none;
   color: #2a2c2d;
   font-size: 14px;
   font-family: helvetica;
   width: 160px;
 }
-.styled input[type=time]::-webkit-datetime-edit-fields-wrapper {
+input[type=time]::-webkit-datetime-edit-fields-wrapper {
   /* display: flex; */
   display: flow-root;
     padding: 12px;
 }
-.styled input[type=time]::-webkit-datetime-edit-text {
+input[type=time]::-webkit-datetime-edit-text {
   padding: 19px 4px;
 }
 /* Hour */
-.styled input[type=time]::-webkit-datetime-edit-hour-field {
+input[type=time]::-webkit-datetime-edit-hour-field {
   background-color: #f2f4f5;
   /* border-radius: 15%; */
   padding: 19px 13px;
 }
 /* Minute */
-.styled input[type=time]::-webkit-datetime-edit-minute-field {
+input[type=time]::-webkit-datetime-edit-minute-field {
   background-color: #f2f4f5;
   /* border-radius: 15%; */
   padding: 19px 13px;
 }
 /* AM/PM */
-.styled input[type=time]::-webkit-datetime-edit-ampm-field {
+input[type=time]::-webkit-datetime-edit-ampm-field {
   background-color: #ECCB00;
   /* border-radius: 15%; */
   color: #fff;
   padding: 19px 13px;
 }
 /* 'X' button for resetting/clearing time */
-.styled input[type=time]::-webkit-clear-button {
+input[type=time]::-webkit-clear-button {
   display: none;
 }
 /* Up/Down arrows for incrementing/decrementing the value */
-.styled input[type=time]::-webkit-inner-spin-button {
+input[type=time]::-webkit-inner-spin-button {
   display: none;
 }
 /*  */

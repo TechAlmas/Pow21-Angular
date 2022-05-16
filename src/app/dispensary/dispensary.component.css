@@ -188,6 +188,15 @@ img.img-responsive1 {
 .claim_listings a {
     color: #fff;
 }
+.claim_unverified{
+    z-index: 999999;
+    position: absolute;
+    color: #ffff;
+    padding: 5px;
+    text-transform: capitalize;
+    font-size: 14px;
+   
+}
 #reviews {
     float: left;
 }
@@ -253,6 +262,15 @@ img.img-responsive1 {
     font-size: 11px; 
     margin-left: -7px;
 
+}
+.claim_unverified{
+    z-index: 999999;
+    position: absolute;
+    color: #ffff;
+    padding: 5px;
+    text-transform: capitalize;
+    font-size: 11px; 
+   
 }
 
  }

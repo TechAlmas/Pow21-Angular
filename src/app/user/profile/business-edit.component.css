@@ -240,6 +240,16 @@ input[type=time]::-webkit-datetime-edit-minute-field {
   /* border-radius: 15%; */
   padding: 19px 13px;
 }
+input[type=time]::-moz-datetime-edit-minute-field {
+    background-color: #f2f4f5;
+    /* border-radius: 15%; */
+    padding: 19px 13px;
+  }
+  input[type=time]::-ms-datetime-edit-minute-field {
+    background-color: #f2f4f5;
+    /* border-radius: 15%; */
+    padding: 19px 13px;
+  }
 /* AM/PM */
 input[type=time]::-webkit-datetime-edit-ampm-field {
   background-color: #ECCB00;
@@ -247,12 +257,36 @@ input[type=time]::-webkit-datetime-edit-ampm-field {
   color: #fff;
   padding: 19px 13px;
 }
+input[type=time]::-ms-datetime-edit-ampm-field {
+    background-color: #ECCB00;
+    /* border-radius: 15%; */
+    color: #fff;
+    padding: 19px 13px;
+  }
+  input[type=time]::-moz-datetime-edit-ampm-field {
+    background-color: #ECCB00;
+    /* border-radius: 15%; */
+    color: #fff;
+    padding: 19px 13px;
+  }
 /* 'X' button for resetting/clearing time */
 input[type=time]::-webkit-clear-button {
   display: none;
 }
+input[type=time]::-ms-clear-button {
+    display: none;
+  }
+  input[type=time]::-moz-clear-button {
+    display: none;
+  }
 /* Up/Down arrows for incrementing/decrementing the value */
 input[type=time]::-webkit-inner-spin-button {
   display: none;
 }
+input[type=time]::-moz-inner-spin-button {
+    display: none;
+  }
+  input[type=time]::-ms-inner-spin-button {
+    display: none;
+  }
 /*  */

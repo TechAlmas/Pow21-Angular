@@ -204,15 +204,36 @@ input[type=time]::-webkit-datetime-edit-fields-wrapper {
   display: flow-root;
     padding: 12px;
 }
+input[type=time]::-moz-datetime-edit-fields-wrapper {
+    /* display: flex; */
+    display: flow-root;
+      padding: 12px;
+  }
+  input[type=time]::-ms-datetime-edit-fields-wrapper {
+    /* display: flex; */
+    display: flow-root;
+      padding: 12px;
+  }
+
 input[type=time]::-webkit-datetime-edit-text {
   padding: 19px 4px;
 }
 /* Hour */
-input[type=time]::-webkit-datetime-edit-hour-field {
+input[type=time]::-ms-datetime-edit-hour-field {
   background-color: #f2f4f5;
   /* border-radius: 15%; */
   padding: 19px 13px;
 }
+input[type=time]::-moz-datetime-edit-hour-field {
+    background-color: #f2f4f5;
+    /* border-radius: 15%; */
+    padding: 19px 13px;
+  }
+  input[type=time]::-webkit-datetime-edit-hour-field {
+    background-color: #f2f4f5;
+    /* border-radius: 15%; */
+    padding: 19px 13px;
+  }
 /* Minute */
 input[type=time]::-webkit-datetime-edit-minute-field {
   background-color: #f2f4f5;

@@ -135,7 +135,7 @@
 								<!-- <span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span> -->
 								<div class="tooltip-contentfollow" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" (click)="followStore(dispDetails.disp_id)">
 	                <a class="headingfollowtooltip">
-	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status">Follow</span></a>
+	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status"><br>Follow</span></a>
 	            	</div>
 							</div>
 							<div class="col title">
@@ -272,7 +272,7 @@
 			</div>					
 		</div>
 		<!-- images store section start -->
-		
+
 		<div class="col store-image">
 			<div class="container">
 			   <div class="row">

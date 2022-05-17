@@ -86,7 +86,7 @@
 									</td>
 									<td class="">
 										<a class="text-primary" title="Edit New Business" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
-										<a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,3)" *ngIf="this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6"><i class="fa fa-pause" ></i></a>
+										<a class="text-warning" title="Edit New Business testing" routerLink="/members/business/edit/{{rv.slug}}" href="javascript:void(0)" (click)="suspendStore(rv,3)" *ngIf="this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6"><i class="fa fa-pause" ></i></a>
 										<a class="text-danger" title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv,0)" *ngIf="this.user_data.id_cms_privileges === 6"><i class="fa fa-trash" ></i></a>
 									</td>
 									</tr>

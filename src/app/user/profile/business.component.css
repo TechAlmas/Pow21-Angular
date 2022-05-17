@@ -10,10 +10,10 @@ tr td:nth-child(9) a{padding: 5px;font-size: 17px;}
 
 
 .table.table.table-striped.stores td.contantsection {
-    text-align: justify ;
+    text-align: left;
 }
 .table.table.table-striped.stores td.contantsection span {
-    text-align: justify;
+    text-align: left;
 }
 
 th.topspaccing {

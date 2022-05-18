@@ -7,6 +7,7 @@
 	<div class="container clearfix">
 		<h2 *ngIf="dispDetails.disp_id else elseBlock">Edit Your store</h2>
 		<ng-template #elseBlock><h2>Add Your store</h2></ng-template>
+		 
 		<div class="row">
 			<div class="col-md-8">
 				<div class="white-box">
@@ -100,12 +101,12 @@
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span class="dayalign">Monday</span>
-		                              <input type = "time" id="monday_start" name="monday_start" class="sm-form-control monday_start required" value="{{dispDetails.license_type}}"  placeholder="" ngModel>
+		                              <input type = "time" id="monday_start" name="monday_start" class="sm-form-control monday_start required" value="{{ getTimeStringValue('monday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('monday','',1) == 'yes'" >
 		                              <span class="tocontant">To</span><br>
-		                              <input type = "time" id="monday_end" name="monday_end" class="sm-form-control monday_end required dau" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="monday_end" name="monday_end" class="sm-form-control monday_end required dau" value="{{ getTimeStringValue('monday','end') | date:'HH:mm' }}" placeholder="" [disabled]="getTimeStringValue('monday','',1) == 'yes'">
 									  <label class="toggle">
 										  <div class="togglebox">
-		                              	<input type="checkbox" id="monday_close" name="monday_close" value="1" class="form-control">
+		                              	<input type="checkbox" id="monday_close" name="monday_close" value="1" class="form-control" (change)="onClickClose($event,'monday')" [checked]="getTimeStringValue('monday','',1) == 'yes'" >
 		                              	<div class="slide-toggle"></div>
 		                              	<div class="slide-toggle-content">Close</div></div>
 		                              </label>
@@ -114,11 +115,11 @@
 		                              <div class="wait-layer" *ngIf="waitLayer "></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Tuesday</span>
-		                              <input type = "time" id="tuesday_start" name="tuesday_start" class="sm-form-control tuesday_start required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="tuesday_start" name="tuesday_start" class="sm-form-control tuesday_start required" value="{{ getTimeStringValue('tuesday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('tuesday','',1) == 'yes'">
 		                              <span>To</span>
-		                              <input type = "time" id="tuesday_end" name="tuesday_end" class="sm-form-control tuesday_end required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="tuesday_end" name="tuesday_end" class="sm-form-control tuesday_end required" value="{{ getTimeStringValue('tuesday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('tuesday','',1) == 'yes'">
 		                              <label class="toggle">
-		                              	<input type="checkbox" id="tuesday_close" name="tuesday_close" value="1" class="form-control">
+		                              	<input type="checkbox" id="tuesday_close" name="tuesday_close" value="1" class="form-control" (change)="onClickClose($event,'tuesday')" [checked]="getTimeStringValue('tuesday','',1) == 'yes'">
 		                              	<div class="slide-toggle"></div>
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
@@ -127,11 +128,11 @@
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Wednesday</span>
-		                              <input type = "time" id="wednesday_start" name="wednesday_start" class="sm-form-control wednesday_start required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="wednesday_start" name="wednesday_start" class="sm-form-control wednesday_start required" value="{{ getTimeStringValue('wednesday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('wednesday','',1) == 'yes'">
 		                              <span>To</span>
-		                              <input type = "time" id="wednesday_end" name="wednesday_end" class="sm-form-control wednesday_end required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="wednesday_end" name="wednesday_end" class="sm-form-control wednesday_end required" value="{{ getTimeStringValue('wednesday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('wednesday','',1) == 'yes'">
 		                              <label class="toggle">
-		                              	<input type="checkbox" id="wednesday_close" name="wednesday_close" value="1" class="form-control">
+		                              	<input type="checkbox" id="wednesday_close" name="wednesday_close" value="1" class="form-control" (change)="onClickClose($event,'wednesday')" [checked]="getTimeStringValue('wednesday','',1) == 'yes'">
 		                              	<div class="slide-toggle"></div>
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
@@ -140,11 +141,11 @@
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Thursday</span>
-		                              <input type = "time" id="thursday_start" name="thursday_start" class="sm-form-control thursday_start required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="thursday_start" name="thursday_start" class="sm-form-control thursday_start required" value="{{ getTimeStringValue('thursday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('thursday','',1) == 'yes'">
 		                              <span>To</span>
-		                              <input type = "time" id="thursday_end" name="thursday_end" class="sm-form-control thursday_end required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="thursday_end" name="thursday_end" class="sm-form-control thursday_end required" value="{{ getTimeStringValue('thursday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('thursday','',1) == 'yes'">
 		                              <label class="toggle">
-		                              	<input type="checkbox" id="thursday_close" name="thursday_close" value="1" class="form-control">
+		                              	<input type="checkbox" id="thursday_close" name="thursday_close" value="1" class="form-control" (change)="onClickClose($event,'thursday')" [checked]="getTimeStringValue('thursday','',1) == 'yes'">
 		                              	<div class="slide-toggle"></div>
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
@@ -153,11 +154,11 @@
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Friday</span>
-		                              <input type = "time" id="friday_start" name="friday_start" class="sm-form-control friday_start required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="friday_start" name="friday_start" class="sm-form-control friday_start required" value="{{ getTimeStringValue('friday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('friday','',1) == 'yes'">
 		                              <span>To</span>
-		                              <input type = "time" id="friday_end" name="friday_end" class="sm-form-control friday_end required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="friday_end" name="friday_end" class="sm-form-control friday_end required" value="{{ getTimeStringValue('friday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('friday','',1) == 'yes'">
 		                              <label class="toggle">
-		                              	<input type="checkbox" id="friday_close" name="friday_close" value="1" class="form-control">
+		                              	<input type="checkbox" id="friday_close" name="friday_close" value="1" class="form-control" (change)="onClickClose($event,'friday')" [checked]="getTimeStringValue('friday','',1) == 'yes'">
 		                              	<div class="slide-toggle"></div>
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
@@ -166,11 +167,11 @@
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Saturday</span>
-		                              <input type = "time" id="saturday_start" name="saturday_start" class="sm-form-control saturday_start required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="saturday_start" name="saturday_start" class="sm-form-control saturday_start required" value="{{ getTimeStringValue('saturday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('saturday','',1) == 'yes'">
 		                              <span>To</span>
-		                              <input type = "time" id="saturday_end" name="saturday_end" class="sm-form-control saturday_end required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="saturday_end" name="saturday_end" class="sm-form-control saturday_end required" value="{{ getTimeStringValue('saturday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('saturday','',1) == 'yes'">
 		                              <label class="toggle">
-		                              	<input type="checkbox" id="saturday_close" name="saturday_close" value="1" class="form-control">
+		                              	<input type="checkbox" id="saturday_close" name="saturday_close" value="1" class="form-control" (change)="onClickClose($event,'saturday')" [checked]="getTimeStringValue('saturday','',1) == 'yes'">
 		                              	<div class="slide-toggle"></div>
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>
@@ -179,11 +180,11 @@
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
 		                              <span>Sunday</span>
-		                              <input type = "time" id="sunday_start" name="sunday_start" class="sm-form-control sunday_start required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="sunday_start" name="sunday_start" class="sm-form-control sunday_start required" value="{{ getTimeStringValue('sunday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('sunday','',1) == 'yes'">
 		                              <span>To</span>
-		                              <input type = "time" id="sunday_end" name="sunday_end" class="sm-form-control sunday_end required" value=""  placeholder="" ngModel>
+		                              <input type = "time" id="sunday_end" name="sunday_end" class="sm-form-control sunday_end required" value="{{ getTimeStringValue('sunday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('sunday','',1) == 'yes'">
 		                              <label class="toggle">
-		                              	<input type="checkbox" id="sunday_close" name="sunday_close" value="1" class="form-control">
+		                              	<input type="checkbox" id="sunday_close" name="sunday_close" value="1" class="form-control" (change)="onClickClose($event,'sunday')" [checked]="getTimeStringValue('sunday','',1) == 'yes'">
 		                              	<div class="slide-toggle"></div>
 		                              	<div class="slide-toggle-content">Close</div>
 		                              </label>

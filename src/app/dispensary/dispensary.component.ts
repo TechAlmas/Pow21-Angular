@@ -82,6 +82,44 @@ export class DispensaryComponent implements OnInit {
 
   		});
 
+      //Validations on KeyUp
+
+      $('.customValidate').on('keyup',function(){
+        $(this).next('.customError').remove();
+      
+        if($(this).attr('name') == 'reemail' && $(this).val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+            
+          }
+          else if($('input[name=email]').val() != $(this).val()){
+            var element = '<p class="customError" style="color:red">'+"Both emails are not matching"+'</p>';
+            
+          }
+        }
+        if($(this).attr('name') == 'email' && $(this).val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+           
+          }
+        }
+        if($(this).attr('name') == 'telnum' && $(this).val() != ''){
+         
+          if(!$.isNumeric($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" should be numeric"+'</p>';
+           
+          }
+        }
+        if($(this).val() == ''){
+
+          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+          
+        }
+        $(element).insertAfter($(this));
+      })
+
 
   }
 getDispensaryDetail(disp_slug)
@@ -138,8 +176,9 @@ enableReviewForm(){
     this.write_review = true;
     setTimeout(function(){ $("#starrating").rating(); }, 1);
  }
+
 onClickSubmit(data) {
-  console.log(data);
+  
     // var postdata = {
     //   "listing_id" : this.dispDetails.id,
     //   "first_name" : data.fname,
@@ -161,7 +200,7 @@ onClickSubmit(data) {
             error++;
           }
           else if(data.email != data.reemail){
-            var element = '<p class="customError" style="color:red">'+"Both emails should be identical"+'</p>';
+            var element = '<p class="customError" style="color:red">'+"Both emails are not matching"+'</p>';
             $(element).insertAfter($(this));
             error++;
           }
@@ -193,21 +232,21 @@ onClickSubmit(data) {
       
     });
 
-    if(data.email != data.reemail){
-      toastr.error("&nbsp;&nbsp;Both emails are not matching!", "", {
-         "closeButton": true,
-          "timeOut": "8000",
-          "extendedTImeout": "0",
-          "showDuration": "300",
-          "hideDuration": "1000",
-          "extendedTimeOut": "0",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut",
-          "positionClass": "toast-top-full-width",
-        });
-    }
+    // if(data.email != data.reemail){
+    //   toastr.error("&nbsp;&nbsp;Both emails are not matching!", "", {
+    //      "closeButton": true,
+    //       "timeOut": "8000",
+    //       "extendedTImeout": "0",
+    //       "showDuration": "300",
+    //       "hideDuration": "1000",
+    //       "extendedTimeOut": "0",
+    //       "showEasing": "swing",
+    //       "hideEasing": "linear",
+    //       "showMethod": "fadeIn",
+    //       "hideMethod": "fadeOut",
+    //       "positionClass": "toast-top-full-width",
+    //     });
+    // }
     const formData = new FormData();
     $.each(this.file, function(index, value){
       formData.append('file[]', value);

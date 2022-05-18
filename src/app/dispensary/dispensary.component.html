@@ -11,35 +11,35 @@
                           	<div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">First Name</label>
-                                  <input type = "text" name = "fname" class="sm-form-control required" placeholder="Enter First Name" ngModel>
+                                  <input type = "text" name = "fname" class="sm-form-control required customValidate" placeholder="Enter First Name" ngModel>
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Last Name</label>
-                                  <input type = "text" name = "lname" class="sm-form-control required" placeholder="Enter Last Name" ngModel>
+                                  <input type = "text" name = "lname" class="sm-form-control required customValidate" placeholder="Enter Last Name" ngModel>
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Telephone Number</label>
-                                  <input type = "text" name = "telnum" class="sm-form-control required" placeholder="Enter Telephone Number" ngModel>
+                                  <input type = "text" name = "telnum" class="sm-form-control required customValidate" placeholder="Enter Telephone Number" ngModel>
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Email Address</label>
-                                  <input type = "email" name = "email" class="sm-form-control required" placeholder="Enter Email Address" ngModel>
+                                  <input type = "email" name = "email" class="sm-form-control required customValidate" placeholder="Enter Email Address" ngModel>
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Re Enter Email Address</label>
-                                  <input type = "email" name = "reemail" class="sm-form-control required" placeholder="Re Enter Email Address" ngModel>
+                                  <input type = "email" name = "reemail" class="sm-form-control required customValidate" placeholder="Re Enter Email Address" ngModel>
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>
@@ -47,7 +47,7 @@
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Notes</label>
                                   <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->
-                                  <textarea name="notes" class="sm-form-control required"></textarea>
+                                  <textarea name="notes" class="sm-form-control required customValidate"></textarea>
                             </div>
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
@@ -64,13 +64,13 @@
             </div>
         </div>
     </form>
-    <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(claimListing.value)" >
+    <!-- <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(claimListing.value)" >
 	   
 	   <br/>
 	   <input type = "password" name = "passwd" placeholder = "passwd" ngModel>
 	   <br/>
 	   <input type = "submit" value = "submit">
-	</form>
+	</form> -->
 </div>
 <div class="content-wrap product-content-wrap">
 	<!-- <h1 class="page-title-heading">{{strainDetails.name}}</h1> -->

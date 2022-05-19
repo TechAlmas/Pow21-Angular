@@ -26,7 +26,7 @@
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Telephone Number</label>
-                                  <input type = "text" name = "telnum" class="sm-form-control required customValidate" placeholder="Enter Telephone Number" ngModel>
+								<input type="text" name = "telnum" id="telnum" class="sm-form-control required customValidate" placeholder="Enter Telephone Number" ngModel placeholder="(555) 555-5555" />
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>
@@ -46,14 +46,15 @@
                             </div>
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Notes</label>
+                                <label for="paid-for-quality">Comments</label>
                                   <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->
-                                  <textarea name="notes" class="sm-form-control required customValidate"></textarea>
+                                  <textarea name="notes" class="sm-form-control required customValidate" placeholder="Enter your comments to verify ownership"></textarea>
                             </div>
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Document</label>
-                                  <input type = "file" (change)="this.onFilechange($event)" name="file" class="sm-form-control required fileInput" placeholder="Enter your notes to verify ownership" ngModel multiple>
+                                  <input type = "file" (change)="this.onFilechange($event)" name="file" class="sm-form-control required fileInput"  ngModel multiple>
+								  <small id="fileHelp" class="form-text text-muted">Optional: Include any non-private business documents that shows your company name and address. This will help speed up the approval process.</small>
                             </div>
 
 							<!-- H o n e y p o t -->

@@ -84,7 +84,17 @@ export class DispensaryComponent implements OnInit {
 
   		});
 
-  
+        //Phone number masking code
+
+        $('#telnum').on('blur',function(){
+          const x = $(this).val().replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+          if(x != null){
+            
+            $(this).val( '(' + x[1] + ') ' + x[2] + '-' + x[3]);
+          }
+          
+          
+        });
 
       //Validations on KeyUp
 
@@ -98,7 +108,7 @@ export class DispensaryComponent implements OnInit {
             
           }
           else if($('input[name=email]').val() != $(this).val()){
-            var element = '<p class="customError" style="color:red">'+"Both emails are not matching"+'</p>';
+            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
             
           }
         }
@@ -110,12 +120,10 @@ export class DispensaryComponent implements OnInit {
           }
         }
         if($(this).attr('name') == 'telnum' && $(this).val() != ''){
-         
-          if(!$.isNumeric($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" should be numeric"+'</p>';
-           
-          }
-        }
+
+          let newVal =  $(this).val().replace(/[^\d]/g, '');
+          $(this).val(newVal)
+        } 
         if($(this).val() == ''){
 
           var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
@@ -204,7 +212,7 @@ onClickSubmit(data) {
             error++;
           }
           else if(data.email != data.reemail){
-            var element = '<p class="customError" style="color:red">'+"Both emails are not matching"+'</p>';
+            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
             $(element).insertAfter($(this));
             error++;
           }
@@ -217,14 +225,7 @@ onClickSubmit(data) {
             error++;
           }
         }
-        if($(this).attr('name') == 'telnum' && $(this).val() != ''){
-         
-          if(!$.isNumeric($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" should be numeric"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-        }
+       
         if($(this).val() == ''){
 
           var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';

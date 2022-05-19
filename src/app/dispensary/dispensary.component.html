@@ -1,4 +1,6 @@
 
+
+
 <div class="modal fade" id="myModal_paid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
    <form #claimListing="ngForm" (ngSubmit)="onClickSubmit(claimListing.value)">
         <div class="modal-dialog">
@@ -26,7 +28,7 @@
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Telephone Number</label>
-								<input type="text" name = "telnum" id="telnum" class="sm-form-control required customValidate" placeholder="Enter Telephone Number" ngModel placeholder="(555) 555-5555" />
+								<input type="tel" name = "telnum" id="telnum" class="sm-form-control required customValidate masked-phone"  data-phonemask="(___)___-____" placeholder="Enter Telephone Number" ngModel  />
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>

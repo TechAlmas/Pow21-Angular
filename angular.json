@@ -55,6 +55,7 @@
               "src/assets/js/components/lightbox.min.js",
               "src/assets/js/functions.js",
               "src/assets/js/sweetalert2.all.min.js",
+              "src/assets/js/phone-mask.min.js"
             ],
             "es5BrowserSupport": true
           },

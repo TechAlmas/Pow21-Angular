@@ -86,15 +86,15 @@ export class DispensaryComponent implements OnInit {
 
         //Phone number masking code
 
-        $('#telnum').on('blur',function(){
-          const x = $(this).val().replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
-          if(x != null){
+        // $('#telnum').on('blur',function(){
+        //   const x = $(this).val().replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        //   if(x != null){
             
-            $(this).val( '(' + x[1] + ') ' + x[2] + '-' + x[3]);
-          }
+        //     $(this).val( '(' + x[1] + ') ' + x[2] + '-' + x[3]);
+        //   }
           
           
-        });
+        // });
 
       //Validations on KeyUp
 
@@ -119,11 +119,11 @@ export class DispensaryComponent implements OnInit {
            
           }
         }
-        if($(this).attr('name') == 'telnum' && $(this).val() != ''){
+        // if($(this).attr('name') == 'telnum' && $(this).val() != ''){
 
-          let newVal =  $(this).val().replace(/[^\d]/g, '');
-          $(this).val(newVal)
-        } 
+        //   let newVal =  $(this).val().replace(/[^\d]/g, '');
+        //   $(this).val(newVal)
+        // } 
         if($(this).val() == ''){
 
           var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
@@ -157,7 +157,7 @@ getDispensaryDetail(disp_slug)
         this.image_disp = "https://www.pow21.com/admin/storage/app/"+this.dispDetails.logoUrl;
         this.mapUrl = "https://www.google.com/maps/place/"+this.dispDetails.address+','+this.dispCity+','+this.dispState+' '+data['data'].zip_code+','+data['data'].country;
         //1353 E 41st Ave, Vancouver, BC V5W 3R8, Canada
-        //this.schedule = JSON.parse(this.dispDetails.schedule);
+        this.schedule = JSON.parse(this.dispDetails.schedule);
         //console.log(this.dispDetails.state.replace(/\s/g, "-"));
 
       }),

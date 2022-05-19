@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .stores td.status img{width: auto;max-height: 50px;}
 /* .modal-footer {
     display: inline;
@@ -228,6 +229,15 @@ input#sunday_end {
 .form-group.whitebgs.assign_user {
     margin-top: 37px;
 }
-.togglebox {
-    margin-top: -20px;
+
+.toggle .slide-toggle-content {
+    display: inline-block;
+    vertical-align: top;
+    width: calc( 100% - 80px);
+    margin-left: 10px;
+    text-transform: initial;
+    font-weight: 600;
+    font-size: 16px;
 }
+/* timer design */
+

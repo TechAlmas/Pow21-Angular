@@ -13,6 +13,7 @@ import { Globals } from '../models/globals';
 import { CookieService } from 'ngx-cookie-service';
 import { PlatformLocation } from '@angular/common';
 import { DispDetail } from '../models/disp-detail';
+import { ViewEncapsulation } from '@angular/core';
 
 
 
@@ -27,6 +28,7 @@ declare var Lightbox: any;
   selector: 'dispensary-details',
   templateUrl: './dispensary.component.html',
   styleUrls: ['./dispensary.component.css'],
+  encapsulation: ViewEncapsulation.None,
   providers: []
 })
 
@@ -211,7 +213,7 @@ onClickSubmit(data) {
         });
       },
       () => {
-        console.log(err.message);
+        console.log("err.message");
         
       }
      );
@@ -358,7 +360,7 @@ getDispensaryDetailData(disp_slug): Observable<any> {
           });
           $('.tooltip-contentfollow').removeClass('user_follow');
           $('.tooltip-contentfollow span.count').html(parseInt($('.tooltip-contentfollow span').text())-1);
-          $('.tooltip-contentfollow span.count').after('<span class="nocount" style="color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;">&nbsp;&nbsp;|&nbsp;&nbsp;Follow</span>');
+          $('.tooltip-contentfollow span.count').after('<span class="nocount" style="color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;">Follow</span>');
         }
       }),
       (err: any) => console.log(err),

@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
+
 declare var $: any;
 declare var jQuery: any;
 declare var toastr: any;
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
   og_local:any;
   loadContent = false;
   showLoadingIndicator = true;
+
 
   constructor(private globals: Globals,private route: ActivatedRoute,private routes: Router,private platformLocation: PlatformLocation, private title: Title, private meta: Meta,private _http: HttpClient,private cookieService: CookieService,@Inject(DOCUMENT) private dom){
 

@@ -17,6 +17,7 @@ import { ViewEncapsulation } from '@angular/core';
 
 
 
+
 declare var $: any;
 declare var jQuery: any;
 declare var toastr: any;
@@ -53,6 +54,8 @@ export class DispensaryComponent implements OnInit {
   fav_disp= new Favdispensary();
   followed: string;
 
+
+
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
 
   ngOnInit() {
@@ -80,6 +83,46 @@ export class DispensaryComponent implements OnInit {
 
 
   		});
+
+  
+
+      //Validations on KeyUp
+
+      $('.customValidate').on('keyup',function(){
+        $(this).next('.customError').remove();
+      
+        if($(this).attr('name') == 'reemail' && $(this).val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+            
+          }
+          else if($('input[name=email]').val() != $(this).val()){
+            var element = '<p class="customError" style="color:red">'+"Both emails are not matching"+'</p>';
+            
+          }
+        }
+        if($(this).attr('name') == 'email' && $(this).val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+           
+          }
+        }
+        if($(this).attr('name') == 'telnum' && $(this).val() != ''){
+         
+          if(!$.isNumeric($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" should be numeric"+'</p>';
+           
+          }
+        }
+        if($(this).val() == ''){
+
+          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+          
+        }
+        $(element).insertAfter($(this));
+      })
 
 
   }
@@ -137,8 +180,9 @@ enableReviewForm(){
     this.write_review = true;
     setTimeout(function(){ $("#starrating").rating(); }, 1);
  }
+
 onClickSubmit(data) {
-  console.log(data);
+  
     // var postdata = {
     //   "listing_id" : this.dispDetails.id,
     //   "first_name" : data.fname,
@@ -147,21 +191,79 @@ onClickSubmit(data) {
     //   "e_mail":data.email,
     //   'verification_details':data.notes,
     // };
-    if(data.email != data.reemail){
-      toastr.error("&nbsp;&nbsp;Both emails are not matching!", "", {
-         "closeButton": true,
-          "timeOut": "8000",
-          "extendedTImeout": "0",
-          "showDuration": "300",
-          "hideDuration": "1000",
-          "extendedTimeOut": "0",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut",
-          "positionClass": "toast-top-full-width",
-        });
+    let error = 0;
+    let honeyError = 0;
+    $('.customValidate').each(function(key,val){
+      $(this).next('.customError').remove();
+      
+        if($(this).attr('name') == 'reemail' && $(this).val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+            $(element).insertAfter($(this));
+            error++;
+          }
+          else if(data.email != data.reemail){
+            var element = '<p class="customError" style="color:red">'+"Both emails are not matching"+'</p>';
+            $(element).insertAfter($(this));
+            error++;
+          }
+        }
+        if($(this).attr('name') == 'email' && $(this).val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+            $(element).insertAfter($(this));
+            error++;
+          }
+        }
+        if($(this).attr('name') == 'telnum' && $(this).val() != ''){
+         
+          if(!$.isNumeric($(this).val())){
+            var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" should be numeric"+'</p>';
+            $(element).insertAfter($(this));
+            error++;
+          }
+        }
+        if($(this).val() == ''){
+
+          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+          $(element).insertAfter($(this));
+          error ++;
+        }
+       
+      
+      
+    });
+
+    if(error == 0){
+
+      // Honeypot Implementation
+      $('.honeyInput').each(function(key,val){
+        if($(this).val() != ''){
+          $('.fileInput').next('.customError').remove();
+            var element = '<p class="customError" style="color:red">Something Went Wrong</p>';
+            $(element).insertAfter($('.fileInput'));
+            honeyError++;
+        }
+      });
     }
+
+    // if(data.email != data.reemail){
+    //   toastr.error("&nbsp;&nbsp;Both emails are not matching!", "", {
+    //      "closeButton": true,
+    //       "timeOut": "8000",
+    //       "extendedTImeout": "0",
+    //       "showDuration": "300",
+    //       "hideDuration": "1000",
+    //       "extendedTimeOut": "0",
+    //       "showEasing": "swing",
+    //       "hideEasing": "linear",
+    //       "showMethod": "fadeIn",
+    //       "hideMethod": "fadeOut",
+    //       "positionClass": "toast-top-full-width",
+    //     });
+    // }
     const formData = new FormData();
     $.each(this.file, function(index, value){
       formData.append('file[]', value);
@@ -172,51 +274,55 @@ onClickSubmit(data) {
     formData.append("telephone",data.telnum);
     formData.append("e_mail",data.email);
     formData.append("verification_details",data.notes);
-    this.postPaidFor(formData).subscribe(
-      (data => {
-          if(data["api_message"] == "success" && data["id"] > 0){
-              toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
-             "closeButton": true,
-              "timeOut": "8000",
-              "extendedTImeout": "0",
-              "showDuration": "300",
-              "hideDuration": "1000",
-              "extendedTimeOut": "0",
-              "showEasing": "swing",
-              "hideEasing": "linear",
-              "showMethod": "fadeIn",
-              "hideMethod": "fadeOut",
-              "positionClass": "toast-top-full-width",
-            });
-          }
 
-          this.expiredDate = new Date();
-          this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
-          this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
+    if(error == 0 && honeyError == 0){
 
-          $('#myModal_paid').modal('hide');
-
-      }),
-      (err: any) => {console.log(err)
-        toastr.error(err.message, "", {
-         "closeButton": true,
-          "timeOut": "8000",
-          "extendedTImeout": "0",
-          "showDuration": "300",
-          "hideDuration": "1000",
-          "extendedTimeOut": "0",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut",
-          "positionClass": "toast-top-full-width",
-        });
-      },
-      () => {
-        console.log("err.message");
-        
-      }
-     );
+      this.postPaidFor(formData).subscribe(
+        (data => {
+            if(data["api_message"] == "success" && data["id"] > 0){
+                toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
+               "closeButton": true,
+                "timeOut": "8000",
+                "extendedTImeout": "0",
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "extendedTimeOut": "0",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "positionClass": "toast-top-full-width",
+              });
+            }
+  
+            this.expiredDate = new Date();
+            this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+            this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
+  
+            $('#myModal_paid').modal('hide');
+  
+        }),
+        (err: any) => {console.log(err)
+          toastr.error(err.message, "", {
+           "closeButton": true,
+            "timeOut": "8000",
+            "extendedTImeout": "0",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "extendedTimeOut": "0",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "positionClass": "toast-top-full-width",
+          });
+        },
+        () => {
+          console.log("err.message");
+          
+        }
+       );
+    }
  }
  postPaidFor(postdata){
     return this._http.post<any[]>('claim_lingings',postdata);
@@ -392,4 +498,8 @@ getDispensaryDetailData(disp_slug): Observable<any> {
       //this.cookieService.set('_mio_user_email', this.favstrain['email'], this.expiredDate,"/");
     }
   }
+
+
+
+
 }

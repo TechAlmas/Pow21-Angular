@@ -24,6 +24,7 @@
     "angular2-text-mask": "^9.0.0",
     "core-js": "^2.5.4",
     "ng2-completer": "^2.0.8",
+    "ng2-google-recaptcha": "^5.0.0",
     "ngx-cookie-service": "^2.2.0",
     "ngx-device-detector": "^1.3.5",
     "ngx-lightbox": "^2.5.2",

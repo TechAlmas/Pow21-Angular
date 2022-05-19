@@ -30,6 +30,7 @@ import {MyCurrencyFormatterDirective} from './util/my-currency-formatter.directi
 import {NumberMaskPipe} from './util/number-mask.pipe';
 import { Ng2CompleterModule } from "ng2-completer";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { Ng2CompleterModule } from "ng2-completer";
     ReactiveFormsModule,
     TextMaskModule,
     ImageUploadModule.forRoot(),
+
     
 
   ],

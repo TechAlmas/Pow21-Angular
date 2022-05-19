@@ -54,6 +54,8 @@ export class DispensaryComponent implements OnInit {
   fav_disp= new Favdispensary();
   followed: string;
 
+
+
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
 
   ngOnInit() {
@@ -81,6 +83,8 @@ export class DispensaryComponent implements OnInit {
 
 
   		});
+
+  
 
       //Validations on KeyUp
 
@@ -188,7 +192,7 @@ onClickSubmit(data) {
     //   'verification_details':data.notes,
     // };
     let error = 0;
-
+    let honeyError = 0;
     $('.customValidate').each(function(key,val){
       $(this).next('.customError').remove();
       
@@ -232,6 +236,19 @@ onClickSubmit(data) {
       
     });
 
+    if(error == 0){
+
+      // Honeypot Implementation
+      $('.honeyInput').each(function(key,val){
+        if($(this).val() != ''){
+          $('.fileInput').next('.customError').remove();
+            var element = '<p class="customError" style="color:red">Something Went Wrong</p>';
+            $(element).insertAfter($('.fileInput'));
+            honeyError++;
+        }
+      });
+    }
+
     // if(data.email != data.reemail){
     //   toastr.error("&nbsp;&nbsp;Both emails are not matching!", "", {
     //      "closeButton": true,
@@ -258,7 +275,7 @@ onClickSubmit(data) {
     formData.append("e_mail",data.email);
     formData.append("verification_details",data.notes);
 
-    if(error == 0){
+    if(error == 0 && honeyError == 0){
 
       this.postPaidFor(formData).subscribe(
         (data => {
@@ -481,4 +498,8 @@ getDispensaryDetailData(disp_slug): Observable<any> {
       //this.cookieService.set('_mio_user_email', this.favstrain['email'], this.expiredDate,"/");
     }
   }
+
+
+
+
 }

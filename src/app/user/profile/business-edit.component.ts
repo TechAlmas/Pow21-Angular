@@ -32,6 +32,7 @@ export class BusinessEditComponent implements OnInit {
 	file:any;
 	userList: any;
 	slug: any;
+	storeImages: any;
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
 		this.user_data = JSON.parse(localStorage.getItem('userData'));
@@ -239,6 +240,34 @@ export class BusinessEditComponent implements OnInit {
 	onFilechange(event: any) {
 		this.file = event.target.files;
 	}
+	onStoreImagesUpload(event:any){
+		jQuery('.fileInput').parent().next('.customError').remove();
+		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+
+		for(let i=0;i<event.target.files.length;i++){
+            var file = event.target.files[i];
+            var fileType = file.type;
+			const fsize = event.target.files[i].size;
+			const fileSize = Math.round((fsize / 1024));
+            if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+				
+				var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').parent());
+                jQuery(".fileInput").val('');
+                return false;
+            }
+			if (fileSize >= 1024) {
+				
+				var element = '<p class="customError" style="color:red">The image size should not be greater than 1MB.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').parent());
+                jQuery(".fileInput").val('');
+                return false;
+			}
+        }
+		this.storeImages = event.target.files;
+		
+
+	}
 	onSubmitStore(data){
 		// var postdata = {
 		// 	'name': jQuery('#name').val(),
@@ -256,11 +285,16 @@ export class BusinessEditComponent implements OnInit {
 		// 	'id': jQuery('#id').val(),
 		// 	'file': this.file
 		// }
-		console.log(this.file);
+		// console.log(this.file);
 		const formData = new FormData();
 		jQuery.each(this.file, function(index,value){
 			formData.append('file[]', value);
 		});
+		
+		jQuery.each(this.storeImages, function(index,value){
+			formData.append('store_images[]', value);
+		});
+	
 		
 		formData.append('name',jQuery('#name').val());
     	formData.append('address', jQuery('#address').val());

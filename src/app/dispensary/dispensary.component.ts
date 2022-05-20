@@ -157,7 +157,7 @@ getDispensaryDetail(disp_slug)
         this.image_disp = "https://www.pow21.com/admin/storage/app/"+this.dispDetails.logoUrl;
         this.mapUrl = "https://www.google.com/maps/place/"+this.dispDetails.address+','+this.dispCity+','+this.dispState+' '+data['data'].zip_code+','+data['data'].country;
         //1353 E 41st Ave, Vancouver, BC V5W 3R8, Canada
-        this.schedule = JSON.parse(this.dispDetails.schedule);
+        this.schedule = JSON.parse(this.dispDetails.schedule); 
         //console.log(this.dispDetails.state.replace(/\s/g, "-"));
 
       }),

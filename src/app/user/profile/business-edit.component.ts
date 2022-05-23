@@ -9,7 +9,6 @@ import {Globals} from '../../models/globals';
 import { CookieService } from 'ngx-cookie-service';
 import { Meta, Title } from '@angular/platform-browser';
 import { DispDetail } from '../../models/disp-detail';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 declare var toastr: any;
 declare var jQuery: any;
@@ -22,6 +21,7 @@ declare var Swal: any;
 })
 export class BusinessEditComponent implements OnInit {
 	dispDetails = new DispDetail();
+	store_meta : any;
 	user_data: any;
 	name : string;
 	email: string;
@@ -34,8 +34,7 @@ export class BusinessEditComponent implements OnInit {
 	slug: any;
 	storeImages: any;
 	removedImages : any;
-	dropdownList = [];
-	dropdownSettings:IDropdownSettings={};
+
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
 		this.user_data = JSON.parse(localStorage.getItem('userData'));
@@ -49,6 +48,7 @@ export class BusinessEditComponent implements OnInit {
 		this.getuserdata();
 		this.getDispensaryDetail();
 		this.userlist();
+		
 	}
 
 	getdispList(){
@@ -71,18 +71,15 @@ export class BusinessEditComponent implements OnInit {
 	}
 	ngOnInit() {
 		window.scrollTo(0, 0);
+		jQuery(".js-select2").select2({
+			closeOnSelect : false,
+			placeholder : "Placeholder",
+			allowHtml: true,
+			allowClear: true,
+			tags: true // создает новые опции на лету
+		});
 
-		this.dropdownList = [
-			{ item_id: 1, item_text: 'Item1' },
-			{ item_id: 2, item_text: 'Item2' },
-			{ item_id: 3, item_text: 'Item3' },
-			{ item_id: 4, item_text: 'Item4' },
-			{ item_id: 5, item_text: 'Item5' }
-		  ];
-		  this.dropdownSettings = {
-			idField: 'item_id',
-			textField: 'item_text',
-		  };
+		
 	}
 	removeStoreImage($name){
 
@@ -111,6 +108,8 @@ export class BusinessEditComponent implements OnInit {
 			(err: any) => console.log(err),
 			() => {}
 		);
+
+		
 	}
 	getMetaData(currentUrl): Observable<any[]> {
 		var postData = {"url":currentUrl};
@@ -174,6 +173,8 @@ export class BusinessEditComponent implements OnInit {
 
 	      ((data:any) => {
 	      	this.dispDetails = data['data'];
+			this.store_meta = data['data'].store_meta; 
+			  
 	        //this.dispens_id = this.dispDetails.disp_id;
 	        //this.dispState = data['data'].state.replace(/\s/g, "-");
 	        //this.dispCity = data['data'].city.replace(/\s/g, "-");
@@ -264,6 +265,10 @@ export class BusinessEditComponent implements OnInit {
 	onFilechange(event: any) {
 		this.file = event.target.files;
 	}
+	// onStoreMetaChange(event: any) {
+	// 	this.storeMeta = event.target.value;
+	// 	con
+	// }
 	onStoreImagesUpload(event:any){
 		jQuery('.fileInput').parent().next('.customError').remove();
 		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -291,6 +296,18 @@ export class BusinessEditComponent implements OnInit {
 		this.storeImages = event.target.files;
 		
 
+	}
+	checkStoreMetaSelectStatus(value){
+		if(Array.isArray(this.store_meta) && this.store_meta !=undefined ){
+
+			if(this.store_meta.includes(value.toString())){
+				return 'yes';
+			}else{
+				return 'no';
+			}
+		}else{
+			return 'no';
+		}
 	}
 	onSubmitStore(data){
 		// var postdata = {
@@ -338,6 +355,13 @@ export class BusinessEditComponent implements OnInit {
 				formData.append('removed_images[]', value);
 			});
 		}
+		let storeMetaValues = jQuery('select[name=store_meta]').val();
+		if(storeMetaValues != undefined && storeMetaValues != null){
+			jQuery.each(storeMetaValues, function(index,value){
+				formData.append('store_meta[]', value);
+			});
+		}
+
     	//console.log(formData);
 		this.updateStoreDetails(formData).subscribe(
 			data =>{

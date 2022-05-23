@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -29,6 +29,7 @@ import {MyCurrencyPipe} from './util/my-currency.pipe';
 import {MyCurrencyFormatterDirective} from './util/my-currency-formatter.directive';
 import {NumberMaskPipe} from './util/number-mask.pipe';
 import { Ng2CompleterModule } from "ng2-completer";
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -63,10 +64,11 @@ import { Ng2CompleterModule } from "ng2-completer";
     ReactiveFormsModule,
     TextMaskModule,
     ImageUploadModule.forRoot(),
-
+    NgMultiSelectDropDownModule.forRoot()
     
 
   ],
+  schemas:[NO_ERRORS_SCHEMA], 
   providers: [
       {
         provide: HTTP_INTERCEPTORS,

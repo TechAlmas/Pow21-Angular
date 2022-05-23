@@ -9,7 +9,7 @@ import {Globals} from '../../models/globals';
 import { CookieService } from 'ngx-cookie-service';
 import { Meta, Title } from '@angular/platform-browser';
 import { DispDetail } from '../../models/disp-detail';
-
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 declare var toastr: any;
 declare var jQuery: any;
@@ -33,6 +33,9 @@ export class BusinessEditComponent implements OnInit {
 	userList: any;
 	slug: any;
 	storeImages: any;
+	removedImages : any;
+	dropdownList = [];
+	dropdownSettings:IDropdownSettings={};
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
 		this.user_data = JSON.parse(localStorage.getItem('userData'));
@@ -68,7 +71,28 @@ export class BusinessEditComponent implements OnInit {
 	}
 	ngOnInit() {
 		window.scrollTo(0, 0);
-		//this.loadMetaData();
+
+		this.dropdownList = [
+			{ item_id: 1, item_text: 'Item1' },
+			{ item_id: 2, item_text: 'Item2' },
+			{ item_id: 3, item_text: 'Item3' },
+			{ item_id: 4, item_text: 'Item4' },
+			{ item_id: 5, item_text: 'Item5' }
+		  ];
+		  this.dropdownSettings = {
+			idField: 'item_id',
+			textField: 'item_text',
+		  };
+	}
+	removeStoreImage($name){
+
+			if(this.removedImages == undefined){
+				this.removedImages = [] ;
+			}
+			jQuery('.remove-image[name="'+$name+'"]').parents('.image-area').remove();
+			this.removedImages.push($name);
+
+
 	}
 	loadMetaData(){
 		//console.log((this.platformLocation as any).location.pathname);
@@ -309,6 +333,11 @@ export class BusinessEditComponent implements OnInit {
 		formData.append('phone', jQuery('#phone').val());
 		formData.append('license_type', jQuery('#license_type').val());
 		formData.append('id', jQuery('#id').val());
+		if(this.removedImages != undefined){
+			jQuery.each(this.removedImages, function(index,value){
+				formData.append('removed_images[]', value);
+			});
+		}
     	//console.log(formData);
 		this.updateStoreDetails(formData).subscribe(
 			data =>{

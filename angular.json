@@ -41,7 +41,7 @@
               "src/assets/css/sweetalert2.min.css",
              "src/styles.css",
               "src/assets/css/responsive.css",
-              "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css"
+              "src/assets/css/select2.min.css"
             ],
             "scripts": [
               "src/assets/js/jquery.js",
@@ -57,7 +57,7 @@
               "src/assets/js/functions.js",
               "src/assets/js/sweetalert2.all.min.js",
               "src/assets/js/phone-mask.min.js",
-              "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"
+              "src/assets/js/select2.min.js"
             ],
             "es5BrowserSupport": true
           },

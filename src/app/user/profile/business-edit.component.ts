@@ -9,6 +9,8 @@ import {Globals} from '../../models/globals';
 import { CookieService } from 'ngx-cookie-service';
 import { Meta, Title } from '@angular/platform-browser';
 import { DispDetail } from '../../models/disp-detail';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 declare var toastr: any;
 declare var jQuery: any;
@@ -174,7 +176,7 @@ export class BusinessEditComponent implements OnInit {
 	      ((data:any) => {
 	      	this.dispDetails = data['data'];
 			this.store_meta = data['data'].store_meta; 
-			  
+			  this.dispDetails.schedule =  JSON.parse(this.dispDetails.schedule)
 	        //this.dispens_id = this.dispDetails.disp_id;
 	        //this.dispState = data['data'].state.replace(/\s/g, "-");
 	        //this.dispCity = data['data'].city.replace(/\s/g, "-");
@@ -361,6 +363,20 @@ export class BusinessEditComponent implements OnInit {
 				formData.append('store_meta[]', value);
 			});
 		}
+		
+
+		//Schedule Timings Data 
+		let scheduleObj = {
+			monday : this.getTimeValue('monday'),
+			tuesday : this.getTimeValue('tuesday'),
+			wednesday : this.getTimeValue('wednesday'),
+			thursday : this.getTimeValue('thursday'),
+			friday : this.getTimeValue('friday'),
+			saturday : this.getTimeValue('saturday'),
+			sunday : this.getTimeValue('sunday'),
+		} ;
+
+		formData.append('schedule',JSON.stringify(scheduleObj));
 
     	//console.log(formData);
 		this.updateStoreDetails(formData).subscribe(
@@ -415,6 +431,23 @@ export class BusinessEditComponent implements OnInit {
 			}
 		);
 	}
+	getTimeValue(day){
+		if(jQuery('#'+day+"_start").val() != undefined && jQuery('#'+day+"_end").val() != undefined && jQuery('#'+day+"_start").val() && jQuery('#'+day+"_end").val() && jQuery('#'+day+"_close").prop('checked') == false){
+
+			let datePipe = new DatePipe('en-US');
+			let startTimeObj = datePipe.transform(new Date("2021-05-23"+" "+ jQuery('#'+day+"_start").val()), 'shortTime');
+			let endTimeObj = datePipe.transform(new Date("2021-05-23"+" "+ jQuery('#'+day+"_end").val()), 'shortTime');
+			
+			let timeString = startTimeObj + " - " + endTimeObj;
+			return timeString;
+		}else if(jQuery('#'+day+"_close").prop('checked') == true){
+			let timeString = "Closed";
+			return timeString;
+		}
+
+
+	}
+
 	userlist(){
 		this.getAllUsers().subscribe(data => {
 			this.userList = data['data'];
@@ -422,4 +455,56 @@ export class BusinessEditComponent implements OnInit {
 			console.log(err.message);
 		});
 	}
+
+	getTimeStringValue(day,type,checkClosed = 0){
+		let timeString = '';
+	
+		if(this.dispDetails.schedule){
+	
+			let scheduleData = this.dispDetails.schedule;
+			if(typeof scheduleData[day] != undefined && scheduleData[day] ){
+				if(checkClosed == 1){
+					if(scheduleData[day] == 'Closed' || scheduleData[day] == 'closed' ){
+						return 'yes';
+					}else{
+						return 'no';
+					}
+				}else{
+					if(scheduleData[day] != 'Closed' && scheduleData[day] != 'closed' ){
+						timeString = scheduleData[day].split(" - ");
+						if(type == 'start'){
+							if(Array.isArray(timeString)){
+								let newTimeString = new Date("2021-05-23"+" "+timeString[0]);
+								return newTimeString;
+							}
+						}else if(type == 'end'){
+							if(Array.isArray(timeString)){
+								let newTimeString = new Date("2021-05-23"+" "+timeString[1]);
+								return newTimeString;
+							}
+						}
+					}
+					
+				}
+				
+			}
+		}
+			
+		
+	
+	}
+
+	onClickClose(e,day){
+		
+		if(e.currentTarget.checked){    
+			jQuery('#'+day+"_start").prop('disabled',true);
+			jQuery('#'+day+"_end").prop('disabled',true);
+			  
+		}else{
+			jQuery('#'+day+"_start").prop('disabled',false);
+			jQuery('#'+day+"_end").prop('disabled',false);
+		}
+	}
+
+	
 }

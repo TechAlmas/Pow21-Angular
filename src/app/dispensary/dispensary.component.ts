@@ -163,7 +163,7 @@ getDispensaryDetail(disp_slug)
       }),
       (err: any) => console.log(err),
       () => {
-		
+		 
 	}
 
 )

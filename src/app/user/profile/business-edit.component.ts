@@ -12,7 +12,6 @@ import { DispDetail } from '../../models/disp-detail';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-
 declare var toastr: any;
 declare var jQuery: any;
 declare var Swal: any;
@@ -24,6 +23,7 @@ declare var Swal: any;
 })
 export class BusinessEditComponent implements OnInit {
 	dispDetails = new DispDetail();
+	store_meta : any;
 	user_data: any;
 	name : string;
 	email: string;
@@ -34,6 +34,9 @@ export class BusinessEditComponent implements OnInit {
 	file:any;
 	userList: any;
 	slug: any;
+	storeImages: any;
+	removedImages : any;
+
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
 		this.user_data = JSON.parse(localStorage.getItem('userData'));
@@ -47,6 +50,7 @@ export class BusinessEditComponent implements OnInit {
 		this.getuserdata();
 		this.getDispensaryDetail();
 		this.userlist();
+		
 	}
 
 	getdispList(){
@@ -69,7 +73,25 @@ export class BusinessEditComponent implements OnInit {
 	}
 	ngOnInit() {
 		window.scrollTo(0, 0);
-		//this.loadMetaData();
+		jQuery(".js-select2").select2({
+			closeOnSelect : false,
+			placeholder : "Placeholder",
+			allowHtml: true,
+			allowClear: true,
+			tags: true // создает новые опции на лету
+		});
+
+		
+	}
+	removeStoreImage($name){
+
+			if(this.removedImages == undefined){
+				this.removedImages = [] ;
+			}
+			jQuery('.remove-image[name="'+$name+'"]').parents('.image-area').remove();
+			this.removedImages.push($name);
+
+
 	}
 	loadMetaData(){
 		//console.log((this.platformLocation as any).location.pathname);
@@ -88,6 +110,8 @@ export class BusinessEditComponent implements OnInit {
 			(err: any) => console.log(err),
 			() => {}
 		);
+
+		
 	}
 	getMetaData(currentUrl): Observable<any[]> {
 		var postData = {"url":currentUrl};
@@ -151,6 +175,7 @@ export class BusinessEditComponent implements OnInit {
 
 	      ((data:any) => {
 	      	this.dispDetails = data['data'];
+			this.store_meta = data['data'].store_meta; 
 			  this.dispDetails.schedule =  JSON.parse(this.dispDetails.schedule)
 	        //this.dispens_id = this.dispDetails.disp_id;
 	        //this.dispState = data['data'].state.replace(/\s/g, "-");
@@ -242,6 +267,50 @@ export class BusinessEditComponent implements OnInit {
 	onFilechange(event: any) {
 		this.file = event.target.files;
 	}
+	// onStoreMetaChange(event: any) {
+	// 	this.storeMeta = event.target.value;
+	// 	con
+	// }
+	onStoreImagesUpload(event:any){
+		jQuery('.fileInput').parent().next('.customError').remove();
+		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+
+		for(let i=0;i<event.target.files.length;i++){
+            var file = event.target.files[i];
+            var fileType = file.type;
+			const fsize = event.target.files[i].size;
+			const fileSize = Math.round((fsize / 1024));
+            if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+				
+				var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').parent());
+                jQuery(".fileInput").val('');
+                return false;
+            }
+			if (fileSize >= 1024) {
+				
+				var element = '<p class="customError" style="color:red">The image size should not be greater than 1MB.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').parent());
+                jQuery(".fileInput").val('');
+                return false;
+			}
+        }
+		this.storeImages = event.target.files;
+		
+
+	}
+	checkStoreMetaSelectStatus(value){
+		if(Array.isArray(this.store_meta) && this.store_meta !=undefined ){
+
+			if(this.store_meta.includes(value.toString())){
+				return 'yes';
+			}else{
+				return 'no';
+			}
+		}else{
+			return 'no';
+		}
+	}
 	onSubmitStore(data){
 		// var postdata = {
 		// 	'name': jQuery('#name').val(),
@@ -259,11 +328,16 @@ export class BusinessEditComponent implements OnInit {
 		// 	'id': jQuery('#id').val(),
 		// 	'file': this.file
 		// }
-		console.log(this.file);
+		// console.log(this.file);
 		const formData = new FormData();
 		jQuery.each(this.file, function(index,value){
 			formData.append('file[]', value);
 		});
+		
+		jQuery.each(this.storeImages, function(index,value){
+			formData.append('store_images[]', value);
+		});
+	
 		
 		formData.append('name',jQuery('#name').val());
     	formData.append('address', jQuery('#address').val());
@@ -278,6 +352,17 @@ export class BusinessEditComponent implements OnInit {
 		formData.append('phone', jQuery('#phone').val());
 		formData.append('license_type', jQuery('#license_type').val());
 		formData.append('id', jQuery('#id').val());
+		if(this.removedImages != undefined){
+			jQuery.each(this.removedImages, function(index,value){
+				formData.append('removed_images[]', value);
+			});
+		}
+		let storeMetaValues = jQuery('select[name=store_meta]').val();
+		if(storeMetaValues != undefined && storeMetaValues != null){
+			jQuery.each(storeMetaValues, function(index,value){
+				formData.append('store_meta[]', value);
+			});
+		}
 		
 
 		//Schedule Timings Data 

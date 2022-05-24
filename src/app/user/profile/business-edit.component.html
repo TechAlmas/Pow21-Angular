@@ -1,3 +1,4 @@
+
 <!-- Dashboard Main Nav End -->
 <mio-profile-top-menu></mio-profile-top-menu>
 <!-- Dashboard SubNav Start -->
@@ -198,6 +199,17 @@
 										</select>
 										<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
 									</div>
+
+									<div class="form-group whitebgs store_meta">
+										<div class="" ></div>
+										<label for="paid-for-quality">Store Meta</label>
+										<select class="js-select2" name="store_meta" multiple="multiple" >
+											<option value="">Store Meta</option>
+											<option *ngFor="let storeMeta of dispDetails.store_meta_dropdown" value="{{storeMeta.id}}" [selected]="checkStoreMetaSelectStatus(storeMeta.id) == 'yes'" >{{storeMeta.title}}</option>
+											
+										</select>
+										<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
+									</div>
 									<div class="form-group whitebgs">
 			                           <div class="" ></div>
 			                           <label for="paid-for-quality">Status </label>
@@ -208,6 +220,27 @@
 			                              <label for="status_suspend" class="radio-style-2-label">Suspend</label>
 			                           </div>
 			                         </div>
+									<!-- <div class="form-group whitebgs">
+										<div class="wait-layer" *ngIf="waitLayer"></div>
+										  <label for="paid-for-quality">Store Images</label>
+											<input type = "file" (change)="this.onStoreImagesUpload($event)" name="file" class="sm-form-control required fileInput"  ngModel multiple>
+										
+									</div> -->
+									<div class="form-group whitebgs">
+										<div class="" ></div>
+										<label for="store_images">Store Images</label>
+										<label for="store_images" class="custom-file-upload"><i class="fa fa-cloud" aria-hidden="true"></i> Custom Images Upload</label>
+										<input type="file" id="store_images" class="fileInput" name="store_images" (change)="this.onStoreImagesUpload($event)" multiple />
+										<!-- <input  class="form-control" type="file" id="formFile"> -->
+										<div class="image-container d-flex mt-3">
+
+											<div class="image-area mr-3" *ngFor="let storeImage of dispDetails.store_images">
+												<img src="{{storeImage.link}}" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" data-name="{{storeImage.name}}" style="display: inline;" (click)="this.removeStoreImage(storeImage.name)">&#215;</a>
+												
+											</div>
+										</div>
+									</div>
+		  
 								</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary">Submit</button>
@@ -255,3 +288,16 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	jQuery(document).ready(function(){
+
+	jQuery(".js-select2").select2({
+			closeOnSelect : false,
+			placeholder : "Placeholder",
+			allowHtml: true,
+			allowClear: true,
+			tags: true // создает новые опции на лету
+		});
+	})
+</script>

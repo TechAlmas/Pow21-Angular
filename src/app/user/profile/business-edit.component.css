@@ -93,8 +93,13 @@ label.radio-style-2-label {
 input#monday_end {
     width: 32%;
     float: left;
+<<<<<<< Updated upstream
     margin-left: -70px;
     margin-top: -3%;
+=======
+    margin-left: -4%;
+    margin-top: -3.5%;
+>>>>>>> Stashed changes
 }
 .form-group.whitebgs.labelalignmentt {
     margin-top: 35px;

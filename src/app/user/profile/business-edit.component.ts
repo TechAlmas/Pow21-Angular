@@ -24,6 +24,7 @@ declare var Swal: any;
 export class BusinessEditComponent implements OnInit {
 	dispDetails = new DispDetail();
 	store_meta : any;
+	assign_user : any;
 	user_data: any;
 	name : string;
 	email: string;
@@ -175,7 +176,8 @@ export class BusinessEditComponent implements OnInit {
 
 	      ((data:any) => {
 	      	this.dispDetails = data['data'];
-			this.store_meta = data['data'].store_meta; 
+			this.store_meta = data['data'].store_meta; 			
+			this.assign_user = data['data'].assign_user; 
 			  this.dispDetails.schedule =  JSON.parse(this.dispDetails.schedule)
 	        //this.dispens_id = this.dispDetails.disp_id;
 	        //this.dispState = data['data'].state.replace(/\s/g, "-");
@@ -311,6 +313,18 @@ export class BusinessEditComponent implements OnInit {
 			return 'no';
 		}
 	}
+	checkAssignUserSelectStatus(value){
+		if(Array.isArray(this.assign_user) && this.assign_user !=undefined ){
+
+			if(this.assign_user.includes(value.toString())){
+				return 'yes';
+			}else{
+				return 'no';
+			}
+		}else{
+			return 'no';
+		}
+	}
 	onSubmitStore(data){
 		// var postdata = {
 		// 	'name': jQuery('#name').val(),
@@ -361,6 +375,12 @@ export class BusinessEditComponent implements OnInit {
 		if(storeMetaValues != undefined && storeMetaValues != null){
 			jQuery.each(storeMetaValues, function(index,value){
 				formData.append('store_meta[]', value);
+			});
+		}
+		let assignUserValues = jQuery('select[name=assign_user]').val();
+		if(assignUserValues != undefined && assignUserValues != null){
+			jQuery.each(assignUserValues, function(index,value){
+				formData.append('assign_user[]', value);
 			});
 		}
 		

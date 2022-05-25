@@ -286,9 +286,10 @@
 
 		<div class="col store-image">
 			<div class="container">
-			   <div class="row" *ngIf="dispDetails.store_images ">
+
+				<div class="row" *ngIf="dispDetails.store_images ">
+				   <h4  style="text-align:left;">Browser our store </h4>
 				  <div [ngClass]="first ? 'col-md-12 storemainimg' : 'col-md-4 storeimg' " *ngFor="let storeImage of dispDetails.store_images; let i =index; let first = first; let last = last;  ">
-					 <span *ngIf = "first"  style="text-align:left;">Browser our store </span>
 					 <div class="columnimage" [ngClass]="first ? 'columnimage' : 'imagesthumb' ">
 						<a href="{{storeImage.link}}" attr.data-lightbox ="{{'image-'+i}}" class="popupimage"><img [ngClass]="first ?'img-responsive1' : 'img-responsive2' " src="{{storeImage.link}}"></a>
 					 </div>
@@ -311,7 +312,9 @@
 					 </div>
 				  </div> -->
 			   </div>
-			   <div class="row" *ngIf="!dispDetails.store_images"> <small style="text-align:center;">Sorry, no store images found. Please come back later! </small></div>
+
+			   <div class="row" *ngIf="!dispDetails.store_images"><h4  style="text-align:left;">Browser our store </h4>
+				 <small style="text-align:center;">Sorry, no store images found. Please come back later! </small></div>
 			</div>
 		</div>
  <!-- image store section end -->

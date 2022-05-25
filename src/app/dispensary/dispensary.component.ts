@@ -182,7 +182,30 @@ linkClicked(id){
      }
   }		
 onFilechange(event: any) {
-  this.file = event.target.files;
+  jQuery('.fileInput').parent().find('.customError').remove();
+  let error = 0;
+		for(let i=0;i<event.target.files.length;i++){
+      var file = event.target.files[i];
+      var fileType = file.type;
+      const fileName = event.target.files[i].name;
+			const fsize = event.target.files[i].size;
+			const fileSize = Math.round((fsize / 1024));
+      
+			if (fileSize >= 5120) {
+				
+				var element = '<p class="customError mb-0" style="color:red">'+fileName+'  size is more than 5MB please reduce size.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').next());
+        error++;
+       
+			}
+    }
+    if(error > 0){
+      jQuery(".fileInput").val('');
+      return false;
+    }else{
+
+      this.file = event.target.files;
+    }
 }
 enableReviewForm(){
     this.write_review = true;
@@ -226,12 +249,13 @@ onClickSubmit(data) {
           }
         }
        
-        if($(this).val() == ''){
+        if($(this).val() == '' || $(this).val() == '(___)___-____'){
 
           var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
           $(element).insertAfter($(this));
           error ++;
         }
+       
        
       
       
@@ -269,12 +293,13 @@ onClickSubmit(data) {
     $.each(this.file, function(index, value){
       formData.append('file[]', value);
     });
+ 
     formData.append("listing_id",this.dispDetails.id);
     formData.append("first_name",data.fname);
     formData.append("last_name",data.lname);
-    formData.append("telephone",data.telnum);
+    formData.append("telephone",$('input[name=telnum]').val());
     formData.append("e_mail",data.email);
-    formData.append("verification_details",data.notes);
+    formData.append("verification_details",$('textarea[name=notes]').val());
 
     if(error == 0 && honeyError == 0){
 

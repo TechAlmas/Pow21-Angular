@@ -376,12 +376,17 @@ export class BusinessEditComponent implements OnInit {
 			jQuery.each(storeMetaValues, function(index,value){
 				formData.append('store_meta[]', value);
 			});
+		}else{
+			formData.append('store_meta[]', storeMetaValues);
 		}
 		let assignUserValues = jQuery('select[name=assign_user]').val();
+		console.log(assignUserValues)
 		if(assignUserValues != undefined && assignUserValues != null){
 			jQuery.each(assignUserValues, function(index,value){
 				formData.append('assign_user[]', value);
 			});
+		}else{
+			formData.append('assign_user[]', assignUserValues);
 		}
 		
 

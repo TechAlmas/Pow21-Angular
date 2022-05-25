@@ -286,11 +286,11 @@
 
 		<div class="col store-image">
 			<div class="container">
-			   <div class="row">
-				  <div class="col-md-12 storemainimg">
-					 <span style="text-align:left;">Browser our store </span>
-					 <div class="columnimage">
-						<a href="https://via.placeholder.com/300x600/e59494/1.png" data-lightbox="image-1" class="popupimage"><img class="img-responsive1" src="https://via.placeholder.com/300x600/e59494/1.png"></a>
+				<div class="row" *ngIf="dispDetails.store_images ">
+				   <h4  style="text-align:left;">Browser our store </h4>
+				  <div [ngClass]="first ? 'col-md-12 storemainimg' : 'col-md-4 storeimg' " *ngFor="let storeImage of dispDetails.store_images; let i =index; let first = first; let last = last;  ">
+					 <div class="columnimage" [ngClass]="first ? 'columnimage' : 'imagesthumb' ">
+						<a href="{{storeImage.link}}" attr.data-lightbox ="{{'image-'+i}}" class="popupimage"><img [ngClass]="first ?'img-responsive1' : 'img-responsive2' " src="{{storeImage.link}}"></a>
 					 </div>
 				  </div>
 				  <br/>
@@ -310,6 +310,8 @@
 					 </div>
 				  </div>
 			   </div>
+			   <div class="row" *ngIf="!dispDetails.store_images"><h4  style="text-align:left;">Browser our store </h4>
+				 <small style="text-align:center;">Sorry, no store images found. Please come back later! </small></div>
 			</div>
 		</div>
  <!-- image store section end -->

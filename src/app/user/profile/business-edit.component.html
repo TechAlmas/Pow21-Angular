@@ -101,7 +101,7 @@
 		                           <div class="form-group whitebgs labelalignmentt">
 		                              <div class="wait-layer" *ngIf="waitLayer"></div>
 		                              <label for="paid-for-quality"></label>
-		                              <span class="dayalign">Monday</span>
+		                              <span class="dayalign">Mondayok</span>
 		                              <input type = "time" id="monday_start" name="monday_start" class="sm-form-control monday_start required" value="{{ getTimeStringValue('monday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('monday','',1) == 'yes'" >
 		                              <span class="tocontant">To</span><br>
 		                              <input type = "time" id="monday_end" name="monday_end" class="sm-form-control monday_end required dau" value="{{ getTimeStringValue('monday','end') | date:'HH:mm' }}" placeholder="" [disabled]="getTimeStringValue('monday','',1) == 'yes'">

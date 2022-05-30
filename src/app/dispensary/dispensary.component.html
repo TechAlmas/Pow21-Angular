@@ -10,7 +10,7 @@
                         <h4 class="modal-title" id="myModalLabel">Claim your listing now!</h4>
                         <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
                     </div>
-                    <div class="modal-body">  
+                    <div class="modal-body" *ngIf="this.globals.user_data">  
                           	<div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">First Name</label>
@@ -68,7 +68,13 @@
 
 							
                     </div>
-                    <div class="modal-footer">                        
+					<div class="modal-body" *ngIf="!this.globals.user_data">
+						To claim the store <span *ngIf="!this.globals.user_data"><a routerLink="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a routerLink="/register">Signup</a></span>.
+						
+								   
+									
+					</div>
+                    <div class="modal-footer"  *ngIf="this.globals.user_data">                        
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
                     </div>
@@ -115,10 +121,8 @@
 				   
 						   <div class="col-md-6 spaccing_products">
 							   <div class="claim_listings">
-								   <span *ngIf="this.globals.user_data">|&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
-								   <span *ngIf="!this.globals.user_data">&nbsp;<a routerLink="/login" >Login</a></span>
-								   <span *ngIf="!this.globals.user_data">|&nbsp;<a routerLink="/register">Signup</a></span>
-									
+								   <span>|&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
+								   
 								
 								
 									

@@ -262,6 +262,10 @@ z-index: 1;
     background-position-y: center;
     text-transform: capitalize; */
 }
+.col.product-image.Verified .claim_listings {
+    display: none;
+}
+
 .dispensary.single-product .product .col.product-image.Pending:before{
     content: '';
     background: url(/assets/images/icon-verified-pending.png);
@@ -274,12 +278,8 @@ z-index: 1;
     left: 15px;
     z-index: 1;
 }
-
-.col.product-image.Verified .claim_listings {
-    display: none;
-}
 .dispensary.single-product .product .col.product-image.Pending:after{
-    content: 'verified';
+    content: 'pending';
     position: absolute;
     top: 0;
     left: 32px;
@@ -294,7 +294,9 @@ z-index: 1;
     z-index: 0;
     
 }
-
+.col.product-image.Pending .claim_listings {
+    display: none;
+}
 
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{

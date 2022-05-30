@@ -212,6 +212,12 @@ a.btn.contactus {
     display: inline-block;
     font-size: 18px;
 }
+.single-product .product .product-info .product-description p {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Lato';
+    color: #555555;
+}
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;

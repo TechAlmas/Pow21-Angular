@@ -11,6 +11,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { DispDetail } from '../../models/disp-detail';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { $ } from 'protractor';
 
 declare var toastr: any;
 declare var jQuery: any;
@@ -343,6 +344,16 @@ export class BusinessEditComponent implements OnInit {
 		// 	'file': this.file
 		// }
 		// console.log(this.file);
+		let error = 0;
+		jQuery('.image-container').parent('.whitebgs').find('.customError').remove();
+		jQuery('.honeyInput').each(function(){
+			if(jQuery(this).val() != '' ){
+				var element = '<p class="customError" style="color:red">Something Went Wrong.</p>';
+				jQuery(element).insertAfter(jQuery('.image-container'));
+				error++;
+				return false;
+			}
+		});
 		const formData = new FormData();
 		jQuery.each(this.file, function(index,value){
 			formData.append('file[]', value);
@@ -404,10 +415,44 @@ export class BusinessEditComponent implements OnInit {
 		formData.append('schedule',JSON.stringify(scheduleObj));
 
     	//console.log(formData);
-		this.updateStoreDetails(formData).subscribe(
-			data =>{
-				if(data["api_message"] == "success"){
-					toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, Your store '"+name+"' updated successfully", "", {
+		if(error == 0){
+			
+			this.updateStoreDetails(formData).subscribe(
+				data =>{
+					if(data["api_message"] == "success"){
+						toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, Your store '"+name+"' updated successfully", "", {
+							"closeButton": true,
+							"timeOut": "7000",
+							"extendedTImeout": "0",
+							"showDuration": "300",
+							"hideDuration": "1000",
+							"extendedTimeOut": "0",
+							"showEasing": "swing",
+							"hideEasing": "linear",
+							"showMethod": "fadeIn",
+							"hideMethod": "fadeOut",
+							"positionClass": "toast-top-full-width",
+						});
+						jQuery('#add_edit_store').modal('hide');
+					}else{
+						toastr.error(data["api_message"], "", {
+							"closeButton": true,
+							"timeOut": "7000",
+							"extendedTImeout": "0",
+							"showDuration": "300",
+							"hideDuration": "1000",
+							"extendedTimeOut": "0",
+							"showEasing": "swing",
+							"hideEasing": "linear",
+							"showMethod": "fadeIn",
+							"hideMethod": "fadeOut",
+							"positionClass": "toast-top-full-width",
+						});
+						//jQuery('#add_edit_store').modal('hide');
+					}
+				},
+				(err) => {
+					toastr.danger(err.message, "", {
 						"closeButton": true,
 						"timeOut": "7000",
 						"extendedTImeout": "0",
@@ -420,41 +465,10 @@ export class BusinessEditComponent implements OnInit {
 						"hideMethod": "fadeOut",
 						"positionClass": "toast-top-full-width",
 					});
-					jQuery('#add_edit_store').modal('hide');
-				}else{
-					toastr.error(data["api_message"], "", {
-						"closeButton": true,
-						"timeOut": "7000",
-						"extendedTImeout": "0",
-						"showDuration": "300",
-						"hideDuration": "1000",
-						"extendedTimeOut": "0",
-						"showEasing": "swing",
-						"hideEasing": "linear",
-						"showMethod": "fadeIn",
-						"hideMethod": "fadeOut",
-						"positionClass": "toast-top-full-width",
-					});
-					//jQuery('#add_edit_store').modal('hide');
+					console.log(err.message);
 				}
-			},
-			(err) => {
-				toastr.danger(err.message, "", {
-					"closeButton": true,
-					"timeOut": "7000",
-					"extendedTImeout": "0",
-					"showDuration": "300",
-					"hideDuration": "1000",
-					"extendedTimeOut": "0",
-					"showEasing": "swing",
-					"hideEasing": "linear",
-					"showMethod": "fadeIn",
-					"hideMethod": "fadeOut",
-					"positionClass": "toast-top-full-width",
-				});
-				console.log(err.message);
-			}
-		);
+			);
+		}
 	}
 	getTimeValue(day){
 		if(jQuery('#'+day+"_start").val() != undefined && jQuery('#'+day+"_end").val() != undefined && jQuery('#'+day+"_start").val() && jQuery('#'+day+"_end").val() && jQuery('#'+day+"_close").prop('checked') == false){

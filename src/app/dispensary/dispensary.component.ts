@@ -54,7 +54,7 @@ export class DispensaryComponent implements OnInit {
   fav_disp= new Favdispensary();
   followed: string;
   isUserReviewed: any;
-
+  isUserLoggedIn= false;
 
 
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
@@ -62,10 +62,11 @@ export class DispensaryComponent implements OnInit {
   ngOnInit() {
 
   this.route.params.subscribe(params => {
-    console.log(this.cookieService.get('_mio_user_email'))
+
         this.user_data = JSON.parse(localStorage.getItem('userData'));
          if(this.user_data && this.user_data['email']){
            this.checkUser = true;
+           this.isUserLoggedIn = true;
           }
           else if(this.cookieService.get('_mio_user_email') && this.cookieService.get('_mio_user_email') != ""){
             this.checkUser = true;
@@ -81,7 +82,6 @@ export class DispensaryComponent implements OnInit {
                 this.getDispensaryDetail(params['dispName']);
               }
           	}
-
 
   		});
 

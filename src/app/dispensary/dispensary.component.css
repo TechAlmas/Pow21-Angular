@@ -224,6 +224,19 @@ span.write-a-review {
     font-family: 'Lato';
     color: #555555;
 }
+.single-product .product .product-info .product-name h1 {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-size: 26px;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: normal;
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 110px);
+    font-family: 'Lato';
+}
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;

@@ -201,6 +201,16 @@ img.img-responsive1 {
     width: 0;
     z-index: -1;
 }
+.postBtn{
+    padding: 10px 20px;
+    color: #fff;
+    background: #08c;
+    border-color: #08c;
+    margin-right: 15px;
+}
+.postBtn:not(:disabled):not(.disabled){
+    cursor: pointer;
+}
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;

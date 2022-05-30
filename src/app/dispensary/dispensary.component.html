@@ -324,6 +324,7 @@
 		<div class="review-detail">	
 			<div class="col-left">
 				<p style="padding-top: 5px;">Have you tried {{dispDetails.name}} before? Share your opinion and experience below to help other cannabis consumers determine if this  dispensary is the right choice</p>
+				<p *ngIf = "isUserReviewed == 1">Your review has already been submitted and pending review. Once approved, you will see it here.</p>
 			</div>
 
 			<div class="review-head">
@@ -408,12 +409,12 @@
 												</div>
 											</div>
 											<div class="form-group text-center">
-												<button class="btn">Post Comment</button>
-												<button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button>
+												<button class="btn postBtn">Post Comment</button>
+												<!-- <button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button> -->
 
 											</div>
 										</div>
-
+ 
 									</form>
 								</div>
 							</div>

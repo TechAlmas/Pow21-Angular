@@ -299,7 +299,32 @@ z-index: 1;
 .col.product-image.Pending .claim_listings {
     display: none;
 }
-
+.tooltip-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    background: #ccc;
+    left: 0px;
+    top: 0px;
+    padding: 6px 15px;
+    margin: 0px;
+    width: 70%;
+    transition: 0.25s all ease;
+    transition-delay: 0.25s;
+    z-index: 2;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.1875rem;
+    padding: 10px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 1px 3px;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: 'Lato';
+}
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;

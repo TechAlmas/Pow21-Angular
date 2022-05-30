@@ -2,7 +2,7 @@
 
 
 <div class="modal fade" id="myModal_paid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-   <form #claimListing="ngForm" (ngSubmit)="onClickSubmit(claimListing.value)">
+   <form #claimListing="ngForm" (ngSubmit)="onClickSubmit(claimListing.value)" autocomplete="off">
         <div class="modal-dialog">
             <div class="modal-body">
                 <div class="modal-content">
@@ -57,6 +57,7 @@
                                 <label for="paid-for-quality">Document</label>
                                   <input type = "file" (change)="this.onFilechange($event)" name="file" class="sm-form-control required fileInput"  ngModel multiple>
 								  <small id="fileHelp" class="form-text text-muted"> Include any non-private business documents that shows your company name and address. This will help speed up the approval process. Each file size should not be more than 5 MB</small>
+								  <small class="form-text text-muted">You can add multiple photos at one time by pressing 'cntrl' and selecting the photos.</small>
                             </div>
 
 							<!-- H o n e y p o t -->
@@ -97,7 +98,7 @@
 		</div>
 		<div class="single-product dispensary">
 			<div class="product row">
-				<div class="col product-image" *ngIf="this.image_disp">
+				<div class="col product-image {{this.dispDetails.claim_status}}" *ngIf="this.image_disp">
 					<div class="single_product">
 					   <div class="row">
 						   <div class="col-md-6 spaccing_products">
@@ -114,7 +115,13 @@
 				   
 						   <div class="col-md-6 spaccing_products">
 							   <div class="claim_listings">
-								   <span>|&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
+								   <span *ngIf="this.globals.user_data">|&nbsp;<a href="javascript:void(0)"  data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
+								   <span *ngIf="!this.globals.user_data">|
+									<a routerLink="/login" >Login</a>
+									</span>
+								   <span *ngIf="!this.globals.user_data">|
+									<a routerLink="/register" >Signup</a>
+								</span>
 							   </div>
 							</div>
 						</div>
@@ -291,7 +298,7 @@
 				   <h4  style="text-align:left;">Browser our store </h4>
 				  <div [ngClass]="first ? 'col-md-12 storemainimg' : 'col-md-4 storeimg' " *ngFor="let storeImage of dispDetails.store_images; let i =index; let first = first; let last = last;  ">
 					 <div class="columnimage" [ngClass]="first ? 'columnimage' : 'imagesthumb' ">
-						<a href="{{storeImage.link}}" attr.data-lightbox ="{{'image-'+i}}" class="popupimage"><img [ngClass]="first ?'img-responsive1' : 'img-responsive2' " src="{{storeImage.link}}"></a>
+						<a href="{{storeImage.link}}" data-lightbox ="store-image" class="popupimage"><img [ngClass]="first ?'img-responsive1' : 'img-responsive2' " src="{{storeImage.link}}"></a>
 					 </div>
 				  </div>
 				  <br/>

@@ -11,6 +11,8 @@ import { Meta, Title } from '@angular/platform-browser';
 import { DispDetail } from '../../models/disp-detail';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { $ } from 'protractor';
+import { strictEqual } from 'assert';
 
 declare var toastr: any;
 declare var jQuery: any;
@@ -295,6 +297,20 @@ export class BusinessEditComponent implements OnInit {
 				jQuery(element).insertAfter(jQuery('.fileInput').parent());
                 jQuery(".fileInput").val('');
                 return false;
+			}else{
+				
+				var reader:any,
+				target:EventTarget;
+				reader= new FileReader();
+
+				reader.onload = function (imgsrc) {
+					let url = imgsrc.target.result;
+					let html = 		'<div class="image-area mr-3" ><img src="'+url+'" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" (click)="this.removeStoreImage("")"></a></div>';
+
+					jQuery('.image-container').append(html); 
+				}
+				reader.readAsDataURL(file); 
+				 
 			}
         }
 		this.storeImages = event.target.files;

@@ -78,7 +78,6 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
     top: 0px;
     padding: 6px 15px;
     margin: 0px;
-    font-size: 15px;
     width: 70%;
     transition: 0.25s all ease;
     transition-delay: 0.25s;
@@ -88,6 +87,8 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
     border-radius: 0.1875rem;
     padding: 10px;
     box-shadow: rgb(0 0 0 / 20%) 0px 1px 3px;
+    font-size: 13px;
+    font-family: 'Lato';
 }
 .tooltip-contents h4{margin-bottom: 10px;}
 .tooltip-contents span{font-size: 13px;display: block;}

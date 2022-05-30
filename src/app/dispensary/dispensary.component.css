@@ -218,6 +218,12 @@ a.btn.contactus {
     font-family: 'Lato';
     color: #555555;
 }
+span.write-a-review {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Lato';
+    color: #555555;
+}
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;

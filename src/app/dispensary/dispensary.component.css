@@ -226,6 +226,7 @@ span.write-a-review {
 }
 .single-product .product .product-info .product-name h1 {
     font-family: 'Lato';
+    font-weight: 500;
 }
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{

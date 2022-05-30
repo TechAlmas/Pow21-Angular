@@ -13,11 +13,11 @@
 .single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 32px;font-size: 14px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 77%;height: auto;text-align: left;padding: 5px 30px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: center;background-position-y: center;text-transform: capitalize;}
 
 .blowimg{width: 85%;margin: 0 auto;}
-.location-icon i {font-size: 24px;color: #c91032;margin-right: 7px;vertical-align: middle;}
-.calling-icon i {font-size: 24px;transform: rotate(315deg);margin-right: 7px;vertical-align: middle;color: #000000;}
-.location-icon {margin: 10px 0;color: #1b88cc;font-size: 17px;vertical-align: middle;}
-.calling-icon {color: #000000;font-size: 17px;vertical-align: middle;}
-a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;}
+.location-icon i {font-size: 18px;color: #c91032;margin-right: 7px;vertical-align: middle;}
+.calling-icon i {font-size: 18px;transform: rotate(315deg);margin-right: 7px;vertical-align: middle;color: #000000;}
+.location-icon {margin: 10px 0;color: #1b88cc;font-size: 18px;vertical-align: middle;}
+.calling-icon {color: #000000;font-size: 18px;vertical-align: middle;}
+/* a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;} */
 .col.follow {flex: 0 0 16%;max-width: 16%;padding: 0;margin: auto 0;text-align: center;}
 .col.title {flex: 0 0 84%;max-width: 84%;padding: 0;}
 .tooltip-contentfollow {cursor: pointer;display: flex;flex-direction: column;align-items: center;justify-content: center;visibility: visible;opacity: 1;position: absolute;background: #2384bc;left: -9px;padding: 0px;margin-top: 2px;font-size: 15px;width: auto;/*transition: 0.25s all ease;transition-delay: 0.25s;*/z-index: 2;border-radius: 4px;top: -50px;padding: 5px 5px;}
@@ -200,6 +200,17 @@ img.img-responsive1 {
     height: 0;
     width: 0;
     z-index: -1;
+}
+a.btn.contactus {
+    padding: 7px 30px;
+    margin-top: 15px;
+    border-radius: 10px;
+    background: #0088cc;
+    width: auto;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 18px;
 }
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{

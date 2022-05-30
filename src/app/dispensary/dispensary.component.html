@@ -10,7 +10,7 @@
                         <h4 class="modal-title" id="myModalLabel">Claim your listing now!</h4>
                         <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
                     </div>
-                    <div class="modal-body">  
+                    <div class="modal-body" *ngIf="this.globals.user_data">  
                           	<div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">First Name</label>
@@ -68,7 +68,13 @@
 
 							
                     </div>
-                    <div class="modal-footer">                        
+					<div class="modal-body" *ngIf="!this.globals.user_data">
+						To claim the store <span *ngIf="!this.globals.user_data"><a class="claimModelLink" href="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a class="claimModelLink"  href="/register">Signup</a></span>.
+						
+								   
+									
+					</div>
+                    <div class="modal-footer"  *ngIf="this.globals.user_data">                        
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
                     </div>
@@ -98,8 +104,8 @@
 		</div>
 		<div class="single-product dispensary">
 			<div class="product row">
-				<div class="col product-image {{this.dispDetails.claim_status}}" *ngIf="this.image_disp">
-					<div class="single_product">
+				<div class="col product-image {{dispDetails.claim_status}}" *ngIf="this.image_disp">
+					<div class="single_product ">
 					   <div class="row">
 						   <div class="col-md-6 spaccing_products">
 							   <!-- <div class="claim_unverified">
@@ -115,13 +121,7 @@
 				   
 						   <div class="col-md-6 spaccing_products">
 							   <div class="claim_listings">
-								   <span *ngIf="this.globals.user_data">|&nbsp;<a href="javascript:void(0)"  data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
-								   <span *ngIf="!this.globals.user_data">|
-									<a routerLink="/login" >Login</a>
-									</span>
-								   <span *ngIf="!this.globals.user_data">|
-									<a routerLink="/register" >Signup</a>
-								</span>
+								   <span>|&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
 							   </div>
 							</div>
 						</div>
@@ -151,10 +151,15 @@
 						<div class="row">
 							<div class="col follow">
 								<!-- <span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span> -->
-								<div class="tooltip-contentfollow" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" (click)="followStore(dispDetails.disp_id)">
-	                <a class="headingfollowtooltip">
-	              	<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status"><br>Follow</span></a>
-	            	</div>
+								<div class="tooltip-contentfollow" *ngIf="this.globals.user_data"  [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" (click)="followStore(dispDetails.disp_id)">
+								<a class="headingfollowtooltip">
+								<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status"><br>Follow</span></a>
+								</div>
+
+								<div class="tooltip-contentfollow" *ngIf="!this.globals.user_data" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" >
+								<a class="headingfollowtooltip" routerLink="/login" target="_blank">
+								<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status"><br>Follow</span></a>
+								</div>
 							</div>
 							<div class="col title">
 								<div class="product-name">
@@ -331,6 +336,7 @@
 		<div class="review-detail">	
 			<div class="col-left">
 				<p style="padding-top: 5px;">Have you tried {{dispDetails.name}} before? Share your opinion and experience below to help other cannabis consumers determine if this  dispensary is the right choice</p>
+				<p *ngIf = "isUserReviewed == 1">Your review has already been submitted and pending review. Once approved, you will see it here.</p>
 			</div>
 
 			<div class="review-head">
@@ -387,8 +393,8 @@
 												</div>	
 											</div>
 
-											<div class="form-group" *ngIf="!this.checkUser">
-												<input type="email" name="email" [ngModel]="this.review.email" required #rEmail="ngModel" [pattern]="emailPattern" class="form-control" placeholder="Type your title here...">
+											<div class="form-group" *ngIf="!this.isUserLoggedIn">
+												<input type="email" name="email" [ngModel]="this.review.email" required #rEmail="ngModel" [pattern]="emailPattern" class="form-control" placeholder="Type your email here">
 												<div *ngIf="rEmail.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
 													<div *ngIf="rEmail.errors.required"> 
 														Please provide your email
@@ -415,12 +421,12 @@
 												</div>
 											</div>
 											<div class="form-group text-center">
-												<button class="btn">Post Comment</button>
-												<button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button>
+												<button class="btn postBtn">Post Comment</button>
+												<!-- <button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button> -->
 
 											</div>
 										</div>
-
+ 
 									</form>
 								</div>
 							</div>

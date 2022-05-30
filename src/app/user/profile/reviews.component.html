@@ -18,20 +18,21 @@
                      <thead>
                         <tr>                           
                            <th>Strain</th>
+                           <th>Rating</th>
                            <th>Review</th>
                            <th>Status</th>
-                           <th>Action</th>
+                           <th>Action</th> 
                         </tr>
                      </thead>  
                      <tbody>
                         <tr *ngFor="let rv of reviews">
                            <td>{{rv.strain_name}}<br/><span style="font-size: 11px;">{{rv.created_at | date: 'MMM d, y'}}</span></td>
                            <td>
-                            <!-- <p class="review" style="width: 50%;">  
-                              <span class="rating-wrap" *ngIf="{'width': (rv.rating*100)/5+'%'}; let variable">
-                                <span class="rating" [ngStyle]="variable"></span>
-                              </span>
-                            </p>    -->
+                              {{rv.rating}}
+                           </td>
+
+                           <td>
+                            
                             <span>{{rv.message.substring(0,40)}}
                               <span id="dots1_{{rv.id}}"></span>
                               <span id="more1_{{rv.id}}" style="display: none">{{rv.message.substring(40)}}</span>
@@ -40,8 +41,7 @@
                             </td>       
                            <td *ngIf="rv.status == 0">Pending review</td>
                            <td *ngIf="rv.status == 1">Published</td>
-                           <td *ngIf="rv.status == 0"><!-- <span class="row"><a title="Remove Your Review" href="javascript:void(0)" (click) = "removeReview(rv.id,rv.strain_name)" class="col-sm-6"><i class="icon-minus remove" style=""></i></a><a href="javascript:void(0);" (click)="getReviewdetail(rv.id)" data-toggle="modal" data-target="#myModal_fav" class="col-sm-6"><i class="i-plain i-medium icon-edit"></i></a></span> --><i class="fa fa-times"></i></td>
-                           <td *ngIf="rv.status == 1"><a title="unpublish your review" href="javascript:void(0)" (click)="unpublishreview(rv.id,rv.strain_name)"><i class="fa fa-check" ></i></a></td>
+                           <td><a title="Remove your review" href="javascript:void(0)" (click)="removereview(rv.id,rv.strain_name)"><i class="fa fa-trash" ></i></a></td>
 
                         </tr>
                      </tbody>                   
@@ -61,6 +61,7 @@
                      <thead>
                         <tr>                           
                            <th>Dispensary</th>
+                           <th>Rating</th>
                            <th>Review</th>
                            <th>Status</th>
                            <th>Action</th>
@@ -69,12 +70,14 @@
                      <tbody>
                         <tr *ngFor="let disp of dispreviews">
                            <td>{{disp.disp_name}}<br/><span style="font-size: 11px;">{{disp.created_at | date: 'MMM d, y'}}</span></td>
+                           <td>
+                              {{disp.rating}}
+                           </td>
                            <td width="40%"><span>{{disp.message.substring(0,40)}}<span id="dots_{{disp.id}}"></span><span id="more_{{disp.id}}" style="display: none">{{disp.message.substring(40)}}</span></span><a href="Javascript:void(0)" (click) = "readmoredisp(disp.id)" id="myBtn_{{disp.id}}" *ngIf="disp.message.length>40" >...Read more</a></td>       
                            <td *ngIf="disp.status == 0">Pending review</td>
                            <td *ngIf="disp.status == 1">Published</td>
-                           <td *ngIf="disp.status == 0"><!-- <span class="row"><a title="Remove Your Review" href="javascript:void(0)" (click) = "removedispReview(disp.id,disp.disp_name)" class="col-sm-6"><i class="icon-minus remove" style=""></i></a><a href="javascript:void(0);" (click)="getdispReviewdetail(disp.id)" data-toggle="modal" data-target="#myModal_fav1" class="col-sm-6"><i class="i-plain i-medium icon-edit"></i></a></span> --><i class="fa fa-times"></i></td>
-                           <td *ngIf="disp.disp_name.status == 1"><i class="fa fa-check" style=""></i></td>
-                           <td *ngIf="disp.status == 1"><a title="unpublish your review" href="javascript:void(0)" (click)="unpublishdispreview(disp.id,disp.disp_name)"><i class="fa fa-check" ></i></a></td>
+                           <td><a title="Remove your review" href="javascript:void(0)" (click)="removedispreview(disp.id,disp.disp_name)"><i class="fa fa-trash" ></i></a></td>
+                         
                         </tr>
                      </tbody>                   
                   </table>

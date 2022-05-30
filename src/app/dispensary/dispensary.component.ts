@@ -53,7 +53,8 @@ export class DispensaryComponent implements OnInit {
   file: any;
   fav_disp= new Favdispensary();
   followed: string;
-
+  isUserReviewed: any;
+  isUserLoggedIn= false;
 
 
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
@@ -65,6 +66,7 @@ export class DispensaryComponent implements OnInit {
         this.user_data = JSON.parse(localStorage.getItem('userData'));
          if(this.user_data && this.user_data['email']){
            this.checkUser = true;
+           this.isUserLoggedIn = true;
           }
           else if(this.cookieService.get('_mio_user_email') && this.cookieService.get('_mio_user_email') != ""){
             this.checkUser = true;
@@ -81,8 +83,15 @@ export class DispensaryComponent implements OnInit {
               }
           	}
 
-
   		});
+
+      jQuery(document).on('click','.claimModelLink',function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        let url = jQuery(this).attr('href');
+        window.open(url,'_blank');
+        jQuery('#myModal_paid').modal('hide');
+      })
 
         //Phone number masking code
 
@@ -159,6 +168,7 @@ getDispensaryDetail(disp_slug)
         //1353 E 41st Ave, Vancouver, BC V5W 3R8, Canada
         this.schedule = JSON.parse(this.dispDetails.schedule); 
         //console.log(this.dispDetails.state.replace(/\s/g, "-"));
+        this.isUserReviewed = data['is_user_reviewed'];
 
       }),
       (err: any) => console.log(err),
@@ -411,7 +421,7 @@ onSubmitReviewForm(form: NgForm) {
             //console.log(this.review_id)
             this.review_id  = 0;
 
-            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome, the POW team has received ', "", {
+            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. ', "", {
              "closeButton": true,
               "timeOut": "8000",
               "extendedTImeout": "0",

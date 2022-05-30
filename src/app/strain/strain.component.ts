@@ -663,7 +663,7 @@ getStrainDetailData(strainName): Observable<any> {
       () => {              
           if(this.review_id > 0){
             this.review_id  = 0;
-            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome, the POW team has received your review for '+this.strainDetails["name"]+'. Once the team has reviewed and approved, your review will be published. <a href="/members/reviews">Manage Reviews</a>. ', "", {
+            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp; Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. <a href="/members/reviews">Manage Reviews</a>. ', "", {
              "closeButton": true,
               "timeOut": "8000",
               "extendedTImeout": "0",
@@ -715,7 +715,7 @@ getStrainDetailData(strainName): Observable<any> {
             this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
      this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
             this.review_id  = 0;
-            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome, the POW team has received your review for '+this.strainDetails["name"]+'. Once the team has reviewed and approved, your review will be published. <a href="/members/reviews">Manage Reviews</a>. ', "", {
+            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. <a href="/members/reviews">Manage Reviews</a>. ', "", {
              "closeButton": true,
               "timeOut": "8000",
               "extendedTImeout": "0",

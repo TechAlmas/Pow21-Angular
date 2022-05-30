@@ -69,7 +69,7 @@
 							
                     </div>
 					<div class="modal-body" *ngIf="!this.globals.user_data">
-						To claim the store <span *ngIf="!this.globals.user_data"><a routerLink="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a routerLink="/register">Signup</a></span>.
+						To claim the store <span *ngIf="!this.globals.user_data"><a class="claimModelLink" href="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a class="claimModelLink"  href="/register">Signup</a></span>.
 						
 								   
 									
@@ -162,7 +162,7 @@
 								</div>
 
 								<div class="tooltip-contentfollow" *ngIf="!this.globals.user_data" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" >
-								<a class="headingfollowtooltip" routerLink="/login">
+								<a class="headingfollowtooltip" routerLink="/login" target="_blank">
 								<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status"><br>Follow</span></a>
 								</div>
 							</div>

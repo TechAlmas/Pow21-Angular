@@ -85,6 +85,14 @@ export class DispensaryComponent implements OnInit {
 
   		});
 
+      jQuery(document).on('click','.claimModelLink',function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        let url = jQuery(this).attr('href');
+        window.open(url,'_blank');
+        jQuery('#myModal_paid').modal('hide');
+      })
+
         //Phone number masking code
 
         // $('#telnum').on('blur',function(){

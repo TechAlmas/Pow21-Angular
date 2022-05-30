@@ -13,8 +13,8 @@
 .single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 32px;font-size: 14px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 77%;height: auto;text-align: left;padding: 5px 30px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: center;background-position-y: center;text-transform: capitalize;}
 
 .blowimg{width: 85%;margin: 0 auto;}
-.location-icon i {font-size: 18px;color: #c91032;margin-right: 7px;vertical-align: middle;}
-.calling-icon i {font-size: 18px;transform: rotate(315deg);margin-right: 7px;vertical-align: middle;color: #000000;}
+.location-icon i {font-size: 16px;color: #c91032;margin-right: 7px;vertical-align: middle;}
+.calling-icon i {font-size: 16px;transform: rotate(315deg);margin-right: 7px;vertical-align: middle;color: #000000;}
 .location-icon {margin: 10px 0;color: #1b88cc;font-size: 18px;vertical-align: middle;}
 .calling-icon {color: #000000;font-size: 18px;vertical-align: middle;}
 /* a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;} */

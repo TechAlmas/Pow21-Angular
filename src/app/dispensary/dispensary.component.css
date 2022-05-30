@@ -256,11 +256,11 @@ z-index: 1;
     padding: 5px 30px;
     line-height: 1.6;
     z-index: 0;
-    background-image: url(/assets/images/question.svg);
+    /* background-image: url(/assets/images/question.svg);
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: center;
-    text-transform: capitalize;
+    text-transform: capitalize; */
 }
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{

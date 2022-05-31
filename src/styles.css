@@ -13374,3 +13374,6 @@ span.select2-selection.select2-selection--multiple:active {
 .select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
     border: 2px solid #AAA;
 }
+.select2-container--open .select2-dropdown {
+    margin-top: 0px;
+}

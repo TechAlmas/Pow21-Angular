@@ -20,9 +20,7 @@
     border-top: none;
 
 }
-span.select2.select2-container.select2-container--default.select2-container--focus {
-    float: right !important;
-}
+
 button.btn.btn-primary {
     height: 46px;
     width: 110px;

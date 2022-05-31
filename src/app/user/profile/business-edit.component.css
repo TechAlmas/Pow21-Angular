@@ -324,3 +324,7 @@ span.select2.select2-container.select2-container--default.select2-container--foc
     float: right;
     width: 81%;
 }
+
+.assign_user_cms {
+    float: right;
+}

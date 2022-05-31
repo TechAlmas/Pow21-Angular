@@ -13340,6 +13340,9 @@ input.select2-search__field {
     border-radius: 0 !important;
     transition: border-color ease-in-out .15s;
 }
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 2px solid #AAA;
+}
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
     box-sizing: border-box;
     list-style: none;

@@ -20,6 +20,10 @@ th.topspaccing {
     padding-top: 0px;
     padding-bottom: 20px;
 }
+tr td:nth-child(10) {
+    width: 10%;
+}
+
 th.trtopspaccings {
     padding-bottom: 0px;
 }

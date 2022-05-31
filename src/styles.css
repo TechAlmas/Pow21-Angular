@@ -13371,3 +13371,6 @@ span.select2-selection.select2-selection--multiple:active {
     color: #d6d6d6;
     padding-left: 10px;
 }
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+    border: 2px solid #AAA;
+}

@@ -33,7 +33,9 @@ i.fa.fa-pause {
 i.fa.fa-trash {
     font-size: 18px;
 }
-
+tr td:nth-child(9) {
+    width: 7%;
+}
 th.trtopspaccings {
     padding-bottom: 0px;
 }

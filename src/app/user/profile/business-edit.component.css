@@ -296,7 +296,7 @@ input#sunday_end {
   .togglebox {
     margin-top: -19px;
 }
-/* span.select2.select2-container.select2-container--default.select2-container--above {
+span.select2.select2-container.select2-container--default.select2-container--above {
     width: 81%;
     float: right;
 }
@@ -318,13 +318,4 @@ span.select2.select2-container {
 }
 span.select2.select2-container.select2-container--default.select2-container--focus {
     float: right !important;
-} */
-
-.store_meta_cms {
-    float: right;
-    width: 81%;
-}
-
-.assign_user_cms {
-    float: right;
 }

@@ -294,6 +294,12 @@ input#sunday_end {
   .togglebox {
     margin-top: -19px;
 }
+
+.cmsright {
+    float: right;
+}
+
+
 /* span.select2.select2-container.select2-container--default.select2-container--above {
     width: 81%;
     float: right;

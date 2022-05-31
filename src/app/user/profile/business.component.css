@@ -20,7 +20,7 @@ th.topspaccing {
     padding-top: 0px;
     padding-bottom: 20px;
 }
-tr td:nth-child(10) {
+/* tr td:nth-child(10) {
     width: 9%;
 }
 i.fa.fa-edit {
@@ -35,7 +35,7 @@ i.fa.fa-trash {
 }
 tr td:nth-child(9) {
     width: 7%;
-}
+} */
 th.trtopspaccings {
     padding-bottom: 0px;
 }

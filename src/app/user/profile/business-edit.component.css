@@ -296,3 +296,6 @@ span.select2.select2-container.select2-container--default.select2-container--abo
     width: 81%;
     float: right;
 }
+select#assign_user span.select2.select2-container.select2-container--default.select2-container--focus {
+    float: right;
+}

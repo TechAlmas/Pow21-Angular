@@ -305,3 +305,9 @@ select#assign_user span.select2.select2-container.select2-container--default.sel
 span.select2.select2-container {
     float: right;
 }
+span.select2.select2-container {
+    float: right;
+}
+.form-group.whitebgs.assign_user span.select2.select2-container {
+    float: right !important;
+}

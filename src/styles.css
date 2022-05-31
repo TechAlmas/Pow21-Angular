@@ -13354,7 +13354,10 @@ input.select2-search__field {
     border: 2px solid #DDD;
 	border-radius: 0px;
 }
-
+span.select2-selection.select2-selection--multiple:focus {
+    border: 2px solid #AAA;
+    outline: 0;
+}
 
 .form-group input::-webkit-input-placeholder {
     color: #d6d6d6;

@@ -303,31 +303,3 @@ span.select2.select2-container.select2-container--default.select2-container--abo
 select#assign_user span.select2.select2-container.select2-container--default.select2-container--focus {
     float: right;
 }
-span.select2.select2-container {
-    float: right;
-}
-span.select2.select2-container {
-    float: right;
-}
-/* .form-group.whitebgs.assign_user span.select2.select2-container {
-    float: right ;
-}
-
-.image-container.cmsright {
-    float: right;
-}
-span.select2.select2-container.select2-container--default.select2-container--focus {
-    float: right;
-}
-
-span.select2-selection.select2-selection--multiple {
-    width: 90%;
-    float: right;
-}
-
-.select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: solid black 1px;
-    outline: 0;
-    float: right;
-    width: 95%;
-} */

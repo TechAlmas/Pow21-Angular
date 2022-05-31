@@ -14,6 +14,9 @@ import { DatePipe } from '@angular/common';
 import { $ } from 'protractor';
 
 
+
+
+
 declare var toastr: any;
 declare var jQuery: any;
 declare var Swal: any;
@@ -39,6 +42,7 @@ export class BusinessEditComponent implements OnInit {
 	slug: any;
 	storeImages: any;
 	removedImages : any;
+
 
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
@@ -83,6 +87,17 @@ export class BusinessEditComponent implements OnInit {
 			allowClear: true,
 			tags: true // создает новые опции на лету
 		});
+
+		jQuery(document).on('change','.isThumbnail',function(){
+			jQuery('.fileInput').parent().next('.customError').remove();
+			if(jQuery('.isThumbnail:checked').length > 1){
+				
+				var element = '<p class="customError" style="color:red">Only one image can be selected as thumbnail image.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').parent());
+				jQuery(this).prop('checked',false);
+				return false;
+			}
+		})
 
 		
 	}
@@ -276,6 +291,7 @@ export class BusinessEditComponent implements OnInit {
 	// 	con
 	// }
 	onStoreImagesUpload(event:any){
+		let dispId =  this.dispDetails.id;
 		jQuery('.fileInput').parent().next('.customError').remove();
 		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
 
@@ -305,7 +321,9 @@ export class BusinessEditComponent implements OnInit {
 
 				reader.onload = function (imgsrc) {
 					let url = imgsrc.target.result;
-					let html = 		'<div class="image-area mr-3" ><img src="'+url+'" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" (click)="this.removeStoreImage("")"></a></div>';
+					
+					let fileName =dispId+"-"+file.name;
+					let html = 		'<div class="image-area mr-3" ><img src="'+url+'" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" name="'+fileName+'" (click)="this.removeStoreImage("")"></a><label class="toggle"><div class="togglebox"><input type="checkbox" name="is_thumbnail" value="'+fileName+'" class="form-control isThumbnail" ><div class="slide-toggle"></div><div class="slide-toggle-content text-white">Thumbnail</div></div></label></div>';
 
 					jQuery('.image-container').append(html); 
 				}
@@ -317,6 +335,8 @@ export class BusinessEditComponent implements OnInit {
 		
 
 	}
+	
+	
 	checkStoreMetaSelectStatus(value){
 		if(Array.isArray(this.store_meta) && this.store_meta !=undefined ){
 
@@ -397,6 +417,13 @@ export class BusinessEditComponent implements OnInit {
 				formData.append('removed_images[]', value);
 			});
 		}
+		if(jQuery('.isThumbnail:checked').val() != undefined){
+
+			formData.append('store_thumbnail_image', jQuery('.isThumbnail:checked').val());
+		}else{
+			formData.append('store_thumbnail_image', '');
+		}
+
 		let storeMetaValues = jQuery('select[name=store_meta]').val();
 		if(storeMetaValues != undefined && storeMetaValues != null){
 			jQuery.each(storeMetaValues, function(index,value){

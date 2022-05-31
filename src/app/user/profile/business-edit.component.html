@@ -237,7 +237,12 @@
 
 											<div class="image-area mr-3" *ngFor="let storeImage of dispDetails.store_images">
 												<img src="{{storeImage.link}}" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" data-name="{{storeImage.name}}" style="display: inline;" (click)="this.removeStoreImage(storeImage.name)">&#215;</a>
-												
+												<label class="toggle">
+													<div class="togglebox">
+													<input type="checkbox" name="is_thumbnail" value="{{storeImage.name}}" class="form-control isThumbnail" [checked]="storeImage.name == dispDetails.store_thumbnail_image" >
+													<div class="slide-toggle"></div>
+													<div class="slide-toggle-content text-white">Thumbnail</div></div>
+												</label>												
 											</div>
 										</div>
 									</div>

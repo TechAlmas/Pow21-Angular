@@ -215,7 +215,6 @@ img.img-responsive1 {
     cursor: pointer;
 }
 a.btn.contactus {
-    padding: 7px 30px;
     margin-top: 15px;
     border-radius: 10px;
     background: #0088cc;
@@ -224,6 +223,11 @@ a.btn.contactus {
     font-weight: bold;
     display: inline-block;
     font-size: 14px;
+    background: #08c;
+    border-color: #08c;
+    padding: 0.725rem 1.75rem 0.825rem;
+    line-height: normal;
+    color: #fff;
 }
 .single-product .product .product-info .product-description p {
     font-size: 16px;

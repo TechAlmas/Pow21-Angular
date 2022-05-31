@@ -325,3 +325,9 @@ span.select2-selection.select2-selection--multiple {
     float: right;
 }
 
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: solid black 1px;
+    outline: 0;
+    float: right;
+    width: 95%;
+}

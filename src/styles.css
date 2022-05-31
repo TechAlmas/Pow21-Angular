@@ -13359,6 +13359,10 @@ span.select2-selection.select2-selection--multiple--focus {
     border: 2px solid #AAA;
     outline: 0;
 }
+.select2-container--default.select2-container--active .select2-selection--multiple {
+    border: 2px solid #AAA;
+    outline: 0;
+}
 span.select2-selection.select2-selection--multiple:active {
     border: 2px solid #AAA;
     outline: 0;

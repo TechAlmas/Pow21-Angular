@@ -207,7 +207,7 @@
 										<label for="paid-for-quality">Store Meta</label>
 										<select class="js-select2 sm-form-control cmsspaccing" name="store_meta" multiple="multiple" >
 											<option value="">Store Meta</option>
-											<option *ngFor="let storeMeta of dispDetails.store_meta_dropdown"class="cmsspaccing" value="{{storeMeta.id}}" [selected]="checkStoreMetaSelectStatus(storeMeta.id) == 'yes'" >{{storeMeta.title}}</option>
+											<option *ngFor="let storeMeta of dispDetails.store_meta_dropdown" value="{{storeMeta.id}}" [selected]="checkStoreMetaSelectStatus(storeMeta.id) == 'yes'" >{{storeMeta.title}}</option>
 											
 										</select>
 										<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->

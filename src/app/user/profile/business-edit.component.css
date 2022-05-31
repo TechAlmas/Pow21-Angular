@@ -309,7 +309,7 @@ span.select2.select2-container {
 span.select2.select2-container {
     float: right;
 }
-.form-group.whitebgs.assign_user span.select2.select2-container {
+/* .form-group.whitebgs.assign_user span.select2.select2-container {
     float: right ;
 }
 
@@ -330,4 +330,4 @@ span.select2-selection.select2-selection--multiple {
     outline: 0;
     float: right;
     width: 95%;
-}
+} */

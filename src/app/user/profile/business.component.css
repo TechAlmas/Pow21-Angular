@@ -24,14 +24,14 @@ tr td:nth-child(10) {
     width: 9%;
 }
 i.fa.fa-edit {
-    font-size: 18px;
+    font-size: 16px;
 }
 i.fa.fa-pause {
-    font-size: 18px;
-    padding: 0px 5px;
+    font-size: 16px;
+    padding: 0px 4px;
 }
 i.fa.fa-trash {
-    font-size: 18px;
+    font-size: 16px;
 }
 tr td:nth-child(9) {
     width: 7%;

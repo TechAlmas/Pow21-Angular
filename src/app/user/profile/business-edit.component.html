@@ -213,7 +213,9 @@
 									</div>
 									<div _ngcontent-vgd-c4="" class="form-group whitebgs"><div _ngcontent-vgd-c4="" class=""></div>
 									<label _ngcontent-vgd-c4="" for="paid-for-quality">STORE META</label>
-									<input _ngcontent-vgd-c4="" class="sm-form-control phone required ng-untouched ng-pristine ng-valid" id="phone" name="phone" ngmodel="" placeholder="" type="Phone"></div>
+									<select id="assign_user" name="assign_user" class="sm-form-control assign_user js-select2 required" multiple="multiple">
+										<option *ngFor="let assignUser of dispDetails.assign_user_dropdown" value="{{assignUser.id}}" [selected]="checkAssignUserSelectStatus(assignUser.id) == 'yes'" >{{assignUser.name}}</option> 	
+									</select>
 									
 									<div class="form-group whitebgs">
 			                           <div class="" ></div>

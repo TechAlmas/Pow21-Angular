@@ -21,17 +21,17 @@ th.topspaccing {
     padding-bottom: 20px;
 }
 tr td:nth-child(10) {
-    width: 10%;
+    width: 9%;
 }
 i.fa.fa-edit {
-    font-size: 20px;
+    font-size: 18px;
 }
 i.fa.fa-pause {
-    font-size: 20px;
+    font-size: 18px;
     padding: 0px 5px;
 }
 i.fa.fa-trash {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 th.trtopspaccings {

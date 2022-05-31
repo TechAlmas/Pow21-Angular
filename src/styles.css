@@ -13352,5 +13352,7 @@ input.select2-search__field {
 }
 
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: 2px solid #DDD;
+    border-color: #AAA;
+    border: 2px solid;
+    padding-left: 15px;
 }

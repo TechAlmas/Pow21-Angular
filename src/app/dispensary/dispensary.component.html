@@ -389,7 +389,7 @@
 										</div>
 										<div class="review-form-body">
 											<h3>Review Guidelines</h3>
-											<div class="form-group" *ngIf="!this.checkUser">
+											<div class="form-group" *ngIf="!this.isUserLoggedIn">
 												<input name="name" [ngModel]="this.review.name" required #rName="ngModel" class="form-control" placeholder="Provide your name...">
 												<div *ngIf="rName.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
 													<div *ngIf="rName.errors.required"> 
@@ -399,7 +399,7 @@
 											</div>
 
 											<div class="form-group" *ngIf="!this.isUserLoggedIn">
-												<input type="email" name="email" [ngModel]="this.review.email" required #rEmail="ngModel" [pattern]="emailPattern" class="form-control" placeholder="Type your email here">
+												<input type="email" name="email" [ngModel]="this.review.email" required #rEmail="ngModel" [pattern]="emailPattern" class="form-control" placeholder="Add your email address. Helps us verify you're human">
 												<div *ngIf="rEmail.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
 													<div *ngIf="rEmail.errors.required"> 
 														Please provide your email
@@ -426,7 +426,7 @@
 												</div>
 											</div>
 											<div class="form-group text-center">
-												<button class="btn postBtn">Post Comment</button>
+												<button class="btn postBtn">Post Review</button>
 												<!-- <button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button> -->
 
 											</div>

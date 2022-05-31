@@ -20,6 +20,9 @@
     border-top: none;
 
 }
+.store_meta_cms {
+    float: right;
+}
 button.btn.btn-primary {
     height: 46px;
     width: 110px;

@@ -23,6 +23,16 @@ th.topspaccing {
 tr td:nth-child(10) {
     width: 10%;
 }
+i.fa.fa-edit {
+    font-size: 20px;
+}
+i.fa.fa-pause {
+    font-size: 20px;
+    padding: 0px 5px;
+}
+i.fa.fa-trash {
+    font-size: 20px;
+}
 
 th.trtopspaccings {
     padding-bottom: 0px;

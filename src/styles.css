@@ -13349,7 +13349,7 @@ input.select2-search__field {
 }
 .select2-container--default.select2-container .select2-selection--multiple {
     border: 2px solid #DDD;
-	border-radius: none;
+	border-radius: 0px;
 }
 
 .select2-container--default.select2-container--focus {

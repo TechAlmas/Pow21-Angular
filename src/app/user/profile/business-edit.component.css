@@ -332,7 +332,7 @@ span.select2-selection.select2-selection--multiple:focus {
 .statusst {
     display: inline-flex;
 }
-
-.form-group.whitebgs.store_meta {
+.store_meta {
+    display: inline-flex;
     padding-top: 10px;
 }

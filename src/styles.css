@@ -13321,7 +13321,6 @@ a.write-a-review{background: #08c; border-color: #08c; padding: 0.725rem 0.75rem
 }
 
 /* TB css */
-
 .select2.select2-container.select2-container--default.select2-container {
     float: right;
     width: 80% !important;
@@ -13379,7 +13378,7 @@ span.select2-selection.select2-selection--multiple:active {
 }
 .select2-dropdown {
     background-color: white;
-    border: 2px solid #ccc !important;
+    border: 2px solid #DDD !important;
     border-radius: 0px;
     box-sizing: border-box;
     display: block;

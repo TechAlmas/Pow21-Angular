@@ -203,8 +203,8 @@
 									</div>
 
 									<div class="form-group whitebgs store_meta">
-										<div class="" ></div>
-										<label for="paid-for-quality">Store Meta</label>
+										<div class="storetopcms" ></div>
+										<label for="paid-for-quality storelabel">Store Meta</label>
 										<select class="js-select2 sm-form-control cmsspaccing" name="store_meta" multiple="multiple" >
 											<option value="">Store Meta</option>
 											<option *ngFor="let storeMeta of dispDetails.store_meta_dropdown" value="{{storeMeta.id}}" [selected]="checkStoreMetaSelectStatus(storeMeta.id) == 'yes'" >{{storeMeta.title}}</option>

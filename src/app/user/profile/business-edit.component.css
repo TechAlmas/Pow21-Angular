@@ -336,9 +336,8 @@ span.select2-selection.select2-selection--multiple:focus {
     display: inline-flex;
     padding-top: 10px;
     width: 100%;
-    margin-left: 49px;
 }
 
 .store_meta label {
-    margin-right: 52px;
+    margin-right: 49px;
 }

@@ -327,3 +327,7 @@ span.select2-selection.select2-selection--multiple:focus {
     border: 2px solid #AAA;
     outline: 0;
 }
+
+.statusst {
+    display: inline-flex;
+}

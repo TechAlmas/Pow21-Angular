@@ -9494,6 +9494,7 @@ fieldset[disabled] .sm-form-control {
 	cursor: not-allowed;
 	background-color: #eeeeee;
 	opacity: 1;
+	color: #231F20;
 }
 
 .sm-form-control { height: auto; }

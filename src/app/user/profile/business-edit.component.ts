@@ -111,8 +111,19 @@ export class BusinessEditComponent implements OnInit {
 		const component = this;
 		jQuery(document).on('click','.remove-image',function(){
 			
+			
+			if(jQuery(this).parents('.image-container').length > 0){
+				console.log('store image remove')
+				component.addRemovedImagesToArray(jQuery(this).attr('name'));
+
+			}
+			if(jQuery(this).parents('.logo-container').length > 0){
+				component.file= '';
+				console.log('logo image remove')
+				jQuery('#file-upload').val('');
+
+			}
 			jQuery(this).parents('.image-area').remove();
-			component.addRemovedImagesToArray(jQuery(this).attr('name'));
 
 		});
 		
@@ -311,12 +322,39 @@ export class BusinessEditComponent implements OnInit {
 		});
 	}
 	onFilechange(event: any) {
-		this.file = event.target.files;
+		let dispId =  this.dispDetails.id;
+		jQuery('#file-upload').parent().next('.customError').remove();
+		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+		var file = event.target.files[0];
+		var fileType = file.type;
+		const fsize = event.target.files[0].size;
+		const fileSize = Math.round((fsize / 1024));
+		if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+				
+			var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+			jQuery(element).insertAfter(jQuery('#file-upload').parent());
+			jQuery('#file-upload').val('');
+			return false;
+		}else{
+				
+			var reader:any,
+			target:EventTarget;
+			reader= new FileReader();
+
+			reader.onload = function (imgsrc) {
+				let url = imgsrc.target.result;
+				
+				let fileName =dispId+"-"+file.name;
+				let html = 		'<div class="image-area mr-3" ><img src="'+url+'" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" ></a></div>';
+
+				jQuery('.logo-container').html(html); 
+			}
+			reader.readAsDataURL(file); 
+			 
+		}
+		this.file = event.target.files[0];
 	}
-	// onStoreMetaChange(event: any) {
-	// 	this.storeMeta = event.target.value;
-	// 	con
-	// }
+	
 	onStoreImagesUpload(event:any){
 		let dispId =  this.dispDetails.id;
 		jQuery('.fileInput').parent().next('.customError').remove();
@@ -417,10 +455,11 @@ export class BusinessEditComponent implements OnInit {
 			}
 		});
 		const formData = new FormData();
-		jQuery.each(this.file, function(index,value){
-			formData.append('file[]', value);
-		});
-		
+		if(this.file && this.file != undefined){
+
+			formData.append('file[]', this.file);
+		}
+	
 		jQuery.each(this.storeImages, function(index,value){
 			formData.append('store_images[]', value);
 		});

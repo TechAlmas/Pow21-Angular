@@ -13402,7 +13402,7 @@ span.select2-selection.select2-selection--multiple:active {
     box-sizing: border-box;
     list-style: none;
     margin: 0;
-    padding: 0 10px !important;
+    padding: 0 8px !important;
     width: 100%;
     height: 36px !important;
 }

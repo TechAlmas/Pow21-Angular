@@ -1,88 +1,170 @@
-
-
-
-<div class="modal fade" id="myModal_paid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-   <form #claimListing="ngForm" (ngSubmit)="onClickSubmit(claimListing.value)" autocomplete="off">
-        <div class="modal-dialog">
-            <div class="modal-body">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Claim your listing now!</h4>
-                        <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
-                    </div>
-                    <div class="modal-body" *ngIf="this.globals.user_data">  
-                          	<div class="form-group whitebgs">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">First Name</label>
-                                  <input type = "text" name = "fname" class="sm-form-control required customValidate" placeholder="Enter First Name" ngModel>
-                                <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+<div
+  class="modal fade"
+  id="myModal_paid"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
+  <form
+    #claimListing="ngForm"
+    (ngSubmit)="onClickSubmit(claimListing.value)"
+    autocomplete="off"
+  >
+    <div class="modal-dialog">
+      <div class="modal-body">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">
+              Claim your listing now!
+            </h4>
+            <button type="button" class="btn btn-close" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+          <div class="modal-body" *ngIf="this.globals.user_data">
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">First Name</label>
+              <input
+                type="text"
+                name="fname"
+                class="sm-form-control required customValidate"
+                placeholder="Enter First Name"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
-                            </div>
-                            <div class="form-group whitebgs">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Last Name</label>
-                                  <input type = "text" name = "lname" class="sm-form-control required customValidate" placeholder="Enter Last Name" ngModel>
-                                <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
-                                </div> -->
-                            </div>
-                            <div class="form-group whitebgs">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Telephone Number</label>
-								<input type="tel" name = "telnum" id="telnum" class="sm-form-control required customValidate masked-phone"  data-phonemask="(___)___-____" placeholder="Enter Telephone Number" ngModel  />
-                                <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
-                                </div> -->
-                            </div>
-                            <div class="form-group whitebgs">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Email Address</label>
-                                  <input type = "email" name = "email" class="sm-form-control required customValidate" placeholder="Enter Email Address" ngModel>
-                                <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
-                                </div> -->
-                            </div>
-                            <div class="form-group whitebgs">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Re Enter Email Address</label>
-                                  <input type = "email" name = "reemail" class="sm-form-control required customValidate" placeholder="Re Enter Email Address" ngModel>
-                                <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
-                                </div> -->
-                            </div>
-                            <div class="form-group whitebgs">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Comments</label>
-                                  <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->
-                                  <textarea name="notes" class="sm-form-control required customValidate" placeholder="Enter your comments to verify ownership"></textarea>
-                            </div>
-                            <div class="form-group whitebgs">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Document</label>
-                                  <input type = "file" (change)="this.onFilechange($event)" name="file" class="sm-form-control required fileInput"  ngModel multiple>
-								  <small id="fileHelp" class="form-text text-muted"> Include any non-private business documents that shows your company name and address. This will help speed up the approval process. Each file size should not be more than 5 MB</small>
-								  <small class="form-text text-muted">You can add multiple photos at one time by pressing 'cntrl' and selecting the photos.</small>
-                            </div>
-
-							<!-- H o n e y p o t -->
-							<label class="ohnohoney" for="claim_captcha_name"></label>
-							<input class="ohnohoney honeyInput" autocomplete="off" type="text" id="claim_captcha_name" name="claim_captcha_name" placeholder="Your name here">
-							<label class="ohnohoney" for="claim_captcha_email"></label>
-							<input class="ohnohoney honeyInput" autocomplete="off" type="email" id="claim_captcha_email" name="claim_captcha_email" placeholder="Your e-mail here">
-
-							
-                    </div>
-					<div class="modal-body" *ngIf="!this.globals.user_data">
-						To claim the store <span *ngIf="!this.globals.user_data"><a class="claimModelLink" href="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a class="claimModelLink"  href="/register">Signup</a></span>.
-						
-								   
-									
-					</div>
-                    <div class="modal-footer"  *ngIf="this.globals.user_data">                        
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
             </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Last Name</label>
+              <input
+                type="text"
+                name="lname"
+                class="sm-form-control required customValidate"
+                placeholder="Enter Last Name"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Telephone Number</label>
+              <input
+                type="tel"
+                name="telnum"
+                id="telnum"
+                class="sm-form-control required customValidate masked-phone"
+                data-phonemask="(___)___-____"
+                placeholder="Enter Telephone Number"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                class="sm-form-control required customValidate"
+                placeholder="Enter Email Address"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Re Enter Email Address</label>
+              <input
+                type="email"
+                name="reemail"
+                class="sm-form-control required customValidate"
+                placeholder="Re Enter Email Address"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Comments</label>
+              <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->
+              <textarea
+                name="notes"
+                class="sm-form-control required customValidate"
+                placeholder="Enter your comments to verify ownership"
+              ></textarea>
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Document</label>
+              <input
+                type="file"
+                (change)="this.onFilechange($event)"
+                name="file"
+                class="sm-form-control required fileInput"
+                ngModel
+                multiple
+              />
+              <small id="fileHelp" class="form-text text-muted">
+                Include any non-private business documents that shows your
+                company name and address. This will help speed up the approval
+                process. Each file size should not be more than 5 MB</small
+              >
+              <small class="form-text text-muted"
+                >You can add multiple photos at one time by pressing 'cntrl' and
+                selecting the photos.</small
+              >
+            </div>
+
+            <!-- H o n e y p o t -->
+            <label class="ohnohoney" for="claim_captcha_name"></label>
+            <input
+              class="ohnohoney honeyInput"
+              autocomplete="off"
+              type="text"
+              id="claim_captcha_name"
+              name="claim_captcha_name"
+              placeholder="Your name here"
+            />
+            <label class="ohnohoney" for="claim_captcha_email"></label>
+            <input
+              class="ohnohoney honeyInput"
+              autocomplete="off"
+              type="email"
+              id="claim_captcha_email"
+              name="claim_captcha_email"
+              placeholder="Your e-mail here"
+            />
+          </div>
+          <div class="modal-body" *ngIf="!this.globals.user_data">
+            To claim the store
+            <span *ngIf="!this.globals.user_data"
+              ><a class="claimModelLink" href="/login">Login</a></span
+            >
+            into account or
+            <span *ngIf="!this.globals.user_data"
+              ><a class="claimModelLink" href="/register">Signup</a></span
+            >.
+          </div>
+          <div class="modal-footer" *ngIf="this.globals.user_data">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-link" data-dismiss="modal">
+              Cancel
+            </button>
+          </div>
         </div>
-    </form>
-    <!-- <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(claimListing.value)" >
+      </div>
+    </div>
+  </form>
+  <!-- <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(claimListing.value)" >
 	   
 	   <br/>
 	   <input type = "password" name = "passwd" placeholder = "passwd" ngModel>
@@ -91,177 +173,320 @@
 	</form> -->
 </div>
 <div class="content-wrap product-content-wrap">
-	<!-- <h1 class="page-title-heading">{{strainDetails.name}}</h1> -->
-	<div class="container clearfix">
-		<div class="breadcrumbs">
-			<ol class="breadcrumb__list">
-				<li><a href="https://www.pow21.com/">Home</a> > </li>
-				<li><a href="https://www.pow21.com/{{dispDetails.country | lowercase}}/compare-price">{{dispDetails.country}}</a> > </li>
-				<li><a href="https://www.pow21.com/{{dispDetails.country | lowercase}}/{{this.dispState | lowercase}}/compare-price">{{dispDetails.state}}</a> > </li>
-				<li><a href="https://www.pow21.com/{{dispDetails.country | lowercase}}/{{this.dispState | lowercase}}/{{this.dispCity | lowercase}}/compare-price">{{dispDetails.city}}</a> > </li>
-				<li><a href="https://www.pow21.com/{{dispDetails.country | lowercase}}/{{dispDetails.slug}}">{{dispDetails.name}}</a></li>
-			</ol>
-		</div>
-		<div class="single-product dispensary">
-			<div class="product row">
-				<div class="col product-image {{dispDetails.claim_status}}" *ngIf="this.image_disp">
-					<div class="single_product ">
-					   <div class="row">
-						   <div class="col-md-6 spaccing_products">
-							   <!-- <div class="claim_unverified">
+  <!-- <h1 class="page-title-heading">{{strainDetails.name}}</h1> -->
+  <div class="container clearfix">
+    <div class="breadcrumbs" style="margin-bottom: 5rem">
+      <ol class="breadcrumb__list">
+        <li><a href="https://www.pow21.com/">Home</a> ></li>
+        <li>
+          <a
+            href="https://www.pow21.com/{{
+              dispDetails.country | lowercase
+            }}/compare-price"
+            >{{ dispDetails.country }}</a
+          >
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.pow21.com/{{ dispDetails.country | lowercase }}/{{
+              this.dispState | lowercase
+            }}/compare-price"
+            >{{ dispDetails.state }}</a
+          >
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.pow21.com/{{ dispDetails.country | lowercase }}/{{
+              this.dispState | lowercase
+            }}/{{ this.dispCity | lowercase }}/compare-price"
+            >{{ dispDetails.city }}</a
+          >
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.pow21.com/{{ dispDetails.country | lowercase }}/{{
+              dispDetails.slug
+            }}"
+            >{{ dispDetails.name }}</a
+          >
+        </li>
+      </ol>
+    </div>
+
+    <div class="single-product dispensary">
+      <div class="product row">
+        <div
+          class="col product-image {{ dispDetails.claim_status }}"
+          *ngIf="this.image_disp"
+        >
+          <div
+            class="follow"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+            "
+          >
+            <!-- <span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span> -->
+            <div
+              class="tooltip-contentfollow"
+              *ngIf="this.globals.user_data"
+              [ngClass]="!dispDetails.follow_status ? '' : 'user_follow'"
+              (click)="followStore(dispDetails.disp_id)"
+            >
+              <a class="headingfollowtooltip">
+                <div class="">
+                  <i class="fa fa-user"></i
+                  ><span class="count">{{ dispDetails.follow_count }}</span>
+                </div>
+                <div class="h-devider"></div>
+                <span class="nocount" *ngIf="!dispDetails.follow_status"
+                  >Follow</span
+                ></a
+              >
+            </div>
+
+            <div
+              class="tooltip-contentfollow"
+              *ngIf="!this.globals.user_data"
+              [ngClass]="!dispDetails.follow_status ? '' : 'user_follow'"
+            >
+              <a
+                class="headingfollowtooltip"
+                routerLink="/login"
+                target="_blank"
+              >
+                <div class="">
+                  <i class="fa fa-user"></i
+                  ><span class="count">{{ dispDetails.follow_count }}</span>
+                </div>
+                <span class="nocount" *ngIf="!dispDetails.follow_status"
+                  >Follow</span
+                ></a
+              >
+            </div>
+          </div>
+
+          <div class="single_product">
+            <div class="row">
+              <div class="col-md-6 spaccing_products">
+                <!-- <div class="claim_unverified">
 								   <span>Unverified</span>
 							   </div> -->
-						   </div>
-				   
-						   <!-- <div class="col-md-2 spaccing_products">
+              </div>
+
+              <!-- <div class="col-md-2 spaccing_products">
 							   <div class="claim_quetoimg">
 								   <img src="/assets/images/question.svg">
 							   </div>
 						   </div> -->
-				   
-						   <div class="col-md-6 spaccing_products">
-							   <div class="claim_listings">
-								   <span>|&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
-							   </div>
-							</div>
-						</div>
-					</div>
-					<!-- <div class="claim_listing">
+
+              <div class="col-md-6 spaccing_products">
+                <div class="claim_listings">
+                  <span
+                    >|&nbsp;<a
+                      href="javascript:void(0)"
+                      data-toggle="modal"
+                      data-target="#myModal_paid"
+                      >claim listing
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                      >
+                        <path
+                          d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM256 336c-18 0-32 14-32 32s13.1 32 32 32c17.1 0 32-14 32-32S273.1 336 256 336zM289.1 128h-51.1C199 128 168 159 168 198c0 13 11 24 24 24s24-11 24-24C216 186 225.1 176 237.1 176h51.1C301.1 176 312 186 312 198c0 8-4 14.1-11 18.1L244 251C236 256 232 264 232 272V288c0 13 11 24 24 24S280 301 280 288V286l45.1-28c21-13 34-36 34-60C360 159 329 128 289.1 128z"
+                        /></svg></a
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="claim_listing">
 					<span>| <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_paid">claim listing</a></span>
 				</div> -->
-			
-					<img  src="{{this.image_disp}}" alt="" draggable="false">
-					<section class="blowimg">
-						<div data-testid="listing-type" class="location-icon">
-							<i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-							<a href="{{this.mapUrl}}"target="_blank">Get directions</a>
-						</div>
-						<div data-testid="listing-type" class="calling-icon">
-							<i class="fa fa-phone-volume" aria-hidden="true"></i>
-							<span>{{dispDetails.phone}}</span>
-						</div>
-						<a _ngcontent-dpg-c4="" class="btn contactus" data-toggle="modal" data-target="#myModal_paid" href="javascript:void(0)">Contact US</a>
-						<br/>
-						<!-- <a href="{{this.image_disp}}" data-lightbox="image-1">Image #1</a>
-						<a href="{{this.image_disp}}" data-lightbox="image-1">Image #2</a> -->
-					</section>
-				</div>
-				<div class="col product-info">
-					<div class="container">
-						<div class="row">
-							<div class="col follow">
-								<!-- <span href="#" (click)="followStore(dispDetails.disp_id)">Follow</span> -->
-								<div class="tooltip-contentfollow" *ngIf="this.globals.user_data"  [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" (click)="followStore(dispDetails.disp_id)">
-								<a class="headingfollowtooltip">
-								<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status"><br>Follow</span></a>
-								</div>
 
-								<div class="tooltip-contentfollow" *ngIf="!this.globals.user_data" [ngClass]="(!dispDetails.follow_status) ? '':'user_follow'" >
-								<a class="headingfollowtooltip" routerLink="/login" target="_blank">
-								<i class="fa fa-user"></i><span class="count">{{dispDetails.follow_count}}</span> <span class="nocount" *ngIf="!dispDetails.follow_status"><br>Follow</span></a>
-								</div>
-							</div>
-							<div class="col title">
-								<div class="product-name">
-									<h1>{{dispDetails.name}} </h1>
-									
-								</div>
-								<!-- <div class="product-category-name">{{dispDetails.email}} </div> -->
-								<div class="product-review">  
-									<span class="review" *ngIf="dispDetails.ratings">
-										<span class="rating-wrap" *ngIf="{'width': (dispDetails.ratings*100)/5+'%'}; let variable">
-											<span class="rating" [ngStyle]="variable"></span>
-										</span>
-									</span>
-									<span class="write-a-review" *ngIf="dispDetails.reviews">
-										<span>{{dispDetails.ratings}}</span>
-										<a href="#"><span class="review-count" *ngIf="dispDetails.reviews"> ({{dispDetails.reviews}} reviews)</span></a>
-									</span>
-								</div>
-								<a href="javascript:void()" (click) = "linkClicked('reviews'); " class="experience"><i class="far fa-thumbs-up iconboxsizethumb"></i> share your experience</a>
-							</div>
-						</div>
-					</div>
-					<hr>
-						<!-- <div class="pos_effect">
+          <img src="{{ this.image_disp }}" alt="" draggable="false" />
+          <section class="blowimg">
+            <div data-testid="listing-type" class="location-icon">
+              <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
+              <a href="{{ this.mapUrl }}" target="_blank">Get directions</a>
+            </div>
+            <div data-testid="listing-type" class="calling-icon">
+              <i class="fa fa-phone-volume" aria-hidden="true"></i>
+              <span>{{ dispDetails.phone }}</span>
+            </div>
+            <a
+              _ngcontent-dpg-c4=""
+              class="contact-icon"
+              data-toggle="modal"
+              data-target="#myModal_paid"
+              href="javascript:void(0)"
+            >
+              <i class="fa fa-envelope"></i>
+              <span>Contact US</span></a
+            >
+            <br />
+            <!-- <a href="{{this.image_disp}}" data-lightbox="image-1">Image #1</a>
+						<a href="{{this.image_disp}}" data-lightbox="image-1">Image #2</a> -->
+          </section>
+        </div>
+        <div class="col product-info">
+          <div class="container">
+            <div class="row">
+              <div class="col title">
+                <div class="product-name">
+                  <h1>{{ dispDetails.name }}</h1>
+                </div>
+                <!-- <div class="product-category-name">{{dispDetails.email}} </div> -->
+                <div class="product-review">
+                  <span class="review" *ngIf="dispDetails.ratings">
+                    <span
+                      class="rating-wrap"
+                      *ngIf="
+                        { width: (dispDetails.ratings * 100) / 5 + '%' };
+                        let variable
+                      "
+                    >
+                      <span class="rating" [ngStyle]="variable"></span>
+                    </span>
+                  </span>
+                  <span class="write-a-review" *ngIf="dispDetails.reviews">
+                    <span>{{ dispDetails.ratings }}</span>
+                    <a href="#"
+                      ><span class="review-count" *ngIf="dispDetails.reviews">
+                        ({{ dispDetails.reviews }} reviews)</span
+                      ></a
+                    >
+                  </span>
+                </div>
+                <a
+                  href="javascript:void()"
+                  (click)="linkClicked('reviews')"
+                  class="experience"
+                  ><i class="far fa-thumbs-up iconboxsizethumb"></i> share your
+                  experience</a
+                >
+              </div>
+            </div>
+          </div>
+          <hr />
+          <!-- <div class="pos_effect">
 							<b style="font-size: 16px; margin-right: 10px;">Availability:</b>Coming soon
 						</div> -->
-						<div class="container">
-						<div class="row">
-							<div class="col retail-other-info">
-								<div role="button" tabindex="0" class="textcontant">
-									<i class="fa fa-archive iconboxsize" aria-hidden="true"></i>
+          <div class="container">
+            <div class="row">
+              <div class="col retail-other-info">
+                <div role="button" tabindex="0" class="textcontant">
+                  <i class="fa fa-archive iconboxsize" aria-hidden="true"></i>
 
-									<span class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH">Storefront</span>
-								</div>
-							</div>
-							<div class="col retail-other-info">
-								<div role="button" tabindex="0" class="textcontant">
-									<i class="fas fa-clock iconboxsize"></i>
-									<span color="#e3452a" class="header-info__OpenStatusLabel-sc-1heoxjr-5 Storefrontspace hlUpkp">Close</span><span class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH Storefrontspacecontant">untill  11:00pm </span>
-									<div id="tooltioicos">
-										<i class="fa fa-chevron-down iconboxcheck" aria-hidden="true"></i>
-									</div>
-									<div class="tooltip-mains">
-										<div class="tooltip-contents">
-											<!-- <div style="" role="tooltip" class="sc-iqHYmW cRsaJD">
+                  <span
+                    class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH"
+                    >Storefront</span
+                  >
+                </div>
+              </div>
+              <div class="col retail-other-info">
+                <div role="button" tabindex="0" class="textcontant">
+                  <i class="fas fa-clock iconboxsize"></i>
+                  <span
+                    color="#e3452a"
+                    class="header-info__OpenStatusLabel-sc-1heoxjr-5 Storefrontspace hlUpkp"
+                    >Close</span
+                  ><span
+                    class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH Storefrontspacecontant"
+                    >untill 11:00pm
+                  </span>
+                  <div id="tooltioicos">
+                    <i
+                      class="fa fa-chevron-down iconboxcheck"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                  <div class="tooltip-mains">
+                    <div class="tooltip-contents">
+                      <!-- <div style="" role="tooltip" class="sc-iqHYmW cRsaJD">
 												
 											</div> -->
-											<div class="col-full" *ngIf = "this.schedule">
-												<h4>Store schedule</h4>
-												<span>Monday: {{this.schedule['monday']}}</span>
-												<span>Tuesday: {{this.schedule['tuesday']}}</span>
-												<span>Wednesday: {{this.schedule['wednesday']}}</span>
-												<span>Thursday: {{this.schedule['thursday']}}</span>
-												<span>Friday: {{this.schedule['friday']}}</span>
-												<span>Saturday: {{this.schedule['saturday']}}</span>
-												<span>Sunday: {{this.schedule['sunday']}}</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col retail-other-info">
-								<div role="button" tabindex="0" class="textcontant">
-									<i class="fa fa-address-card iconboxsize" aria-hidden="true"></i>
+                      <div class="col-full" *ngIf="this.schedule">
+                        <h4>Store schedule</h4>
+                        <span>Monday: {{ this.schedule["monday"] }}</span>
+                        <span>Tuesday: {{ this.schedule["tuesday"] }}</span>
+                        <span>Wednesday: {{ this.schedule["wednesday"] }}</span>
+                        <span>Thursday: {{ this.schedule["thursday"] }}</span>
+                        <span>Friday: {{ this.schedule["friday"] }}</span>
+                        <span>Saturday: {{ this.schedule["saturday"] }}</span>
+                        <span>Sunday: {{ this.schedule["sunday"] }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col retail-other-info">
+                <div role="button" tabindex="0" class="textcontant">
+                  <i
+                    class="fa fa-address-card iconboxsize"
+                    aria-hidden="true"
+                  ></i>
 
-									<span class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH">Recreational</span>
-								
-									
-								</div>
-							</div>
-							<div class="col retail-other-info">
-								<div role="button" tabindex="0" class="textcontant">
-									<i class="fa fa-check-circle iconboxsize" aria-hidden="true"></i>
-									<span class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH Licensespace">License information</span>
-									<div id="tooltioicos">
-										<i class="fa fa-chevron-down iconboxcheck" aria-hidden="true"></i>
-									</div>
-									<div class="tooltip-mains">
-										<div class="tooltip-contents">
-											<!-- <div style="" role="tooltip" class="sc-iqHYmW cRsaJD">
+                  <span
+                    class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH"
+                    >Recreational</span
+                  >
+                </div>
+              </div>
+              <div class="col retail-other-info">
+                <div role="button" tabindex="0" class="textcontant">
+                  <i
+                    class="fa fa-check-circle iconboxsize"
+                    aria-hidden="true"
+                  ></i>
+                  <span
+                    class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH Licensespace"
+                    >License information</span
+                  >
+                  <div id="tooltioicos">
+                    <i
+                      class="fa fa-chevron-down iconboxcheck"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                  <div class="tooltip-mains">
+                    <div class="tooltip-contents">
+                      <!-- <div style="" role="tooltip" class="sc-iqHYmW cRsaJD">
 												
 											</div> -->
-											<div class="col-full" *ngIf = "this.schedule">
-												<div class="retailspace">	
-													<span>{{dispDetails.license_type}}</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col retail-other-info">
-								<div role="button" tabindex="0" class="textcontant">
-									<i class="fa fa-shopping-cart iconboxsize" aria-hidden="true"></i>
+                      <div class="col-full" *ngIf="this.schedule">
+                        <div class="retailspace">
+                          <span>{{ dispDetails.license_type }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col retail-other-info">
+                <div role="button" tabindex="0" class="textcontant">
+                  <i
+                    class="fa fa-shopping-cart iconboxsize"
+                    aria-hidden="true"
+                  ></i>
 
-									<span class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH">Order online (pickup)</span>
-								</div>
-							</div>
-							<br><br><br>
-						<div class="product-description" [innerHTML]="dispDetails.description"></div>
-					</div>
-				<!-- <div class="col product-extra-info">
+                  <span
+                    class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH"
+                    >Order online (pickup)</span
+                  >
+                </div>
+              </div>
+              <br /><br /><br />
+              <div
+                class="product-description"
+                [innerHTML]="dispDetails.description"
+              ></div>
+            </div>
+            <!-- <div class="col product-extra-info">
 					Is this your business?<br><a class="mt-1 btns" (click)="convertModel=true" data-toggle="modal" data-target="#myModal_paid" href="#">Claim this this listing</a>
 					<div class="card product-meta">
 						<h3>Store Address</h3>
@@ -291,24 +516,43 @@
 					<!-- <div class="track-price-change btn-wrap">
               <button >Claim Listing !</button>
           </div> --
-				</div> -->			
-			</div>					
-		</div>
-		<!-- images store section start -->
+				</div> -->
+          </div>
+        </div>
+        <!-- images store section start -->
 
-		<div class="col store-image">
-			<div class="container">
+        <div class="col store-image">
+          <div class="container">
+            <div class="row" *ngIf="dispDetails.store_images">
+              <h4 style="text-align: left">Browser our store</h4>
+              <div
+                [ngClass]="
+                  first ? 'col-md-12 storemainimg' : 'col-md-4 storeimg'
+                "
+                *ngFor="
+                  let storeImage of dispDetails.store_images;
+                  let i = index;
+                  let first = first;
+                  let last = last
+                "
+              >
+                <div
+                  class="columnimage"
+                  [ngClass]="first ? 'columnimage' : 'imagesthumb'"
+                >
+                  <a
+                    href="{{ storeImage.link }}"
+                    data-lightbox="store-image"
+                    class="popupimage"
+                    ><img
+                      [ngClass]="first ? 'img-responsive1' : 'img-responsive2'"
+                      src="{{ storeImage.link }}"
+                  /></a>
+                </div>
+              </div>
+              <br />
 
-				<div class="row" *ngIf="dispDetails.store_images ">
-				   <h4  style="text-align:left;">Browser our store </h4>
-				  <div [ngClass]="first ? 'col-md-12 storemainimg' : 'col-md-4 storeimg' " *ngFor="let storeImage of dispDetails.store_images; let i =index; let first = first; let last = last;  ">
-					 <div class="columnimage" [ngClass]="first ? 'columnimage' : 'imagesthumb' ">
-						<a href="{{storeImage.link}}" data-lightbox ="store-image" class="popupimage"><img [ngClass]="first ?'img-responsive1' : 'img-responsive2' " src="{{storeImage.link}}"></a>
-					 </div>
-				  </div>
-				  <br/>
-				 
-				  <!-- <div class="col-md-4 storeimg">
+              <!-- <div class="col-md-4 storeimg">
 					 <div class="imagesthumb">
 						<a href="http://via.placeholder.com/300x800/fefwf2/1.png" data-lightbox="image-1"class="popupimage"><img class="img-responsive2" src="http://via.placeholder.com/300x800/fefwf2/1.png"></a>
 					 </div>
@@ -323,112 +567,210 @@
 						<a href="https://via.placeholder.com/300x600/8398f4/4.png" data-lightbox="image-1"class="popupimage"><img class="img-responsive2" src="https://via.placeholder.com/300x600/8398f4/4.png"></a>
 					 </div>
 				  </div> -->
-			   </div>
+            </div>
 
-			   <div class="row" *ngIf="!dispDetails.store_images"><h4  style="text-align:left;">Browser our store </h4>
-				 <small style="text-align:center;">Sorry, no store images found. Please come back later! </small></div>
-			</div>
-		</div>
- <!-- image store section end -->
-<div id="reviews">
-	<div class="container">
-		<h2 class="tab-content-title review-title">Reviews & Experiences</h2>
-		<div class="review-detail">	
-			<div class="col-left">
-				<p style="padding-top: 5px;">Have you tried {{dispDetails.name}} before? Share your opinion and experience below to help other cannabis consumers determine if this  dispensary is the right choice</p>
-				<p *ngIf = "isUserReviewed == 1">Your review has already been submitted and pending review. Once approved, you will see it here.</p>
-			</div>
+            <div class="row" *ngIf="!dispDetails.store_images">
+              <h4 style="text-align: left">Browser our store</h4>
+              <small style="text-align: center"
+                >Sorry, no store images found. Please come back later!
+              </small>
+            </div>
+          </div>
+        </div>
+        <!-- image store section end -->
+        <div id="reviews">
+          <div class="container">
+            <h2 class="tab-content-title review-title">
+              Reviews & Experiences
+            </h2>
+            <div class="review-detail">
+              <div class="col-left">
+                <p style="padding-top: 5px">
+                  Have you tried {{ dispDetails.name }} before? Share your
+                  opinion and experience below to help other cannabis consumers
+                  determine if this dispensary is the right choice
+                </p>
+                <p *ngIf="isUserReviewed == 1">
+                  Your review has already been submitted and pending review.
+                  Once approved, you will see it here.
+                </p>
+              </div>
 
-			<div class="review-head">
-				<span class="rating" *ngIf="dispDetails.ratings">
-					<span class="total">{{dispDetails.ratings}}</span>
-					<span class="outof">
-						<span>out of 5.0</span>
-						<span class="review-wrap">
-							<span class="review" *ngIf="dispDetails.ratings">
-								<span class="rating-wrap" *ngIf="{'width': (dispDetails.ratings*100)/5+'%'}; let variable">
-									<span class="rating" [ngStyle]="variable"></span>
-								</span>
-							</span>
-									<!-- <span class="review">
+              <div class="review-head">
+                <span class="rating" *ngIf="dispDetails.ratings">
+                  <span class="total">{{ dispDetails.ratings }}</span>
+                  <span class="outof">
+                    <span>out of 5.0</span>
+                    <span class="review-wrap">
+                      <span class="review" *ngIf="dispDetails.ratings">
+                        <span
+                          class="rating-wrap"
+                          *ngIf="
+                            { width: (dispDetails.ratings * 100) / 5 + '%' };
+                            let variable
+                          "
+                        >
+                          <span class="rating" [ngStyle]="variable"></span>
+                        </span>
+                      </span>
+                      <!-- <span class="review">
 									        <span class="rating-wrap" style="width: 100%;">
 									        	<span class="rating" style="width: 100%;"></span>
 									        </span>
 									      </span> -->
-									      <span class="review-count" *ngIf="dispDetails.reviews">{{dispDetails.reviews}} reviews</span>
-									    </span>
-									  </span>
-									</span>
-									<a href="javascript:void(0)" (click) = "enableReviewForm();" class="btn write-a-review">Write a review</a> 
-								</div>
+                      <span class="review-count" *ngIf="dispDetails.reviews"
+                        >{{ dispDetails.reviews }} reviews</span
+                      >
+                    </span>
+                  </span>
+                </span>
+                <a
+                  href="javascript:void(0)"
+                  (click)="enableReviewForm()"
+                  class="btn write-a-review"
+                  >Write a review</a
+                >
+              </div>
 
-								<div class="Write-a-review-form" *ngIf="write_review">
-									<h3>Add Review</h3>
-									<form #reviewForm="ngForm" (ngSubmit)="onSubmitReviewForm(reviewForm)">
-										<div class="review-form-head">
-											<div class="left-col">
-												<h4>How Would you rate {{dispDetails.name}}?</h4>
-												<span class="review">
-													<input id="starrating" type="number" class="rating" min="1" max="5" data-size="sm" name="starrating">
-												</span>
-												<div *ngIf="rating_req" [ngClass] = "'error'"> 
-													<div *ngIf="rating_req"> 
-														Please select your rating
-													</div>
-												</div>
+              <div class="Write-a-review-form" *ngIf="write_review">
+                <h3>Add Review</h3>
+                <form
+                  #reviewForm="ngForm"
+                  (ngSubmit)="onSubmitReviewForm(reviewForm)"
+                >
+                  <div class="review-form-head">
+                    <div class="left-col">
+                      <h4>How Would you rate {{ dispDetails.name }}?</h4>
+                      <span class="review">
+                        <input
+                          id="starrating"
+                          type="number"
+                          class="rating"
+                          min="1"
+                          max="5"
+                          data-size="sm"
+                          name="starrating"
+                        />
+                      </span>
+                      <div *ngIf="rating_req" [ngClass]="'error'">
+                        <div *ngIf="rating_req">Please select your rating</div>
+                      </div>
+                    </div>
+                    <div class="right-col">
+                      <!-- <button class="btn outline-btn">Full Review</button> -->
+                    </div>
+                  </div>
+                  <div class="review-form-body">
+                    <h3>Review Guidelines</h3>
+                    <div class="form-group" *ngIf="!this.checkUser">
+                      <input
+                        name="name"
+                        [ngModel]="this.review.name"
+                        required
+                        #rName="ngModel"
+                        class="form-control"
+                        placeholder="Provide your name..."
+                      />
+                      <div
+                        *ngIf="
+                          rName.errors &&
+                          reviewForm.submitted &&
+                          !isValidFormSubmitted
+                        "
+                        [ngClass]="'error'"
+                      >
+                        <div *ngIf="rName.errors.required">
+                          Please provide your name
+                        </div>
+                      </div>
+                    </div>
 
-											</div>
-											<div class="right-col">
-												<!-- <button class="btn outline-btn">Full Review</button> -->
-											</div>
-										</div>
-										<div class="review-form-body">
-											<h3>Review Guidelines</h3>
-											<div class="form-group" *ngIf="!this.checkUser">
-												<input name="name" [ngModel]="this.review.name" required #rName="ngModel" class="form-control" placeholder="Provide your name...">
-												<div *ngIf="rName.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
-													<div *ngIf="rName.errors.required"> 
-														Please provide your name
-													</div>
-												</div>	
-											</div>
-
-											<div class="form-group" *ngIf="!this.isUserLoggedIn">
-												<input type="email" name="email" [ngModel]="this.review.email" required #rEmail="ngModel" [pattern]="emailPattern" class="form-control" placeholder="Type your email here">
-												<div *ngIf="rEmail.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
-													<div *ngIf="rEmail.errors.required"> 
-														Please provide your email
-													</div>
-													<div *ngIf="rEmail.errors.pattern"> 
-														Please enter valid email address
-													</div> 
-												</div>	
-											</div>
-											<div class="form-group">
-												<input type="text" name="title" [ngModel]="this.review.title" required #rTitle="ngModel" class="form-control" placeholder="Type your title here...">
-												<div *ngIf="rTitle.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
-													<div *ngIf="rTitle.errors.required"> 
-														Please provide review title
-													</div>
-												</div>	
-											</div>
-											<div class="form-group">
-												<textarea name="message" id="review_message" [ngModel]="this.review.message" required="true" cols="30" rows="4" class="form-control" #rMessage="ngModel" placeholder="Type your review here..."></textarea>
-												<div *ngIf="rMessage.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
-													<div *ngIf="rMessage.errors.required"> 
-														Please provide review description
-													</div>
-												</div>
-											</div>
-											<div class="form-group text-center">
-												<button class="btn postBtn">Post Comment</button>
-												<!-- <button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button> -->
-
-											</div>
-										</div>
- 
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
+                    <div class="form-group" *ngIf="!this.isUserLoggedIn">
+                      <input
+                        type="email"
+                        name="email"
+                        [ngModel]="this.review.email"
+                        required
+                        #rEmail="ngModel"
+                        [pattern]="emailPattern"
+                        class="form-control"
+                        placeholder="Type your email here"
+                      />
+                      <div
+                        *ngIf="
+                          rEmail.errors &&
+                          reviewForm.submitted &&
+                          !isValidFormSubmitted
+                        "
+                        [ngClass]="'error'"
+                      >
+                        <div *ngIf="rEmail.errors.required">
+                          Please provide your email
+                        </div>
+                        <div *ngIf="rEmail.errors.pattern">
+                          Please enter valid email address
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        name="title"
+                        [ngModel]="this.review.title"
+                        required
+                        #rTitle="ngModel"
+                        class="form-control"
+                        placeholder="Type your title here..."
+                      />
+                      <div
+                        *ngIf="
+                          rTitle.errors &&
+                          reviewForm.submitted &&
+                          !isValidFormSubmitted
+                        "
+                        [ngClass]="'error'"
+                      >
+                        <div *ngIf="rTitle.errors.required">
+                          Please provide review title
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <textarea
+                        name="message"
+                        id="review_message"
+                        [ngModel]="this.review.message"
+                        required="true"
+                        cols="30"
+                        rows="4"
+                        class="form-control"
+                        #rMessage="ngModel"
+                        placeholder="Type your review here..."
+                      ></textarea>
+                      <div
+                        *ngIf="
+                          rMessage.errors &&
+                          reviewForm.submitted &&
+                          !isValidFormSubmitted
+                        "
+                        [ngClass]="'error'"
+                      >
+                        <div *ngIf="rMessage.errors.required">
+                          Please provide review description
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group text-center">
+                      <button class="btn postBtn">Post Comment</button>
+                      <!-- <button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button> -->
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

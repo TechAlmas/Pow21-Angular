@@ -333,3 +333,6 @@ span.select2-selection.select2-selection--multiple:focus {
     display: inline-flex;
 }
 
+.form-group.whitebgs.store_meta {
+    display: inline;
+}

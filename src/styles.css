@@ -13325,6 +13325,7 @@ a.write-a-review{background: #08c; border-color: #08c; padding: 0.725rem 0.75rem
 .select2.select2-container.select2-container--default.select2-container {
     float: right;
     width: 80% !important;
+	margin-left: 50px;
 }
 input.select2-search__field {
     display: block;

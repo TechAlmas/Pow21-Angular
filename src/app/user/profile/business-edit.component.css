@@ -341,3 +341,8 @@ span.select2-selection.select2-selection--multiple:focus {
 .store_meta label {
     margin-right: 49px;
 }
+
+.radio-style-1-label:before, .radio-style-2-label:before, .radio-style-3-label:before {
+    border-radius: 50%;
+    vertical-align: middle;
+}

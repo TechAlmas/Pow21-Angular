@@ -1,7 +1,7 @@
 .dispensary.single-product .product .product-image {flex: 0 0 25%;max-width: 25%;overflow: revert;}
 .dispensary.single-product .product .product-info {flex: 0 0 55%;max-width: 55%;padding: 0;}
 .dispensary.single-product .product .store-images{flex: 0 0 20%;max-width: 20%;padding: 0;}
-.single-product.dispensary .product .product-image img{width: auto;max-height: 220px;margin: 0 auto;}
+.single-product.dispensary .product .product-image img{width: 220px;max-height: 220px;margin: 0 auto;}
 .topimgright img{width:40px;height:40px;}
 .topimgright {position: relative;z-index: 1;top: 30px;right: 106px;}
 .topimg {position: absolute;left: 36px;background-color: #0000007d;width: 75%;}

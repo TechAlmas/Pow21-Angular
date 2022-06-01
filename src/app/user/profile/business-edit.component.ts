@@ -88,6 +88,16 @@ export class BusinessEditComponent implements OnInit {
 			tags: true // создает новые опции на лету
 		});
 
+		//Show First checkbox always checked
+		setTimeout(function() { 
+			if(jQuery('.isThumbnail:checked').length == 0){
+				jQuery('.isThumbnail').first().prop('checked',true);
+			}
+		}, 4000);
+		
+		
+
+		//Functionality on thumbnail radio change
 		jQuery(document).on('change','.isThumbnail',function(){
 			jQuery('.fileInput').parent().next('.customError').remove();
 			if(jQuery('.isThumbnail:checked').length > 1){

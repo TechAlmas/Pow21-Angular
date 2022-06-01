@@ -13414,6 +13414,6 @@ span.select2-selection.select2-selection--multiple:active {
     padding: 0;
 }
 
-.store_meta .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+.store_meta .select2-container--default .select2-selection__rendered {
 	margin-top: -21px !important;
 }

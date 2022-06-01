@@ -42,7 +42,7 @@ export class BusinessEditComponent implements OnInit {
 	slug: any;
 	storeImages: any;
 	removedImages : any;
-
+	store_images : any;
 
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
@@ -97,20 +97,35 @@ export class BusinessEditComponent implements OnInit {
 				jQuery(this).prop('checked',false);
 				return false;
 			}
-		})
+		});
+		const component = this;
+		jQuery(document).on('click','.remove-image',function(){
+			
+			jQuery(this).parents('.image-area').remove();
+			component.addRemovedImagesToArray(jQuery(this).attr('name'));
+
+		});
+		
 
 		
 	}
-	removeStoreImage($name){
-
-			if(this.removedImages == undefined){
-				this.removedImages = [] ;
-			}
-			jQuery('.remove-image[name="'+$name+'"]').parents('.image-area').remove();
-			this.removedImages.push($name);
-
-
+	addRemovedImagesToArray($name){
+		if(this.removedImages == undefined){
+			this.removedImages = [] ;
+		}
+		this.removedImages.push($name);
 	}
+	// removeStoreImage($name){
+
+	// 		if(this.removedImages == undefined){
+	// 			this.removedImages = [] ;
+	// 		}
+	// 		console.log(jQuery('.remove-image[name="'+$name+'"]'))
+	// 		jQuery('.remove-image[name="'+$name+'"]').parents('.image-area').remove();
+	// 		this.removedImages.push($name);
+
+
+	// }
 	loadMetaData(){
 		//console.log((this.platformLocation as any).location.pathname);
 		//console.log(this.globals.location_global_url);
@@ -196,6 +211,8 @@ export class BusinessEditComponent implements OnInit {
 			this.store_meta = data['data'].store_meta; 			
 			this.assign_user = data['data'].assign_user; 
 			  this.dispDetails.schedule =  JSON.parse(this.dispDetails.schedule)
+			  this.store_images  = Object.values(data['data'].store_images);
+			console.log(this.store_images)
 	        //this.dispens_id = this.dispDetails.disp_id;
 	        //this.dispState = data['data'].state.replace(/\s/g, "-");
 	        //this.dispCity = data['data'].city.replace(/\s/g, "-");
@@ -323,7 +340,7 @@ export class BusinessEditComponent implements OnInit {
 					let url = imgsrc.target.result;
 					
 					let fileName =dispId+"-"+file.name;
-					let html = 		'<div class="image-area mr-3" ><img src="'+url+'" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" name="'+fileName+'" (click)="this.removeStoreImage("")"></a><label class="toggle"><div class="togglebox"><input type="checkbox" name="is_thumbnail" value="'+fileName+'" class="form-control isThumbnail" ><div class="slide-toggle"></div><div class="slide-toggle-content text-white">Thumbnail</div></div></label></div>';
+					let html = 		'<div class="image-area mr-3" ><img src="'+url+'" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" name="'+fileName+'"></a><label class="toggle"><div class="togglebox"><input type="radio" name="is_thumbnail" value="'+fileName+'" class="form-control isThumbnail" ><div class="slide-toggle"></div><div class="slide-toggle-content text-white">Thumbnail</div></div></label></div>';
 
 					jQuery('.image-container').append(html); 
 				}
@@ -412,6 +429,7 @@ export class BusinessEditComponent implements OnInit {
 		formData.append('phone', jQuery('#phone').val());
 		formData.append('license_type', jQuery('#license_type').val());
 		formData.append('id', jQuery('#id').val());
+		console.log(this.removedImages)
 		if(this.removedImages != undefined){
 			jQuery.each(this.removedImages, function(index,value){
 				formData.append('removed_images[]', value);

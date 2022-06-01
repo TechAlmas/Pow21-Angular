@@ -68,6 +68,7 @@ label.radio-style-2-label {
 .statusrbox {
     width: 80%;
     float: right;
+    margin-top: -6px;
 }
 /* start */
 .form-group.whitebgs.labelalignment span {

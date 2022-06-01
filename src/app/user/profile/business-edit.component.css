@@ -66,9 +66,10 @@ label.radio-style-2-label {
     text-transform: capitalize;
 }
 .statusrbox {
-    width: 80%;
-    float: right;
-    margin-top: -6px;
+    /* width: 80%;
+    float: right; */
+    margin-top: -7px;
+    margin-left: 82px
 }
 /* start */
 .form-group.whitebgs.labelalignment span {

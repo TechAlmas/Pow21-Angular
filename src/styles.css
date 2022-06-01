@@ -13377,3 +13377,14 @@ span.select2-selection.select2-selection--multiple:active {
 .select2-container--open .select2-dropdown {
     margin-top: 0px;
 }
+.select2-dropdown {
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 0px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: -100000px;
+    width: 100%;
+    z-index: 1051;
+}

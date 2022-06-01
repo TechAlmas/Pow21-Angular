@@ -335,4 +335,5 @@ span.select2-selection.select2-selection--multiple:focus {
 .store_meta {
     display: inline-flex;
     padding-top: 10px;
+    width: 100%;
 }

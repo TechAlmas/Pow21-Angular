@@ -296,7 +296,7 @@ input#sunday_end {
 }
 
 .cmsright {
-    /* float: right; */
+    float: right;
     width: 80%;
 }
 

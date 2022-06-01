@@ -304,7 +304,7 @@ input#sunday_end {
 .select2-dropdown {
     background-color: white;
     border: 2px solid #ccc;
-    border-radius: 0px;
+    border-radius: 0px !important;
     box-sizing: border-box;
     display: block;
     position: absolute;

@@ -299,7 +299,17 @@ input#sunday_end {
     float: right;
     width: 80%;
 }
-
+.select2-dropdown {
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 0px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: -100000px;
+    width: 100%;
+    z-index: 1051;
+}
 
 /* span.select2.select2-container.select2-container--default.select2-container--above {
     width: 81%;

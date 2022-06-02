@@ -134,6 +134,51 @@
 	   <input type = "submit" value = "submit">
 	</form> -->
 </div>
+<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<form #Login="ngForm" (ngSubmit)="onLogin(Login)">              
+		 <div class="modal-dialog">
+			 <div class="modal-body">
+				 <div class="modal-content">
+					 <div class="modal-header">
+						 <h4 class="modal-title" id="myModalLabel">Login Here</h4>
+						 <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+					 </div>
+					 <div class="modal-body">  
+						 <p>You have already account with pow enter your password for login</p>   
+ 
+						 <div class="form-group" *ngIf="!this.isUserLoggedIn">
+							 <label for="converter-alert-email" class="sr-only">Email</label>
+							 <input name="email" [ngModel]="this.login_alert.email" required [pattern]="emailPattern" #uEmail="ngModel" class="form-control" placeholder="Enter your e-mail">
+							 <div *ngIf="uEmail.errors && Login.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+								   <div *ngIf="uEmail.errors.required"> 
+									Please provide your password
+								  </div>        
+								 
+							 </div>
+						 </div>
+									   
+						 <div class="form-group" *ngIf="!this.isUserLoggedIn">
+							 <label for="converter-alert-name" class="sr-only">Name</label>
+							 <input name="password" [ngModel]="this.login_alert.password" required #uPass="ngModel" class="form-control" placeholder="Enter your password" type="password">
+							 <div *ngIf="uPass.errors && Login.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+								   <div *ngIf="uName.errors.required"> 
+									Please provide your name
+								  </div>       
+								 
+							 </div>
+						 </div>
+						 
+					  
+					 </div>
+					 <div class="modal-footer">
+					   <button type="submit" class="btn btn-primary">Login</button>
+						 <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>                        
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+	 </form>
+ </div>
 <div class="content-wrap product-content-wrap">
 	<!-- <h1 class="page-title-heading">{{strainDetails.name}}</h1> -->
 	<div class="container clearfix">
@@ -428,7 +473,7 @@
 										</div>
 										<div class="review-form-body">
 											<h3>Review Guidelines</h3>
-											<div class="form-group" *ngIf="!this.checkUser">
+											<div class="form-group" *ngIf="!this.isUserLoggedIn">
 												<input name="name" [ngModel]="this.review.name" required #rName="ngModel" class="form-control" placeholder="Provide your name...">
 												<div *ngIf="rName.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
 													<div *ngIf="rName.errors.required"> 
@@ -438,7 +483,7 @@
 											</div>
 
 											<div class="form-group" *ngIf="!this.isUserLoggedIn">
-												<input type="email" name="email" [ngModel]="this.review.email" required #rEmail="ngModel" [pattern]="emailPattern" class="form-control" placeholder="Type your email here">
+												<input type="email" name="email" [ngModel]="this.review.email" required #rEmail="ngModel" [pattern]="emailPattern" class="form-control" placeholder="Add your email address. Helps us verify you're human">
 												<div *ngIf="rEmail.errors && reviewForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
 													<div *ngIf="rEmail.errors.required"> 
 														Please provide your email
@@ -465,7 +510,7 @@
 												</div>
 											</div>
 											<div class="form-group text-center">
-												<button class="btn postBtn">Post Comment</button>
+												<button class="btn postBtn">Post Review</button>
 												<!-- <button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button> -->
 
 											</div>

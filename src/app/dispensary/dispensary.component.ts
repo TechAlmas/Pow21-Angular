@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { PlatformLocation } from '@angular/common';
 import { DispDetail } from '../models/disp-detail';
 import { ViewEncapsulation } from '@angular/core';
+import {Login} from '../models/login';
 
 
 
@@ -55,7 +56,9 @@ export class DispensaryComponent implements OnInit {
   followed: string;
   isUserReviewed: any;
   isUserLoggedIn= false;
-
+  validateEqual = false;
+  claimListingWithSignup = false;
+  login_alert = new Login();
 
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
 
@@ -221,6 +224,76 @@ enableReviewForm(){
     this.write_review = true;
     setTimeout(function(){ $("#starrating").rating(); }, 1);
  }
+ customValidateFields(data,isSignUpfields = false):any{
+  let error = 0;
+  $('.customValidate').each(function(key,val){
+    $(this).next('.customError').remove();
+    
+      if($(this).attr('name') == 'reemail' && $(this).val() != ''){
+        let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test($(this).val())){
+          var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+        else if(data.email != data.reemail){
+          var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+      }
+      if($(this).attr('name') == 'email' && $(this).val() != ''){
+        let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test($(this).val())){
+          var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+      }
+     
+      if($(this).val() == '' || $(this).val() == '(___)___-____'){
+
+        var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+        $(element).insertAfter($(this));
+        error ++;
+      }
+     
+  });
+  if(isSignUpfields){
+    $('.customValidateSignUp').each(function(key,val){
+      $(this).next('.customError').remove();
+      if($(this).attr('name') == 'password' && $(this).val() != ''){
+        if($(this).val().length < 6){
+          var element = '<p class="customError" style="color:red">'+" Password must be at least 6 characters long."+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+      }
+      if($(this).attr('name') == 'cpassword' && $(this).val() != ''){
+        if($(this).val() != $('input[name=password]').val()){
+          var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+      }
+      if($(this).val() == '' ){
+      
+          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+          $(element).insertAfter($(this));
+          error ++;
+        
+      }
+      if($(this).attr('name') == 'is_terms' && $(this).prop('checked') == false){
+        var element = '<p class="customError" style="color:red">'+"Please accept the Term & Condition."+'</p>';
+        $(element).insertAfter($(this));
+        error ++;
+      }
+  
+    });
+  }
+ 
+  return error;
+ }
 
 onClickSubmit(data) {
   
@@ -232,44 +305,9 @@ onClickSubmit(data) {
     //   "e_mail":data.email,
     //   'verification_details':data.notes,
     // };
-    let error = 0;
+    
     let honeyError = 0;
-    $('.customValidate').each(function(key,val){
-      $(this).next('.customError').remove();
-      
-        if($(this).attr('name') == 'reemail' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-          else if(data.email != data.reemail){
-            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-        }
-        if($(this).attr('name') == 'email' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-        }
-       
-        if($(this).val() == '' || $(this).val() == '(___)___-____'){
-
-          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
-          $(element).insertAfter($(this));
-          error ++;
-        }
-       
-       
-      
-      
-    });
+    let error = this.customValidateFields(data);
 
     if(error == 0){
 
@@ -313,10 +351,107 @@ onClickSubmit(data) {
 
     if(error == 0 && honeyError == 0){
 
-      this.postPaidFor(formData).subscribe(
-        (data => {
-            if(data["api_message"] == "success" && data["id"] > 0){
-                toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
+      if(!this.claimListingWithSignup){
+        this.review_check_email().subscribe(
+          (data => {    
+            if(data['data'] > 0)
+            {
+              this.postPaidFor(formData).subscribe(
+                (data => {
+                    if(data["api_message"] == "success" && data["id"] > 0){
+                        toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
+                       "closeButton": true,
+                        "timeOut": "8000",
+                        "extendedTImeout": "0",
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "extendedTimeOut": "0",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut",
+                        "positionClass": "toast-top-full-width",
+                      });
+                    }
+          
+                    this.expiredDate = new Date();
+                    this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+                    this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
+          
+                    $('#myModal_paid').modal('hide');
+          
+                }),
+                (err: any) => {console.log(err)
+                  toastr.error(err.message, "", {
+                   "closeButton": true,
+                    "timeOut": "8000",
+                    "extendedTImeout": "0",
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "extendedTimeOut": "0",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    "positionClass": "toast-top-full-width",
+                  });
+                },
+                () => {
+                  console.log("err.message");
+                  
+                }
+               );
+             
+            }
+            else
+            {
+              jQuery('.signupFields').show();
+              this.claimListingWithSignup = true;
+            }
+          }),
+          (err: any) => console.log(err),
+          () => {  
+              
+         });
+      }else{
+        let errorCheck = this.customValidateFields(data,true);
+
+        if(errorCheck == 0){
+          this.isValidFormSubmitted = true;
+          formData.append("password",data.password);        
+          formData.append("is_updates",data.is_updates);   
+          formData.append("status",'1');
+          formData.append("id_cms_privileges",'4');
+          formData.append("referrer_id",this.cookieService.get('_mio_user_referral_id'));
+          formData.append("claim_listing_with_signup","1");
+
+          this.postPaidFor(formData).subscribe(
+            (data => {
+                if(data["api_message"] == "success" && data["id"] > 0){
+                    toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
+                   "closeButton": true,
+                    "timeOut": "8000",
+                    "extendedTImeout": "0",
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "extendedTimeOut": "0",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    "positionClass": "toast-top-full-width",
+                  });
+                }
+      
+                this.expiredDate = new Date();
+                this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+                this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
+      
+                $('#myModal_paid').modal('hide');
+      
+            }),
+            (err: any) => {console.log(err)
+              toastr.error(err.message, "", {
                "closeButton": true,
                 "timeOut": "8000",
                 "extendedTImeout": "0",
@@ -329,37 +464,65 @@ onClickSubmit(data) {
                 "hideMethod": "fadeOut",
                 "positionClass": "toast-top-full-width",
               });
+            },
+            () => {
+              console.log("err.message");
+              
             }
-  
-            this.expiredDate = new Date();
-            this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
-            this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
-  
-            $('#myModal_paid').modal('hide');
-  
-        }),
-        (err: any) => {console.log(err)
-          toastr.error(err.message, "", {
-           "closeButton": true,
-            "timeOut": "8000",
-            "extendedTImeout": "0",
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "extendedTimeOut": "0",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut",
-            "positionClass": "toast-top-full-width",
-          });
-        },
-        () => {
-          console.log("err.message");
-          
+           );
         }
-       );
+      }
+      
+     
     }
  }
+
+ onCheckEmail(form: NgForm)
+ {
+
+   this.postCheckEmail().subscribe(data => 
+    {
+       //console.log(data);
+       if (data["api_status"]==1)
+       {
+           this.validateEqual = false;
+           $('#email_error').show();      
+
+        }else
+        {
+          $('#email_error').hide();
+        }
+     }, (err) => {
+              
+               console.log(err.message);
+    });
+ }
+ postCheckEmail(){
+  var postData = {"email":jQuery('input[name=email]').val()};
+ 
+  return this._http.post<any[]>('checkemailexit',postData);
+}
+
+ onConfirmPwd(form: NgForm)
+ {
+   //console.log("Sumer");
+
+  
+         //  console.log(data);
+       if(form.value.password != form.value.cpassword){
+           this.validateEqual = false;
+           $('#pcp_error').show();      
+
+        }else
+        {
+          $('#pcp_error').hide();
+        }
+     
+
+ }
+ review_check_email(){
+  return this._http.get<any[]>('review_check_email?email='+$('input[name=email]').val());
+}
  postPaidFor(postdata){
     return this._http.post<any[]>('claim_lingings',postdata);
   }
@@ -382,6 +545,8 @@ onSubmitReviewForm(form: NgForm) {
 
      this.isValidFormSubmitted = true;
      this.review = form.value;
+     this.login_alert.email = form.value.email
+     this.review.status = 0;
 
      if(this.user_data && this.user_data['email']){
 
@@ -407,20 +572,77 @@ onSubmitReviewForm(form: NgForm) {
     this.review.rating = $("#starrating").val();
      this.review.disp_id = this.dispens_id;
       this.expiredDate = new Date();
+      this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+  
 
-          this.postReview().subscribe(
-      (data => {
+      if(this.isUserLoggedIn)
+    {
+     // this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+     // this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+      this.postReview().subscribe(
+      (data => {    
+       
         this.review_id = data["id"];        
         this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
         this.checkUser = true;
-        
       }),
       (err: any) => console.log(err),
-      () => {
+      () => {              
           if(this.review_id > 0){
-            //console.log(this.review_id)
             this.review_id  = 0;
+            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp; Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily.  ', "", {
+             "closeButton": true,
+              "timeOut": "8000",
+              "extendedTImeout": "0",
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "extendedTimeOut": "0",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut",
+              "positionClass": "toast-top-full-width",
+            }); 
 
+            this.write_review =  false;
+
+            this.review = new ReviewDisp();   
+            form.resetForm();
+          }
+          
+     });
+    }
+    else
+    {
+      
+      this.review_check_email().subscribe(
+      (data => {    
+           if(data['data'] > 0)
+           {
+             console.log(data['data'])
+             setTimeout(function(){ 
+                $('#login_modal').modal({
+                    show: true,
+                    backdrop: 'static',
+                    keyboard: false
+              });
+        }, 1);
+           }
+           else
+           {
+             this.postReview().subscribe(
+      (data => {    
+        console.log(data)
+        this.review_id = data["id"];        
+        this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
+        this.checkUser = true;
+      }),
+      (err: any) => console.log(err),
+      () => {              
+          if(this.review_id > 0){
+            this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+     this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+            this.review_id  = 0;
             toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. ', "", {
              "closeButton": true,
               "timeOut": "8000",
@@ -442,11 +664,59 @@ onSubmitReviewForm(form: NgForm) {
           }
           
      });
+           }
+      }),
+      (err: any) => console.log(err),
+      () => {              
+          
+          
+     });
+    }
+
+    // this.postReview().subscribe(
+    //   (data => {
+    //     this.review_id = data["id"];        
+    //     this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
+    //     this.checkUser = true;
+        
+    //   }),
+    //   (err: any) => console.log(err),
+    //   () => {
+    //       if(this.review_id > 0){
+    //         this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+    //         this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+    //         this.review_id  = 0;
+    //         //console.log(this.review_id)
+    //         this.review_id  = 0;
+
+    //         toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. ', "", {
+    //          "closeButton": true,
+    //           "timeOut": "8000",
+    //           "extendedTImeout": "0",
+    //           "showDuration": "300",
+    //           "hideDuration": "1000",
+    //           "extendedTimeOut": "0",
+    //           "showEasing": "swing",
+    //           "hideEasing": "linear",
+    //           "showMethod": "fadeIn",
+    //           "hideMethod": "fadeOut",
+    //           "positionClass": "toast-top-full-width",
+    //         }); 
+
+    //         this.write_review =  false;
+
+    //         this.review = new ReviewDisp();   
+    //         form.resetForm();
+    //       }
+          
+    //  });
     
     
 } 
   
-
+review_check_email(){
+  return this._http.get<any[]>('review_check_email?email='+this.review.email);
+}
 getDispensaryDetailData(disp_slug): Observable<any> {
    // var postData = {"url":currentUrl};
     if(this.user_data){
@@ -533,6 +803,129 @@ getDispensaryDetailData(disp_slug): Observable<any> {
       $('.tooltip-contentfollow span').html(parseInt($('.tooltip-contentfollow span').text())+1);
       //this.cookieService.set('_mio_user_email', this.favstrain['email'], this.expiredDate,"/");
     }
+  }
+
+  
+addUserLog (): Observable<any[]> {
+    
+  var postdata: any;
+  var userId: any;
+
+  userId = 0;
+
+  if(this.user_data && this.user_data['id']!= '')
+  {
+      userId = this.user_data['id'];
+  }else if(this.cookieService.get('_mio_user_id') && this.cookieService.get('_mio_user_id')!="")
+  {
+      userId = this.cookieService.get('_mio_user_id');
+  }
+
+  //var url = (this.platformLocation as any).location.origin ;
+  var url = (this.platformLocation as any).location.href;
+
+  //var detailstmp = {'location' : this.selectedLocation,'strain' : this.selectedStrain, 'mass' : this.selectedMass };
+  
+  //console.log((this.platformLocation as any).location);
+  var details = "NA";
+  
+  
+
+  var description = "I Feel Like-"+this.dispDetails['name'];
+
+
+  postdata = {'url' : url , 'description' : description, 'user_id' :userId , 'details': details};
+ 
+  return this._http.post<any[]>('set_user_log',postdata);
+}
+
+
+  onLogin(form: NgForm)
+  {
+    this.isValidFormSubmitted = false;
+     if (form.invalid) {
+        return;
+     }
+     this.isValidFormSubmitted = true;
+     this.login_alert.email = form.value.email;
+     this.login_alert.password = form.value.password;
+
+     this.postLogin().subscribe(data => 
+            {
+            //console.log(data);
+            if (data["api_status"]==1)
+                {
+                   toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Login sucess fully !", "", {
+                 "closeButton": true,
+                  "timeOut": "7000",
+                  "extendedTImeout": "0",
+                  "showDuration": "300",
+                  "hideDuration": "1000",
+                  "extendedTimeOut": "0",
+                  "showEasing": "swing",
+                  "hideEasing": "linear",
+                  "showMethod": "fadeIn",
+                  "hideMethod": "fadeOut",
+                  "positionClass": "toast-top-full-width",
+                });
+                  // window.location.href = '/user-profile';
+                   $('#login_modal').modal('hide');
+
+                   this.expiredDate = new Date();
+    this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+
+    //this.cookieService.set( '_mio_user_name', this.converter_alert.name, this.expiredDate,"/" );
+    this.cookieService.set( '_mio_user_email', this.login_alert.email, this.expiredDate,"/" );
+     this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );      
+                   
+                   localStorage.setItem('userData',JSON.stringify(data));   
+                   this.checkUser = true;
+                   this.isUserLoggedIn = true;
+                   this.user_data = data;                
+                   this.globals.user_data = true;
+                   this.globals.user_name = data["name"];
+                   this.globals.user_email = data["email"];
+                   //this.getpricealertCount();
+
+                   this.addUserLog().subscribe(
+                      (data => {}),
+                      (err: any) => console.log(err),
+                      () => {}
+                    ); 
+                   form.resetForm();
+                  // this.router.navigate(['/members/dashboard']);
+
+                   //localStorage.setItem('remember_token',data["remember_token"]);
+                //form.resetForm();
+
+                  
+
+                }
+                else
+                {
+                    toastr.error("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Please provide valid details !", "", {
+                 "closeButton": true,
+                "timeOut": "7000",
+                "extendedTImeout": "0",
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "extendedTimeOut": "0",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "positionClass": "toast-top-full-width",
+                });     
+               }
+                
+            }, (err) => {
+               
+                console.log(err.message);
+            });
+  }
+
+   postLogin(){
+    return this._http.post<any[]>('userlogin',this.login_alert);
   }
 
 

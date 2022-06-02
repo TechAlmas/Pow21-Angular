@@ -520,9 +520,7 @@ onClickSubmit(data) {
      
 
  }
- review_check_email(){
-  return this._http.get<any[]>('review_check_email?email='+$('input[name=email]').val());
-}
+ 
  postPaidFor(postdata){
     return this._http.post<any[]>('claim_lingings',postdata);
   }

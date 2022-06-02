@@ -1,126 +1,3 @@
-
-.dispensary.single-product .product .product-image {
-  flex: 0 0 25%;
-  max-width: 25%;
-  overflow: revert;
-}
-.dispensary.single-product .product .product-info {
-  flex: 0 0 55%;
-  max-width: 55%;
-  padding: 0;
-  margin-top: -3rem;
-}
-.dispensary.single-product .product .store-images {
-  flex: 0 0 20%;
-  max-width: 20%;
-  padding: 0;
-}
-.single-product.dispensary .product .product-image .logo-wrepper {
-  /* width: 100%; */
-  padding: 1.92rem 1.15rem 0 1.1rem;
-}
-.single-product.dispensary .product .product-image img {
-  width: 100%;
-  max-height: 220px;
-  height: auto;
-  /* padding: 2rem 1.15rem 0 1.1rem; */
-  /* margin: 0 auto; */
-}
-.topimgright img {
-  width: 40px;
-  height: 40px;
-}
-.topimgright {
-  position: relative;
-  z-index: 1;
-  top: 30px;
-  right: 106px;
-}
-.topimg {
-  position: absolute;
-  left: 36px;
-  background-color: #0000007d;
-  width: 75%;
-}
-.topimg .unverified-icon {
-  display: inline-flex;
-}
-.topimg .unverified-icon span {
-  font-size: 12px;
-  color: #d7d7db;
-  font-weight: 500;
-  margin-left: 25px;
-  margin-top: 9px;
-}
-.topimg .unverified-icon span {
-  font-size: 12px;
-  color: #d7d7db;
-  font-weight: 500;
-  margin-left: 25px;
-  margin-top: 9px;
-}
-.questionmarks {
-  margin: 5px 0px;
-  padding: 3px;
-  opacity: 0.9;
-}
-.single-product.dispensary .product .product-image:before {
-  content: "";
-  background: url("/assets/images/icon-verified-no.png");
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: -15px;
-  left: 15px;
-  z-index: 1;
-}
-.single-product.dispensary .product .product-image:after {
-  content: "unverified";
-  position: absolute;
-  top: 0;
-  left: 32px;
-  font-size: 14px;
-  color: #ffffff;
-  background: rgb(0 0 0 / 40%);
-  width: 77%;
-  height: auto;
-  text-align: left;
-  padding: 5px 20px;
-  line-height: 1.6;
-  z-index: 0;
-  /* background-image: url("/assets/images/question.svg");
-  background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: center; */
-  text-transform: capitalize;
-}
-
-.blowimg {
-  width: 85%;
-  margin: 0 auto;
-}
-.location-icon i {
-  font-size: 16px;
-  color: #c91032;
-  margin-right: 7px;
-  vertical-align: middle;
-}
-.calling-icon i {
-  font-size: 16px;
-  transform: rotate(315deg);
-  margin-right: 7px;
-  vertical-align: middle;
-  color: #000000;
-}
-.contact-icon i {
-  margin-top: 0.5px;
-  font-size: 16px;
-  margin-right: 7px;
-  vertical-align: middle;
-  color: #1b88cc;
-}
 .dispensary.single-product .product .product-image {flex: 0 0 25%;max-width: 25%;overflow: revert;}
 .dispensary.single-product .product .product-info {flex: 0 0 55%;max-width: 55%;padding: 0;}
 .dispensary.single-product .product .store-images{flex: 0 0 20%;max-width: 20%;padding: 0;}
@@ -135,99 +12,12 @@
 .single-product.dispensary .product .product-image:before {content: '';background: url('/assets/images/icon-verified-no.png');width: 100%;height: 220px;position: absolute;background-repeat: no-repeat;background-size: 15%;top: -15px;left: 15px;z-index: 1;}
 .single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 32px;font-size: 14px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 220px;height: auto;text-align: left;padding: 5px 30px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: right;background-position-y: center;text-transform: capitalize;}
 
-
-.contact-icon span {
-  font-size: 14px;
-}
-
-.location-icon {
-  margin: 10px 0;
-  color: #1b88cc;
-  font-size: 14px;
-  vertical-align: middle;
-}
-.calling-icon {
-  color: #000000;
-  font-size: 14px;
-  vertical-align: middle;
-  margin: 10px 0;
-}
-.contact-icon {
-  color: #1b88cc;
-  font-size: 16px;
-  vertical-align: middle;
-  display: flex;
-  align-items: center;
-}
+.blowimg{width: 85%;margin: 0 auto;}
+.location-icon i {font-size: 16px;color: #c91032;margin-right: 7px;vertical-align: middle;}
+.calling-icon i {font-size: 16px;transform: rotate(315deg);margin-right: 7px;vertical-align: middle;color: #000000;}
+.location-icon {margin: 10px 0;color: #1b88cc;font-size: 14px;vertical-align: middle;}
+.calling-icon {color: #000000;font-size: 14px;vertical-align: middle;}
 /* a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;} */
-
-.follow {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.col.follow {
-  flex: 0 0 16%;
-  max-width: 16%;
-  padding: 0;
-  margin: auto 0;
-  text-align: center;
-}
-.col.title {
-  flex: 0 0 84%;
-  max-width: 84%;
-  padding: 0;
-}
-.tooltip-contentfollow {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  visibility: visible;
-  opacity: 1;
-  position: absolute;
-  background: #2384bc;
-  right: 33px;
-  padding: 0px;
-  margin-top: 2px;
-  font-size: 15px;
-  width: auto;
-  z-index: 2;
-  border-radius: 4px;
-  top: -44px;
-  padding: 5px 5px;
-}
-.tooltip-contentfollow.user_follow {
-  padding: 5px 15px;
-}
-.tooltip-contentfollow.user_follow .headingfollowtooltip i.fa.fa-user {
-  margin-left: 0px;
-}
-.follow span {
-  padding: 0px 0;
-  cursor: pointer;
-}
-span.review-count {
-  margin-left: 5px;
-}
-
-.headingfollowtooltip {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: center;
-}
-/*.follow span:hover ~ .tooltip-contentfollow{visibility: visible;opacity: 1;}*/
-.headingfollowtooltip i.fa.fa-user {
-  font-size: 14px;
-  color: #fff;
-  vertical-align: middle;
-  padding: 0px;
-  margin-left: 10px;
-}
-
 .col.follow {flex: 0 0 16%;max-width: 16%;padding: 0;margin: auto 0;text-align: center;}
 .col.title {flex: 0 0 84%;max-width: 84%;padding: 0;}
 .tooltip-contentfollow {cursor: pointer;display: flex;flex-direction: column;align-items: center;justify-content: center;visibility: visible;opacity: 1;position: absolute;background: #2384bc;left: -9px;padding: 0px;margin-top: 2px;font-size: 15px;width: auto;/*transition: 0.25s all ease;transition-delay: 0.25s;*/z-index: 2;border-radius: 4px;top: -50px;padding: 3px 6px 6px 6px;}
@@ -244,274 +34,167 @@ a.headingfollowtooltip span {color: #ffff;font-size: 14px;vertical-align: middle
 .col.retail-other-info {flex: 0 0 50%;max-width: 50%;padding: 0;}
 .single-product.dispensary {margin-bottom: 50px;}
 
-a.headingfollowtooltip .nocount {
-  border-left: 2px solid rgba(255, 255, 255, 0.747);
-  padding-left: 7px;
-  padding-right: 4px;
-}
 
-a.headingfollowtooltip span {
-  color: #ffff;
-  font-size: 17px;
-  vertical-align: middle;
-  font-weight: 700;
-  margin-left: 5px;
-}
-
-.headingfollowtooltip .wrepper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tooltip-contentfollow:after {
-  content: "";
-  position: absolute;
-  border-width: 8px;
-  border-style: solid;
-  top: 100%;
-  left: 42%;
-  border-color: #2384bc transparent transparent transparent;
-}
-.tooltip-contentfollow.user_follow:after {
-  left: 30%;
-}
-.experience {
-  font-size: 16px;
-}
-.col.retail-meta {
-  flex: 0 0 50%;
-  max-width: 50%;
-  padding: 0;
-}
-.col.retail-other-info {
-  flex: 0 0 50%;
-  max-width: 50%;
-  padding: 0;
-}
-.single-product.dispensary {
-  margin-bottom: 50px;
-}
-
-i.fas.fa-clock {
-  margin-right: 7px;
-}
+i.fas.fa-clock {margin-right: 7px;}
 .textcontant {
-  /*margin-top: 5px;*/
-  vertical-align: middle;
-  cursor: pointer;
+    /*margin-top: 5px;*/
+    vertical-align: middle;
+    cursor: pointer;
 }
 span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
-  color: #50af63;
-  font-weight: 600;
-  font-size: 16px;
-  margin-left: 10px;
+    color: #50af63;
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 10px;
 }
 .textcontant span {
-  font-size: 14px;
-  letter-spacing: 0.7;
-  margin-left: 8px;
-  font-weight: 400;
-  vertical-align: baseline;
+    font-size: 14px;
+    letter-spacing: 0.7;
+    margin-left: 8px;
+    font-weight: 400;
+    vertical-align: baseline;
 }
 .tooltip-mains {
-  position: relative;
+    position: relative;
 }
 #tooltioicos {
-  display: inline;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  /*margin-top: -20px;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    /*margin-top: -20px;
     margin-left: 134px;*/
 }
 .tooltip-contents {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  background: #ccc;
-  left: 0px;
-  top: 0px;
-  padding: 6px 15px;
-  margin: 0px;
-  width: 70%;
-  transition: 0.25s all ease;
-  transition-delay: 0.25s;
-  z-index: 2;
-  border-radius: 4px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 0.1875rem;
-  padding: 10px;
-  box-shadow: rgb(0 0 0 / 20%) 0px 1px 3px;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: "Lato";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    background: #ccc;
+    left: 0px;
+    top: 0px;
+    padding: 6px 15px;
+    margin: 0px;
+    width: 70%;
+    transition: 0.25s all ease;
+    transition-delay: 0.25s;
+    z-index: 2;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.1875rem;
+    padding: 10px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 1px 3px;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: 'Lato';
 }
-.tooltip-contents h4 {
-  margin-bottom: 10px;
-}
-.tooltip-contents span {
-  font-size: 13px;
-  display: block;
-}
-.textcontant:hover .tooltip-contents {
-  opacity: 1;
-  visibility: visible;
-}
+.tooltip-contents h4{margin-bottom: 10px;}
+.tooltip-contents span{font-size: 13px;display: block;}
+.textcontant:hover .tooltip-contents{opacity: 1;visibility: visible;}
 
 /*.Recreational-contant .tooltip-contents {
     width: 600px;
 }*/
 .content-a span a {
-  color: rgb(0, 168, 163);
+    color: rgb(0, 168, 163);
 }
 .iconboxsize {
-  font-size: 14px;
-  vertical-align: revert;
+    font-size: 14px;
+    vertical-align: revert;
 }
 .iconboxcheck {
-  vertical-align: baseline;
-  font-size: 14px;
+ vertical-align: baseline;
+    font-size: 14px;
 }
 span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Licensespace {
-  margin-right: 7px;
+    margin-right: 7px;
 }
 span.header-info__OpenStatusLabel-sc-1heoxjr-5.Storefrontspace.hlUpkp {
-  margin-left: 0px;
+    margin-left: 0px;
 }
 span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
-  margin-right: 1px;
+    margin-right: 1px;
 }
 .single-product .product .product-info .product-review {
-  padding: 10px 0px 5px 0px;
-}
-.single-product .product .product-info .product-review .review {
-  margin-right: 6px;
+    padding: 10px 0px 5px 0px;
 }
 .iconboxsizethumb {
-  font-size: 20px;
+    font-size: 20px;
 }
 .col.retail-other-info {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 .blowimg {
-  width: 85%;
-  margin: 0 auto;
-  margin-top: 20px;
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 .retailspace h5 {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 .imagesthumb {
-  width: 100%;
-  /* margin-left: -14px; */
-  margin-top: 3px;
+    width: 100%;
+    /* margin-left: -14px; */
+    margin-top: 3px;
 }
 .columnimage {
-  padding-top: 5px;
+    padding-top: 5px;
 }
 /* lightbox */
 .lb-data .lb-number {
-  display: block;
-  clear: left;
-  padding-bottom: 1em;
-  font-size: 15px !important;
-  color: rgb(255, 255, 255) !important;
+    display: block;
+    clear: left;
+    padding-bottom: 1em;
+    font-size: 15px !important;
+    color: rgb(255, 255, 255) !important;
 }
 img.img-responsive2 {
-  height: 75px;
-  width: 100%;
+    height: 75px;
+    width: 100%;
 }
 img.img-responsive1 {
-  height: 250px;
-  width: 230px;
+    height: 250px;
+     width: 230px;
 }
 .lb-data .lb-details .lb-caption span.lb-number {
-  font-size: 15px;
-  color: #fff;
-  margin-top: 5px;
+    font-size: 15px;
+    color: #fff;
+    margin-top: 5px;
 }
 .claim_listings {
-  z-index: 100;
-  position: absolute;
-  color: #ffff;
-  padding: 5px;
-  text-transform: capitalize;
-  font-size: 14px;
-  margin-left: -36px;
+    z-index: 999999;
+    position: absolute;
+    color: #ffff;
+    padding: 5px;
+    text-transform: capitalize;
+    font-size: 14px;  
+    margin-left: -26px;
 }
 .claim_listings a {
-  color: #fff;
-  margin-left: 14px;
-}
-
-.claim_listings span a {
-  vertical-align: baseline;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -1.3rem;
-}
-
-.claim_listings span a svg {
-  height: 1.2rem;
-  width: 1.2rem;
-  margin-left: 5px;
-  fill: #ffff;
+    color: #fff;
 }
 #reviews {
-  float: left;
+    float: left;
 }
 .unverified {
-  z-index: 999999;
-  position: absolute;
-  color: #ffff;
-  margin-left: 18px;
-  padding: 5px;
-  text-transform: capitalize;
+    z-index: 999999;
+    position: absolute;
+    color: #ffff;
+    margin-left: 18px;
+    padding: 5px;
+    text-transform: capitalize;
 }
 .storeimg {
-  padding: 0px 1px;
-  /* margin: 0px; */
+    padding: 0px 1px;
+    /* margin: 0px; */
 }
 .storemainimg {
-  padding: 0px;
+    padding: 0px;
 }
 
-.ohnohoney {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 0;
-  width: 0;
-  z-index: -1;
-}
-.postBtn {
-  padding: 10px 20px;
-  color: #fff;
-  background: #08c;
-  border-color: #08c;
-  margin-right: 15px;
-}
-.postBtn:not(:disabled):not(.disabled) {
-  cursor: pointer;
-}
-a.btn.contactus {
-  padding: 7px 30px;
-  margin-top: 15px;
-  border-radius: 10px;
-  background: #0088cc;
-  width: auto;
-  color: #fff;
-  font-weight: bold;
-  display: inline-block;
-  font-size: 14px;
-}
 .ohnohoney{
     opacity: 0;
     position: absolute;
@@ -541,50 +224,22 @@ a.btn.contactus {
     color: #fff;
 }
 .single-product .product .product-info .product-description p {
-  font-size: 16px;
-  font-weight: 400;
-  font-family: "Lato";
-  color: #555555;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Lato';
+    color: #555555;
 }
 span.write-a-review {
-  font-size: 14px;
-  font-weight: 400;
-  font-family: "Lato";
-  color: #555555;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Lato';
+    color: #555555;
 }
 .single-product .product .product-info .product-name h1 {
-  font-family: "Lato";
-  font-weight: 500;
+    font-family: 'Lato';
+    font-weight: 500;
 }
 
-
-.dispensary.single-product .product .product-image.Verified:before {
-  content: "";
-  background: url(/assets/images/icon-verified-yes.png);
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: -15px;
-  left: 15px;
-  z-index: 1;
-}
-.dispensary.single-product .product .product-image.Verified:after {
-  content: "verified";
-  position: absolute;
-  top: 0;
-  left: 32px;
-  font-size: 14px;
-  color: #ffffff;
-  background: rgb(0 0 0 / 40%);
-  width: 77%;
-  height: auto;
-  text-align: left;
-  padding: 5px 30px;
-  line-height: 1.6;
-  z-index: 0;
-  /* background-image: url(/assets/images/question.svg);
 .dispensary.single-product .product .product-image.Verified:before{
 content: '';
 background: url(/assets/images/icon-verified-yes.png);
@@ -618,108 +273,35 @@ z-index: 1;
     text-transform: capitalize; */
 }
 .col.product-image.Verified .claim_listings {
-  display: none;
+    display: none;
 }
 
-.dispensary.single-product .product .col.product-image.Pending:before {
-  content: "";
-  background: url(/assets/images/icon-verified-pending.png);
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: -15px;
-  left: 15px;
-  z-index: 1;
-}
-.dispensary.single-product .product .col.product-image.Pending:after {
-  content: "pending";
-  position: absolute;
-  top: 0;
-  left: 32px;
-  font-size: 14px;
-  color: #ffffff;
-  background: rgb(0 0 0 / 40%);
-  width: 77%;
-  height: auto;
-  text-align: left;
-  padding: 5px 30px;
-  line-height: 1.6;
-  z-index: 0;
-}
-.col.product-image.Pending .claim_listings {
-  display: none;
-}
-
-@media (min-width: 991px) and (max-width: 1199px) {
-  a.headingfollowtooltip {
-    color: #ffff;
-    font-size: 10px;
-    vertical-align: middle;
-    font-weight: 700;
-    /*   */
-  }
-  .tooltip-contentfollow {
-    margin-top: -0px;
-    left: 4px;
-  }
-  .headingfollowtooltip i.fa.fa-user {
-    font-size: 10px;
-  }
-  a.headingfollowtooltip span {
-    font-size: 10px;
-  }
-  .iconboxsize {
-    font-size: 14px;
-    vertical-align: revert;
-  }
-  .textcontant span {
-    font-size: 14px;
-    letter-spacing: 0.7;
-    margin-left: 8px;
-    font-weight: 400;
-    vertical-align: baseline;
-  }
-  .iconboxcheck {
-    vertical-align: baseline;
-    font-size: 14px;
-  }
-  .col.store-image span {
-    font-size: 12px;
-  }
-  .single-product.dispensary .product .product-image:before {
-    content: "";
-    background: url("/assets/images/icon-verified-no.png");
+.dispensary.single-product .product .col.product-image.Pending:before{
+    content: '';
+    background: url(/assets/images/icon-verified-pending.png);
     width: 100%;
     height: 220px;
     position: absolute;
     background-repeat: no-repeat;
     background-size: 15%;
-    top: -10px;
-    left: -12px;
+    top: -15px;
+    left: 15px;
     z-index: 1;
-  }
-  .single-product.dispensary .product .product-image:after {
-    content: "unverified";
+}
+.dispensary.single-product .product .col.product-image.Pending:after{
+    content: 'pending';
     position: absolute;
     top: 0;
-    left: 0px;
-    font-size: 11px;
+    left: 32px;
+    font-size: 14px;
     color: #ffffff;
     background: rgb(0 0 0 / 40%);
-    width: 93%;
+    width: 220px;
     height: auto;
     text-align: left;
-    padding: 5px 0px 5px 23px;
+    padding: 5px 30px;
     line-height: 1.6;
     z-index: 0;
-    /* background-image: url("/assets/images/question.svg");
-    background-repeat: no-repeat;
-    background-position-x: right;
-    background-position-y: center; */
-    text-transform: capitalize;
-  }
     
 }
 .col.product-image.Pending .claim_listings {
@@ -770,12 +352,12 @@ z-index: 1;
 
  
   .claim_listings {
-    z-index: 999999;
-    position: absolute;
-    color: #ffff;
-    padding: 5px;
-    text-transform: capitalize;
-    font-size: 11px;
-    margin-left: -7px;
+      z-index: 999999;
+      position: absolute;
+      color: #ffff;
+      padding: 5px;
+      text-transform: capitalize;
+      font-size: 11px; 
+      margin-left: -7px;
   }
-}
+ }

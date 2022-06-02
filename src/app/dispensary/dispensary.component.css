@@ -210,7 +210,7 @@ img.img-responsive1 {
     background: #08c;
     border-color: #08c;
     margin-right: 15px;
-}
+} 
 .postBtn:not(:disabled):not(.disabled){
     cursor: pointer;
 }

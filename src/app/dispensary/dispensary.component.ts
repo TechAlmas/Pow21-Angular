@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { PlatformLocation } from '@angular/common';
 import { DispDetail } from '../models/disp-detail';
 import { ViewEncapsulation } from '@angular/core';
+import {Login} from '../models/login';
 
 
 
@@ -53,8 +54,9 @@ export class DispensaryComponent implements OnInit {
   file: any;
   fav_disp= new Favdispensary();
   followed: string;
-
-
+  isUserReviewed: any;
+  isUserLoggedIn= false;
+  login_alert = new Login();
 
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
 
@@ -65,6 +67,7 @@ export class DispensaryComponent implements OnInit {
         this.user_data = JSON.parse(localStorage.getItem('userData'));
          if(this.user_data && this.user_data['email']){
            this.checkUser = true;
+           this.isUserLoggedIn = true;
           }
           else if(this.cookieService.get('_mio_user_email') && this.cookieService.get('_mio_user_email') != ""){
             this.checkUser = true;
@@ -81,10 +84,27 @@ export class DispensaryComponent implements OnInit {
               }
           	}
 
-
   		});
 
-  
+      jQuery(document).on('click','.claimModelLink',function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        let url = jQuery(this).attr('href');
+        window.open(url,'_blank');
+        jQuery('#myModal_paid').modal('hide');
+      })
+
+        //Phone number masking code
+
+        // $('#telnum').on('blur',function(){
+        //   const x = $(this).val().replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        //   if(x != null){
+            
+        //     $(this).val( '(' + x[1] + ') ' + x[2] + '-' + x[3]);
+        //   }
+          
+          
+        // });
 
       //Validations on KeyUp
 
@@ -98,7 +118,7 @@ export class DispensaryComponent implements OnInit {
             
           }
           else if($('input[name=email]').val() != $(this).val()){
-            var element = '<p class="customError" style="color:red">'+"Both emails are not matching"+'</p>';
+            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
             
           }
         }
@@ -109,13 +129,11 @@ export class DispensaryComponent implements OnInit {
            
           }
         }
-        if($(this).attr('name') == 'telnum' && $(this).val() != ''){
-         
-          if(!$.isNumeric($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" should be numeric"+'</p>';
-           
-          }
-        }
+        // if($(this).attr('name') == 'telnum' && $(this).val() != ''){
+
+        //   let newVal =  $(this).val().replace(/[^\d]/g, '');
+        //   $(this).val(newVal)
+        // } 
         if($(this).val() == ''){
 
           var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
@@ -149,13 +167,14 @@ getDispensaryDetail(disp_slug)
         this.image_disp = "https://www.pow21.com/admin/storage/app/"+this.dispDetails.logoUrl;
         this.mapUrl = "https://www.google.com/maps/place/"+this.dispDetails.address+','+this.dispCity+','+this.dispState+' '+data['data'].zip_code+','+data['data'].country;
         //1353 E 41st Ave, Vancouver, BC V5W 3R8, Canada
-        //this.schedule = JSON.parse(this.dispDetails.schedule);
+        this.schedule = JSON.parse(this.dispDetails.schedule); 
         //console.log(this.dispDetails.state.replace(/\s/g, "-"));
+        this.isUserReviewed = data['is_user_reviewed'];
 
       }),
       (err: any) => console.log(err),
       () => {
-		
+		 
 	}
 
 )
@@ -174,7 +193,30 @@ linkClicked(id){
      }
   }		
 onFilechange(event: any) {
-  this.file = event.target.files;
+  jQuery('.fileInput').parent().find('.customError').remove();
+  let error = 0;
+		for(let i=0;i<event.target.files.length;i++){
+      var file = event.target.files[i];
+      var fileType = file.type;
+      const fileName = event.target.files[i].name;
+			const fsize = event.target.files[i].size;
+			const fileSize = Math.round((fsize / 1024));
+      
+			if (fileSize >= 5120) {
+				
+				var element = '<p class="customError mb-0" style="color:red">'+fileName+'  size is more than 5MB please reduce size.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').next().next());
+        error++;
+       
+			}
+    }
+    if(error > 0){
+      jQuery(".fileInput").val('');
+      return false;
+    }else{
+
+      this.file = event.target.files;
+    }
 }
 enableReviewForm(){
     this.write_review = true;
@@ -204,7 +246,7 @@ onClickSubmit(data) {
             error++;
           }
           else if(data.email != data.reemail){
-            var element = '<p class="customError" style="color:red">'+"Both emails are not matching"+'</p>';
+            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
             $(element).insertAfter($(this));
             error++;
           }
@@ -217,20 +259,14 @@ onClickSubmit(data) {
             error++;
           }
         }
-        if($(this).attr('name') == 'telnum' && $(this).val() != ''){
-         
-          if(!$.isNumeric($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" should be numeric"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-        }
-        if($(this).val() == ''){
+       
+        if($(this).val() == '' || $(this).val() == '(___)___-____'){
 
           var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
           $(element).insertAfter($(this));
           error ++;
         }
+       
        
       
       
@@ -268,12 +304,13 @@ onClickSubmit(data) {
     $.each(this.file, function(index, value){
       formData.append('file[]', value);
     });
+ 
     formData.append("listing_id",this.dispDetails.id);
     formData.append("first_name",data.fname);
     formData.append("last_name",data.lname);
-    formData.append("telephone",data.telnum);
+    formData.append("telephone",$('input[name=telnum]').val());
     formData.append("e_mail",data.email);
-    formData.append("verification_details",data.notes);
+    formData.append("verification_details",$('textarea[name=notes]').val());
 
     if(error == 0 && honeyError == 0){
 
@@ -346,6 +383,8 @@ onSubmitReviewForm(form: NgForm) {
 
      this.isValidFormSubmitted = true;
      this.review = form.value;
+     this.login_alert.email = form.value.email
+     this.review.status = 0;
 
      if(this.user_data && this.user_data['email']){
 
@@ -371,21 +410,25 @@ onSubmitReviewForm(form: NgForm) {
     this.review.rating = $("#starrating").val();
      this.review.disp_id = this.dispens_id;
       this.expiredDate = new Date();
+      this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+  
 
-          this.postReview().subscribe(
-      (data => {
+      if(this.isUserLoggedIn)
+    {
+     // this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+     // this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+      this.postReview().subscribe(
+      (data => {    
+       
         this.review_id = data["id"];        
         this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
         this.checkUser = true;
-        
       }),
       (err: any) => console.log(err),
-      () => {
+      () => {              
           if(this.review_id > 0){
-            //console.log(this.review_id)
             this.review_id  = 0;
-
-            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome, the POW team has received ', "", {
+            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp; Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily.  ', "", {
              "closeButton": true,
               "timeOut": "8000",
               "extendedTImeout": "0",
@@ -406,11 +449,112 @@ onSubmitReviewForm(form: NgForm) {
           }
           
      });
+    }
+    else
+    {
+      
+      this.review_check_email().subscribe(
+      (data => {    
+           if(data['data'] > 0)
+           {
+             console.log(data['data'])
+             setTimeout(function(){ 
+                $('#login_modal').modal({
+                    show: true,
+                    backdrop: 'static',
+                    keyboard: false
+              });
+        }, 1);
+           }
+           else
+           {
+             this.postReview().subscribe(
+      (data => {    
+        console.log(data)
+        this.review_id = data["id"];        
+        this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
+        this.checkUser = true;
+      }),
+      (err: any) => console.log(err),
+      () => {              
+          if(this.review_id > 0){
+            this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+     this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+            this.review_id  = 0;
+            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. ', "", {
+             "closeButton": true,
+              "timeOut": "8000",
+              "extendedTImeout": "0",
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "extendedTimeOut": "0",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut",
+              "positionClass": "toast-top-full-width",
+            }); 
+
+            this.write_review =  false;
+
+            this.review = new ReviewDisp();   
+            form.resetForm();
+          }
+          
+     });
+           }
+      }),
+      (err: any) => console.log(err),
+      () => {              
+          
+          
+     });
+    }
+
+    // this.postReview().subscribe(
+    //   (data => {
+    //     this.review_id = data["id"];        
+    //     this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
+    //     this.checkUser = true;
+        
+    //   }),
+    //   (err: any) => console.log(err),
+    //   () => {
+    //       if(this.review_id > 0){
+    //         this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+    //         this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+    //         this.review_id  = 0;
+    //         //console.log(this.review_id)
+    //         this.review_id  = 0;
+
+    //         toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. ', "", {
+    //          "closeButton": true,
+    //           "timeOut": "8000",
+    //           "extendedTImeout": "0",
+    //           "showDuration": "300",
+    //           "hideDuration": "1000",
+    //           "extendedTimeOut": "0",
+    //           "showEasing": "swing",
+    //           "hideEasing": "linear",
+    //           "showMethod": "fadeIn",
+    //           "hideMethod": "fadeOut",
+    //           "positionClass": "toast-top-full-width",
+    //         }); 
+
+    //         this.write_review =  false;
+
+    //         this.review = new ReviewDisp();   
+    //         form.resetForm();
+    //       }
+          
+    //  });
     
     
 } 
   
-
+review_check_email(){
+  return this._http.get<any[]>('review_check_email?email='+this.review.email);
+}
 getDispensaryDetailData(disp_slug): Observable<any> {
    // var postData = {"url":currentUrl};
     if(this.user_data){
@@ -497,6 +641,129 @@ getDispensaryDetailData(disp_slug): Observable<any> {
       $('.tooltip-contentfollow span').html(parseInt($('.tooltip-contentfollow span').text())+1);
       //this.cookieService.set('_mio_user_email', this.favstrain['email'], this.expiredDate,"/");
     }
+  }
+
+  
+addUserLog (): Observable<any[]> {
+    
+  var postdata: any;
+  var userId: any;
+
+  userId = 0;
+
+  if(this.user_data && this.user_data['id']!= '')
+  {
+      userId = this.user_data['id'];
+  }else if(this.cookieService.get('_mio_user_id') && this.cookieService.get('_mio_user_id')!="")
+  {
+      userId = this.cookieService.get('_mio_user_id');
+  }
+
+  //var url = (this.platformLocation as any).location.origin ;
+  var url = (this.platformLocation as any).location.href;
+
+  //var detailstmp = {'location' : this.selectedLocation,'strain' : this.selectedStrain, 'mass' : this.selectedMass };
+  
+  //console.log((this.platformLocation as any).location);
+  var details = "NA";
+  
+  
+
+  var description = "I Feel Like-"+this.dispDetails['name'];
+
+
+  postdata = {'url' : url , 'description' : description, 'user_id' :userId , 'details': details};
+ 
+  return this._http.post<any[]>('set_user_log',postdata);
+}
+
+
+  onLogin(form: NgForm)
+  {
+    this.isValidFormSubmitted = false;
+     if (form.invalid) {
+        return;
+     }
+     this.isValidFormSubmitted = true;
+     this.login_alert.email = form.value.email;
+     this.login_alert.password = form.value.password;
+
+     this.postLogin().subscribe(data => 
+            {
+            //console.log(data);
+            if (data["api_status"]==1)
+                {
+                   toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Login sucess fully !", "", {
+                 "closeButton": true,
+                  "timeOut": "7000",
+                  "extendedTImeout": "0",
+                  "showDuration": "300",
+                  "hideDuration": "1000",
+                  "extendedTimeOut": "0",
+                  "showEasing": "swing",
+                  "hideEasing": "linear",
+                  "showMethod": "fadeIn",
+                  "hideMethod": "fadeOut",
+                  "positionClass": "toast-top-full-width",
+                });
+                  // window.location.href = '/user-profile';
+                   $('#login_modal').modal('hide');
+
+                   this.expiredDate = new Date();
+    this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+
+    //this.cookieService.set( '_mio_user_name', this.converter_alert.name, this.expiredDate,"/" );
+    this.cookieService.set( '_mio_user_email', this.login_alert.email, this.expiredDate,"/" );
+     this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );      
+                   
+                   localStorage.setItem('userData',JSON.stringify(data));   
+                   this.checkUser = true;
+                   this.isUserLoggedIn = true;
+                   this.user_data = data;                
+                   this.globals.user_data = true;
+                   this.globals.user_name = data["name"];
+                   this.globals.user_email = data["email"];
+                   //this.getpricealertCount();
+
+                   this.addUserLog().subscribe(
+                      (data => {}),
+                      (err: any) => console.log(err),
+                      () => {}
+                    ); 
+                   form.resetForm();
+                  // this.router.navigate(['/members/dashboard']);
+
+                   //localStorage.setItem('remember_token',data["remember_token"]);
+                //form.resetForm();
+
+                  
+
+                }
+                else
+                {
+                    toastr.error("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Please provide valid details !", "", {
+                 "closeButton": true,
+                "timeOut": "7000",
+                "extendedTImeout": "0",
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "extendedTimeOut": "0",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "positionClass": "toast-top-full-width",
+                });     
+               }
+                
+            }, (err) => {
+               
+                console.log(err.message);
+            });
+  }
+
+   postLogin(){
+    return this._http.post<any[]>('userlogin',this.login_alert);
   }
 
 

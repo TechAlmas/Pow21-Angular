@@ -23,6 +23,7 @@
     "angular2-image-upload": "^1.0.0-rc.2",
     "angular2-text-mask": "^9.0.0",
     "core-js": "^2.5.4",
+    "ng-multiselect-dropdown": "^0.3.8",
     "ng2-completer": "^2.0.8",
     "ng2-google-recaptcha": "^5.0.0",
     "ngx-cookie-service": "^2.2.0",

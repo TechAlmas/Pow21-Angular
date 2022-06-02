@@ -451,14 +451,14 @@ onDispreviewupdate(form: NgForm)
 
 }
 
-unpublishreview(id,name)
+removereview(id,name)
 {
   Swal({
       title: 'Are you sure?',
-      text: 'You want to unpublish review for'+name,
+      text: 'You want to remove review for'+name,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, unpublish it!',
+      confirmButtonText: 'Yes, remove it!',
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.value) {  
@@ -467,7 +467,7 @@ unpublishreview(id,name)
           data =>{
             this.listreview();
 
-              toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, review form"+name+"unpublish successfully", "", {
+              toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, review from "+name+" removed successfully", "", {
              "closeButton": true,
               "timeOut": "7000",
               "extendedTImeout": "0",
@@ -488,14 +488,14 @@ unpublishreview(id,name)
       }
     });
 }
-unpublishdispreview(id,name)
+removedispreview(id,name)
 {
    Swal({
       title: 'Are you sure?',
-      text: 'You want to unpublish review for'+name,
+      text: 'You want to remove review for'+name,
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, unpublish it!',
+      confirmButtonText: 'Yes, remove it!',
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.value) {  
@@ -504,7 +504,7 @@ unpublishdispreview(id,name)
           data =>{
             this.listdispreview();
 
-              toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, review form"+name+"unpublish successfully", "", {
+              toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, review from "+name+" removed successfully", "", {
              "closeButton": true,
               "timeOut": "7000",
               "extendedTImeout": "0",

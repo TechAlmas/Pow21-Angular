@@ -40,7 +40,8 @@
               "src/assets/css/components/lightbox.min.css",
               "src/assets/css/sweetalert2.min.css",
              "src/styles.css",
-              "src/assets/css/responsive.css"
+              "src/assets/css/responsive.css",
+              "src/assets/css/select2.min.css"
             ],
             "scripts": [
               "src/assets/js/jquery.js",
@@ -55,6 +56,8 @@
               "src/assets/js/components/lightbox.min.js",
               "src/assets/js/functions.js",
               "src/assets/js/sweetalert2.all.min.js",
+              "src/assets/js/phone-mask.min.js",
+              "src/assets/js/select2.min.js"
             ],
             "es5BrowserSupport": true
           },

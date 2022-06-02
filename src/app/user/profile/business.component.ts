@@ -29,6 +29,7 @@ export class BusinessComponent implements OnInit {
 	listdispLists:any;
 	file:any;
 	userList: any;
+	
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
 		this.user_data = JSON.parse(localStorage.getItem('userData'));
@@ -65,6 +66,8 @@ export class BusinessComponent implements OnInit {
 	}
 	ngOnInit() {
 		window.scrollTo(0, 0);
+
+		
 		//this.loadMetaData();
 	}
 	loadMetaData(){

@@ -35,7 +35,9 @@
                             <div class="form-group whitebgs">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Email Address</label>
-                                  <input type = "email" name = "email" class="sm-form-control required customValidate" placeholder="Enter Email Address" ngModel>
+                                  <input type = "email" name = "email" class="sm-form-control required customValidate" placeholder="Enter Email Address" ngModel >
+							
+									
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>
@@ -46,7 +48,49 @@
                                 <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
                             </div>
-                            <div class="form-group whitebgs">
+							<div class="form-group whitebgs signupFields" style="display:none;">
+								<div class="wait-layer" *ngIf="waitLayer"></div>
+								<label for="paid-for-quality">Choose Password</label>
+								<input type="password" id="register-form-password" name="password" value="" minlength="6" class="form-control customValidateSignUp" required ngModel/>
+									
+							</div>
+							<div class="form-group whitebgs signupFields" style="display:none;">
+								<div class="wait-layer" *ngIf="waitLayer"></div>
+								<label for="paid-for-quality">Confirm Password</label>
+								<input type="password" id="register-form-repassword" name="cpassword" value="" class="form-control customValidateSignUp" required validateEqual="password" ngModel />
+								
+									<div id="pcp_error" style="display: none;" class="error" > 
+											Password & Confirm password do not match.
+									</div> 
+								
+							</div>
+							<div class="form-group whitebgs signupFields" style="display:none;">
+								<div class="wait-layer" *ngIf="waitLayer"></div>
+									<label class="toggle">
+									<input type="checkbox" id="register-form-is_updates" name="is_updates"  value="1" class="form-control"ngModel>
+									<div class="slide-toggle"></div>
+									<div class="slide-toggle-content">Keep me updated on special offers and news.</div>
+								  </label>
+							</div>
+							<div class="form-group whitebgs signupFields" style="display:none;">
+								<div class="wait-layer" *ngIf="waitLayer"></div>
+									<label class="toggle">
+									<input type="checkbox" id="register-form-is_terms" name="is_terms"  value="1" class="form-control customValidateSignUp" required ngModel>                             
+	
+									<div class="slide-toggle"></div>
+									<div class="slide-toggle-content">Yes, I agree to POW's <a href="https://www.pow21.com/blog/termsofuse/" target="_blank">Terms</a> and <a href="https://www.pow21.com/blog/privacy/" target="_blank">Privacy.</a></div>
+								  </label>
+								 
+							</div>
+							<div class="form-group whitebgs signupFields" style="display:none;">
+								<div class="wait-layer" *ngIf="waitLayer"></div>
+									<label class="toggle">
+									<input type="checkbox" id="register-form-is_business_account" name="is_business_account"  value="1" class="form-control" disabled checked>
+									<div class="slide-toggle"></div>
+									<div class="slide-toggle-content">Business Account</div>
+								  </label>
+							</div>
+                            <div class="form-group whitebgs ">
                               <div class="wait-layer" *ngIf="waitLayer"></div>
                                 <label for="paid-for-quality">Comments</label>
                                   <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->

@@ -91,7 +91,15 @@
 										<div class="" ></div>
 										<label for="paid-for-quality">Logo</label>
 										<label for="file-upload" class="custom-file-upload"><i class="fa fa-cloud" aria-hidden="true"></i> Custom files Upload</label>
-										<input id="file-upload" type="file" (change)="this.onFilechange($event)" multiple />
+										<input id="file-upload" type="file" (change)="this.onFilechange($event)" />
+
+										<div class="logo-container d-flex mt-3">
+
+											<div class="image-area mr-3"  *ngIf="dispDetails.logoUrl">
+												<img src="{{dispDetails.logoUrl}}" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" >&#215;</a>
+																							
+											</div>
+										</div>
 										<!-- <input  class="form-control" type="file" id="formFile"> -->
 									</div>
 									<div class="form-group whitebgs">
@@ -235,9 +243,14 @@
 										<!-- <input  class="form-control" type="file" id="formFile"> -->
 										<div class="image-container d-flex mt-3">
 
-											<div class="image-area mr-3" *ngFor="let storeImage of dispDetails.store_images">
-												<img src="{{storeImage.link}}" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" data-name="{{storeImage.name}}" style="display: inline;" (click)="this.removeStoreImage(storeImage.name)">&#215;</a>
-												
+											<div class="image-area mr-3" *ngFor="let storeImage of store_images">
+												<img src="{{storeImage.link}}" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" data-name="{{storeImage.name}}" style="display: inline;" >&#215;</a>
+												<label class="toggle">
+													<div class="togglebox">
+													<input type="radio" name="is_thumbnail" value="{{storeImage.name}}" class="form-control isThumbnail" [checked]="storeImage.name == dispDetails.store_thumbnail_image" >
+													<div class="slide-toggle"></div>
+													<div class="slide-toggle-content text-white">Thumbnail</div></div>
+												</label>												
 											</div>
 										</div>
 									</div>

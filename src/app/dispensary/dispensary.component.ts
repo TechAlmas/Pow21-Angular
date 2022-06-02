@@ -205,7 +205,7 @@ onFilechange(event: any) {
 			if (fileSize >= 5120) {
 				
 				var element = '<p class="customError mb-0" style="color:red">'+fileName+'  size is more than 5MB please reduce size.</p>';
-				jQuery(element).insertAfter(jQuery('.fileInput').next());
+				jQuery(element).insertAfter(jQuery('.fileInput').next().next());
         error++;
        
 			}

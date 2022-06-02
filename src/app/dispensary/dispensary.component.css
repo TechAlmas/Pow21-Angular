@@ -10,14 +10,14 @@
 .topimg .unverified-icon span {font-size: 12px;color: #d7d7db;font-weight: 500;margin-left: 25px;margin-top: 9px;}
 .questionmarks {margin: 5px 0px;padding: 3px;opacity: 0.9;}
 .single-product.dispensary .product .product-image:before {content: '';background: url('/assets/images/icon-verified-no.png');width: 100%;height: 220px;position: absolute;background-repeat: no-repeat;background-size: 15%;top: -15px;left: 15px;z-index: 1;}
-.single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 32px;font-size: 14px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 77%;height: auto;text-align: left;padding: 5px 30px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: center;background-position-y: center;text-transform: capitalize;}
+.single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 32px;font-size: 14px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 77%;height: auto;text-align: left;padding: 5px 30px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: right;background-position-y: center;text-transform: capitalize;}
 
 .blowimg{width: 85%;margin: 0 auto;}
-.location-icon i {font-size: 24px;color: #c91032;margin-right: 7px;vertical-align: middle;}
-.calling-icon i {font-size: 24px;transform: rotate(315deg);margin-right: 7px;vertical-align: middle;color: #000000;}
-.location-icon {margin: 10px 0;color: #1b88cc;font-size: 17px;vertical-align: middle;}
-.calling-icon {color: #000000;font-size: 17px;vertical-align: middle;}
-a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;}
+.location-icon i {font-size: 16px;color: #c91032;margin-right: 7px;vertical-align: middle;}
+.calling-icon i {font-size: 16px;transform: rotate(315deg);margin-right: 7px;vertical-align: middle;color: #000000;}
+.location-icon {margin: 10px 0;color: #1b88cc;font-size: 14px;vertical-align: middle;}
+.calling-icon {color: #000000;font-size: 14px;vertical-align: middle;}
+/* a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;} */
 .col.follow {flex: 0 0 16%;max-width: 16%;padding: 0;margin: auto 0;text-align: center;}
 .col.title {flex: 0 0 84%;max-width: 84%;padding: 0;}
 .tooltip-contentfollow {cursor: pointer;display: flex;flex-direction: column;align-items: center;justify-content: center;visibility: visible;opacity: 1;position: absolute;background: #2384bc;left: -9px;padding: 0px;margin-top: 2px;font-size: 15px;width: auto;/*transition: 0.25s all ease;transition-delay: 0.25s;*/z-index: 2;border-radius: 4px;top: -50px;padding: 5px 5px;}
@@ -29,7 +29,7 @@ span.review-count {margin-left: 5px;}
 a.headingfollowtooltip span {color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;}
 .tooltip-contentfollow:after {content: "";position: absolute;border-width: 8px;border-style: solid;top: 100%;left: 35%;border-color: #2384bc transparent transparent transparent;}
 .tooltip-contentfollow.user_follow:after{left: 30%;}
-.experience{font-size: 18px;}
+.experience{font-size: 16px;}
 .col.retail-meta {flex: 0 0 50%;max-width: 50%;padding: 0;}
 .col.retail-other-info {flex: 0 0 50%;max-width: 50%;padding: 0;}
 .single-product.dispensary {margin-bottom: 50px;}
@@ -48,7 +48,7 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
     margin-left: 10px;
 }
 .textcontant span {
-    font-size: 18px;
+    font-size: 14px;
     letter-spacing: 0.7;
     margin-left: 8px;
     font-weight: 400;
@@ -78,7 +78,6 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
     top: 0px;
     padding: 6px 15px;
     margin: 0px;
-    font-size: 15px;
     width: 70%;
     transition: 0.25s all ease;
     transition-delay: 0.25s;
@@ -88,6 +87,9 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
     border-radius: 0.1875rem;
     padding: 10px;
     box-shadow: rgb(0 0 0 / 20%) 0px 1px 3px;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: 'Lato';
 }
 .tooltip-contents h4{margin-bottom: 10px;}
 .tooltip-contents span{font-size: 13px;display: block;}
@@ -100,12 +102,12 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
     color: rgb(0, 168, 163);
 }
 .iconboxsize {
-    font-size: 18px;
+    font-size: 14px;
     vertical-align: revert;
 }
 .iconboxcheck {
  vertical-align: baseline;
-    font-size: 18px;
+    font-size: 14px;
 }
 span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Licensespace {
     margin-right: 7px;
@@ -120,7 +122,7 @@ span.styled-components__HoursText-sc-1sy7kcj-10.iWfkRH.Storefrontspacecontant {
     padding: 10px 0px 5px 0px;
 }
 .iconboxsizethumb {
-    font-size: 22px;
+    font-size: 20px;
 }
 .col.retail-other-info {
     margin-top: 5px;
@@ -169,6 +171,7 @@ img.img-responsive1 {
     padding: 5px;
     text-transform: capitalize;
     font-size: 14px;  
+    margin-left: -26px;
 }
 .claim_listings a {
     color: #fff;
@@ -211,6 +214,103 @@ img.img-responsive1 {
 .postBtn:not(:disabled):not(.disabled){
     cursor: pointer;
 }
+a.btn.contactus {
+    padding: 7px 30px;
+    margin-top: 15px;
+    border-radius: 10px;
+    background: #0088cc;
+    width: auto;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 14px;
+}
+.single-product .product .product-info .product-description p {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Lato';
+    color: #555555;
+}
+span.write-a-review {
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Lato';
+    color: #555555;
+}
+.single-product .product .product-info .product-name h1 {
+    font-family: 'Lato';
+    font-weight: 500;
+}
+
+.dispensary.single-product .product .product-image.Verified:before{
+content: '';
+background: url(/assets/images/icon-verified-yes.png);
+width: 100%;
+height: 220px;
+position: absolute;
+background-repeat: no-repeat;
+background-size: 15%;
+top: -15px;
+left: 15px;
+z-index: 1;
+}
+.dispensary.single-product .product .product-image.Verified:after{
+    content: 'verified';
+    position: absolute;
+    top: 0;
+    left: 32px;
+    font-size: 14px;
+    color: #ffffff;
+    background: rgb(0 0 0 / 40%);
+    width: 77%;
+    height: auto;
+    text-align: left;
+    padding: 5px 30px;
+    line-height: 1.6;
+    z-index: 0;
+    /* background-image: url(/assets/images/question.svg);
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: center;
+    text-transform: capitalize; */
+}
+.col.product-image.Verified .claim_listings {
+    display: none;
+}
+
+.dispensary.single-product .product .col.product-image.Pending:before{
+    content: '';
+    background: url(/assets/images/icon-verified-pending.png);
+    width: 100%;
+    height: 220px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 15%;
+    top: -15px;
+    left: 15px;
+    z-index: 1;
+}
+.dispensary.single-product .product .col.product-image.Pending:after{
+    content: 'pending';
+    position: absolute;
+    top: 0;
+    left: 32px;
+    font-size: 14px;
+    color: #ffffff;
+    background: rgb(0 0 0 / 40%);
+    width: 77%;
+    height: auto;
+    text-align: left;
+    padding: 5px 30px;
+    line-height: 1.6;
+    z-index: 0;
+    
+}
+.col.product-image.Pending .claim_listings {
+    display: none;
+}
+
+
 @media (min-width: 991px) and (max-width: 1199px) { 
     a.headingfollowtooltip{
         color: #ffff;
@@ -248,7 +348,7 @@ img.img-responsive1 {
         font-size: 12px;
     }
   .single-product.dispensary .product .product-image:before {content: '';background: url('/assets/images/icon-verified-no.png');width: 100%;height: 220px;position: absolute;background-repeat: no-repeat;background-size: 15%;top: -10px;left: -12px;z-index: 1;}
-  .single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 0px;font-size: 11px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 93%;height: auto;text-align: left;padding: 5px 0px 5px 23px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: center;background-position-y: center;text-transform: capitalize;}
+  .single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 0px;font-size: 11px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 93%;height: auto;text-align: left;padding: 5px 0px 5px 23px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: right;background-position-y: center;text-transform: capitalize;}
   .claim_listings {
       z-index: 999999;
       position: absolute;

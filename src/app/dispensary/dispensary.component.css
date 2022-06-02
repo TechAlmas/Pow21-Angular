@@ -129,6 +129,8 @@
   color: #1b88cc;
   font-size: 16px;
   vertical-align: middle;
+  display: flex;
+  align-items: center;
 }
 /* a.btn.contactus {background: #2d9bf0;padding: 7px 30px;border: 1px solid #000000;color: #000000;margin-top: 15px;border-radius: 1px;} */
 
@@ -207,7 +209,7 @@ a.headingfollowtooltip .nocount {
 
 a.headingfollowtooltip span {
   color: #ffff;
-  font-size: 16px;
+  font-size: 17px;
   vertical-align: middle;
   font-weight: 700;
   margin-left: 5px;
@@ -397,7 +399,7 @@ img.img-responsive1 {
   padding: 5px;
   text-transform: capitalize;
   font-size: 14px;
-  margin-left: -32px;
+  margin-left: -36px;
 }
 .claim_listings a {
   color: #fff;

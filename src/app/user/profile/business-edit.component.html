@@ -201,27 +201,27 @@
 		                           </div>
 
 									<div class="form-group whitebgs assign_user">
-										<div class="" ></div>
+										<div class="assign_usercms" >
 										<label for="paid-for-quality">Assign User</label>
-										<select id="assign_user" name="assign_user" class="sm-form-control assign_user js-select2 required" multiple="multiple">
+										<select id="assign_user" name="assign_user" class="sm-form-control cmsspaccing assign_user js-select2 required" multiple="multiple">
 											<option *ngFor="let assignUser of dispDetails.assign_user_dropdown" value="{{assignUser.id}}" [selected]="checkAssignUserSelectStatus(assignUser.id) == 'yes'" >{{assignUser.name}}</option> 	
 										</select>
+									</div>
 										<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
 									</div>
 
 									<div class="form-group whitebgs store_meta">
-										<div class="" ></div>
-										<label for="paid-for-quality">Store Meta</label>
-										<select class="js-select2 sm-form-control" name="store_meta" multiple="multiple" >
-											<option value="">Store Meta</option>
+										<div class="storetopcms" ></div>
+										<label for="paid-for-quality storelabel">Store Meta</label>
+										<select class="js-select2 sm-form-control cmsspaccing" name="store_meta" multiple="multiple" >
 											<option *ngFor="let storeMeta of dispDetails.store_meta_dropdown" value="{{storeMeta.id}}" [selected]="checkStoreMetaSelectStatus(storeMeta.id) == 'yes'" >{{storeMeta.title}}</option>
 											
 										</select>
 										<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
 									</div>
-									<div class="form-group whitebgs">
-			                           <div class="" ></div>
-			                           <label for="paid-for-quality">Status </label>
+									<div class="form-group whitebgs statusst">
+			                           <div class="statustop" ></div>
+			                           <label for="paid-for-quality statuslabel">Status </label>
 			                           <div class="statusrbox">
 			                              <input id="status_active" class="radio-style" name="status" type="radio" value="active" required>
 			                              <label for="status_active" class="radio-style-2-label">Active</label>
@@ -241,7 +241,7 @@
 										<label for="store_images" class="custom-file-upload"><i class="fa fa-cloud" aria-hidden="true"></i> Custom Images Upload</label>
 										<input type="file" id="store_images" class="fileInput" name="store_images" (change)="this.onStoreImagesUpload($event)" multiple />
 										<!-- <input  class="form-control" type="file" id="formFile"> -->
-										<div class="image-container d-flex mt-3">
+										<div class="image-container d-flex mt-3 cmsright">
 
 											<div class="image-area mr-3" *ngFor="let storeImage of store_images">
 												<img src="{{storeImage.link}}" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" data-name="{{storeImage.name}}" style="display: inline;" >&#215;</a>

@@ -1,4 +1,4 @@
-import { Component, HostListener,OnInit, OnDestroy} from '@angular/core';
+import { Component, HostListener,OnInit, OnDestroy, Input} from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Globals } from './models/globals';
@@ -37,6 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
   showLoadingIndicator = true;
 
 
+
   constructor(private globals: Globals,private route: ActivatedRoute,private routes: Router,private platformLocation: PlatformLocation, private title: Title, private meta: Meta,private _http: HttpClient,private cookieService: CookieService,@Inject(DOCUMENT) private dom){
 
     this.routes.events.subscribe((routerEvent: Event) => {
@@ -47,6 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
         if(routerEvent instanceof NavigationEnd){
           this.showLoadingIndicator = false;
         }
+
+      
     });
 
   }

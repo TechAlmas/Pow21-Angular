@@ -11,6 +11,10 @@ import { Meta, Title } from '@angular/platform-browser';
 import { DispDetail } from '../../models/disp-detail';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { $ } from 'protractor';
+
+
+
 
 
 declare var toastr: any;
@@ -24,6 +28,8 @@ declare var Swal: any;
 })
 export class BusinessEditComponent implements OnInit {
 	dispDetails = new DispDetail();
+	store_meta : any;
+	assign_user : any;
 	user_data: any;
 	name : string;
 	email: string;
@@ -34,6 +40,10 @@ export class BusinessEditComponent implements OnInit {
 	file:any;
 	userList: any;
 	slug: any;
+	storeImages: any;
+	removedImages : any;
+	store_images : any;
+
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
 		this.user_data = JSON.parse(localStorage.getItem('userData'));
@@ -47,6 +57,7 @@ export class BusinessEditComponent implements OnInit {
 		this.getuserdata();
 		this.getDispensaryDetail();
 		this.userlist();
+		
 	}
 
 	getdispList(){
@@ -69,8 +80,73 @@ export class BusinessEditComponent implements OnInit {
 	}
 	ngOnInit() {
 		window.scrollTo(0, 0);
-		//this.loadMetaData();
+		jQuery(".js-select2").select2({
+			closeOnSelect : false,
+			placeholder : "Placeholder",
+			allowHtml: true,
+			allowClear: true,
+			tags: true // создает новые опции на лету
+		});
+
+		//Show First checkbox always checked
+		setTimeout(function() { 
+			if(jQuery('.isThumbnail:checked').length == 0){
+				jQuery('.isThumbnail').first().prop('checked',true);
+			}
+		}, 4000);
+		
+		
+
+		//Functionality on thumbnail radio change
+		jQuery(document).on('change','.isThumbnail',function(){
+			jQuery('.fileInput').parent().next('.customError').remove();
+			if(jQuery('.isThumbnail:checked').length > 1){
+				
+				var element = '<p class="customError" style="color:red">Only one image can be selected as thumbnail image.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').parent());
+				jQuery(this).prop('checked',false);
+				return false;
+			}
+		});
+		const component = this;
+		jQuery(document).on('click','.remove-image',function(){
+			
+			
+			if(jQuery(this).parents('.image-container').length > 0){
+				console.log('store image remove')
+				component.addRemovedImagesToArray(jQuery(this).attr('name'));
+
+			}
+			if(jQuery(this).parents('.logo-container').length > 0){
+				component.file= '';
+				console.log('logo image remove')
+				jQuery('#file-upload').val('');
+
+			}
+			jQuery(this).parents('.image-area').remove();
+
+		});
+		
+
+		
 	}
+	addRemovedImagesToArray($name){
+		if(this.removedImages == undefined){
+			this.removedImages = [] ;
+		}
+		this.removedImages.push($name);
+	}
+	// removeStoreImage($name){
+
+	// 		if(this.removedImages == undefined){
+	// 			this.removedImages = [] ;
+	// 		}
+	// 		console.log(jQuery('.remove-image[name="'+$name+'"]'))
+	// 		jQuery('.remove-image[name="'+$name+'"]').parents('.image-area').remove();
+	// 		this.removedImages.push($name);
+
+
+	// }
 	loadMetaData(){
 		//console.log((this.platformLocation as any).location.pathname);
 		//console.log(this.globals.location_global_url);
@@ -88,6 +164,8 @@ export class BusinessEditComponent implements OnInit {
 			(err: any) => console.log(err),
 			() => {}
 		);
+
+		
 	}
 	getMetaData(currentUrl): Observable<any[]> {
 		var postData = {"url":currentUrl};
@@ -151,7 +229,11 @@ export class BusinessEditComponent implements OnInit {
 
 	      ((data:any) => {
 	      	this.dispDetails = data['data'];
+			this.store_meta = data['data'].store_meta; 			
+			this.assign_user = data['data'].assign_user; 
 			  this.dispDetails.schedule =  JSON.parse(this.dispDetails.schedule)
+			  this.store_images  = Object.values(data['data'].store_images);
+			console.log(this.store_images)
 	        //this.dispens_id = this.dispDetails.disp_id;
 	        //this.dispState = data['data'].state.replace(/\s/g, "-");
 	        //this.dispCity = data['data'].city.replace(/\s/g, "-");
@@ -240,7 +322,109 @@ export class BusinessEditComponent implements OnInit {
 		});
 	}
 	onFilechange(event: any) {
-		this.file = event.target.files;
+		let dispId =  this.dispDetails.id;
+		jQuery('#file-upload').parent().next('.customError').remove();
+		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+		var file = event.target.files[0];
+		var fileType = file.type;
+		const fsize = event.target.files[0].size;
+		const fileSize = Math.round((fsize / 1024));
+		if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+				
+			var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+			jQuery(element).insertAfter(jQuery('#file-upload').parent());
+			jQuery('#file-upload').val('');
+			return false;
+		}else{
+				
+			var reader:any,
+			target:EventTarget;
+			reader= new FileReader();
+
+			reader.onload = function (imgsrc) {
+				let url = imgsrc.target.result;
+				
+				let fileName =dispId+"-"+file.name;
+				let html = 		'<div class="image-area mr-3" ><img src="'+url+'" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" ></a></div>';
+
+				jQuery('.logo-container').html(html); 
+			}
+			reader.readAsDataURL(file); 
+			 
+		}
+		this.file = event.target.files[0];
+	}
+	
+	onStoreImagesUpload(event:any){
+		let dispId =  this.dispDetails.id;
+		jQuery('.fileInput').parent().next('.customError').remove();
+		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+
+		for(let i=0;i<event.target.files.length;i++){
+            var file = event.target.files[i];
+            var fileType = file.type;
+			const fsize = event.target.files[i].size;
+			const fileSize = Math.round((fsize / 1024));
+            if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+				
+				var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').parent());
+                jQuery(".fileInput").val('');
+                return false;
+            }
+			if (fileSize >= 1024) {
+				
+				var element = '<p class="customError" style="color:red">The image size should not be greater than 1MB.</p>';
+				jQuery(element).insertAfter(jQuery('.fileInput').parent());
+                jQuery(".fileInput").val('');
+                return false;
+			}else{
+				
+				var reader:any,
+				target:EventTarget;
+				reader= new FileReader();
+
+				reader.onload = function (imgsrc) {
+					let url = imgsrc.target.result;
+					
+					let fileName =dispId+"-"+file.name;
+					let html = 		'<div class="image-area mr-3" ><img src="'+url+'" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" name="'+fileName+'"></a><label class="toggle"><div class="togglebox"><input type="radio" name="is_thumbnail" value="'+fileName+'" class="form-control isThumbnail" ><div class="slide-toggle"></div><div class="slide-toggle-content text-white">Thumbnail</div></div></label></div>';
+
+					jQuery('.image-container').append(html); 
+				}
+				reader.readAsDataURL(file); 
+				 
+			}
+        }
+		this.storeImages = event.target.files;
+		
+
+	}
+	
+	
+	checkStoreMetaSelectStatus(value){
+		if(Array.isArray(this.store_meta) && this.store_meta !=undefined ){
+
+			if(this.store_meta.includes(value.toString())){
+				return 'yes';
+			}else{
+				return 'no';
+			}
+		}else{
+			return 'no';
+		}
+	}
+	checkAssignUserSelectStatus(value){
+		if(Array.isArray(this.assign_user) && this.assign_user !=undefined ){
+
+			if(this.assign_user.includes(value.toString())){
+				return 'yes';
+			}else{
+				return 'no';
+			}
+		}else{
+			return 'no';
+		}
 	}
 	onSubmitStore(data){
 		// var postdata = {
@@ -259,11 +443,27 @@ export class BusinessEditComponent implements OnInit {
 		// 	'id': jQuery('#id').val(),
 		// 	'file': this.file
 		// }
-		console.log(this.file);
-		const formData = new FormData();
-		jQuery.each(this.file, function(index,value){
-			formData.append('file[]', value);
+		// console.log(this.file);
+		let error = 0;
+		jQuery('.image-container').parent('.whitebgs').find('.customError').remove();
+		jQuery('.honeyInput').each(function(){
+			if(jQuery(this).val() != '' ){
+				var element = '<p class="customError" style="color:red">Something Went Wrong.</p>';
+				jQuery(element).insertAfter(jQuery('.image-container'));
+				error++;
+				return false;
+			}
 		});
+		const formData = new FormData();
+		if(this.file && this.file != undefined){
+
+			formData.append('file[]', this.file);
+		}
+	
+		jQuery.each(this.storeImages, function(index,value){
+			formData.append('store_images[]', value);
+		});
+	
 		
 		formData.append('name',jQuery('#name').val());
     	formData.append('address', jQuery('#address').val());
@@ -278,6 +478,36 @@ export class BusinessEditComponent implements OnInit {
 		formData.append('phone', jQuery('#phone').val());
 		formData.append('license_type', jQuery('#license_type').val());
 		formData.append('id', jQuery('#id').val());
+		console.log(this.removedImages)
+		if(this.removedImages != undefined){
+			jQuery.each(this.removedImages, function(index,value){
+				formData.append('removed_images[]', value);
+			});
+		}
+		if(jQuery('.isThumbnail:checked').val() != undefined){
+
+			formData.append('store_thumbnail_image', jQuery('.isThumbnail:checked').val());
+		}else{
+			formData.append('store_thumbnail_image', '');
+		}
+
+		let storeMetaValues = jQuery('select[name=store_meta]').val();
+		if(storeMetaValues != undefined && storeMetaValues != null){
+			jQuery.each(storeMetaValues, function(index,value){
+				formData.append('store_meta[]', value);
+			});
+		}else{
+			formData.append('store_meta[]', storeMetaValues);
+		}
+		let assignUserValues = jQuery('select[name=assign_user]').val();
+		console.log(assignUserValues)
+		if(assignUserValues != undefined && assignUserValues != null){
+			jQuery.each(assignUserValues, function(index,value){
+				formData.append('assign_user[]', value);
+			});
+		}else{
+			formData.append('assign_user[]', assignUserValues);
+		}
 		
 
 		//Schedule Timings Data 
@@ -294,10 +524,44 @@ export class BusinessEditComponent implements OnInit {
 		formData.append('schedule',JSON.stringify(scheduleObj));
 
     	//console.log(formData);
-		this.updateStoreDetails(formData).subscribe(
-			data =>{
-				if(data["api_message"] == "success"){
-					toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, Your store '"+name+"' updated successfully", "", {
+		if(error == 0){
+			
+			this.updateStoreDetails(formData).subscribe(
+				data =>{
+					if(data["api_message"] == "success"){
+						toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, Your store '"+name+"' updated successfully", "", {
+							"closeButton": true,
+							"timeOut": "7000",
+							"extendedTImeout": "0",
+							"showDuration": "300",
+							"hideDuration": "1000",
+							"extendedTimeOut": "0",
+							"showEasing": "swing",
+							"hideEasing": "linear",
+							"showMethod": "fadeIn",
+							"hideMethod": "fadeOut",
+							"positionClass": "toast-top-full-width",
+						});
+						jQuery('#add_edit_store').modal('hide');
+					}else{
+						toastr.error(data["api_message"], "", {
+							"closeButton": true,
+							"timeOut": "7000",
+							"extendedTImeout": "0",
+							"showDuration": "300",
+							"hideDuration": "1000",
+							"extendedTimeOut": "0",
+							"showEasing": "swing",
+							"hideEasing": "linear",
+							"showMethod": "fadeIn",
+							"hideMethod": "fadeOut",
+							"positionClass": "toast-top-full-width",
+						});
+						//jQuery('#add_edit_store').modal('hide');
+					}
+				},
+				(err) => {
+					toastr.danger(err.message, "", {
 						"closeButton": true,
 						"timeOut": "7000",
 						"extendedTImeout": "0",
@@ -310,41 +574,10 @@ export class BusinessEditComponent implements OnInit {
 						"hideMethod": "fadeOut",
 						"positionClass": "toast-top-full-width",
 					});
-					jQuery('#add_edit_store').modal('hide');
-				}else{
-					toastr.error(data["api_message"], "", {
-						"closeButton": true,
-						"timeOut": "7000",
-						"extendedTImeout": "0",
-						"showDuration": "300",
-						"hideDuration": "1000",
-						"extendedTimeOut": "0",
-						"showEasing": "swing",
-						"hideEasing": "linear",
-						"showMethod": "fadeIn",
-						"hideMethod": "fadeOut",
-						"positionClass": "toast-top-full-width",
-					});
-					//jQuery('#add_edit_store').modal('hide');
+					console.log(err.message);
 				}
-			},
-			(err) => {
-				toastr.danger(err.message, "", {
-					"closeButton": true,
-					"timeOut": "7000",
-					"extendedTImeout": "0",
-					"showDuration": "300",
-					"hideDuration": "1000",
-					"extendedTimeOut": "0",
-					"showEasing": "swing",
-					"hideEasing": "linear",
-					"showMethod": "fadeIn",
-					"hideMethod": "fadeOut",
-					"positionClass": "toast-top-full-width",
-				});
-				console.log(err.message);
-			}
-		);
+			);
+		}
 	}
 	getTimeValue(day){
 		if(jQuery('#'+day+"_start").val() != undefined && jQuery('#'+day+"_end").val() != undefined && jQuery('#'+day+"_start").val() && jQuery('#'+day+"_end").val() && jQuery('#'+day+"_close").prop('checked') == false){

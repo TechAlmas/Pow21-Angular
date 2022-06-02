@@ -3,3 +3,5 @@ dist/*
 node_modules/*
 **/.DS_Store
 .DS_Store
+src/environments/environment.prod.ts
+src/environments/environment.ts

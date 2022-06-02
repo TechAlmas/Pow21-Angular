@@ -113,6 +113,11 @@
   vertical-align: middle;
   color: #1b88cc;
 }
+
+.contact-icon span {
+  font-size: 14px;
+}
+
 .location-icon {
   margin: 10px 0;
   color: #1b88cc;

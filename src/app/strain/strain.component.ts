@@ -704,7 +704,8 @@ getStrainDetailData(strainName): Observable<any> {
            else
            {
              this.postReview().subscribe(
-      (data => {    
+      (data => {  
+        console.log(data)  
         this.review_id = data["id"];        
         this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
         this.checkUser = true;

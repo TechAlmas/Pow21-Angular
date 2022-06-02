@@ -55,7 +55,8 @@ export class DispensaryComponent implements OnInit {
   followed: string;
   isUserReviewed: any;
   isUserLoggedIn= false;
-
+  validateEqual = false;
+  claimListingWithSignup = false;
 
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
 
@@ -221,6 +222,76 @@ enableReviewForm(){
     this.write_review = true;
     setTimeout(function(){ $("#starrating").rating(); }, 1);
  }
+ customValidateFields(data,isSignUpfields = false):any{
+  let error = 0;
+  $('.customValidate').each(function(key,val){
+    $(this).next('.customError').remove();
+    
+      if($(this).attr('name') == 'reemail' && $(this).val() != ''){
+        let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test($(this).val())){
+          var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+        else if(data.email != data.reemail){
+          var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+      }
+      if($(this).attr('name') == 'email' && $(this).val() != ''){
+        let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test($(this).val())){
+          var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+      }
+     
+      if($(this).val() == '' || $(this).val() == '(___)___-____'){
+
+        var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+        $(element).insertAfter($(this));
+        error ++;
+      }
+     
+  });
+  if(isSignUpfields){
+    $('.customValidateSignUp').each(function(key,val){
+      $(this).next('.customError').remove();
+      if($(this).attr('name') == 'password' && $(this).val() != ''){
+        if($(this).val().length < 6){
+          var element = '<p class="customError" style="color:red">'+" Password must be at least 6 characters long."+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+      }
+      if($(this).attr('name') == 'cpassword' && $(this).val() != ''){
+        if($(this).val() != $('input[name=password]').val()){
+          var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
+          $(element).insertAfter($(this));
+          error++;
+        }
+      }
+      if($(this).val() == '' ){
+      
+          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+          $(element).insertAfter($(this));
+          error ++;
+        
+      }
+      if($(this).attr('name') == 'is_terms' && $(this).prop('checked') == false){
+        var element = '<p class="customError" style="color:red">'+"Please accept the Term & Condition."+'</p>';
+        $(element).insertAfter($(this));
+        error ++;
+      }
+  
+    });
+  }
+ 
+  return error;
+ }
 
 onClickSubmit(data) {
   
@@ -232,44 +303,9 @@ onClickSubmit(data) {
     //   "e_mail":data.email,
     //   'verification_details':data.notes,
     // };
-    let error = 0;
+    
     let honeyError = 0;
-    $('.customValidate').each(function(key,val){
-      $(this).next('.customError').remove();
-      
-        if($(this).attr('name') == 'reemail' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-          else if(data.email != data.reemail){
-            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-        }
-        if($(this).attr('name') == 'email' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-        }
-       
-        if($(this).val() == '' || $(this).val() == '(___)___-____'){
-
-          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
-          $(element).insertAfter($(this));
-          error ++;
-        }
-       
-       
-      
-      
-    });
+    let error = this.customValidateFields(data);
 
     if(error == 0){
 
@@ -313,10 +349,107 @@ onClickSubmit(data) {
 
     if(error == 0 && honeyError == 0){
 
-      this.postPaidFor(formData).subscribe(
-        (data => {
-            if(data["api_message"] == "success" && data["id"] > 0){
-                toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
+      if(!this.claimListingWithSignup){
+        this.review_check_email().subscribe(
+          (data => {    
+            if(data['data'] > 0)
+            {
+              this.postPaidFor(formData).subscribe(
+                (data => {
+                    if(data["api_message"] == "success" && data["id"] > 0){
+                        toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
+                       "closeButton": true,
+                        "timeOut": "8000",
+                        "extendedTImeout": "0",
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "extendedTimeOut": "0",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut",
+                        "positionClass": "toast-top-full-width",
+                      });
+                    }
+          
+                    this.expiredDate = new Date();
+                    this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+                    this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
+          
+                    $('#myModal_paid').modal('hide');
+          
+                }),
+                (err: any) => {console.log(err)
+                  toastr.error(err.message, "", {
+                   "closeButton": true,
+                    "timeOut": "8000",
+                    "extendedTImeout": "0",
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "extendedTimeOut": "0",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    "positionClass": "toast-top-full-width",
+                  });
+                },
+                () => {
+                  console.log("err.message");
+                  
+                }
+               );
+             
+            }
+            else
+            {
+              jQuery('.signupFields').show();
+              this.claimListingWithSignup = true;
+            }
+          }),
+          (err: any) => console.log(err),
+          () => {  
+              
+         });
+      }else{
+        let errorCheck = this.customValidateFields(data,true);
+
+        if(errorCheck == 0){
+          this.isValidFormSubmitted = true;
+          formData.append("password",data.password);        
+          formData.append("is_updates",data.is_updates);   
+          formData.append("status",'1');
+          formData.append("id_cms_privileges",'4');
+          formData.append("referrer_id",this.cookieService.get('_mio_user_referral_id'));
+          formData.append("claim_listing_with_signup","1");
+
+          this.postPaidFor(formData).subscribe(
+            (data => {
+                if(data["api_message"] == "success" && data["id"] > 0){
+                    toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
+                   "closeButton": true,
+                    "timeOut": "8000",
+                    "extendedTImeout": "0",
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "extendedTimeOut": "0",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    "positionClass": "toast-top-full-width",
+                  });
+                }
+      
+                this.expiredDate = new Date();
+                this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+                this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
+      
+                $('#myModal_paid').modal('hide');
+      
+            }),
+            (err: any) => {console.log(err)
+              toastr.error(err.message, "", {
                "closeButton": true,
                 "timeOut": "8000",
                 "extendedTImeout": "0",
@@ -329,37 +462,65 @@ onClickSubmit(data) {
                 "hideMethod": "fadeOut",
                 "positionClass": "toast-top-full-width",
               });
+            },
+            () => {
+              console.log("err.message");
+              
             }
-  
-            this.expiredDate = new Date();
-            this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
-            this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
-  
-            $('#myModal_paid').modal('hide');
-  
-        }),
-        (err: any) => {console.log(err)
-          toastr.error(err.message, "", {
-           "closeButton": true,
-            "timeOut": "8000",
-            "extendedTImeout": "0",
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "extendedTimeOut": "0",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut",
-            "positionClass": "toast-top-full-width",
-          });
-        },
-        () => {
-          console.log("err.message");
-          
+           );
         }
-       );
+      }
+      
+     
     }
  }
+
+ onCheckEmail(form: NgForm)
+ {
+
+   this.postCheckEmail().subscribe(data => 
+    {
+       //console.log(data);
+       if (data["api_status"]==1)
+       {
+           this.validateEqual = false;
+           $('#email_error').show();      
+
+        }else
+        {
+          $('#email_error').hide();
+        }
+     }, (err) => {
+              
+               console.log(err.message);
+    });
+ }
+ postCheckEmail(){
+  var postData = {"email":jQuery('input[name=email]').val()};
+ 
+  return this._http.post<any[]>('checkemailexit',postData);
+}
+
+ onConfirmPwd(form: NgForm)
+ {
+   //console.log("Sumer");
+
+  
+         //  console.log(data);
+       if(form.value.password != form.value.cpassword){
+           this.validateEqual = false;
+           $('#pcp_error').show();      
+
+        }else
+        {
+          $('#pcp_error').hide();
+        }
+     
+
+ }
+ review_check_email(){
+  return this._http.get<any[]>('review_check_email?email='+$('input[name=email]').val());
+}
  postPaidFor(postdata){
     return this._http.post<any[]>('claim_lingings',postdata);
   }

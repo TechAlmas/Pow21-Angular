@@ -36,7 +36,7 @@ declare var Lightbox: any;
 
 export class DispensaryComponent implements OnInit {
 
-	dispDetails = new DispDetail();
+  dispDetails = new DispDetail();
   review = new ReviewDisp();
   schedule:any;
   image_disp : any;
@@ -74,19 +74,19 @@ export class DispensaryComponent implements OnInit {
           else if(this.cookieService.get('_mio_user_email') && this.cookieService.get('_mio_user_email') != ""){
             this.checkUser = true;
           }
-  			if(typeof params['dispName'] === "undefined")
-          	{ 
-          		//console.log(params['strainName']);
-          		this.routes.navigate(['/']);
-          	}else
-          	{
+        if(typeof params['dispName'] === "undefined")
+            { 
+              //console.log(params['strainName']);
+              this.routes.navigate(['/']);
+            }else
+            {
               if(typeof params['dispName'] !== "undefined")
               { 
                 this.getDispensaryDetail(params['dispName']);
               }
-          	}
+            }
 
-  		});
+      });
 
       jQuery(document).on('click','.claimModelLink',function(e){
         e.stopPropagation();
@@ -148,7 +148,7 @@ export class DispensaryComponent implements OnInit {
   }
 getDispensaryDetail(disp_slug)
 {
-	this.getDispensaryDetailData(disp_slug).subscribe(
+  this.getDispensaryDetailData(disp_slug).subscribe(
 
       ((data:any) => {
         //console.log(data['data']);
@@ -162,7 +162,7 @@ getDispensaryDetail(disp_slug)
         }else{
           console.log(this.cookieService.get('fav_disp'));
         }
-      	this.dispDetails = data['data'];
+        this.dispDetails = data['data'];
         this.dispens_id = this.dispDetails.disp_id;
         this.dispState = data['data'].state.replace(/\s/g, "-");
         this.dispCity = data['data'].city.replace(/\s/g, "-");
@@ -176,8 +176,8 @@ getDispensaryDetail(disp_slug)
       }),
       (err: any) => console.log(err),
       () => {
-		 
-	}
+     
+  }
 
 )
 
@@ -193,24 +193,24 @@ linkClicked(id){
      if(id == "reviews"){
        this.enableReviewForm();
      }
-  }		
+  }   
 onFilechange(event: any) {
   jQuery('.fileInput').parent().find('.customError').remove();
   let error = 0;
-		for(let i=0;i<event.target.files.length;i++){
+    for(let i=0;i<event.target.files.length;i++){
       var file = event.target.files[i];
       var fileType = file.type;
       const fileName = event.target.files[i].name;
-			const fsize = event.target.files[i].size;
-			const fileSize = Math.round((fsize / 1024));
+      const fsize = event.target.files[i].size;
+      const fileSize = Math.round((fsize / 1024));
       
-			if (fileSize >= 5120) {
-				
-				var element = '<p class="customError mb-0" style="color:red">'+fileName+'  size is more than 5MB please reduce size.</p>';
-				jQuery(element).insertAfter(jQuery('.fileInput').next().next());
+      if (fileSize >= 5120) {
+        
+        var element = '<p class="customError mb-0" style="color:red">'+fileName+'  size is more than 5MB please reduce size.</p>';
+        jQuery(element).insertAfter(jQuery('.fileInput').next().next());
         error++;
        
-			}
+      }
     }
     if(error > 0){
       jQuery(".fileInput").val('');
@@ -520,7 +520,9 @@ onClickSubmit(data) {
      
 
  }
- 
+//  review_check_email(){
+//   return this._http.get<any[]>('review_check_email?email='+$('input[name=email]').val());
+// }
  postPaidFor(postdata){
     return this._http.post<any[]>('claim_lingings',postdata);
   }

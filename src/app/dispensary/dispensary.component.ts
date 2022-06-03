@@ -520,9 +520,9 @@ onClickSubmit(data) {
      
 
  }
-//  review_check_email(){
-//   return this._http.get<any[]>('review_check_email?email='+$('input[name=email]').val());
-// }
+ review_check_email(){
+  return this._http.get<any[]>('review_check_email?email='+$('input[name=email]').val());
+}
  postPaidFor(postdata){
     return this._http.post<any[]>('claim_lingings',postdata);
   }
@@ -714,9 +714,9 @@ onSubmitReviewForm(form: NgForm) {
     
 } 
   
-review_check_email(){
-  return this._http.get<any[]>('review_check_email?email='+this.review.email);
-}
+// review_check_email(){
+//   return this._http.get<any[]>('review_check_email?email='+this.review.email);
+// }
 getDispensaryDetailData(disp_slug): Observable<any> {
    // var postData = {"url":currentUrl};
     if(this.user_data){

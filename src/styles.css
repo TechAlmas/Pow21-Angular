@@ -12978,6 +12978,10 @@ input[type="checkbox"]:not(:checked) + label.error {
 	Google Custom Search
 -----------------------------------------------------------------*/
 
+.text-sm {
+  font-size: 10px;
+}
+
 #content .cse .gsc-control-cse,
 #content .gsc-control-cse,
 #content .gsc-above-wrapper-area,
@@ -18856,8 +18860,8 @@ ul.dash-nav li a:hover span.text {
   display: inline-block;
   position: relative;
   flex: none;
-  width: 40px;
-  height: 20px;
+  width: 50px;
+  height: 30px;
   border-radius: 30px;
   background-color: #d7d2cb;
   cursor: pointer;
@@ -18871,27 +18875,68 @@ ul.dash-nav li a:hover span.text {
   content: " ";
   display: block;
   position: absolute;
-  top: 0px;
+  top: 1px;
   border-radius: 30px;
   height: 28px;
   background-color: #fff;
-  -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   transition: 0.2s cubic-bezier(0, 1.1, 1, 1.1);
 }
 .toggle .slide-toggle::before {
   z-index: -1;
-  width: 40px;
+  width: 48px;
   right: 1px;
-  -webkit-transform: scale(1);
   transform: scale(1);
 }
 .toggle .slide-toggle::after {
   z-index: 1;
-  width: 20px;
+  width: 28px;
   left: 1px;
-  box-shadow: 0 1px 4px 0.5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 4px 0.5px rgb(0 0 0 / 25%);
 }
+/*  */
+/*  */
+.image-area .toggle .togglebox .slide-toggle {
+  width: 42px;
+  height: 22px;
+}
+.image-area .toggle .togglebox .slide-toggle::before,
+.image-area .toggle .togglebox .slide-toggle::after {
+  height: 20px;
+}
+.image-area .toggle .togglebox .slide-toggle::before {
+  width: 38px;
+  right: 1px;
+}
+.image-area .toggle .togglebox .slide-toggle::after {
+  height: 20px;
+  width: 20px;
+}
+
+.image-area
+  .toggle
+  input:checked
+  + .image-area
+  .toggle
+  .togglebox
+  .slide-toggle::after {
+  transform: translate3d(18px, 0, 0);
+}
+
+.image-area
+  .toggle
+  input:checked
+  + .image-area
+  .toggle
+  .togglebox
+  .slide-toggle::before {
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+/*  */
+/*  */
+
 .toggle input:checked + .slide-toggle {
   background-color: #0375b2;
 }
@@ -21165,9 +21210,10 @@ span.select2-selection.select2-selection--multiple:active {
 /* Multiple images Css */
 .image-area {
   position: relative;
-  background: #333;
+  background: transparent;
   width: 100%;
 }
+
 .image-area img {
   max-width: 100%;
   width: 100%;
@@ -21201,4 +21247,5 @@ span.select2-selection.select2-selection--multiple:active {
   top: -10px;
   right: -11px;
 }
+
 /* Multiple images Css */

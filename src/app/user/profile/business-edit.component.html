@@ -217,7 +217,7 @@
                     />
 
                     <div class="logo-container d-flex mt-3">
-                      <div class="image-area mr-3" *ngIf="dispDetails.logoUrl">
+                      <div class="image-area" *ngIf="dispDetails.logoUrl">
                         <img
                           src="{{ dispDetails.logoUrl }}"
                           width="100"
@@ -227,7 +227,7 @@
                           class="remove-image"
                           href="javascript:void(0)"
                           style="display: inline"
-                          >&#215;</a
+                          >x</a
                         >
                       </div>
                     </div>
@@ -649,7 +649,7 @@
                     <!-- <input  class="form-control" type="file" id="formFile"> -->
                     <div class="image-container d-flex mt-3 cmsright">
                       <div
-                        class="image-area mr-3"
+                        class="image-area"
                         *ngFor="let storeImage of store_images"
                       >
                         <img
@@ -662,7 +662,7 @@
                           href="javascript:void(0)"
                           data-name="{{ storeImage.name }}"
                           style="display: inline"
-                          >&#215;</a
+                          >x</a
                         >
                         <label class="toggle">
                           <div class="togglebox">
@@ -677,7 +677,9 @@
                               "
                             />
                             <div class="slide-toggle"></div>
-                            <div class="slide-toggle-content">Thumbnail</div>
+                            <div class="slide-toggle-content text-sm">
+                              Thumbnail
+                            </div>
                           </div>
                         </label>
                       </div>

@@ -18949,13 +18949,14 @@ ul.dash-nav li a:hover span.text {
   transform: translate3d(20px, 0, 0);
 }
 .toggle .slide-toggle-content {
+  font-size: 12px;
+  margin-left: 5px;
+  margin-top: 3px;
   display: inline-block;
   vertical-align: top;
   width: calc(100% - 80px);
-  margin-left: 20px;
   text-transform: initial;
   font-weight: 600;
-  font-size: 16px;
 }
 
 .table,
@@ -21211,12 +21212,12 @@ span.select2-selection.select2-selection--multiple:active {
 .image-area {
   position: relative;
   background: transparent;
-  width: 100%;
+  width: fit-content;
 }
 
 .image-area img {
   max-width: 100%;
-  width: 100%;
+  width: 8rem;
   height: auto;
 }
 .remove-image {
@@ -21226,19 +21227,23 @@ span.select2-selection.select2-selection--multiple:active {
   right: -10px;
   border-radius: 10em;
   padding: 2px 6px 3px;
+  height: 1.7rem;
+  width: 1.7rem;
   text-decoration: none;
-  font: 700 21px/20px sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  line-height: 15px;
+  font-family: inherit;
   background: #555;
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   color: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.3);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  -webkit-transition: background 0.5s;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 50%), inset 0 2px 4px rgb(0 0 0 / 30%);
   transition: background 0.5s;
 }
 .remove-image:hover {
   background: #e54e4e;
-  padding: 3px 7px 5px;
+  /* padding: 3px 7px 5px; */
   top: -11px;
   right: -11px;
 }

@@ -16,7 +16,8 @@
 }
 .single-product.dispensary .product .product-image .logo-wrepper {
   /* width: 100%; */
-  padding: 1.92rem 1.15rem 0 1.1rem;
+  /* padding: 1.92rem 1.15rem 0 1.1rem; */
+  padding: 0rem 1.15rem 0 1.1rem;
 }
 .single-product.dispensary .product .product-image img {
   width: 100%;

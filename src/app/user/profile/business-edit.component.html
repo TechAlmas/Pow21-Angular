@@ -215,7 +215,7 @@
                       ngModel
                     />
                   </div>
-                  <div class="form-group whitebgs row">
+                  <div class="form-group whitebgs row mb-0">
                     <!-- <div class=""></div> -->
                     <label for="paid-for-quality " class="col-md-2">Logo</label>
                     <label
@@ -231,9 +231,12 @@
                       class="col-md-2"
                     />
 
-                    <div class="logo-container d-flex mt-4 col-md-12">
-                      <div style="">
-                        <div class="image-area" *ngIf="dispDetails.logoUrl">
+                    <div class="logo-container d-flex col-md-12">
+                      <div>
+                        <div
+                          class="image-area mt-4"
+                          *ngIf="dispDetails.logoUrl"
+                        >
                           <img
                             src="{{ dispDetails.logoUrl }}"
                             width="100"
@@ -253,37 +256,38 @@
                   </div>
                   <div class="form-group whitebgs row">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
-                    <label for="paid-for-quality">Store schedule</label>
+                    <label for="paid-for-quality" class="w-100 text-center"
+                      >Store schedule</label
+                    >
                   </div>
-
-                  <div class="form-group whitebgs labelalignmentt row">
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <label for="paid-for-quality"></label>
-                    <span class="dayalign">Monday</span>
+                    <span class="dayalign col-md-2">Monday</span>
                     <input
                       type="time"
                       id="monday_start"
                       name="monday_start"
-                      class="sm-form-control monday_start required"
+                      class="sm-form-control monday_start required col-md-3"
                       value="{{
                         getTimeStringValue('monday', 'start') | date: 'HH:mm'
                       }}"
                       placeholder=""
                       [disabled]="getTimeStringValue('monday', '', 1) == 'yes'"
                     />
-                    <span class="tocontant">To</span><br />
+                    <span class="col-md-1 text-center p-0">To</span>
                     <input
                       type="time"
-                      id="monday_end"
                       name="monday_end"
-                      class="sm-form-control monday_end required dau"
+                      id="monday_end"
+                      class="sm-form-control monday_end required dau col-md-3"
                       value="{{
                         getTimeStringValue('monday', 'end') | date: 'HH:mm'
                       }}"
                       placeholder=""
                       [disabled]="getTimeStringValue('monday', '', 1) == 'yes'"
                     />
-                    <label class="toggle">
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
                       <div class="togglebox">
                         <input
                           type="checkbox"
@@ -301,34 +305,34 @@
                       </div>
                     </label>
                   </div>
-                  <div class="form-group whitebgs labelalignmentt row">
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <label for="paid-for-quality"></label>
-                    <span>Tuesday</span>
+                    <span class="col-md-2">Tuesday</span>
                     <input
                       type="time"
                       id="tuesday_start"
                       name="tuesday_start"
-                      class="sm-form-control tuesday_start required"
+                      class="sm-form-control tuesday_start required col-md-3"
                       value="{{
                         getTimeStringValue('tuesday', 'start') | date: 'HH:mm'
                       }}"
                       placeholder=""
                       [disabled]="getTimeStringValue('tuesday', '', 1) == 'yes'"
                     />
-                    <span>To</span>
+                    <span class="col-md-1 p-0 text-center">To</span>
                     <input
                       type="time"
-                      id="tuesday_end"
                       name="tuesday_end"
-                      class="sm-form-control tuesday_end required"
+                      id="tuesday_end"
+                      class="sm-form-control tuesday_end required col-md-3"
                       value="{{
                         getTimeStringValue('tuesday', 'end') | date: 'HH:mm'
                       }}"
                       placeholder=""
                       [disabled]="getTimeStringValue('tuesday', '', 1) == 'yes'"
                     />
-                    <label class="toggle">
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
                       <input
                         type="checkbox"
                         id="tuesday_close"
@@ -344,15 +348,15 @@
                       <div class="slide-toggle-content">Close</div>
                     </label>
                   </div>
-                  <div class="form-group whitebgs labelalignmentt row">
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <label for="paid-for-quality"></label>
-                    <span>Wednesday</span>
+                    <span class="col-md-2">Wednesday</span>
                     <input
                       type="time"
                       id="wednesday_start"
                       name="wednesday_start"
-                      class="sm-form-control wednesday_start required"
+                      class="sm-form-control wednesday_start col-md-3 required"
                       value="{{
                         getTimeStringValue('wednesday', 'start') | date: 'HH:mm'
                       }}"
@@ -361,12 +365,12 @@
                         getTimeStringValue('wednesday', '', 1) == 'yes'
                       "
                     />
-                    <span>To</span>
+                    <span class="col-md-1 text-center p-0">To</span>
                     <input
                       type="time"
                       id="wednesday_end"
                       name="wednesday_end"
-                      class="sm-form-control wednesday_end required"
+                      class="sm-form-control wednesday_end col-md-3 required"
                       value="{{
                         getTimeStringValue('wednesday', 'end') | date: 'HH:mm'
                       }}"
@@ -375,7 +379,7 @@
                         getTimeStringValue('wednesday', '', 1) == 'yes'
                       "
                     />
-                    <label class="toggle">
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
                       <input
                         type="checkbox"
                         id="wednesday_close"
@@ -391,15 +395,15 @@
                       <div class="slide-toggle-content">Close</div>
                     </label>
                   </div>
-                  <div class="form-group whitebgs labelalignmentt row">
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <label for="paid-for-quality"></label>
-                    <span>Thursday</span>
+                    <span class="col-md-2">Thursday</span>
                     <input
                       type="time"
                       id="thursday_start"
                       name="thursday_start"
-                      class="sm-form-control thursday_start required"
+                      class="sm-form-control thursday_start col-md-3 required"
                       value="{{
                         getTimeStringValue('thursday', 'start') | date: 'HH:mm'
                       }}"
@@ -408,12 +412,12 @@
                         getTimeStringValue('thursday', '', 1) == 'yes'
                       "
                     />
-                    <span>To</span>
+                    <span class="col-md-1 text-center p-0">To</span>
                     <input
                       type="time"
                       id="thursday_end"
                       name="thursday_end"
-                      class="sm-form-control thursday_end required"
+                      class="sm-form-control thursday_end col-md-3 required"
                       value="{{
                         getTimeStringValue('thursday', 'end') | date: 'HH:mm'
                       }}"
@@ -422,7 +426,7 @@
                         getTimeStringValue('thursday', '', 1) == 'yes'
                       "
                     />
-                    <label class="toggle">
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
                       <input
                         type="checkbox"
                         id="thursday_close"
@@ -438,34 +442,34 @@
                       <div class="slide-toggle-content">Close</div>
                     </label>
                   </div>
-                  <div class="form-group whitebgs labelalignmentt row">
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <label for="paid-for-quality"></label>
-                    <span>Friday</span>
+                    <span class="col-md-2">Friday</span>
                     <input
                       type="time"
                       id="friday_start"
                       name="friday_start"
-                      class="sm-form-control friday_start required"
+                      class="sm-form-control friday_start required col-md-3"
                       value="{{
                         getTimeStringValue('friday', 'start') | date: 'HH:mm'
                       }}"
                       placeholder=""
                       [disabled]="getTimeStringValue('friday', '', 1) == 'yes'"
                     />
-                    <span>To</span>
+                    <span class="col-md-1 text-center p-0">To</span>
                     <input
                       type="time"
                       id="friday_end"
                       name="friday_end"
-                      class="sm-form-control friday_end required"
+                      class="sm-form-control friday_end required col-md-3"
                       value="{{
                         getTimeStringValue('friday', 'end') | date: 'HH:mm'
                       }}"
                       placeholder=""
                       [disabled]="getTimeStringValue('friday', '', 1) == 'yes'"
                     />
-                    <label class="toggle">
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
                       <input
                         type="checkbox"
                         id="friday_close"
@@ -479,15 +483,15 @@
                       <div class="slide-toggle-content">Close</div>
                     </label>
                   </div>
-                  <div class="form-group whitebgs labelalignmentt row">
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <label for="paid-for-quality"></label>
-                    <span>Saturday</span>
+                    <span class="col-md-2">Saturday</span>
                     <input
                       type="time"
                       id="saturday_start"
                       name="saturday_start"
-                      class="sm-form-control saturday_start required"
+                      class="sm-form-control saturday_start required col-md-3"
                       value="{{
                         getTimeStringValue('saturday', 'start') | date: 'HH:mm'
                       }}"
@@ -496,12 +500,12 @@
                         getTimeStringValue('saturday', '', 1) == 'yes'
                       "
                     />
-                    <span>To</span>
+                    <span class="col-md-1 text-center p-0">To</span>
                     <input
                       type="time"
                       id="saturday_end"
                       name="saturday_end"
-                      class="sm-form-control saturday_end required"
+                      class="sm-form-control saturday_end required col-md-3"
                       value="{{
                         getTimeStringValue('saturday', 'end') | date: 'HH:mm'
                       }}"
@@ -510,7 +514,7 @@
                         getTimeStringValue('saturday', '', 1) == 'yes'
                       "
                     />
-                    <label class="toggle">
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
                       <input
                         type="checkbox"
                         id="saturday_close"
@@ -526,34 +530,34 @@
                       <div class="slide-toggle-content">Close</div>
                     </label>
                   </div>
-                  <div class="form-group whitebgs labelalignmentt row">
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <label for="paid-for-quality"></label>
-                    <span>Sunday</span>
+                    <span class="col-md-2">Sunday</span>
                     <input
                       type="time"
                       id="sunday_start"
                       name="sunday_start"
-                      class="sm-form-control sunday_start required"
+                      class="sm-form-control sunday_start col-md-3 required"
                       value="{{
                         getTimeStringValue('sunday', 'start') | date: 'HH:mm'
                       }}"
                       placeholder=""
                       [disabled]="getTimeStringValue('sunday', '', 1) == 'yes'"
                     />
-                    <span>To</span>
+                    <span class="col-md-1 text-center p-0">To</span>
                     <input
                       type="time"
                       id="sunday_end"
                       name="sunday_end"
-                      class="sm-form-control sunday_end required"
+                      class="sm-form-control sunday_end required col-md-3"
                       value="{{
                         getTimeStringValue('sunday', 'end') | date: 'HH:mm'
                       }}"
                       placeholder=""
                       [disabled]="getTimeStringValue('sunday', '', 1) == 'yes'"
                     />
-                    <label class="toggle">
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
                       <input
                         type="checkbox"
                         id="sunday_close"
@@ -567,8 +571,7 @@
                       <div class="slide-toggle-content">Close</div>
                     </label>
                   </div>
-
-                  <div class="form-group whitebgs mt-4 row">
+                  <div class="form-group whitebgs row">
                     <label for="paid-for-quality" class="col-md-2"
                       >Assign User</label
                     >
@@ -592,7 +595,6 @@
                     </select>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
                   </div>
-
                   <div class="form-group whitebgs row">
                     <!-- <div class="storetopcms"></div> -->
                     <label for="paid-for-quality storelabel" class="col-md-2"
@@ -625,7 +627,7 @@
                     <label for="paid-for-quality statuslabel " class="col-md-2"
                       >Status
                     </label>
-                    <div class="col-md-10 p-0">
+                    <div class="col-md-10 p-0 pt-1">
                       <input
                         id="status_active"
                         class="radio-style"
@@ -713,7 +715,6 @@
                     </div>
                     <!--  -->
                   </div>
-
                   <label class="ohnohoney" for="claim_captcha_name"></label>
                   <input
                     autocomplete="off"

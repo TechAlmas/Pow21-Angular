@@ -96,13 +96,13 @@ label.radio-style-2-label {
 input#monday_start {
   width: 24%;
   float: left;
-  margin-left: 42px;
+  margin-left: 0px;
 }
 
 input#monday_end {
-  width: 25%;
+  /* width: 25%;
   float: left;
-  margin-left: -4%;
+  margin-left: -4%; */
   /* margin-top: -3%; */
 }
 
@@ -140,87 +140,87 @@ input#monday_end {
 }
 
 .form-group.whitebgs.labelalignmentt span {
-  float: left;
-  margin-left: 4%;
-  width: 10%;
+  /* float: left; */
+  /* margin-left: 4%; */
+  /* width: 10%; */
   margin-top: 9px;
 }
 .slide-toggle-content {
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
-.form-group.whitebgs.labelalignmentt span {
+/* .form-group.whitebgs.labelalignmentt span {
   float: left;
   margin-left: 4%;
   width: 10%;
-}
+} */
 
 input#tuesday_start {
   width: 24%;
   float: left;
-  margin-left: 42px;
+  margin-left: 0px;
 }
 
 input#tuesday_end {
-  width: 25%;
+  /* width: 25%;
   float: left;
-  margin-left: -27px;
+  margin-left: -27px; */
 }
 
 input#wednesday_start {
   width: 24%;
   float: left;
-  margin-left: 42px;
+  margin-left: 0px;
 }
 
 input#wednesday_end {
-  width: 25%;
+  /* width: 25%;
   float: left;
-  margin-left: -27px;
+  margin-left: -27px; */
 }
 input#thursday_start {
   width: 24%;
   float: left;
-  margin-left: 42px;
+  margin-left: 0px;
 }
 /*  */
 input#thursday_end {
-  width: 25%;
+  /* width: 25%;
   float: left;
-  margin-left: -27px;
+  margin-left: -27px; */
 }
 
 input#friday_start {
   width: 24%;
   float: left;
-  margin-left: 42px;
+  margin-left: 0px;
 }
 input#friday_end {
-  width: 25%;
+  /* width: 25%;
   float: left;
-  margin-left: -27px;
+  margin-left: -27px; */
 }
 
 input#saturday_start {
   width: 24%;
   float: left;
-  margin-left: 42px;
+  margin-left: 0px;
 }
 input#saturday_end {
-  width: 25%;
+  /* width: 25%;
   float: left;
-  margin-left: -27px;
+  margin-left: -27px; */
 }
 
 input#sunday_start {
   width: 24%;
   float: left;
-  margin-left: 42px;
+  margin-left: 0px;
 }
 input#sunday_end {
-  width: 25%;
+  /* width: 25%;
   float: left;
-  margin-left: -27px;
+  margin-left: -27px; */
 }
 
 .form-group.whitebgs.assign_user {

@@ -69,7 +69,7 @@
               Close
             </button>
           </div>
-          <div class="modal-body" *ngIf="this.globals.user_data">
+          <div class="modal-body" >
             <div class="form-group whitebgs">
               <div class="wait-layer" *ngIf="waitLayer"></div>
               <label for="paid-for-quality">First Name</label>
@@ -117,7 +117,7 @@
               <input
                 type="email"
                 name="email"
-                class="sm-form-control required customValidate"
+                class="sm-form-control required customValidate claimListingEmail"
                 placeholder="Enter Email Address"
                 ngModel
               />
@@ -211,13 +211,13 @@
 			
 			</div>
 
-			<div class="modal-body" *ngIf="!this.globals.user_data">
+			<!-- <div class="modal-body" *ngIf="!this.globals.user_data">
 				To claim the store <span *ngIf="!this.globals.user_data"><a class="claimModelLink" href="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a class="claimModelLink"  href="/register">Signup</a></span>.
 				
 							
 							
-			</div>
-			<div class="modal-footer"  *ngIf="this.globals.user_data">                        
+			</div> -->
+			<div class="modal-footer" >                        
 				<button type="submit" class="btn btn-primary">Submit</button>
 				<button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
 			</div>
@@ -745,7 +745,7 @@
                         [ngModel]="this.review.name"
                         required
                         #rName="ngModel"
-                        class="form-control"
+                        class="form-control reviewName"
                         placeholder="Provide your name..."
                       />
                       <div
@@ -770,7 +770,7 @@
                         required
                         #rEmail="ngModel"
                         [pattern]="emailPattern"
-                        class="form-control"
+                        class="form-control reviewEmail"
                         placeholder="Type your email here"
                       />
                       <div

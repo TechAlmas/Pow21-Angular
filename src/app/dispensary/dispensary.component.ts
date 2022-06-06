@@ -119,10 +119,10 @@ export class DispensaryComponent implements OnInit {
             var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
             
           }
-          else if($('input[name=email]').val() != $(this).val()){
-            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+          // else if($('input[name=email]').val() != $(this).val()){
+          //   var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
             
-          }
+          // }
         }
         if($(this).attr('name') == 'email' && $(this).val() != ''){
           let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -228,7 +228,7 @@ enableReviewForm(){
   let error = 0;
   $('.customValidate').each(function(key,val){
     $(this).next('.customError').remove();
-    
+
       if($(this).attr('name') == 'reemail' && $(this).val() != ''){
         let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if(!regex.test($(this).val())){
@@ -270,7 +270,7 @@ enableReviewForm(){
         }
       }
       if($(this).attr('name') == 'cpassword' && $(this).val() != ''){
-        if($(this).val() != $('input[name=password]').val()){
+        if($(this).val() != $(this).parents('form').find('input[name=password]').val()){
           var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
           $(element).insertAfter($(this));
           error++;
@@ -352,7 +352,7 @@ onClickSubmit(data) {
     if(error == 0 && honeyError == 0){
 
       if(!this.claimListingWithSignup){
-        this.review_check_email().subscribe(
+        this.review_check_email_claim_listing().subscribe(
           (data => {    
             if(data['data'] > 0)
             {
@@ -521,7 +521,7 @@ onClickSubmit(data) {
 
  }
  review_check_email(){
-  return this._http.get<any[]>('review_check_email?email='+$('input[name=email]').val());
+  return this._http.get<any[]>('review_check_email?email='+$(document).find('.reviewEmail').val());
 }
  postPaidFor(postdata){
     return this._http.post<any[]>('claim_lingings',postdata);
@@ -547,15 +547,17 @@ onSubmitReviewForm(form: NgForm) {
      this.review = form.value;
      this.login_alert.email = form.value.email
      this.review.status = 0;
-
-     if(this.user_data && this.user_data['email']){
-
+     if(!this.isUserLoggedIn){
+      this.review.email = $('.reviewEmail').val();
+      this.review.name = $('.reviewName').val();
+     }else if(this.user_data && this.user_data['email']){
+        
       this.review.email = this.user_data['email'];
       this.review.name = this.user_data['name'];
       this.review.user_id = this.user_data["id"];
 
     }else if(this.cookieService.get('_mio_user_email') && this.cookieService.get('_mio_user_email') != ""){
-
+ 
         this.review.email = this.cookieService.get('_mio_user_email');
         this.review.name = this.cookieService.get('_mio_user_name');
         this.review.user_id = parseInt(this.cookieService.get('_mio_user_id'));
@@ -714,9 +716,9 @@ onSubmitReviewForm(form: NgForm) {
     
 } 
   
-// review_check_email(){
-//   return this._http.get<any[]>('review_check_email?email='+this.review.email);
-// }
+review_check_email_claim_listing(){
+  return this._http.get<any[]>('review_check_email?email='+$(document).find('.claimListingEmail').val());
+}
 getDispensaryDetailData(disp_slug): Observable<any> {
    // var postData = {"url":currentUrl};
     if(this.user_data){

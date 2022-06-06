@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { PlatformLocation } from '@angular/common';
 import { DispDetail } from '../models/disp-detail';
 import { ViewEncapsulation } from '@angular/core';
+import {Login} from '../models/login';
 
 
 
@@ -35,7 +36,7 @@ declare var Lightbox: any;
 
 export class DispensaryComponent implements OnInit {
 
-	dispDetails = new DispDetail();
+  dispDetails = new DispDetail();
   review = new ReviewDisp();
   schedule:any;
   image_disp : any;
@@ -55,7 +56,9 @@ export class DispensaryComponent implements OnInit {
   followed: string;
   isUserReviewed: any;
   isUserLoggedIn= false;
-
+  validateEqual = false;
+  claimListingWithSignup = false;
+  login_alert = new Login();
 
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
 
@@ -71,19 +74,19 @@ export class DispensaryComponent implements OnInit {
           else if(this.cookieService.get('_mio_user_email') && this.cookieService.get('_mio_user_email') != ""){
             this.checkUser = true;
           }
-  			if(typeof params['dispName'] === "undefined")
-          	{ 
-          		//console.log(params['strainName']);
-          		this.routes.navigate(['/']);
-          	}else
-          	{
+        if(typeof params['dispName'] === "undefined")
+            { 
+              //console.log(params['strainName']);
+              this.routes.navigate(['/']);
+            }else
+            {
               if(typeof params['dispName'] !== "undefined")
               { 
                 this.getDispensaryDetail(params['dispName']);
               }
-          	}
+            }
 
-  		});
+      });
 
       jQuery(document).on('click','.claimModelLink',function(e){
         e.stopPropagation();
@@ -106,46 +109,182 @@ export class DispensaryComponent implements OnInit {
         // });
 
       //Validations on KeyUp
-
+      let component = this;
       $('.customValidate').on('keyup',function(){
-        $(this).next('.customError').remove();
+        component.customValidateFields($(this));
+        // $(this).next('.customError').remove();
       
-        if($(this).attr('name') == 'reemail' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+        // if($(this).attr('name') == 'reemail' && $(this).val() != ''){
+        //   let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        //   if(!regex.test($(this).val())){
+        //     var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
             
-          }
-          else if($('input[name=email]').val() != $(this).val()){
-            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+        //   }
+        //   // else if($('input[name=email]').val() != $(this).val()){
+        //   //   var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
             
-          }
-        }
-        if($(this).attr('name') == 'email' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+        //   // }
+        // }
+        // if($(this).attr('name') == 'email' && $(this).val() != ''){
+        //   let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        //   if(!regex.test($(this).val())){
+        //     var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
            
-          }
-        }
-        // if($(this).attr('name') == 'telnum' && $(this).val() != ''){
+        //   }
+        // }
+        // // if($(this).attr('name') == 'telnum' && $(this).val() != ''){
 
-        //   let newVal =  $(this).val().replace(/[^\d]/g, '');
-        //   $(this).val(newVal)
-        // } 
-        if($(this).val() == ''){
+        // //   let newVal =  $(this).val().replace(/[^\d]/g, '');
+        // //   $(this).val(newVal)
+        // // } 
+        // if($(this).val() == ''){
 
-          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+        //   var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
           
-        }
-        $(element).insertAfter($(this));
+        // }
+        // $(element).insertAfter($(this));
       })
 
 
   }
+
+  customValidateFields($elem):any{
+    let error = 0;
+  
+      $elem.next('.customError').remove();
+  
+        if($elem.attr('name') == 'reemail' && $elem.val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($elem.val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+            
+          }
+          else if($elem.val() != $('.claimListingEmail').val()){
+            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+         
+          }else{
+            $('.claimListingEmail').next('.customError').remove()
+            this.review_check_email_claim_listing().subscribe(
+              (data => {    
+                if(data['data'] > 0)
+                {
+                  jQuery('.signupFields').hide();
+                  this.claimListingWithSignup = false;
+                }
+                else
+                {
+                  jQuery('.signupFields').show();
+                  this.claimListingWithSignup = true;
+                }
+              }),
+              (err: any) => console.log(err),
+              () => {  
+                  
+             });
+
+          }
+        }
+        if($elem.attr('name') == 'email' && $elem.val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($elem.val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+          } else if($elem.val() != $('.claimListingReEmail').val()){
+              if($('.claimListingReEmail').val() != ''){
+
+                var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+                $(element).insertAfter($elem);
+                error++;
+              }
+         
+          }else{
+            $('.claimListingReEmail').next('.customError').remove()
+            this.review_check_email_claim_listing().subscribe(
+              (data => {    
+                if(data['data'] > 0)
+                {
+                  jQuery('.signupFields').hide();
+                  this.claimListingWithSignup = false;
+                }
+                else
+                {
+                  jQuery('.signupFields').show();
+                  this.claimListingWithSignup = true;
+                }
+              }),
+              (err: any) => console.log(err),
+              () => {  
+                  
+             });
+
+          }
+        }
+       
+        if($elem.val() == '' || $elem.val() == '(___)___-____'){
+  
+          var element = '<p class="customError" style="color:red">'+"The "+$elem.prev().text()+" field is required"+'</p>';
+          $(element).insertAfter($elem);
+          error ++;
+        }
+       
+     
+    if(this.claimListingWithSignup){
+      
+        $elem.next('.customError').remove();
+        if($elem.attr('name') == 'password' && $elem.val() != ''){
+          if($elem.val().length < 6){
+            var element = '<p class="customError" style="color:red">'+" Password must be at least 6 characters long."+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+          }
+          else if($elem.val() != $('.claimListingCPassword').val()){
+            if($('.claimListingCPassword').val() != ''){
+
+              var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
+              $(element).insertAfter($elem);
+              error++;
+            }
+       
+          }else{
+            $('.claimListingCPassword').next('.customError').remove()
+          }
+        }
+        if($elem.attr('name') == 'cpassword' && $elem.val() != ''){
+    
+          if($elem.val() != $('.claimListingPassword').val()){
+            var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+          }else{
+            $('.claimListingPassword').next('.customError').remove()
+          }
+        }
+        if($elem.val() == '' ){
+        
+            var element = '<p class="customError" style="color:red">'+"The "+$elem.prev().text()+" field is required"+'</p>';
+            $(element).insertAfter($elem);
+            error ++;
+          
+        }
+        if($elem.attr('name') == 'is_terms' && $elem.prop('checked') == false){
+          var element = '<p class="customError" style="color:red">'+"Please accept the Term & Condition."+'</p>';
+          $(element).insertAfter($elem);
+          error ++;
+        }
+    
+
+    }
+   
+    return error;
+   }
 getDispensaryDetail(disp_slug)
 {
-	this.getDispensaryDetailData(disp_slug).subscribe(
+  this.getDispensaryDetailData(disp_slug).subscribe(
 
       ((data:any) => {
         //console.log(data['data']);
@@ -159,7 +298,7 @@ getDispensaryDetail(disp_slug)
         }else{
           console.log(this.cookieService.get('fav_disp'));
         }
-      	this.dispDetails = data['data'];
+        this.dispDetails = data['data'];
         this.dispens_id = this.dispDetails.disp_id;
         this.dispState = data['data'].state.replace(/\s/g, "-");
         this.dispCity = data['data'].city.replace(/\s/g, "-");
@@ -173,8 +312,8 @@ getDispensaryDetail(disp_slug)
       }),
       (err: any) => console.log(err),
       () => {
-		 
-	}
+     
+  }
 
 )
 
@@ -190,24 +329,24 @@ linkClicked(id){
      if(id == "reviews"){
        this.enableReviewForm();
      }
-  }		
+  }   
 onFilechange(event: any) {
   jQuery('.fileInput').parent().find('.customError').remove();
   let error = 0;
-		for(let i=0;i<event.target.files.length;i++){
+    for(let i=0;i<event.target.files.length;i++){
       var file = event.target.files[i];
       var fileType = file.type;
       const fileName = event.target.files[i].name;
-			const fsize = event.target.files[i].size;
-			const fileSize = Math.round((fsize / 1024));
+      const fsize = event.target.files[i].size;
+      const fileSize = Math.round((fsize / 1024));
       
-			if (fileSize >= 5120) {
-				
-				var element = '<p class="customError mb-0" style="color:red">'+fileName+'  size is more than 5MB please reduce size.</p>';
-				jQuery(element).insertAfter(jQuery('.fileInput').next().next());
+      if (fileSize >= 5120) {
+        
+        var element = '<p class="customError mb-0" style="color:red">'+fileName+'  size is more than 5MB please reduce size.</p>';
+        jQuery(element).insertAfter(jQuery('.fileInput').next().next());
         error++;
        
-			}
+      }
     }
     if(error > 0){
       jQuery(".fileInput").val('');
@@ -222,83 +361,39 @@ enableReviewForm(){
     setTimeout(function(){ $("#starrating").rating(); }, 1);
  }
 
+
 onClickSubmit(data) {
-  
-    // var postdata = {
-    //   "listing_id" : this.dispDetails.id,
-    //   "first_name" : data.fname,
-    //   "last_name":data.lname,
-    //   "telephone":data.telnum,
-    //   "e_mail":data.email,
-    //   'verification_details':data.notes,
-    // };
     let error = 0;
     let honeyError = 0;
+
     $('.customValidate').each(function(key,val){
       $(this).next('.customError').remove();
-      
-        if($(this).attr('name') == 'reemail' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-          else if(data.email != data.reemail){
-            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-        }
-        if($(this).attr('name') == 'email' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
-            $(element).insertAfter($(this));
-            error++;
-          }
-        }
-       
-        if($(this).val() == '' || $(this).val() == '(___)___-____'){
 
+        if($(this).val() == '' || $(this).val() == '(___)___-____'){
+  
           var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
           $(element).insertAfter($(this));
           error ++;
         }
+        if($(this).attr('name') == 'is_terms' && $(this).prop('checked') == false){
+          var element = '<p class="customError" style="color:red">'+"Please accept the Term & Condition."+'</p>';
+          $(element).insertAfter($(this));
+          error ++;
+        }
        
-       
-      
-      
     });
 
-    if(error == 0){
+    // Honeypot Implementation
+    $('.honeyInput').each(function(key,val){
+      if($(this).val() != ''){
+        $('.fileInput').next('.customError').remove();
+          var element = '<p class="customError" style="color:red">Something Went Wrong</p>';
+          $(element).insertAfter($('.fileInput'));
+          honeyError++;
+      }
+    });
+   
 
-      // Honeypot Implementation
-      $('.honeyInput').each(function(key,val){
-        if($(this).val() != ''){
-          $('.fileInput').next('.customError').remove();
-            var element = '<p class="customError" style="color:red">Something Went Wrong</p>';
-            $(element).insertAfter($('.fileInput'));
-            honeyError++;
-        }
-      });
-    }
-
-    // if(data.email != data.reemail){
-    //   toastr.error("&nbsp;&nbsp;Both emails are not matching!", "", {
-    //      "closeButton": true,
-    //       "timeOut": "8000",
-    //       "extendedTImeout": "0",
-    //       "showDuration": "300",
-    //       "hideDuration": "1000",
-    //       "extendedTimeOut": "0",
-    //       "showEasing": "swing",
-    //       "hideEasing": "linear",
-    //       "showMethod": "fadeIn",
-    //       "hideMethod": "fadeOut",
-    //       "positionClass": "toast-top-full-width",
-    //     });
-    // }
     const formData = new FormData();
     $.each(this.file, function(index, value){
       formData.append('file[]', value);
@@ -311,13 +406,21 @@ onClickSubmit(data) {
     formData.append("e_mail",data.email);
     formData.append("verification_details",$('textarea[name=notes]').val());
 
-    if(error == 0 && honeyError == 0){
+    if( error==0 && honeyError == 0){
+
+      this.isValidFormSubmitted = true;
+      formData.append("password",data.password);        
+      formData.append("is_updates",data.is_updates);   
+      formData.append("status",'1');
+      formData.append("id_cms_privileges",'4');
+      formData.append("referrer_id",this.cookieService.get('_mio_user_referral_id'));
+      formData.append("claim_listing_with_signup","1");
 
       this.postPaidFor(formData).subscribe(
         (data => {
             if(data["api_message"] == "success" && data["id"] > 0){
                 toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
-               "closeButton": true,
+                "closeButton": true,
                 "timeOut": "8000",
                 "extendedTImeout": "0",
                 "showDuration": "300",
@@ -340,7 +443,7 @@ onClickSubmit(data) {
         }),
         (err: any) => {console.log(err)
           toastr.error(err.message, "", {
-           "closeButton": true,
+            "closeButton": true,
             "timeOut": "8000",
             "extendedTImeout": "0",
             "showDuration": "300",
@@ -357,9 +460,57 @@ onClickSubmit(data) {
           console.log("err.message");
           
         }
-       );
+        );
+        
     }
  }
+
+ onCheckEmail(form: NgForm)
+ {
+
+   this.postCheckEmail().subscribe(data => 
+    {
+       //console.log(data);
+       if (data["api_status"]==1)
+       {
+           this.validateEqual = false;
+           $('#email_error').show();      
+
+        }else
+        {
+          $('#email_error').hide();
+        }
+     }, (err) => {
+              
+               console.log(err.message);
+    });
+ }
+ postCheckEmail(){
+  var postData = {"email":jQuery('input[name=email]').val()};
+ 
+  return this._http.post<any[]>('checkemailexit',postData);
+}
+
+ onConfirmPwd(form: NgForm)
+ {
+   //console.log("Sumer");
+
+  
+         //  console.log(data);
+       if(form.value.password != form.value.cpassword){
+           this.validateEqual = false;
+           $('#pcp_error').show();      
+
+        }else
+        {
+          $('#pcp_error').hide();
+        }
+     
+
+ }
+ review_check_email(){
+  return this._http.get<any[]>('review_check_email?email='+$(document).find('.reviewEmail').val());
+}
  postPaidFor(postdata){
     return this._http.post<any[]>('claim_lingings',postdata);
   }
@@ -382,15 +533,19 @@ onSubmitReviewForm(form: NgForm) {
 
      this.isValidFormSubmitted = true;
      this.review = form.value;
-
-     if(this.user_data && this.user_data['email']){
-
+     this.login_alert.email = form.value.email
+     this.review.status = 0;
+     if(!this.isUserLoggedIn){
+      this.review.email = $('.reviewEmail').val();
+      this.review.name = $('.reviewName').val();
+     }else if(this.user_data && this.user_data['email']){
+        
       this.review.email = this.user_data['email'];
       this.review.name = this.user_data['name'];
       this.review.user_id = this.user_data["id"];
 
     }else if(this.cookieService.get('_mio_user_email') && this.cookieService.get('_mio_user_email') != ""){
-
+ 
         this.review.email = this.cookieService.get('_mio_user_email');
         this.review.name = this.cookieService.get('_mio_user_name');
         this.review.user_id = parseInt(this.cookieService.get('_mio_user_id'));
@@ -407,20 +562,77 @@ onSubmitReviewForm(form: NgForm) {
     this.review.rating = $("#starrating").val();
      this.review.disp_id = this.dispens_id;
       this.expiredDate = new Date();
+      this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+  
 
-          this.postReview().subscribe(
-      (data => {
+      if(this.isUserLoggedIn)
+    {
+     // this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+     // this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+      this.postReview().subscribe(
+      (data => {    
+       
         this.review_id = data["id"];        
         this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
         this.checkUser = true;
-        
       }),
       (err: any) => console.log(err),
-      () => {
+      () => {              
           if(this.review_id > 0){
-            //console.log(this.review_id)
             this.review_id  = 0;
+            toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp; Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily.  ', "", {
+             "closeButton": true,
+              "timeOut": "8000",
+              "extendedTImeout": "0",
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "extendedTimeOut": "0",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut",
+              "positionClass": "toast-top-full-width",
+            }); 
 
+            this.write_review =  false;
+
+            this.review = new ReviewDisp();   
+            form.resetForm();
+          }
+          
+     });
+    }
+    else
+    {
+      
+      this.review_check_email().subscribe(
+      (data => {    
+           if(data['data'] > 0)
+           {
+             console.log(data['data'])
+             setTimeout(function(){ 
+                $('#login_modal').modal({
+                    show: true,
+                    backdrop: 'static',
+                    keyboard: false
+              });
+        }, 1);
+           }
+           else
+           {
+             this.postReview().subscribe(
+      (data => {    
+        console.log(data)
+        this.review_id = data["id"];        
+        this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
+        this.checkUser = true;
+      }),
+      (err: any) => console.log(err),
+      () => {              
+          if(this.review_id > 0){
+            this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+     this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+            this.review_id  = 0;
             toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. ', "", {
              "closeButton": true,
               "timeOut": "8000",
@@ -442,11 +654,59 @@ onSubmitReviewForm(form: NgForm) {
           }
           
      });
+           }
+      }),
+      (err: any) => console.log(err),
+      () => {              
+          
+          
+     });
+    }
+
+    // this.postReview().subscribe(
+    //   (data => {
+    //     this.review_id = data["id"];        
+    //     this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );
+    //     this.checkUser = true;
+        
+    //   }),
+    //   (err: any) => console.log(err),
+    //   () => {
+    //       if(this.review_id > 0){
+    //         this.cookieService.set( '_mio_user_name', this.review.name, this.expiredDate,"/" );
+    //         this.cookieService.set( '_mio_user_email', this.review.email, this.expiredDate ,"/");
+    //         this.review_id  = 0;
+    //         //console.log(this.review_id)
+    //         this.review_id  = 0;
+
+    //         toastr.success('<i class="icon-warning-sign"></i>&nbsp;&nbsp;Awesome! The POW Team has received your review. If it meets the community guidelines, it will be published momentarily. ', "", {
+    //          "closeButton": true,
+    //           "timeOut": "8000",
+    //           "extendedTImeout": "0",
+    //           "showDuration": "300",
+    //           "hideDuration": "1000",
+    //           "extendedTimeOut": "0",
+    //           "showEasing": "swing",
+    //           "hideEasing": "linear",
+    //           "showMethod": "fadeIn",
+    //           "hideMethod": "fadeOut",
+    //           "positionClass": "toast-top-full-width",
+    //         }); 
+
+    //         this.write_review =  false;
+
+    //         this.review = new ReviewDisp();   
+    //         form.resetForm();
+    //       }
+          
+    //  });
     
     
 } 
   
-
+review_check_email_claim_listing(){
+  return this._http.get<any[]>('review_check_email?email='+$(document).find('.claimListingEmail').val());
+}
 getDispensaryDetailData(disp_slug): Observable<any> {
    // var postData = {"url":currentUrl};
     if(this.user_data){
@@ -533,6 +793,129 @@ getDispensaryDetailData(disp_slug): Observable<any> {
       $('.tooltip-contentfollow span').html(parseInt($('.tooltip-contentfollow span').text())+1);
       //this.cookieService.set('_mio_user_email', this.favstrain['email'], this.expiredDate,"/");
     }
+  }
+
+  
+addUserLog (): Observable<any[]> {
+    
+  var postdata: any;
+  var userId: any;
+
+  userId = 0;
+
+  if(this.user_data && this.user_data['id']!= '')
+  {
+      userId = this.user_data['id'];
+  }else if(this.cookieService.get('_mio_user_id') && this.cookieService.get('_mio_user_id')!="")
+  {
+      userId = this.cookieService.get('_mio_user_id');
+  }
+
+  //var url = (this.platformLocation as any).location.origin ;
+  var url = (this.platformLocation as any).location.href;
+
+  //var detailstmp = {'location' : this.selectedLocation,'strain' : this.selectedStrain, 'mass' : this.selectedMass };
+  
+  //console.log((this.platformLocation as any).location);
+  var details = "NA";
+  
+  
+
+  var description = "I Feel Like-"+this.dispDetails['name'];
+
+
+  postdata = {'url' : url , 'description' : description, 'user_id' :userId , 'details': details};
+ 
+  return this._http.post<any[]>('set_user_log',postdata);
+}
+
+
+  onLogin(form: NgForm)
+  {
+    this.isValidFormSubmitted = false;
+     if (form.invalid) {
+        return;
+     }
+     this.isValidFormSubmitted = true;
+     this.login_alert.email = form.value.email;
+     this.login_alert.password = form.value.password;
+
+     this.postLogin().subscribe(data => 
+            {
+            //console.log(data);
+            if (data["api_status"]==1)
+                {
+                   toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Login sucess fully !", "", {
+                 "closeButton": true,
+                  "timeOut": "7000",
+                  "extendedTImeout": "0",
+                  "showDuration": "300",
+                  "hideDuration": "1000",
+                  "extendedTimeOut": "0",
+                  "showEasing": "swing",
+                  "hideEasing": "linear",
+                  "showMethod": "fadeIn",
+                  "hideMethod": "fadeOut",
+                  "positionClass": "toast-top-full-width",
+                });
+                  // window.location.href = '/user-profile';
+                   $('#login_modal').modal('hide');
+
+                   this.expiredDate = new Date();
+    this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+
+    //this.cookieService.set( '_mio_user_name', this.converter_alert.name, this.expiredDate,"/" );
+    this.cookieService.set( '_mio_user_email', this.login_alert.email, this.expiredDate,"/" );
+     this.cookieService.set( '_mio_user_id', data['user_id'], this.expiredDate,"/" );      
+                   
+                   localStorage.setItem('userData',JSON.stringify(data));   
+                   this.checkUser = true;
+                   this.isUserLoggedIn = true;
+                   this.user_data = data;                
+                   this.globals.user_data = true;
+                   this.globals.user_name = data["name"];
+                   this.globals.user_email = data["email"];
+                   //this.getpricealertCount();
+
+                   this.addUserLog().subscribe(
+                      (data => {}),
+                      (err: any) => console.log(err),
+                      () => {}
+                    ); 
+                   form.resetForm();
+                  // this.router.navigate(['/members/dashboard']);
+
+                   //localStorage.setItem('remember_token',data["remember_token"]);
+                //form.resetForm();
+
+                  
+
+                }
+                else
+                {
+                    toastr.error("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Please provide valid details !", "", {
+                 "closeButton": true,
+                "timeOut": "7000",
+                "extendedTImeout": "0",
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "extendedTimeOut": "0",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "positionClass": "toast-top-full-width",
+                });     
+               }
+                
+            }, (err) => {
+               
+                console.log(err.message);
+            });
+  }
+
+   postLogin(){
+    return this._http.post<any[]>('userlogin',this.login_alert);
   }
 
 

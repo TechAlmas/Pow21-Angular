@@ -1,4 +1,4 @@
 #Folder
 dist
 node_modules
-src/environments
+src/environments/*

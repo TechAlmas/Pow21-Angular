@@ -1,3 +1,4 @@
+
 .dispensary.single-product .product .product-image {
   flex: 0 0 25%;
   max-width: 25%;
@@ -120,6 +121,20 @@
   vertical-align: middle;
   color: #1b88cc;
 }
+.dispensary.single-product .product .product-image {flex: 0 0 25%;max-width: 25%;overflow: revert;}
+.dispensary.single-product .product .product-info {flex: 0 0 55%;max-width: 55%;padding: 0;}
+.dispensary.single-product .product .store-images{flex: 0 0 20%;max-width: 20%;padding: 0;}
+.single-product.dispensary .product .product-image img{width: 220px;max-height: 220px;margin: 0 auto;}
+.topimgright img{width:40px;height:40px;}
+.topimgright {position: relative;z-index: 1;top: 30px;right: 106px;}
+.topimg {position: absolute;left: 36px;background-color: #0000007d;width: 75%;}
+.topimg .unverified-icon {display: inline-flex;}
+.topimg .unverified-icon span {font-size: 12px;color: #d7d7db;font-weight: 500;margin-left: 25px;margin-top: 9px;}
+.topimg .unverified-icon span {font-size: 12px;color: #d7d7db;font-weight: 500;margin-left: 25px;margin-top: 9px;}
+.questionmarks {margin: 5px 0px;padding: 3px;opacity: 0.9;}
+.single-product.dispensary .product .product-image:before {content: '';background: url('/assets/images/icon-verified-no.png');width: 100%;height: 220px;position: absolute;background-repeat: no-repeat;background-size: 15%;top: -15px;left: 15px;z-index: 1;}
+.single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 32px;font-size: 14px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 220px;height: auto;text-align: left;padding: 5px 30px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: right;background-position-y: center;text-transform: capitalize;}
+
 
 .contact-icon span {
   font-size: 14px;
@@ -212,6 +227,22 @@ span.review-count {
   padding: 0px;
   margin-left: 10px;
 }
+
+.col.follow {flex: 0 0 16%;max-width: 16%;padding: 0;margin: auto 0;text-align: center;}
+.col.title {flex: 0 0 84%;max-width: 84%;padding: 0;}
+.tooltip-contentfollow {cursor: pointer;display: flex;flex-direction: column;align-items: center;justify-content: center;visibility: visible;opacity: 1;position: absolute;background: #2384bc;left: -9px;padding: 0px;margin-top: 2px;font-size: 15px;width: auto;/*transition: 0.25s all ease;transition-delay: 0.25s;*/z-index: 2;border-radius: 4px;top: -50px;padding: 3px 6px 6px 6px;}
+.tooltip-contentfollow.user_follow {left: 15%;}
+.follow span {padding: 0px 0;cursor: pointer;}
+span.review-count {margin-left: 5px;}
+/*.follow span:hover ~ .tooltip-contentfollow{visibility: visible;opacity: 1;}*/
+.headingfollowtooltip i.fa.fa-user {font-size: 14px;color: #fff;vertical-align: middle;padding: 0px;margin-left: 10px;}
+a.headingfollowtooltip span {color: #ffff;font-size: 14px;vertical-align: middle;padding-right: 6px;font-weight: 700;margin-left: 6px;}
+.tooltip-contentfollow:after {content: "";position: absolute;border-width: 8px;border-style: solid;top: 100%;left: 35%;border-color: #2384bc transparent transparent transparent;}
+.tooltip-contentfollow.user_follow:after{left: 37%;}
+.experience{font-size: 16px;}
+.col.retail-meta {flex: 0 0 50%;max-width: 50%;padding: 0;}
+.col.retail-other-info {flex: 0 0 50%;max-width: 50%;padding: 0;}
+.single-product.dispensary {margin-bottom: 50px;}
 
 a.headingfollowtooltip .nocount {
   border-left: 2px solid rgba(255, 255, 255, 0.747);
@@ -481,6 +512,34 @@ a.btn.contactus {
   display: inline-block;
   font-size: 14px;
 }
+.ohnohoney{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    z-index: -1;
+}
+.postBtn{
+    padding: 10px 20px;
+    color: #fff;
+    background: #08c;
+    border-color: #08c;
+    margin-right: 15px;
+} 
+.postBtn:not(:disabled):not(.disabled){
+    cursor: pointer;
+}
+a.btn.contactus {
+    margin-top: 15px;
+    font-size: 16px;
+    background: #08c;
+    border-color: #08c;
+    padding: 0.725rem 1.75rem 0.825rem;
+    line-height: normal;
+    color: #fff;
+}
 .single-product .product .product-info .product-description p {
   font-size: 16px;
   font-weight: 400;
@@ -497,6 +556,7 @@ span.write-a-review {
   font-family: "Lato";
   font-weight: 500;
 }
+
 
 .dispensary.single-product .product .product-image.Verified:before {
   content: "";
@@ -525,6 +585,33 @@ span.write-a-review {
   line-height: 1.6;
   z-index: 0;
   /* background-image: url(/assets/images/question.svg);
+.dispensary.single-product .product .product-image.Verified:before{
+content: '';
+background: url(/assets/images/icon-verified-yes.png);
+width: 100%;
+height: 220px;
+position: absolute;
+background-repeat: no-repeat;
+background-size: 15%;
+top: -15px;
+left: 15px;
+z-index: 1;
+}
+.dispensary.single-product .product .product-image.Verified:after{
+    content: 'verified';
+    position: absolute;
+    top: 0;
+    left: 32px;
+    font-size: 14px;
+    color: #ffffff;
+    background: rgb(0 0 0 / 40%);
+    width: 220px;
+    height: auto;
+    text-align: left;
+    padding: 5px 30px;
+    line-height: 1.6;
+    z-index: 0;
+    /* background-image: url(/assets/images/question.svg);
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: center;
@@ -633,6 +720,55 @@ span.write-a-review {
     background-position-y: center; */
     text-transform: capitalize;
   }
+    
+}
+.col.product-image.Pending .claim_listings {
+    display: none;
+}
+
+
+@media (min-width: 991px) and (max-width: 1199px) { 
+    a.headingfollowtooltip{
+        color: #ffff;
+        font-size: 10px;
+        vertical-align: middle;
+        font-weight: 700;
+        /*   */
+    }
+    .tooltip-contentfollow{
+        margin-top: -0px;
+        left: 4px;
+    }
+    .headingfollowtooltip  i.fa.fa-user{
+        font-size: 10px;
+    }
+    a.headingfollowtooltip span{
+        font-size: 10px;
+    }
+    .iconboxsize {
+        font-size: 14px;
+        vertical-align: revert;
+    }
+    .textcontant span {
+        font-size: 14px;
+        letter-spacing: 0.7;
+        margin-left: 8px;
+        font-weight: 400;
+        vertical-align: baseline;
+    }
+    .iconboxcheck {
+        vertical-align: baseline;
+           font-size: 14px;
+       }
+       .col.store-image span {
+        font-size: 12px;
+    }
+  .single-product.dispensary .product .product-image:before {content: '';background: url('/assets/images/icon-verified-no.png');width: 100%;height: 220px;position: absolute;background-repeat: no-repeat;background-size: 15%;top: -10px;left: -12px;z-index: 1;}
+  .single-product.dispensary .product .product-image:after {content: 'unverified';position: absolute;top: 0;left: 0px;font-size: 11px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 220px;height: auto;text-align: left;padding: 5px 0px 5px 23px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: right;background-position-y: center;text-transform: capitalize;}
+  .single-product.dispensary .product .product-image.Pending:after {content: 'unverified';position: absolute;top: 0;left: 0px;font-size: 11px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 220px;height: auto;text-align: left;padding: 5px 0px 5px 23px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: right;background-position-y: center;text-transform: capitalize;}
+  .single-product.dispensary .product .product-image.Verified:after {content: 'unverified';position: absolute;top: 0;left: 0px;font-size: 11px;color: #ffffff;background: rgb(0 0 0 / 40%);width: 220px;height: auto;text-align: left;padding: 5px 0px 5px 23px;line-height: 1.6;z-index: 0;background-image: url('/assets/images/question.svg');background-repeat: no-repeat;background-position-x: right;background-position-y: center;text-transform: capitalize;}
+
+ 
   .claim_listings {
     z-index: 999999;
     position: absolute;

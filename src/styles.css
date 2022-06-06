@@ -21221,6 +21221,21 @@ span.select2-selection.select2-selection--multiple:active {
   background: transparent;
   width: fit-content;
 }
+.image-container .image-area {
+  position: relative;
+  background: transparent;
+  width: 100%;
+}
+
+.logo-container .image-area {
+  margin-top: 1rem;
+}
+
+.logo-container .image-area img {
+  max-width: 100%;
+  width: 7rem;
+  height: auto;
+}
 
 .image-area img {
   max-width: 100%;

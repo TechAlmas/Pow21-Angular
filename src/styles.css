@@ -21224,7 +21224,7 @@ span.select2-selection.select2-selection--multiple:active {
 
 .image-area img {
   max-width: 100%;
-  width: 8rem;
+  width: 100%;
   height: auto;
 }
 .remove-image {

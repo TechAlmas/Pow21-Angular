@@ -59,7 +59,7 @@ export class DispensaryComponent implements OnInit {
   validateEqual = false;
   claimListingWithSignup = false;
   login_alert = new Login();
-  isSignUpfields = false;
+
    constructor(private cookieService: CookieService,public globals: Globals,private route: ActivatedRoute,private routes: Router,private _http: HttpClient,private platformLocation: PlatformLocation, private title: Title, private meta: Meta) {window.scrollTo(0, 0);}
 
   ngOnInit() {
@@ -232,8 +232,8 @@ export class DispensaryComponent implements OnInit {
           error ++;
         }
        
- 
-    if(this.isSignUpfields){
+     
+    if(this.claimListingWithSignup){
       
         $elem.next('.customError').remove();
         if($elem.attr('name') == 'password' && $elem.val() != ''){
@@ -255,6 +255,7 @@ export class DispensaryComponent implements OnInit {
           }
         }
         if($elem.attr('name') == 'cpassword' && $elem.val() != ''){
+    
           if($elem.val() != $('.claimListingPassword').val()){
             var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
             $(element).insertAfter($elem);
@@ -364,6 +365,23 @@ enableReviewForm(){
 onClickSubmit(data) {
     let error = 0;
     let honeyError = 0;
+
+    $('.customValidate').each(function(key,val){
+      $(this).next('.customError').remove();
+
+        if($(this).val() == '' || $(this).val() == '(___)___-____'){
+  
+          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+          $(element).insertAfter($(this));
+          error ++;
+        }
+        if($(this).attr('name') == 'is_terms' && $(this).prop('checked') == false){
+          var element = '<p class="customError" style="color:red">'+"Please accept the Term & Condition."+'</p>';
+          $(element).insertAfter($(this));
+          error ++;
+        }
+       
+    });
 
     // Honeypot Implementation
     $('.honeyInput').each(function(key,val){

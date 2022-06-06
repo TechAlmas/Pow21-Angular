@@ -10573,7 +10573,7 @@ body:not(.device-touch) .social-icon i {
 .toggle {
   display: block;
   position: relative;
-  margin: 0 0 20px 0;
+  margin: 10px 0 20px 0;
 }
 
 .toggle .togglet,
@@ -21103,8 +21103,15 @@ a.write-a-review {
 
 /* TA css */
 .select2.select2-container.select2-container--default.select2-container {
+  /* float: right; */
+  /* width: 100% !important; */
+  /* margin-left: 50px; */
+}
+
+.form-group.whitebgs
+  .select2.select2-container.select2-container--default.select2-container {
   float: right;
-  width: 80% !important;
+  /* width: 80% !important; */
   /* margin-left: 50px; */
 }
 

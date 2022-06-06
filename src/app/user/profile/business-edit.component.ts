@@ -373,7 +373,7 @@ export class BusinessEditComponent implements OnInit {
 
         let fileName = dispId + "-" + file.name;
         let html =
-          '<div class="" style="width: 80%;"> <div class="image-area mr-3" ><img src="' +
+          '<div class="" style=""> <div class="image-area mr-3" ><img src="' +
           url +
           '" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" >x</a></div> </div>';
 

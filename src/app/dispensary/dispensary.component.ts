@@ -109,43 +109,179 @@ export class DispensaryComponent implements OnInit {
         // });
 
       //Validations on KeyUp
-
+      let component = this;
       $('.customValidate').on('keyup',function(){
-        $(this).next('.customError').remove();
+        component.customValidateFields($(this));
+        // $(this).next('.customError').remove();
       
-        if($(this).attr('name') == 'reemail' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+        // if($(this).attr('name') == 'reemail' && $(this).val() != ''){
+        //   let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        //   if(!regex.test($(this).val())){
+        //     var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
             
-          }
-          // else if($('input[name=email]').val() != $(this).val()){
-          //   var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+        //   }
+        //   // else if($('input[name=email]').val() != $(this).val()){
+        //   //   var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
             
-          // }
-        }
-        if($(this).attr('name') == 'email' && $(this).val() != ''){
-          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-          if(!regex.test($(this).val())){
-            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+        //   // }
+        // }
+        // if($(this).attr('name') == 'email' && $(this).val() != ''){
+        //   let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        //   if(!regex.test($(this).val())){
+        //     var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
            
-          }
-        }
-        // if($(this).attr('name') == 'telnum' && $(this).val() != ''){
+        //   }
+        // }
+        // // if($(this).attr('name') == 'telnum' && $(this).val() != ''){
 
-        //   let newVal =  $(this).val().replace(/[^\d]/g, '');
-        //   $(this).val(newVal)
-        // } 
-        if($(this).val() == ''){
+        // //   let newVal =  $(this).val().replace(/[^\d]/g, '');
+        // //   $(this).val(newVal)
+        // // } 
+        // if($(this).val() == ''){
 
-          var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
+        //   var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
           
-        }
-        $(element).insertAfter($(this));
+        // }
+        // $(element).insertAfter($(this));
       })
 
 
   }
+
+  customValidateFields($elem):any{
+    let error = 0;
+  
+      $elem.next('.customError').remove();
+  
+        if($elem.attr('name') == 'reemail' && $elem.val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($elem.val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+            
+          }
+          else if($elem.val() != $('.claimListingEmail').val()){
+            var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+         
+          }else{
+            $('.claimListingEmail').next('.customError').remove()
+            this.review_check_email_claim_listing().subscribe(
+              (data => {    
+                if(data['data'] > 0)
+                {
+                  jQuery('.signupFields').hide();
+                  this.claimListingWithSignup = false;
+                }
+                else
+                {
+                  jQuery('.signupFields').show();
+                  this.claimListingWithSignup = true;
+                }
+              }),
+              (err: any) => console.log(err),
+              () => {  
+                  
+             });
+
+          }
+        }
+        if($elem.attr('name') == 'email' && $elem.val() != ''){
+          let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(!regex.test($elem.val())){
+            var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+          } else if($elem.val() != $('.claimListingReEmail').val()){
+              if($('.claimListingReEmail').val() != ''){
+
+                var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
+                $(element).insertAfter($elem);
+                error++;
+              }
+         
+          }else{
+            $('.claimListingReEmail').next('.customError').remove()
+            this.review_check_email_claim_listing().subscribe(
+              (data => {    
+                if(data['data'] > 0)
+                {
+                  jQuery('.signupFields').hide();
+                  this.claimListingWithSignup = false;
+                }
+                else
+                {
+                  jQuery('.signupFields').show();
+                  this.claimListingWithSignup = true;
+                }
+              }),
+              (err: any) => console.log(err),
+              () => {  
+                  
+             });
+
+          }
+        }
+       
+        if($elem.val() == '' || $elem.val() == '(___)___-____'){
+  
+          var element = '<p class="customError" style="color:red">'+"The "+$elem.prev().text()+" field is required"+'</p>';
+          $(element).insertAfter($elem);
+          error ++;
+        }
+       
+     
+    if(this.claimListingWithSignup){
+      
+        $elem.next('.customError').remove();
+        if($elem.attr('name') == 'password' && $elem.val() != ''){
+          if($elem.val().length < 6){
+            var element = '<p class="customError" style="color:red">'+" Password must be at least 6 characters long."+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+          }
+          else if($elem.val() != $('.claimListingCPassword').val()){
+            if($('.claimListingCPassword').val() != ''){
+
+              var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
+              $(element).insertAfter($elem);
+              error++;
+            }
+       
+          }else{
+            $('.claimListingCPassword').next('.customError').remove()
+          }
+        }
+        if($elem.attr('name') == 'cpassword' && $elem.val() != ''){
+    
+          if($elem.val() != $('.claimListingPassword').val()){
+            var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
+            $(element).insertAfter($elem);
+            error++;
+          }else{
+            $('.claimListingPassword').next('.customError').remove()
+          }
+        }
+        if($elem.val() == '' ){
+        
+            var element = '<p class="customError" style="color:red">'+"The "+$elem.prev().text()+" field is required"+'</p>';
+            $(element).insertAfter($elem);
+            error ++;
+          
+        }
+        if($elem.attr('name') == 'is_terms' && $elem.prop('checked') == false){
+          var element = '<p class="customError" style="color:red">'+"Please accept the Term & Condition."+'</p>';
+          $(element).insertAfter($elem);
+          error ++;
+        }
+    
+
+    }
+   
+    return error;
+   }
 getDispensaryDetail(disp_slug)
 {
   this.getDispensaryDetailData(disp_slug).subscribe(
@@ -224,119 +360,40 @@ enableReviewForm(){
     this.write_review = true;
     setTimeout(function(){ $("#starrating").rating(); }, 1);
  }
- customValidateFields(data,isSignUpfields = false):any{
-  let error = 0;
-  $('.customValidate').each(function(key,val){
-    $(this).next('.customError').remove();
 
-      if($(this).attr('name') == 'reemail' && $(this).val() != ''){
-        let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(!regex.test($(this).val())){
-          var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
-          $(element).insertAfter($(this));
-          error++;
-        }
-        else if(data.email != data.reemail){
-          var element = '<p class="customError" style="color:red">'+"Email address does not match"+'</p>';
-          $(element).insertAfter($(this));
-          error++;
-        }
-      }
-      if($(this).attr('name') == 'email' && $(this).val() != ''){
-        let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(!regex.test($(this).val())){
-          var element = '<p class="customError" style="color:red">'+"The email should be a valid email address"+'</p>';
-          $(element).insertAfter($(this));
-          error++;
-        }
-      }
-     
-      if($(this).val() == '' || $(this).val() == '(___)___-____'){
 
-        var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
-        $(element).insertAfter($(this));
-        error ++;
-      }
-     
-  });
-  if(isSignUpfields){
-    $('.customValidateSignUp').each(function(key,val){
+onClickSubmit(data) {
+    let error = 0;
+    let honeyError = 0;
+
+    $('.customValidate').each(function(key,val){
       $(this).next('.customError').remove();
-      if($(this).attr('name') == 'password' && $(this).val() != ''){
-        if($(this).val().length < 6){
-          var element = '<p class="customError" style="color:red">'+" Password must be at least 6 characters long."+'</p>';
-          $(element).insertAfter($(this));
-          error++;
-        }
-      }
-      if($(this).attr('name') == 'cpassword' && $(this).val() != ''){
-        if($(this).val() != $(this).parents('form').find('input[name=password]').val()){
-          var element = '<p class="customError" style="color:red">'+"Password & Confirm password do not match."+'</p>';
-          $(element).insertAfter($(this));
-          error++;
-        }
-      }
-      if($(this).val() == '' ){
-      
+
+        if($(this).val() == '' || $(this).val() == '(___)___-____'){
+  
           var element = '<p class="customError" style="color:red">'+"The "+$(this).prev().text()+" field is required"+'</p>';
           $(element).insertAfter($(this));
           error ++;
-        
-      }
-      if($(this).attr('name') == 'is_terms' && $(this).prop('checked') == false){
-        var element = '<p class="customError" style="color:red">'+"Please accept the Term & Condition."+'</p>';
-        $(element).insertAfter($(this));
-        error ++;
-      }
-  
-    });
-  }
- 
-  return error;
- }
-
-onClickSubmit(data) {
-  
-    // var postdata = {
-    //   "listing_id" : this.dispDetails.id,
-    //   "first_name" : data.fname,
-    //   "last_name":data.lname,
-    //   "telephone":data.telnum,
-    //   "e_mail":data.email,
-    //   'verification_details':data.notes,
-    // };
-    
-    let honeyError = 0;
-    let error = this.customValidateFields(data);
-
-    if(error == 0){
-
-      // Honeypot Implementation
-      $('.honeyInput').each(function(key,val){
-        if($(this).val() != ''){
-          $('.fileInput').next('.customError').remove();
-            var element = '<p class="customError" style="color:red">Something Went Wrong</p>';
-            $(element).insertAfter($('.fileInput'));
-            honeyError++;
         }
-      });
-    }
+        if($(this).attr('name') == 'is_terms' && $(this).prop('checked') == false){
+          var element = '<p class="customError" style="color:red">'+"Please accept the Term & Condition."+'</p>';
+          $(element).insertAfter($(this));
+          error ++;
+        }
+       
+    });
 
-    // if(data.email != data.reemail){
-    //   toastr.error("&nbsp;&nbsp;Both emails are not matching!", "", {
-    //      "closeButton": true,
-    //       "timeOut": "8000",
-    //       "extendedTImeout": "0",
-    //       "showDuration": "300",
-    //       "hideDuration": "1000",
-    //       "extendedTimeOut": "0",
-    //       "showEasing": "swing",
-    //       "hideEasing": "linear",
-    //       "showMethod": "fadeIn",
-    //       "hideMethod": "fadeOut",
-    //       "positionClass": "toast-top-full-width",
-    //     });
-    // }
+    // Honeypot Implementation
+    $('.honeyInput').each(function(key,val){
+      if($(this).val() != ''){
+        $('.fileInput').next('.customError').remove();
+          var element = '<p class="customError" style="color:red">Something Went Wrong</p>';
+          $(element).insertAfter($('.fileInput'));
+          honeyError++;
+      }
+    });
+   
+
     const formData = new FormData();
     $.each(this.file, function(index, value){
       formData.append('file[]', value);
@@ -349,110 +406,21 @@ onClickSubmit(data) {
     formData.append("e_mail",data.email);
     formData.append("verification_details",$('textarea[name=notes]').val());
 
-    if(error == 0 && honeyError == 0){
+    if( error==0 && honeyError == 0){
 
-      if(!this.claimListingWithSignup){
-        this.review_check_email_claim_listing().subscribe(
-          (data => {    
-            if(data['data'] > 0)
-            {
-              this.postPaidFor(formData).subscribe(
-                (data => {
-                    if(data["api_message"] == "success" && data["id"] > 0){
-                        toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
-                       "closeButton": true,
-                        "timeOut": "8000",
-                        "extendedTImeout": "0",
-                        "showDuration": "300",
-                        "hideDuration": "1000",
-                        "extendedTimeOut": "0",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut",
-                        "positionClass": "toast-top-full-width",
-                      });
-                    }
-          
-                    this.expiredDate = new Date();
-                    this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
-                    this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
-          
-                    $('#myModal_paid').modal('hide');
-          
-                }),
-                (err: any) => {console.log(err)
-                  toastr.error(err.message, "", {
-                   "closeButton": true,
-                    "timeOut": "8000",
-                    "extendedTImeout": "0",
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "extendedTimeOut": "0",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut",
-                    "positionClass": "toast-top-full-width",
-                  });
-                },
-                () => {
-                  console.log("err.message");
-                  
-                }
-               );
-             
-            }
-            else
-            {
-              jQuery('.signupFields').show();
-              this.claimListingWithSignup = true;
-            }
-          }),
-          (err: any) => console.log(err),
-          () => {  
-              
-         });
-      }else{
-        let errorCheck = this.customValidateFields(data,true);
+      this.isValidFormSubmitted = true;
+      formData.append("password",data.password);        
+      formData.append("is_updates",data.is_updates);   
+      formData.append("status",'1');
+      formData.append("id_cms_privileges",'4');
+      formData.append("referrer_id",this.cookieService.get('_mio_user_referral_id'));
+      formData.append("claim_listing_with_signup","1");
 
-        if(errorCheck == 0){
-          this.isValidFormSubmitted = true;
-          formData.append("password",data.password);        
-          formData.append("is_updates",data.is_updates);   
-          formData.append("status",'1');
-          formData.append("id_cms_privileges",'4');
-          formData.append("referrer_id",this.cookieService.get('_mio_user_referral_id'));
-          formData.append("claim_listing_with_signup","1");
-
-          this.postPaidFor(formData).subscribe(
-            (data => {
-                if(data["api_message"] == "success" && data["id"] > 0){
-                    toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
-                   "closeButton": true,
-                    "timeOut": "8000",
-                    "extendedTImeout": "0",
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "extendedTimeOut": "0",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut",
-                    "positionClass": "toast-top-full-width",
-                  });
-                }
-      
-                this.expiredDate = new Date();
-                this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
-                this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
-      
-                $('#myModal_paid').modal('hide');
-      
-            }),
-            (err: any) => {console.log(err)
-              toastr.error(err.message, "", {
-               "closeButton": true,
+      this.postPaidFor(formData).subscribe(
+        (data => {
+            if(data["api_message"] == "success" && data["id"] > 0){
+                toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks", "", {
+                "closeButton": true,
                 "timeOut": "8000",
                 "extendedTImeout": "0",
                 "showDuration": "300",
@@ -464,16 +432,36 @@ onClickSubmit(data) {
                 "hideMethod": "fadeOut",
                 "positionClass": "toast-top-full-width",
               });
-            },
-            () => {
-              console.log("err.message");
-              
             }
-           );
+  
+            this.expiredDate = new Date();
+            this.expiredDate.setDate( this.expiredDate.getDate() + 1000 );
+            this.cookieService.set( '_mio_user_id', data["user_id"], this.expiredDate,"/" );
+  
+            $('#myModal_paid').modal('hide');
+  
+        }),
+        (err: any) => {console.log(err)
+          toastr.error(err.message, "", {
+            "closeButton": true,
+            "timeOut": "8000",
+            "extendedTImeout": "0",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "extendedTimeOut": "0",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "positionClass": "toast-top-full-width",
+          });
+        },
+        () => {
+          console.log("err.message");
+          
         }
-      }
-      
-     
+        );
+        
     }
  }
 

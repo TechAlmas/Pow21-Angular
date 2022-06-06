@@ -138,7 +138,7 @@
               <input
                 type="email"
                 name="reemail"
-                class="sm-form-control required customValidate"
+                class="sm-form-control required customValidate claimListingReEmail"
                 placeholder="Re Enter Email Address"
                 ngModel
               />
@@ -149,13 +149,13 @@
 			<div class="form-group whitebgs signupFields" style="display:none;">
 				<div class="wait-layer" *ngIf="waitLayer"></div>
 				<label for="paid-for-quality">Choose Password</label>
-				<input type="password" id="register-form-password" name="password" value="" minlength="6" class="form-control customValidateSignUp" required ngModel/>
+				<input type="password" id="register-form-password" name="password" value="" minlength="6" class="form-control customValidate claimListingPassword" required ngModel/>
 					
 			</div>
 			<div class="form-group whitebgs signupFields" style="display:none;">
 				<div class="wait-layer" *ngIf="waitLayer"></div>
 				<label for="paid-for-quality">Confirm Password</label>
-				<input type="password" id="register-form-repassword" name="cpassword" value="" class="form-control customValidateSignUp" required validateEqual="password" ngModel />
+				<input type="password" id="register-form-repassword" name="cpassword" value="" class="form-control customValidate claimListingCPassword" required validateEqual="password" ngModel />
 				
 					<div id="pcp_error" style="display: none;" class="error" > 
 							Password & Confirm password do not match.
@@ -173,7 +173,7 @@
 			<div class="form-group whitebgs signupFields" style="display:none;">
 				<div class="wait-layer" *ngIf="waitLayer"></div>
 					<label class="toggle">
-					<input type="checkbox" id="register-form-is_terms" name="is_terms"  value="1" class="form-control customValidateSignUp" required ngModel>                             
+					<input type="checkbox" id="register-form-is_terms" name="is_terms"  value="1" class="form-control customValidate" required ngModel>                             
 
 					<div class="slide-toggle"></div>
 					<div class="slide-toggle-content">Yes, I agree to POW's <a href="https://www.pow21.com/blog/termsofuse/" target="_blank">Terms</a> and <a href="https://www.pow21.com/blog/privacy/" target="_blank">Privacy.</a></div>

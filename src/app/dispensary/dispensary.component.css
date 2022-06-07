@@ -376,7 +376,7 @@ a.headingfollowtooltip span {
   left: 37%;
 }
 .experience {
-  font-size: 16px;
+  font-size: 14px;
 }
 .col.retail-meta {
   flex: 0 0 50%;
@@ -424,9 +424,7 @@ a.headingfollowtooltip span {
 .tooltip-contentfollow.user_follow:after {
   left: 30%;
 }
-.experience {
-  font-size: 16px;
-}
+
 .col.retail-meta {
   flex: 0 0 50%;
   max-width: 50%;
@@ -450,11 +448,17 @@ i.fas.fa-clock {
   cursor: pointer;
 }
 span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
-  color: #50af63;
   font-weight: 600;
   font-size: 16px;
   margin-left: 10px;
 }
+.close-txt {
+  color: #c91032;
+}
+.open-txt {
+  color: #50af63;
+}
+
 .textcontant span {
   font-size: 14px;
   letter-spacing: 0.7;
@@ -688,8 +692,11 @@ a.btn.contactus {
   line-height: normal;
   color: #fff;
 }
+.single-product .product .product-info .product-description {
+  width: 100%;
+}
 .single-product .product .product-info .product-description p {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   font-family: "Lato";
   color: #555555;

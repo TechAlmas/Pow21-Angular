@@ -9,6 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import {Globals} from '../../models/globals';
 
+
 declare var $: any;
 declare var jQuery: any;
 declare var toastr: any;
@@ -33,18 +34,17 @@ export class HeaderComponent implements OnInit {
   location_data: any;
  // mio_session_count : any;
 
-  constructor(private cookieService: CookieService,private _http: HttpClient, public globals: Globals,private routes: Router, private route: ActivatedRoute) {
+  constructor(private cookieService: CookieService,private _http: HttpClient, public globals: Globals,private routes: Router, private route: ActivatedRoute,private router: Router) {
      
 
   }
 
   ngOnInit() {
-    
     this.globals.location_global_url = "canada";
     this.location_data = JSON.parse(localStorage.getItem('locationData'));
-
+    
     this.user_data = JSON.parse(localStorage.getItem('userData'));
-
+      console.log(this.user_data.id_cms_privileges)
       if(this.user_data == null){
         this.globals.user_name = this.cookieService.get('_mio_user_name');
         this.globals.user_email = this.cookieService.get('_mio_user_email');
@@ -64,6 +64,15 @@ export class HeaderComponent implements OnInit {
     console.log(parm);
     this.dispContent = false;
     this.routes.navigate(['/'+parm]);
+  }
+
+  onClickProfile(){
+    if(this.user_data.id_cms_privileges != 7 && this.user_data.id_cms_privileges != 6){
+			return '/members/dashboard';
+		}else{
+      return '/members/business';
+
+    }
   }
 
   getcount(){

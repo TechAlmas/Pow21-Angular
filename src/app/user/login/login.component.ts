@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 
       this.postLogin().subscribe(data => 
       			{
-      			//console.log(data);
+      			console.log(data);
       			if (data["api_status"]==1)
                 {
                    toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Login sucess fully !", "", {
@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
                   "hideMethod": "fadeOut",
                   "positionClass": "toast-top-full-width",
 			          });
+               
                   // window.location.href = '/user-profile';
 
                    this.expiredDate = new Date();
@@ -80,6 +81,7 @@ export class LoginComponent implements OnInit {
                    this.globals.user_data = true;
                    this.globals.user_name = data["name"];
                    this.globals.user_email = data["email"];
+                   this.globals.id_cms_privileges = data["id_cms_privileges"];
                    this.getpricealertCount();
 
                    this.addUserLog().subscribe(

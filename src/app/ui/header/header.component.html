@@ -33,7 +33,7 @@
                         <!-- Before Member Login -->
 
                         <li *ngIf="this.globals.user_data"> 
-                            <a [routerLink]="onClickProfile()"><i class="icon-user"></i><span class="user-name">{{this.globals.user_name}}</span></a>
+                            <a [routerLink]="(this.globals.id_cms_privileges != 7 && this.globals.id_cms_privileges != 6) ? '/members/dashboard':'/members/business'"><i class="icon-user"></i><span class="user-name">{{this.globals.user_name}} </span></a>
                         </li>
 
                         <li *ngIf="!this.globals.user_data">

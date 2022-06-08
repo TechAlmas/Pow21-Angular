@@ -54,6 +54,7 @@ export class HeaderComponent implements OnInit {
         this.globals.user_data = true;
         this.globals.user_name = this.user_data.name;
         this.user_email = this.user_data.email;
+        this.globals.id_cms_privileges = this.user_data.id_cms_privileges;
       }
       this.getpricealertCount();
       this.strian_count();
@@ -66,14 +67,7 @@ export class HeaderComponent implements OnInit {
     this.routes.navigate(['/'+parm]);
   }
 
-  onClickProfile(){
-    if(this.user_data.id_cms_privileges != 7 && this.user_data.id_cms_privileges != 6){
-			return '/members/dashboard';
-		}else{
-      return '/members/business';
-
-    }
-  }
+  
 
   getcount(){
     return this._http.get<Ret[]>('pricealertcount?email='+this.user_email);

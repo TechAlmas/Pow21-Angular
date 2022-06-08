@@ -1,0 +1,56 @@
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu></mio-profile-top-menu>
+<!-- Dashboard SubNav Start -->
+<mio-business-sub-menu></mio-business-sub-menu>
+<div class="content-wrap grey-bg">
+	<!-- Manage price Section start -->
+	<div class="container clearfix">
+		<h2>Manage Your Business Contributers</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="white-box">
+					<div class="white-box-title">
+						<h3>Business Contributers List
+							<div class="btn-group-sm" style="display: inline;margin-left: 10px;vertical-align: middle;">
+								<button class="btn btn-primary save-btn" style="width: 10%;" routerLink="/members/business/contributors/edit/add">Add</button>
+							</div><i class="icon-angle-right"></i>
+						</h3>
+					</div>
+					<div class="white-box-content">
+						<table class="table table-striped stores">
+							<thead>
+								<tr>
+									<th class="trtopspaccings">Name</th>
+									<th class="trtopspaccings">Email</th>
+									<th class="trtopspaccings">Retail Stores</th>
+									
+									<th class="trtopspaccings">Actions</th>
+								</tr>
+							
+							</thead>
+							<tbody>
+								<tr *ngFor="let rv of listContLists">
+									
+									<td class="">{{rv.name}}</td>
+									<!-- <td></td> -->
+									<td class="">
+										{{rv.email}}
+									</td>
+									<td>
+                                        <span *ngFor="let rs of rv.retail_store">{{rs}}, </span>
+                                    </td>
+									<td class="">
+										<a class="text-primary" title="Edit your business contributer" routerLink="/members/business/contributors/edit/{{rv.id}}" ><i class="fa fa-edit" ></i></a>
+										<!-- <a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,3)" *ngIf="this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6"><i class="fa fa-pause" ></i></a> -->
+										<a class="text-danger" title="Remove your business contributer" href="javascript:void(0)" (click)="removeBusinessContributer(rv)" *ngIf="this.user_data.id_cms_privileges === 6"><i class="fa fa-trash" ></i></a>
+									</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Manage price Section End -->
+</div>

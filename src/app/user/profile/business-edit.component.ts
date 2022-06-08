@@ -324,12 +324,12 @@ export class BusinessEditComponent implements OnInit {
 	onFilechange(event: any) {
 		let dispId =  this.dispDetails.id;
 		jQuery('#file-upload').parent().next('.customError').remove();
-		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+		var validations = ['image/jpeg', 'image/png', 'image/jpg','image/webp'];
 		var file = event.target.files[0];
 		var fileType = file.type;
 		const fsize = event.target.files[0].size;
 		const fileSize = Math.round((fsize / 1024));
-		if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+		if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]) || (fileType == validations[3]))){
 				
 			var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
 			jQuery(element).insertAfter(jQuery('#file-upload').parent());
@@ -358,14 +358,14 @@ export class BusinessEditComponent implements OnInit {
 	onStoreImagesUpload(event:any){
 		let dispId =  this.dispDetails.id;
 		jQuery('.fileInput').parent().next('.customError').remove();
-		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+		var validations = ['image/jpeg', 'image/png', 'image/jpg','image/webp'];
 
 		for(let i=0;i<event.target.files.length;i++){
             var file = event.target.files[i];
             var fileType = file.type;
 			const fsize = event.target.files[i].size;
 			const fileSize = Math.round((fsize / 1024));
-            if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+            if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]) || (fileType == validations[3]))){
 				
 				var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
 				jQuery(element).insertAfter(jQuery('.fileInput').parent());

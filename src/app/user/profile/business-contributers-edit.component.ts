@@ -270,12 +270,30 @@ export class BusinessContributersEditComponent implements OnInit {
 				return false;
 			}
 		});
+        let component = this;
         jQuery('.customInput').each(function(){
             jQuery(this).next('.customError').remove();
-			if(jQuery(this).val() == '' ){
-				var element = '<p class="customError" style="color:red">The '+jQuery(this).attr('name')+' field is required</p>';
-				jQuery(element).insertAfter(jQuery(this));
-				error++;
+            if(jQuery(this).attr('name') == 'cpassword' && jQuery(this).val() != ''){
+                if(jQuery(this).val() != jQuery('#contributor_password').val()){
+                    var element = '<p class="customError" style="color:red">Password & Confirm password do not match</p>';
+                    jQuery(element).insertAfter(jQuery(this));
+				    error++;
+                }
+            }
+			else if(jQuery(this).val() == ''){
+                if(jQuery(this).attr('name') == 'password' || jQuery(this).attr('name') == 'cpassword'){
+                 
+                    if(component.cont_id == 'add'){
+                        var element = '<p class="customError" style="color:red">The '+jQuery(this).attr('name')+' field is required</p>';
+                        jQuery(element).insertAfter(jQuery(this));
+                        error++;
+                    }
+                }else{
+                    var element = '<p class="customError" style="color:red">The '+jQuery(this).attr('name')+' field is required</p>';
+                    jQuery(element).insertAfter(jQuery(this));
+                    error++;
+                }
+				
 				
 			}
 		});

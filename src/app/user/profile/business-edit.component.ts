@@ -331,7 +331,7 @@ export class BusinessEditComponent implements OnInit {
 		const fileSize = Math.round((fsize / 1024));
 		if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]) || (fileType == validations[3]))){
 				
-			var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+			var element = '<p class="customError" style="color:red">only JPG, JPEG,PNG & WEBP files are allowed to upload.</p>';
 			jQuery(element).insertAfter(jQuery('#file-upload').parent());
 			jQuery('#file-upload').val('');
 			return false;
@@ -367,7 +367,7 @@ export class BusinessEditComponent implements OnInit {
 			const fileSize = Math.round((fsize / 1024));
             if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]) || (fileType == validations[3]))){
 				
-				var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+				var element = '<p class="customError" style="color:red">only JPG, JPEG, PNG & WEBP files are allowed to upload.</p>';
 				jQuery(element).insertAfter(jQuery('.fileInput').parent());
                 jQuery(".fileInput").val('');
                 return false;

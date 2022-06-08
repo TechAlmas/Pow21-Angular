@@ -289,7 +289,7 @@ export class BusinessContributersEditComponent implements OnInit {
         formData.append('name',jQuery('#first_name').val()+" "+jQuery('#last_name').val())
 		formData.append('email', jQuery('#email').val());
 		formData.append('id', jQuery('#id').val());
-        formData.append('id_cms_privileges','8');
+        formData.append('id_cms_privileges','7');
         formData.append('parent_id',this.user_data['id']);
 
 		let retailStoreValues = jQuery('select[name=retail_store]').val();

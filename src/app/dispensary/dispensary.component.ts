@@ -781,8 +781,8 @@ export class DispensaryComponent implements OnInit {
         (data) => {
           if (data["data"] == "follow") {
             toastr.success(
-              '<i class="icon-ok-sign"></i>&nbsp;&nbsp;PuPow! You are now following&nbsp;' +
-                this.dispDetails.name,
+              "<i class='icon-ok-sign'></i>&nbsp;&nbsp;PuPow! You are now following&nbsp;" +
+                this.dispDetails.name +". Manage stores you're following <a href='/members/dispensary-followers' target='_blank'>here</a>.",
               "",
               {
                 closeButton: true,

@@ -23,6 +23,7 @@ declare var Swal: any;
   styleUrls: ["./business-edit.component.css"],
 })
 export class BusinessEditComponent implements OnInit {
+
   dispDetails = new DispDetail();
   store_meta: any;
   assign_user: any;
@@ -335,6 +336,7 @@ export class BusinessEditComponent implements OnInit {
                   positionClass: "toast-top-full-width",
                 }
               );
+
             }
           },
           (err) => {
@@ -618,6 +620,7 @@ export class BusinessEditComponent implements OnInit {
           });
           console.log(err.message);
         }
+
       );
     }
   }
@@ -703,4 +706,5 @@ export class BusinessEditComponent implements OnInit {
       jQuery("#" + day + "_end").prop("disabled", false);
     }
   }
+
 }

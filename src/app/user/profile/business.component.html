@@ -12,7 +12,7 @@
 					<div class="white-box-title">
 						<h3>Business List
 							<div class="btn-group-sm" style="display: inline;margin-left: 10px;vertical-align: middle;">
-								<button class="btn btn-primary save-btn" style="width: 10%;" routerLink="/members/business/edit/add">Add</button>
+								<button class="btn btn-primary save-btn" style="width: 10%;" routerLink="/members/business/add">Add</button>
 							</div><i class="icon-angle-right"></i>
 						</h3>
 					</div>
@@ -45,14 +45,22 @@
 							<tbody>
 								<tr *ngFor="let rv of listdispLists">
 									<td class="status">
-										<div *ngIf="rv.status else elseBlock">
+										<div *ngIf="rv.status == 1">
 											<img src="/assets/images/icon-verified-yes.png">
 										</div>
-										<ng-template #elseBlock>
+										<div *ngIf="rv.status == 2">
+											<img src="/assets/images/icon-verified-pending.png">
+										</div>
+										<div *ngIf="rv.status == 3">
+											<a routerLink="/members/business/edit/{{rv.slug}}">
+												<img src="/assets/images/icon-verified-no.png">
+											</a>
+										</div>
+										<!-- <ng-template #elseBlock>
 											<a routerLink="/members/business/edit/{{rv.slug}}">
 												<img src="/assets/images/icon-verified-no.png" >
 											</a>
-										</ng-template>
+										</ng-template> -->
 									</td>
 									<td>
 										<ng-container [ngTemplateOutlet]="rv.status == 0 ? first : rv.status == 1 ? second : third"></ng-container>
@@ -75,7 +83,7 @@
 									<td></td> -->
 									<!-- <td class="contantsection">{{rv.country}}</td> -->
 									<td class="contantsection">
-										<span *ngFor="let cb of rv.contributors">{{cb.name}}, </span>
+										<span *ngFor="let cb of rv.contributors">{{cb}}, </span>
 									</td>
 									<td>{{rv.social}}<a href="#">4.7</a></td>
 									<td><a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>

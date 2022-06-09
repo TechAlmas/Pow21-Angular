@@ -1,0 +1,101 @@
+
+<!-- Dashboard Main Nav End -->
+<mio-profile-top-menu></mio-profile-top-menu>
+<!-- Dashboard SubNav Start -->
+<mio-business-sub-menu></mio-business-sub-menu>
+
+<div class="content-wrap grey-bg">
+	<!-- Manage price Section start -->
+	<div class="container clearfix">
+		<h2 *ngIf="contDetails.id else elseBlock">Edit Your Business Contributer</h2>
+		<ng-template #elseBlock><h2>Add Your Business Contributer</h2></ng-template>
+		 
+		<div class="row">
+			<div class="col-md-8">
+				<div class="white-box">
+					<div class="white-box-title">
+						<h3>Business Contributer
+							<div class="btn-group-sm" style="display: inline;margin-left: 10px;vertical-align: middle;">
+								<!-- <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> -->
+							</div><i class="icon-angle-right"></i>
+						</h3>
+					</div>
+					<div class="white-box-content">
+						<form id="submitStore" #submitStore="ngForm" (ngSubmit)="onSubmitCont(submitStore.value)">
+							<div class="modal-content">
+								<input type = "hidden" id="id" name="id" class="sm-form-control" placeholder="" value="{{contDetails.id}}" ngModel>
+								<div class="modal-body formcontant">  
+									<div class="form-group whitebgs">
+										<div class="" ></div>
+										<label for="paid-for-quality">First Name</label>
+										<input type = "text" id="first_name" name="first_name" class="sm-form-control required customInput" value="{{contDetails.first_name}}" placeholder="" ngModel>
+									</div>
+                                    <div class="form-group whitebgs">
+										<div class="" ></div>
+										<label for="paid-for-quality">Last Name</label>
+										<input type = "text" id="last_name" name="last_name" class="sm-form-control required customInput" value="{{contDetails.last_name}}" placeholder="" ngModel>
+									</div>
+								
+									<div class="form-group whitebgs">
+										<div class="" ></div>
+										<label for="paid-for-quality">Email</label>
+										<input type = "email" id="email" name="email" class="sm-form-control email required customInput" value="{{contDetails.email}}"  placeholder="" ngModel>
+									</div>
+
+                                    <div class="form-group whitebgs retail_store">
+										<div class="storetopcms" ></div>
+										<label for="paid-for-quality storelabel">Retail Stores</label>
+										<select class="js-select2 sm-form-control cmsspaccing" name="retail_store" multiple="multiple" >
+											<option *ngFor="let storeMeta of retail_store_dropdown" value="{{storeMeta.id}}" [selected]="checkRetailStoreSelectStatus(storeMeta.id) == 'yes'" >{{storeMeta.name}}</option>
+											
+										</select>
+										<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
+									</div>
+                                    <div class="form-group whitebgs signupFields">
+                                        
+                                        <label for="paid-for-quality">Choose Password</label>
+                                        <input type="password" id="contributor_password" name="password" value="" minlength="6" class="sm-form-control customInput contributorPassword" required ngModel/>
+                                            
+                                    </div>
+                                    <div class="form-group whitebgs signupFields">
+                                        
+                                        <label for="paid-for-quality">Confirm Password</label>
+                                        <input type="password" id="contributor_repassword" name="cpassword" value="" class="sm-form-control customInput contributorCPassword" required  ngModel />
+                                        
+                                           
+                                    </div>
+							
+
+									<label class="ohnohoney" for="contributor_captcha_name"></label>
+									<input autocomplete="off" class="ohnohoney honeyInput" id="contributor_captcha_name" name="contributor_captcha_name" placeholder="Your name here" type="text">
+									<label class="ohnohoney" for="contributor_captcha_email"></label>
+									<input autocomplete="off" class="ohnohoney honeyInput" id="contributor_captcha_email" name="contributor_captcha_email" placeholder="Your e-mail here" type="email">
+		  
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary">Submit</button>
+									<a href="#"><button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button></a>									
+								</div>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- Manage price Section End -->
+</div>
+
+
+<script>
+	jQuery(document).ready(function(){
+		setTimeout(jQuery(".js-select2").select2({
+			closeOnSelect : false,
+			placeholder : "Select Retail Store",
+			allowHtml: true,
+			allowClear: true,
+			tags: true // создает новые опции на лету
+		}), 3000);
+		
+	})
+</script>

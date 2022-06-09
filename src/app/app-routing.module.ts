@@ -33,6 +33,8 @@ import { BusinessUserEditComponent } from './user/profile/business-user-edit.com
 import { FollowdispComponent } from './user/profile/followdisp.component';
 import { BusinessFollowersComponent } from './user/profile/business-followers.component';
 import { BusinessInsightsComponent } from './user/profile/business-insights.component';
+import { BusinessContributersComponent } from './user/profile/business-contributers.component';
+import { BusinessContributersEditComponent } from './user/profile/business-contributers-edit.component';
 
 
 const routes: Routes = [
@@ -64,6 +66,9 @@ const routes: Routes = [
   {path: 'members/strain-favorites',component:FavstrainComponent,resolve: {locations: LocationResolver}},
   {path: 'members/dispensary-followers',component:FollowdispComponent,resolve: {locations: LocationResolver}},
   {path: 'members/reviews',component:ReviewsComponent,resolve: {locations: LocationResolver}},
+  { path: 'members/business/contributors', component: BusinessContributersComponent,resolve: {locations: LocationResolver}},
+  { path: 'members/business/contributors/edit/:slug', component: BusinessContributersEditComponent,resolve: {locations: LocationResolver}},
+  { path: 'members/business/contributors/add', component: BusinessContributersEditComponent,resolve: {locations: LocationResolver}},
 
   { path: ':country',
      // component: MainComponent,

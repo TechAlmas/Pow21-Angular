@@ -379,8 +379,9 @@ a.headingfollowtooltip span {
 .tooltip-contentfollow.user_follow:after {
   left: 37%;
 }
+
 .experience {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .col.retail-meta {
@@ -429,9 +430,8 @@ a.headingfollowtooltip span {
 .tooltip-contentfollow.user_follow:after {
   left: 30%;
 }
-.experience {
-  font-size: 14px;
-}
+
+
 .col.retail-meta {
   flex: 0 0 50%;
   max-width: 50%;
@@ -460,12 +460,13 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
   margin-left: 10px;
 }
 
+.close-txt {
+  color: #c91032;
+}
 .open-txt {
   color: #50af63;
 }
-.close-txt {
-  color: #e3452a;
-}
+
 
 .textcontant span {
   font-size: 14px;
@@ -702,6 +703,12 @@ a.btn.contactus {
   padding: 0.725rem 1.75rem 0.825rem;
   line-height: normal;
   color: #fff;
+}
+
+.single-product .product .product-info .product-description {
+  width: 100%;
+  margin-top: 2rem;
+
 }
 .single-product .product .product-info .product-description p {
   font-size: 14px;

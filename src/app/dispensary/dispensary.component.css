@@ -123,20 +123,26 @@
   color: #1b88cc;
 }
 .dispensary.single-product .product .product-image {
-  flex: 0 0 25%;
+
+  flex: 1;
+
   max-width: 25%;
   overflow: revert;
 }
 .dispensary.single-product .product .product-info {
-  flex: 0 0 55%;
-  max-width: 55%;
+  flex: 2;
+  max-width: 100%;
   padding: 0;
 }
 .dispensary.single-product .product .store-images {
-  flex: 0 0 20%;
+  flex: 1;
   max-width: 20%;
   padding: 0;
 }
+.dispensary.single-product .product .no-store-images {
+  display: none;
+}
+
 .single-product.dispensary .product .product-image img {
   width: 220px;
   max-height: 220px;
@@ -183,6 +189,7 @@
 .single-product.dispensary .product .product-image:before {
   content: "";
   background: url("/assets/images/icon-verified-no.png");
+
   width: 35px;
   height: 35px;
   position: absolute;
@@ -200,6 +207,7 @@
   font-size: 14px;
   color: #ffffff;
   background: rgb(0 0 0 / 40%);
+
   width: 77%;
   height: auto;
   text-align: left;
@@ -327,7 +335,7 @@ span.review-count {
   opacity: 1;
   position: absolute;
   background: #2384bc;
-  /* left: -9px; */
+  left: -9px;
   padding: 0px;
   margin-top: 2px;
   font-size: 15px;
@@ -337,6 +345,8 @@ span.review-count {
   top: -50px;
   padding: 3px 6px 6px 6px;
 }
+
+=======
 /* .tooltip-contentfollow.user_follow {
   left: 15%;
 } */
@@ -359,7 +369,9 @@ a.headingfollowtooltip span {
   color: #ffff;
   font-size: 14px;
   vertical-align: middle;
-  /* padding-right: 6px; */
+
+  padding-right: 6px;
+
   font-weight: 700;
   margin-left: 6px;
 }

@@ -718,7 +718,11 @@
         </div>
         <!-- images store section start -->
 
-        <div class="col store-image">
+        <div
+          class=" col {{
+            dispDetails.store_images ? 'store-image' : 'no-store-images'
+          }}"
+        >
           <div class="container">
             <div class="row" *ngIf="dispDetails.store_images">
               <h4 style="text-align: left">Browser our store</h4>

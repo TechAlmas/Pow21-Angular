@@ -10,4 +10,5 @@ export class Globals {
   user_email: string;
   redirect_url: string;
   locations:any = [];
+  id_cms_privileges : number;
 }

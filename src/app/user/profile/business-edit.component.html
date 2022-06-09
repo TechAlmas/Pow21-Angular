@@ -1,323 +1,843 @@
-
 <!-- Dashboard Main Nav End -->
 <mio-profile-top-menu></mio-profile-top-menu>
 <!-- Dashboard SubNav Start -->
 <mio-business-sub-menu></mio-business-sub-menu>
 
 <div class="content-wrap grey-bg">
-	<!-- Manage price Section start -->
-	<div class="container clearfix">
-		<h2 *ngIf="dispDetails.disp_id else elseBlock">Edit Your store</h2>
-		<ng-template #elseBlock><h2>Add Your store</h2></ng-template>
-		 
-		<div class="row">
-			<div class="col-md-8">
-				<div class="white-box">
-					<div class="white-box-title">
-						<h3>Store Name
-							<div class="btn-group-sm" style="display: inline;margin-left: 10px;vertical-align: middle;">
-								<!-- <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> -->
-							</div><i class="icon-angle-right"></i>
-						</h3>
-					</div>
-					<div class="white-box-content">
-						<form id="submitStore" #submitStore="ngForm" (ngSubmit)="onSubmitStore(submitStore.value)">
-							<div class="modal-content">
-								<input type = "hidden" id="id" name="id" class="sm-form-control" placeholder="" value="{{dispDetails.disp_id}}" ngModel>
-								<div class="modal-body formcontant">  
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Name</label>
-										<input type = "text" id="name" name="name" class="sm-form-control required" value="{{dispDetails.name}}" placeholder="" ngModel>
-									</div>
-									<!-- Add new form fields here -->
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Address</label>
-										<input type = "text" id="address" name="address" class="sm-form-control address required" value="{{dispDetails.address}}" placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Address 2</label>
-										<input type = "text" id="address2" name="address2" class="sm-form-control address2 required" value="{{dispDetails.address2}}" placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">City</label>
-										<input type = "text" id="city" name="city" class="sm-form-control city required" value="{{dispDetails.city}}"   placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">State</label>
-										<input type = "text" id="state" name="state" class="sm-form-control state required" value="{{dispDetails.state}}"  placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Zip Code</label>
-										<input type = "text" id="zip_code" name="zip_code" class="sm-form-control zip_code required" value="{{dispDetails.zip_code}}"  placeholder="" ngModel>
-									</div>
-			
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Country</label>
-										<input type = "text" id="country" name="country" class="sm-form-control country required" value="{{dispDetails.country}}"  placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Tags</label>
-										<input type = "text" id="license_type" name="license_type" class="sm-form-control license_type required" value="{{dispDetails.license_type}}"  placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Website</label>
-										<input type = "text" id="website" name="website" class="sm-form-control website required" value="{{dispDetails.website}}"  placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Email</label>
-										<input type = "email" id="email" name="email" class="sm-form-control email required" value="{{dispDetails.email}}"  placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Email 2</label>
-										<input type = "email" id="email2" name="email2" class="sm-form-control email2 required" value="{{dispDetails.email2}}"  placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Phone</label>
-										<input type = "Phone" id="phone" name="phone" class="sm-form-control phone required" value="{{dispDetails.phone}}"  placeholder="" ngModel>
-									</div>
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="paid-for-quality">Logo</label>
-										<label for="file-upload" class="custom-file-upload"><i class="fa fa-cloud" aria-hidden="true"></i> Custom files Upload</label>
-										<input id="file-upload" type="file" (change)="this.onFilechange($event)" />
+  <!-- Manage price Section start -->
+  <div class="container clearfix">
+    <h2 *ngIf="dispDetails.disp_id; else elseBlock">Edit Your store</h2>
+    <ng-template #elseBlock><h2>Add Your store</h2></ng-template>
 
-										<div class="logo-container d-flex mt-3">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="white-box">
+          <div class="white-box-title">
+            <h3>
+              Store Name
+              <div
+                class="btn-group-sm"
+                style="
+                  display: inline;
+                  margin-left: 10px;
+                  vertical-align: middle;
+                "
+              >
+                <!-- <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> -->
+              </div>
+              <i class="icon-angle-right"></i>
+            </h3>
+          </div>
+          <div class="white-box-content">
+            <form
+              id="submitStore"
+              #submitStore="ngForm"
+              (ngSubmit)="onSubmitStore(submitStore.value)"
+            >
+              <div class="modal-content">
+                <input
+                  type="hidden"
+                  id="id"
+                  name="id"
+                  class="sm-form-control"
+                  placeholder=""
+                  value="{{ dispDetails.disp_id }}"
+                  ngModel
+                />
+                <div class="modal-body formcontant">
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      class="sm-form-control required col-md-10"
+                      value="{{ dispDetails.name }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <!-- Add new form fields here -->
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2"
+                      >Address</label
+                    >
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      class="sm-form-control address required col-md-10"
+                      value="{{ dispDetails.address }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2"
+                      >Address 2</label
+                    >
+                    <input
+                      type="text"
+                      id="address2"
+                      name="address2"
+                      class="sm-form-control address2 required col-md-10"
+                      value="{{ dispDetails.address2 }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2">City</label>
+                    <input
+                      type="text"
+                      id="city"
+                      name="city"
+                      class="sm-form-control city required col-md-10"
+                      value="{{ dispDetails.city }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2">State</label>
+                    <input
+                      type="text"
+                      id="state"
+                      name="state"
+                      class="sm-form-control state required col-md-10"
+                      value="{{ dispDetails.state }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2"
+                      >Zip Code</label
+                    >
+                    <input
+                      type="text"
+                      id="zip_code"
+                      name="zip_code"
+                      class="sm-form-control zip_code required col-md-10"
+                      value="{{ dispDetails.zip_code }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
 
-											<div class="image-area mr-3"  *ngIf="dispDetails.logoUrl">
-												<img src="{{dispDetails.logoUrl}}" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" style="display: inline;" >&#215;</a>
-																							
-											</div>
-										</div>
-										<!-- <input  class="form-control" type="file" id="formFile"> -->
-									</div>
-									<div class="form-group whitebgs">
-		                              <div class="wait-layer" *ngIf="waitLayer"></div>
-		                              <label for="paid-for-quality">Store schedule</label>
-		                           </div>
-								   
-		                           <div class="form-group whitebgs labelalignmentt">
-		                              <div class="wait-layer" *ngIf="waitLayer"></div>
-		                              <label for="paid-for-quality"></label>
-		                              <span class="dayalign">Monday</span>
-		                              <input type = "time" id="monday_start" name="monday_start" class="sm-form-control monday_start required" value="{{ getTimeStringValue('monday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('monday','',1) == 'yes'" >
-		                              <span class="tocontant">To</span><br>
-		                              <input type = "time" id="monday_end" name="monday_end" class="sm-form-control monday_end required dau" value="{{ getTimeStringValue('monday','end') | date:'HH:mm' }}" placeholder="" [disabled]="getTimeStringValue('monday','',1) == 'yes'">
-									  <label class="toggle">
-										  <div class="togglebox">
-		                              	<input type="checkbox" id="monday_close" name="monday_close" value="1" class="form-control" (change)="onClickClose($event,'monday')" [checked]="getTimeStringValue('monday','',1) == 'yes'" >
-		                              	<div class="slide-toggle"></div>
-		                              	<div class="slide-toggle-content">Close</div></div>
-		                              </label>
-		                           </div>
-		                           <div class="form-group whitebgs labelalignmentt">
-		                              <div class="wait-layer" *ngIf="waitLayer "></div>
-		                              <label for="paid-for-quality"></label>
-		                              <span>Tuesday</span>
-		                              <input type = "time" id="tuesday_start" name="tuesday_start" class="sm-form-control tuesday_start required" value="{{ getTimeStringValue('tuesday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('tuesday','',1) == 'yes'">
-		                              <span>To</span>
-		                              <input type = "time" id="tuesday_end" name="tuesday_end" class="sm-form-control tuesday_end required" value="{{ getTimeStringValue('tuesday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('tuesday','',1) == 'yes'">
-		                              <label class="toggle">
-		                              	<input type="checkbox" id="tuesday_close" name="tuesday_close" value="1" class="form-control" (change)="onClickClose($event,'tuesday')" [checked]="getTimeStringValue('tuesday','',1) == 'yes'">
-		                              	<div class="slide-toggle"></div>
-		                              	<div class="slide-toggle-content">Close</div>
-		                              </label>
-		                           </div>
-		                           <div class="form-group whitebgs labelalignmentt	">
-		                              <div class="wait-layer" *ngIf="waitLayer"></div>
-		                              <label for="paid-for-quality"></label>
-		                              <span>Wednesday</span>
-		                              <input type = "time" id="wednesday_start" name="wednesday_start" class="sm-form-control wednesday_start required" value="{{ getTimeStringValue('wednesday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('wednesday','',1) == 'yes'">
-		                              <span>To</span>
-		                              <input type = "time" id="wednesday_end" name="wednesday_end" class="sm-form-control wednesday_end required" value="{{ getTimeStringValue('wednesday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('wednesday','',1) == 'yes'">
-		                              <label class="toggle">
-		                              	<input type="checkbox" id="wednesday_close" name="wednesday_close" value="1" class="form-control" (change)="onClickClose($event,'wednesday')" [checked]="getTimeStringValue('wednesday','',1) == 'yes'">
-		                              	<div class="slide-toggle"></div>
-		                              	<div class="slide-toggle-content">Close</div>
-		                              </label>
-		                           </div>
-		                           <div class="form-group whitebgs labelalignmentt">
-		                              <div class="wait-layer" *ngIf="waitLayer"></div>
-		                              <label for="paid-for-quality"></label>
-		                              <span>Thursday</span>
-		                              <input type = "time" id="thursday_start" name="thursday_start" class="sm-form-control thursday_start required" value="{{ getTimeStringValue('thursday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('thursday','',1) == 'yes'">
-		                              <span>To</span>
-		                              <input type = "time" id="thursday_end" name="thursday_end" class="sm-form-control thursday_end required" value="{{ getTimeStringValue('thursday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('thursday','',1) == 'yes'">
-		                              <label class="toggle">
-		                              	<input type="checkbox" id="thursday_close" name="thursday_close" value="1" class="form-control" (change)="onClickClose($event,'thursday')" [checked]="getTimeStringValue('thursday','',1) == 'yes'">
-		                              	<div class="slide-toggle"></div>
-		                              	<div class="slide-toggle-content">Close</div>
-		                              </label>
-		                           </div>
-		                           <div class="form-group whitebgs labelalignmentt">
-		                              <div class="wait-layer" *ngIf="waitLayer"></div>
-		                              <label for="paid-for-quality"></label>
-		                              <span>Friday</span>
-		                              <input type = "time" id="friday_start" name="friday_start" class="sm-form-control friday_start required" value="{{ getTimeStringValue('friday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('friday','',1) == 'yes'">
-		                              <span>To</span>
-		                              <input type = "time" id="friday_end" name="friday_end" class="sm-form-control friday_end required" value="{{ getTimeStringValue('friday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('friday','',1) == 'yes'">
-		                              <label class="toggle">
-		                              	<input type="checkbox" id="friday_close" name="friday_close" value="1" class="form-control" (change)="onClickClose($event,'friday')" [checked]="getTimeStringValue('friday','',1) == 'yes'">
-		                              	<div class="slide-toggle"></div>
-		                              	<div class="slide-toggle-content">Close</div>
-		                              </label>
-		                           </div>
-		                           <div class="form-group whitebgs labelalignmentt">
-		                              <div class="wait-layer" *ngIf="waitLayer"></div>
-		                              <label for="paid-for-quality"></label>
-		                              <span>Saturday</span>
-		                              <input type = "time" id="saturday_start" name="saturday_start" class="sm-form-control saturday_start required" value="{{ getTimeStringValue('saturday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('saturday','',1) == 'yes'">
-		                              <span>To</span>
-		                              <input type = "time" id="saturday_end" name="saturday_end" class="sm-form-control saturday_end required" value="{{ getTimeStringValue('saturday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('saturday','',1) == 'yes'">
-		                              <label class="toggle">
-		                              	<input type="checkbox" id="saturday_close" name="saturday_close" value="1" class="form-control" (change)="onClickClose($event,'saturday')" [checked]="getTimeStringValue('saturday','',1) == 'yes'">
-		                              	<div class="slide-toggle"></div>
-		                              	<div class="slide-toggle-content">Close</div>
-		                              </label>
-		                           </div>
-		                           <div class="form-group whitebgs labelalignmentt">
-		                              <div class="wait-layer" *ngIf="waitLayer"></div>
-		                              <label for="paid-for-quality"></label>
-		                              <span>Sunday</span>
-		                              <input type = "time" id="sunday_start" name="sunday_start" class="sm-form-control sunday_start required" value="{{ getTimeStringValue('sunday','start') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('sunday','',1) == 'yes'">
-		                              <span>To</span>
-		                              <input type = "time" id="sunday_end" name="sunday_end" class="sm-form-control sunday_end required" value="{{ getTimeStringValue('sunday','end') | date:'HH:mm' }}"  placeholder="" [disabled]="getTimeStringValue('sunday','',1) == 'yes'">
-		                              <label class="toggle">
-		                              	<input type="checkbox" id="sunday_close" name="sunday_close" value="1" class="form-control" (change)="onClickClose($event,'sunday')" [checked]="getTimeStringValue('sunday','',1) == 'yes'">
-		                              	<div class="slide-toggle"></div>
-		                              	<div class="slide-toggle-content">Close</div>
-		                              </label>
-		                           </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2"
+                      >Country</label
+                    >
+                    <input
+                      type="text"
+                      id="country"
+                      name="country"
+                      class="sm-form-control country required col-md-10"
+                      value="{{ dispDetails.country }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2">Tags</label>
+                    <input
+                      type="text"
+                      id="license_type"
+                      name="license_type"
+                      class="sm-form-control license_type required col-md-10"
+                      value="{{ dispDetails.license_type }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality " class="col-md-2"
+                      >Website</label
+                    >
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      class="sm-form-control website required col-md-10"
+                      value="{{ dispDetails.website }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="sm-form-control email required col-md-10"
+                      value="{{ dispDetails.email }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2"
+                      >Email 2</label
+                    >
+                    <input
+                      type="email"
+                      id="email2"
+                      name="email2"
+                      class="sm-form-control email2 required col-md-10"
+                      value="{{ dispDetails.email2 }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality" class="col-md-2">Phone</label>
+                    <input
+                      type="Phone"
+                      id="phone"
+                      name="phone"
+                      class="sm-form-control phone required col-md-10"
+                      value="{{ dispDetails.phone }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs row mb-0">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality " class="col-md-2">Logo</label>
+                    <label
+                      for="file-upload"
+                      class="col-md-10 custom-file-upload"
+                      ><i class="fa fa-cloud" aria-hidden="true"></i> Custom
+                      files Upload</label
+                    >
+                    <input
+                      id="file-upload"
+                      type="file"
+                      (change)="this.onFilechange($event)"
+                      class="col-md-2"
+                    />
 
-									<div class="form-group whitebgs assign_user">
-										<div class="assign_usercms" >
-										<label for="paid-for-quality">Assign User</label>
-										<select id="assign_user" name="assign_user" class="sm-form-control cmsspaccing assign_user js-select2 required" multiple="multiple">
-											<option *ngFor="let assignUser of dispDetails.assign_user_dropdown" value="{{assignUser.id}}" [selected]="checkAssignUserSelectStatus(assignUser.id) == 'yes'" >{{assignUser.name}}</option> 	
-										</select>
-									</div>
-										<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
-									</div>
+                    <div class="logo-container d-flex col-md-12">
+                      <div>
+                        <div
+                          class="image-area mt-4"
+                          *ngIf="dispDetails.logoUrl"
+                        >
+                          <img
+                            src="{{ dispDetails.logoUrl }}"
+                            width="100"
+                            height="100"
+                            alt=""
+                          /><a
+                            class="remove-image"
+                            href="javascript:void(0)"
+                            style="display: inline"
+                          >
+                            <span>x</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <input  class="form-control" type="file" id="formFile"> -->
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <div class="wait-layer" *ngIf="waitLayer"></div>
+                    <h4 for="paid-for-quality" class="w-100 mb-0 text-center">
+                      Store schedule
+                    </h4>
+                  </div>
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
+                    <div class="wait-layer" *ngIf="waitLayer"></div>
+                    <label for="paid-for-quality"></label>
+                    <span class="dayalign col-md-2">Monday</span>
+                    <input
+                      type="time"
+                      id="monday_start"
+                      name="monday_start"
+                      class="sm-form-control monday_start required col-md-3"
+                      value="{{
+                        getTimeStringValue('monday', 'start') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="getTimeStringValue('monday', '', 1) == 'yes'"
+                    />
+                    <span class="col-md-1 text-center p-0">To</span>
+                    <input
+                      type="time"
+                      name="monday_end"
+                      id="monday_end"
+                      class="sm-form-control monday_end required dau col-md-3"
+                      value="{{
+                        getTimeStringValue('monday', 'end') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="getTimeStringValue('monday', '', 1) == 'yes'"
+                    />
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
+                      <div class="togglebox">
+                        <input
+                          type="checkbox"
+                          id="monday_close"
+                          name="monday_close"
+                          value="1"
+                          class="form-control"
+                          (change)="onClickClose($event, 'monday')"
+                          [checked]="
+                            getTimeStringValue('monday', '', 1) == 'yes'
+                          "
+                        />
+                        <div class="slide-toggle"></div>
+                        <div class="slide-toggle-content">Close</div>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
+                    <div class="wait-layer" *ngIf="waitLayer"></div>
+                    <label for="paid-for-quality"></label>
+                    <span class="col-md-2">Tuesday</span>
+                    <input
+                      type="time"
+                      id="tuesday_start"
+                      name="tuesday_start"
+                      class="sm-form-control tuesday_start required col-md-3"
+                      value="{{
+                        getTimeStringValue('tuesday', 'start') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="getTimeStringValue('tuesday', '', 1) == 'yes'"
+                    />
+                    <span class="col-md-1 p-0 text-center">To</span>
+                    <input
+                      type="time"
+                      name="tuesday_end"
+                      id="tuesday_end"
+                      class="sm-form-control tuesday_end required col-md-3"
+                      value="{{
+                        getTimeStringValue('tuesday', 'end') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="getTimeStringValue('tuesday', '', 1) == 'yes'"
+                    />
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
+                      <input
+                        type="checkbox"
+                        id="tuesday_close"
+                        name="tuesday_close"
+                        value="1"
+                        class="form-control"
+                        (change)="onClickClose($event, 'tuesday')"
+                        [checked]="
+                          getTimeStringValue('tuesday', '', 1) == 'yes'
+                        "
+                      />
+                      <div class="slide-toggle"></div>
+                      <div class="slide-toggle-content">Close</div>
+                    </label>
+                  </div>
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
+                    <div class="wait-layer" *ngIf="waitLayer"></div>
+                    <label for="paid-for-quality"></label>
+                    <span class="col-md-2">Wednesday</span>
+                    <input
+                      type="time"
+                      id="wednesday_start"
+                      name="wednesday_start"
+                      class="sm-form-control wednesday_start col-md-3 required"
+                      value="{{
+                        getTimeStringValue('wednesday', 'start') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="
+                        getTimeStringValue('wednesday', '', 1) == 'yes'
+                      "
+                    />
+                    <span class="col-md-1 text-center p-0">To</span>
+                    <input
+                      type="time"
+                      id="wednesday_end"
+                      name="wednesday_end"
+                      class="sm-form-control wednesday_end col-md-3 required"
+                      value="{{
+                        getTimeStringValue('wednesday', 'end') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="
+                        getTimeStringValue('wednesday', '', 1) == 'yes'
+                      "
+                    />
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
+                      <input
+                        type="checkbox"
+                        id="wednesday_close"
+                        name="wednesday_close"
+                        value="1"
+                        class="form-control"
+                        (change)="onClickClose($event, 'wednesday')"
+                        [checked]="
+                          getTimeStringValue('wednesday', '', 1) == 'yes'
+                        "
+                      />
+                      <div class="slide-toggle"></div>
+                      <div class="slide-toggle-content">Close</div>
+                    </label>
+                  </div>
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
+                    <div class="wait-layer" *ngIf="waitLayer"></div>
+                    <label for="paid-for-quality"></label>
+                    <span class="col-md-2">Thursday</span>
+                    <input
+                      type="time"
+                      id="thursday_start"
+                      name="thursday_start"
+                      class="sm-form-control thursday_start col-md-3 required"
+                      value="{{
+                        getTimeStringValue('thursday', 'start') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="
+                        getTimeStringValue('thursday', '', 1) == 'yes'
+                      "
+                    />
+                    <span class="col-md-1 text-center p-0">To</span>
+                    <input
+                      type="time"
+                      id="thursday_end"
+                      name="thursday_end"
+                      class="sm-form-control thursday_end col-md-3 required"
+                      value="{{
+                        getTimeStringValue('thursday', 'end') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="
+                        getTimeStringValue('thursday', '', 1) == 'yes'
+                      "
+                    />
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
+                      <input
+                        type="checkbox"
+                        id="thursday_close"
+                        name="thursday_close"
+                        value="1"
+                        class="form-control"
+                        (change)="onClickClose($event, 'thursday')"
+                        [checked]="
+                          getTimeStringValue('thursday', '', 1) == 'yes'
+                        "
+                      />
+                      <div class="slide-toggle"></div>
+                      <div class="slide-toggle-content">Close</div>
+                    </label>
+                  </div>
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
+                    <div class="wait-layer" *ngIf="waitLayer"></div>
+                    <label for="paid-for-quality"></label>
+                    <span class="col-md-2">Friday</span>
+                    <input
+                      type="time"
+                      id="friday_start"
+                      name="friday_start"
+                      class="sm-form-control friday_start required col-md-3"
+                      value="{{
+                        getTimeStringValue('friday', 'start') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="getTimeStringValue('friday', '', 1) == 'yes'"
+                    />
+                    <span class="col-md-1 text-center p-0">To</span>
+                    <input
+                      type="time"
+                      id="friday_end"
+                      name="friday_end"
+                      class="sm-form-control friday_end required col-md-3"
+                      value="{{
+                        getTimeStringValue('friday', 'end') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="getTimeStringValue('friday', '', 1) == 'yes'"
+                    />
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
+                      <input
+                        type="checkbox"
+                        id="friday_close"
+                        name="friday_close"
+                        value="1"
+                        class="form-control"
+                        (change)="onClickClose($event, 'friday')"
+                        [checked]="getTimeStringValue('friday', '', 1) == 'yes'"
+                      />
+                      <div class="slide-toggle"></div>
+                      <div class="slide-toggle-content">Close</div>
+                    </label>
+                  </div>
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
+                    <div class="wait-layer" *ngIf="waitLayer"></div>
+                    <label for="paid-for-quality"></label>
+                    <span class="col-md-2">Saturday</span>
+                    <input
+                      type="time"
+                      id="saturday_start"
+                      name="saturday_start"
+                      class="sm-form-control saturday_start required col-md-3"
+                      value="{{
+                        getTimeStringValue('saturday', 'start') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="
+                        getTimeStringValue('saturday', '', 1) == 'yes'
+                      "
+                    />
+                    <span class="col-md-1 text-center p-0">To</span>
+                    <input
+                      type="time"
+                      id="saturday_end"
+                      name="saturday_end"
+                      class="sm-form-control saturday_end required col-md-3"
+                      value="{{
+                        getTimeStringValue('saturday', 'end') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="
+                        getTimeStringValue('saturday', '', 1) == 'yes'
+                      "
+                    />
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
+                      <input
+                        type="checkbox"
+                        id="saturday_close"
+                        name="saturday_close"
+                        value="1"
+                        class="form-control"
+                        (change)="onClickClose($event, 'saturday')"
+                        [checked]="
+                          getTimeStringValue('saturday', '', 1) == 'yes'
+                        "
+                      />
+                      <div class="slide-toggle"></div>
+                      <div class="slide-toggle-content">Close</div>
+                    </label>
+                  </div>
+                  <div class="form-group whitebgs labelalignmentt row mt-0">
+                    <div class="wait-layer" *ngIf="waitLayer"></div>
+                    <label for="paid-for-quality"></label>
+                    <span class="col-md-2">Sunday</span>
+                    <input
+                      type="time"
+                      id="sunday_start"
+                      name="sunday_start"
+                      class="sm-form-control sunday_start col-md-3 required"
+                      value="{{
+                        getTimeStringValue('sunday', 'start') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="getTimeStringValue('sunday', '', 1) == 'yes'"
+                    />
+                    <span class="col-md-1 text-center p-0">To</span>
+                    <input
+                      type="time"
+                      id="sunday_end"
+                      name="sunday_end"
+                      class="sm-form-control sunday_end required col-md-3"
+                      value="{{
+                        getTimeStringValue('sunday', 'end') | date: 'HH:mm'
+                      }}"
+                      placeholder=""
+                      [disabled]="getTimeStringValue('sunday', '', 1) == 'yes'"
+                    />
+                    <label class="toggle col-md-2 m-0 ps-3 pt-2">
+                      <input
+                        type="checkbox"
+                        id="sunday_close"
+                        name="sunday_close"
+                        value="1"
+                        class="form-control"
+                        (change)="onClickClose($event, 'sunday')"
+                        [checked]="getTimeStringValue('sunday', '', 1) == 'yes'"
+                      />
+                      <div class="slide-toggle"></div>
+                      <div class="slide-toggle-content">Close</div>
+                    </label>
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <label for="paid-for-quality" class="col-md-2"
+                      >Assign User</label
+                    >
+                    <select
+                      id="assign_user"
+                      name="assign_user"
+                      class="sm-form-control col-md-10 cmsspaccing assign_user js-select2 required"
+                      multiple="multiple"
+                    >
+                      <option
+                        *ngFor="
+                          let assignUser of dispDetails.assign_user_dropdown
+                        "
+                        value="{{ assignUser.id }}"
+                        [selected]="
+                          checkAssignUserSelectStatus(assignUser.id) == 'yes'
+                        "
+                      >
+                        {{ assignUser.name }}
+                      </option>
+                    </select>
+                    <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class="storetopcms"></div> -->
+                    <label for="paid-for-quality storelabel" class="col-md-2"
+                      >Store Meta</label
+                    >
+                    <div class="col-md-10 p-0">
+                      <select
+                        class="js-select2 sm-form-control cmsspaccing"
+                        name="store_meta"
+                        multiple="multiple"
+                      >
+                        <option
+                          *ngFor="
+                            let storeMeta of dispDetails.store_meta_dropdown
+                          "
+                          value="{{ storeMeta.id }}"
+                          [selected]="
+                            checkStoreMetaSelectStatus(storeMeta.id) == 'yes'
+                          "
+                        >
+                          {{ storeMeta.title }}
+                        </option>
+                      </select>
+                    </div>
+                    <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class="statustop"></div> -->
+                    <label for="paid-for-quality statuslabel " class="col-md-2"
+                      >Status
+                    </label>
+                    <div class="col-md-10 p-0 pt-1">
+                      <input
+                        id="status_active"
+                        class="radio-style"
+                        name="status "
+                        type="radio"
+                        value="active"
+                        required
+                      />
+                      <label
+                        for="status_active "
+                        class="radio-style-2-label p-0"
+                        >Active</label
+                      >
+                      <input
+                        id="status_suspend"
+                        class="radio-style"
+                        name="status"
+                        type="radio"
+                        value="suspend"
+                        required
+                      />
+                      <label
+                        for="status_suspend "
+                        class="radio-style-2-label p-0"
+                        >Suspend</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <label for="store_images " class="col-md-2"
+                      >Store Images</label
+                    >
+                    <label
+                      for="store_images"
+                      class="custom-file-upload col-md-10"
+                      ><i class="fa fa-cloud" aria-hidden="true"></i> Custom
+                      Images Upload</label
+                    >
+                    <input
+                      type="file"
+                      id="store_images"
+                      class="fileInput col-md-2"
+                      name="store_images"
+                      (change)="this.onStoreImagesUpload($event)"
+                      multiple
+                    />
+                    <!-- <input  class="form-control" type="file" id="formFile"> -->
+                    <div class="image-container mt-3 col-md-12">
+                      <div
+                        class="image-area"
+                        *ngFor="let storeImage of store_images"
+                      >
+                        <img
+                          src="{{ storeImage.link }}"
+                          width="100"
+                          height="100"
+                          alt=""
+                        /><a
+                          class="remove-image"
+                          href="javascript:void(0)"
+                          data-name="{{ storeImage.name }}"
+                          style="display: inline"
+                          >x</a
+                        >
+                        <label class="toggle">
+                          <div class="togglebox">
+                            <input
+                              type="radio"
+                              name="is_thumbnail"
+                              value="{{ storeImage.name }}"
+                              class="form-control isThumbnail"
+                              [checked]="
+                                storeImage.name ==
+                                dispDetails.store_thumbnail_image
+                              "
+                            />
+                            <div class="slide-toggle"></div>
+                            <div class="slide-toggle-content text-sm">
+                              Thumbnail
+                            </div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                    <!--  -->
+                  </div>
+                  <label class="ohnohoney" for="claim_captcha_name"></label>
+                  <input
+                    autocomplete="off"
+                    class="ohnohoney honeyInput"
+                    id="claim_captcha_name"
+                    name="claim_captcha_name"
+                    placeholder="Your name here"
+                    type="text"
+                  />
+                  <label class="ohnohoney" for="claim_captcha_email"></label>
+                  <input
+                    autocomplete="off"
+                    class="ohnohoney honeyInput"
+                    id="claim_captcha_email"
+                    name="claim_captcha_email"
+                    placeholder="Your e-mail here"
+                    type="email"
+                  />
+                </div>
+                <div class="modal-footer w-100">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <a href="#"
+                    ><button
+                      type="button"
+                      class="btn btn-link"
+                      data-dismiss="modal"
+                    >
+                      Cancel
+                    </button></a
+                  >
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Manage price Section End -->
+  </div>
 
-									<div class="form-group whitebgs store_meta">
-										<div class="storetopcms" ></div>
-										<label for="paid-for-quality storelabel">Store Meta</label>
-										<select class="js-select2 sm-form-control cmsspaccing" name="store_meta" multiple="multiple" >
-											<option *ngFor="let storeMeta of dispDetails.store_meta_dropdown" value="{{storeMeta.id}}" [selected]="checkStoreMetaSelectStatus(storeMeta.id) == 'yes'" >{{storeMeta.title}}</option>
-											
-										</select>
-										<!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
-									</div>
-									<div class="form-group whitebgs statusst">
-			                           <div class="statustop" ></div>
-			                           <label for="paid-for-quality statuslabel">Status </label>
-			                           <div class="statusrbox">
-			                              <input id="status_active" class="radio-style" name="status" type="radio" value="active" required>
-			                              <label for="status_active" class="radio-style-2-label">Active</label>
-			                              <input id="status_suspend" class="radio-style" name="status" type="radio" value="suspend" required >
-			                              <label for="status_suspend" class="radio-style-2-label">Suspend</label>
-			                           </div>
-			                         </div>
-									<!-- <div class="form-group whitebgs">
-										<div class="wait-layer" *ngIf="waitLayer"></div>
-										  <label for="paid-for-quality">Store Images</label>
-											<input type = "file" (change)="this.onStoreImagesUpload($event)" name="file" class="sm-form-control required fileInput"  ngModel multiple>
-										
-									</div> -->
-									<div class="form-group whitebgs">
-										<div class="" ></div>
-										<label for="store_images">Store Images</label>
-										<label for="store_images" class="custom-file-upload"><i class="fa fa-cloud" aria-hidden="true"></i> Custom Images Upload</label>
-										<input type="file" id="store_images" class="fileInput" name="store_images" (change)="this.onStoreImagesUpload($event)" multiple />
-										<small class="form-text text-muted">You can add multiple photos at one time by pressing 'cntrl' and selecting the photos.</small>
-										<!-- <input  class="form-control" type="file" id="formFile"> -->
-										<div class="image-container d-flex mt-3 cmsright">
+  <div
+    class="modal fade"
+    id="store_status_change"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+    data-backdrop="static"
+    data-keyboard="false"
+  >
+    <div class="modal-dialog">
+      <div class="modal-body">
+        <form
+          #submitStore="ngForm"
+          (ngSubmit)="onSubmitStore(submitStore.value)"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Change Status</h4>
+              <!-- <button type="button" class="btn btn-close" data-dismiss="modal">Close</button> -->
+              <input
+                type="hidden"
+                id="id"
+                name="id"
+                class="sm-form-control"
+                placeholder=""
+                ngModel
+              />
+            </div>
+            <div class="modal-body">
+              <div class="form-group whitebgs">
+                <div class=""></div>
+                <label for="paid-for-quality">Status</label>
+                <div>
+                  <input
+                    id="status_1"
+                    class="radio-style"
+                    name="status"
+                    type="radio"
+                    value="1"
+                    required
+                    *ngIf=""
+                  />
+                  <label for="status_1" class="radio-style-2-label"
+                    >Active</label
+                  >
+                  <input
+                    id="status_0"
+                    class="radio-style"
+                    name="status"
+                    type="radio"
+                    value="0"
+                    required
+                  />
+                  <label for="status_0" class="radio-style-2-label"
+                    >Suspend</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-link" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-											<div class="image-area mr-3" *ngFor="let storeImage of store_images">
-												<img src="{{storeImage.link}}" width="100" height="100" alt="" ><a class="remove-image" href="javascript:void(0)" data-name="{{storeImage.name}}" style="display: inline;" >&#215;</a>
-												<label class="toggle">
-													<div class="togglebox">
-													<input type="radio" name="is_thumbnail" value="{{storeImage.name}}" class="form-control isThumbnail" [checked]="storeImage.name == dispDetails.store_thumbnail_image" >
-													<div class="slide-toggle"></div>
-													<div class="slide-toggle-content text-white">Thumbnail</div></div>
-												</label>												
-											</div>
-										</div>
-									</div>
-
-									<label class="ohnohoney" for="claim_captcha_name"></label>
-									<input autocomplete="off" class="ohnohoney honeyInput" id="claim_captcha_name" name="claim_captcha_name" placeholder="Your name here" type="text">
-									<label class="ohnohoney" for="claim_captcha_email"></label>
-									<input autocomplete="off" class="ohnohoney honeyInput" id="claim_captcha_email" name="claim_captcha_email" placeholder="Your e-mail here" type="email">
-		  
-								</div>
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary">Submit</button>
-									<a href="#"><button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button></a>									
-								</div>
-							</div>
-						</form>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-		<!-- Manage price Section End -->
+  <script>
+    jQuery(document).ready(function () {
+      setTimeout(
+        jQuery(".js-select2").select2({
+          closeOnSelect: false,
+          placeholder: "Placeholder",
+          allowHtml: true,
+          allowClear: true,
+          tags: true, // создает новые опции на лету
+        }),
+        3000
+      );
+    });
+  </script>
 </div>
-
-
-<div class="modal fade" id="store_status_change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-	<div class="modal-dialog">
-		<div class="modal-body">
-			<form #submitStore="ngForm" (ngSubmit)="onSubmitStore(submitStore.value)">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">Change Status</h4>
-						<!-- <button type="button" class="btn btn-close" data-dismiss="modal">Close</button> -->
-						<input type = "hidden" id="id" name="id" class="sm-form-control" placeholder="" ngModel>
-					</div>
-					<div class="modal-body">  
-						<div class="form-group whitebgs">
-                        	<div class="" ></div>
-                        	<label for="paid-for-quality">Status</label>
-	                        <div>
-	                           <input id="status_1" class="radio-style" name="status" type="radio" value="1" required *ngIf="">
-	                           <label for="status_1" class="radio-style-2-label">Active</label>
-	                           <input id="status_0" class="radio-style" name="status" type="radio" value="0" required>
-	                           <label for="status_0" class="radio-style-2-label">Suspend</label>
-	                        </div>
-                     	</div>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<script>
-	jQuery(document).ready(function(){
-		setTimeout(jQuery(".js-select2").select2({
-			closeOnSelect : false,
-			placeholder : "Placeholder",
-			allowHtml: true,
-			allowClear: true,
-			tags: true // создает новые опции на лету
-		}), 3000);
-		
-	})
-</script>

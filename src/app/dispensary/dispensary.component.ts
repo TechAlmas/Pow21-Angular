@@ -780,9 +780,10 @@ export class DispensaryComponent implements OnInit {
       this.disp_follow(this.fav_disp).subscribe(
         (data) => {
           if (data["data"] == "follow") {
+            let html = '<a href = "members/dispensary-followers" target="_blank">here</a>';
             toastr.success(
               '<i class="icon-ok-sign"></i>&nbsp;&nbsp;PuPow! You are now following&nbsp;' +
-                this.dispDetails.name,
+                this.dispDetails.name+'. Manage stores you\'re following '+ html ,
               "",
               {
                 closeButton: true,

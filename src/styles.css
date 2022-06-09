@@ -4074,7 +4074,6 @@ body.stretched .container-fullwidth .breadcrumb {
 .content-wrap {
   position: relative;
   padding: 40px 0 80px 0;
-
 }
 .content-wrap.lesspadding {
   padding: 0px 0 40px;
@@ -10574,7 +10573,7 @@ body:not(.device-touch) .social-icon i {
 .toggle {
   display: block;
   position: relative;
-  margin: 10px 0 20px 0
+  margin: 10px 0 20px 0;
 }
 
 .toggle .togglet,
@@ -12982,7 +12981,6 @@ input[type="checkbox"]:not(:checked) + label.error {
 .text-sm {
   font-size: 10px;
 }
-
 
 #content .cse .gsc-control-cse,
 #content .gsc-control-cse,
@@ -18959,7 +18957,6 @@ ul.dash-nav li a:hover span.text {
   width: calc(100% - 80px);
   text-transform: initial;
   font-weight: 600;
-
 }
 
 .table,
@@ -19562,17 +19559,16 @@ strong.select2-results__group {
 #strain-list .strain-list-icon .inactive.iact {
   display: none;
 }
-
+.breadcrumbs {
+  margin-bottom: 4rem;
+}
 /*Product Detail page
 --------------------------------------------------------------------------------------------------*/
 .product-content-wrap {
   background: #f5f5f5; /*padding: 38px 0;*/
   padding: 120px 0px 40px 0px;
 }
-.single-product {
-}
-.single-product .product {
-}
+
 .single-product .product .product-image {
   flex: 0 0 35.6%;
   max-width: 35.6%;
@@ -19808,11 +19804,14 @@ strong.select2-results__group {
   color: #0088cc;
   font-size: 0.775rem;
 }
-<<<<<<< store-images-changes
-=======
-
->>>>>>> main
-.single-product .product .product-info .product-description p {
+<<<<<<<
+  store-images-changes
+  =======>>>>>>>main
+  .single-product
+  .product
+  .product-info
+  .product-description
+  p {
   color: #000;
 }
 
@@ -20412,7 +20411,6 @@ ol.breadcrumb__list li a {
   padding: 5px 0;
   border-radius: 10px;
   margin: 0 auto 3px;
-
 }
 
 .about-list .list-item .col-left .flavours-list li.flavour-list-icon {
@@ -20447,7 +20445,6 @@ ol.breadcrumb__list li a {
 }
 .about-list .list-item .col-left .flavours-list li.cheese {
   background-image: url(/assets/images/icons/strain/cheese.jpg);
-
 }
 .about-list .list-item .col-left .flavours-list li.chemical {
   background-image: url(/assets/images/icons/strain/chemical.jpg);
@@ -21286,4 +21283,3 @@ span.select2-selection.select2-selection--multiple:active {
   top: -10px;
   right: -11px; */
 }
-

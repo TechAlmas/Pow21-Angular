@@ -130,7 +130,7 @@
   flex: 2;
   max-width: 100%;
   padding: 0;
-  margin-top: -3rem;
+  margin-top: -3.2rem;
 }
 .dispensary.single-product .product .store-images {
   flex: 1;
@@ -345,7 +345,7 @@ span.review-count {
   z-index: 2;
   border-radius: 4px;
   top: -50px;
-  padding: 3px 6px 6px 6px;
+  padding: 3px 6px 4px 6px;
 }
 /* .tooltip-contentfollow.user_follow {
   left: 15%;
@@ -359,18 +359,18 @@ span.review-count {
 }
 /*.follow span:hover ~ .tooltip-contentfollow{visibility: visible;opacity: 1;}*/
 .headingfollowtooltip i.fa.fa-user {
-  font-size: 14px;
+  font-size: 13px;
   color: #fff;
   vertical-align: middle;
   padding: 0px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 a.headingfollowtooltip span {
   color: #ffff;
   font-size: 14px;
   vertical-align: middle;
   /* padding-right: 6px; */
-  font-weight: 700;
+  font-weight: 400;
   margin-left: 6px;
 }
 .tooltip-contentfollow:after {
@@ -413,9 +413,9 @@ a.headingfollowtooltip .nocount {
 
 a.headingfollowtooltip span {
   color: #ffff;
-  font-size: 17px;
+  font-size: 14px;
   vertical-align: middle;
-  font-weight: 700;
+  font-weight: 500;
   margin-left: 5px;
 }
 

@@ -146,7 +146,12 @@ export class BusinessComponent implements OnInit {
 	}
 	listdispList(){
 		this.getdispList().subscribe(data => {
-			this.listdispLists = data['data'];
+		
+			const resultArray = Object.keys(data['data']).map(index => {
+				let newData = data['data'][index];
+				return newData;
+			});
+			this.listdispLists = resultArray;
 			//console.log(this.listdispLists);
 			if(this.listdispLists.length == 0){
 				//this.isValid = true;

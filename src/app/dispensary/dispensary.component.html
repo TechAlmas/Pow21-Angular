@@ -371,7 +371,7 @@
 <div class="content-wrap product-content-wrap">
   <!-- <h1 class="page-title-heading">{{strainDetails.name}}</h1> -->
   <div class="container clearfix">
-    <div class="breadcrumbs" style="margin-bottom: 5rem">
+    <div class="breadcrumbs">
       <ol class="breadcrumb__list">
         <li><a href="https://www.pow21.com/">Home</a> ></li>
         <li>
@@ -502,23 +502,29 @@
           </div>
           <section class="blowimg">
             <div data-testid="listing-type" class="location-icon">
-              <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-              <a href="{{ this.mapUrl }}" target="_blank">Get directions</a>
+              <a href="{{ this.mapUrl }}" target="_blank">
+                <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
+                <span>Get directions</span></a
+              >
             </div>
             <div data-testid="listing-type" class="calling-icon">
-              <i class="fa fa-phone-volume" aria-hidden="true"></i>
-              <span>{{ dispDetails.phone }}</span>
+              <a href="#">
+                <i class="fa fa-phone-volume" aria-hidden="true"></i>
+                <span>{{ dispDetails.phone }}</span>
+              </a>
             </div>
-            <a
-              _ngcontent-dpg-c4=""
-              class="contact-icon"
-              data-toggle="modal"
-              data-target="#myModal_paid"
-              href="javascript:void(0)"
-            >
-              <i class="fa fa-envelope"></i>
-              <span>Contact US</span></a
-            >
+            <div class="">
+              <a
+                _ngcontent-dpg-c4=""
+                class="contact-icon"
+                data-toggle="modal"
+                data-target="#myModal_paid"
+                href="javascript:void(0)"
+              >
+                <i class="fa fa-envelope"></i>
+                <span>Contact US</span></a
+              >
+            </div>
             <br />
             <!-- <a href="{{this.image_disp}}" data-lightbox="image-1">Image #1</a>
 						<a href="{{this.image_disp}}" data-lightbox="image-1">Image #2</a> -->
@@ -568,7 +574,7 @@
 							<b style="font-size: 16px; margin-right: 10px;">Availability:</b>Coming soon
 						</div> -->
           <div class="container">
-            <div class="row">
+            <div class="row flfo-col">
               <div class="col retail-other-info">
                 <div role="button" tabindex="0" class="textcontant">
                   <i class="fa fa-archive iconboxsize" aria-hidden="true"></i>
@@ -586,6 +592,7 @@
                     color="#e3452a"
                     class="header-info__OpenStatusLabel-sc-1heoxjr-5 Storefrontspace hlUpkp close-txt"
                     >Closed</span
+
                   ><span
                     class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH Storefrontspacecontant"
                     >untill 11:00pm
@@ -671,7 +678,7 @@
                   >
                 </div>
               </div>
-              <br /><br /><br />
+
               <div
                 class="product-description"
                 [innerHTML]="dispDetails.description"
@@ -712,7 +719,13 @@
         </div>
         <!-- images store section start -->
 
-        <div class="col store-image" style="">
+
+        <div
+          class=" col {{
+            dispDetails.store_images ? 'store-image' : 'no-store-images'
+          }}"
+        >
+
           <div class="container">
             <div class="row" *ngIf="dispDetails.store_images">
               <h4 style="text-align: left">Browser our store</h4>

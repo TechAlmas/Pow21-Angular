@@ -123,20 +123,26 @@
   color: #1b88cc;
 }
 .dispensary.single-product .product .product-image {
-  flex: 0 0 25%;
+
+  flex: 1;
+
   max-width: 25%;
   overflow: revert;
 }
 .dispensary.single-product .product .product-info {
-  flex: 0 0 55%;
-  max-width: 55%;
+  flex: 2;
+  max-width: 100%;
   padding: 0;
 }
 .dispensary.single-product .product .store-images {
-  flex: 0 0 20%;
+  flex: 1;
   max-width: 20%;
   padding: 0;
 }
+.dispensary.single-product .product .no-store-images {
+  display: none;
+}
+
 .single-product.dispensary .product .product-image img {
   width: 220px;
   max-height: 220px;
@@ -183,6 +189,7 @@
 .single-product.dispensary .product .product-image:before {
   content: "";
   background: url("/assets/images/icon-verified-no.png");
+
   width: 35px;
   height: 35px;
   position: absolute;
@@ -200,6 +207,7 @@
   font-size: 14px;
   color: #ffffff;
   background: rgb(0 0 0 / 40%);
+
   width: 77%;
   height: auto;
   text-align: left;
@@ -327,7 +335,7 @@ span.review-count {
   opacity: 1;
   position: absolute;
   background: #2384bc;
-  /* left: -9px; */
+  left: -9px;
   padding: 0px;
   margin-top: 2px;
   font-size: 15px;
@@ -337,6 +345,8 @@ span.review-count {
   top: -50px;
   padding: 3px 6px 6px 6px;
 }
+
+=======
 /* .tooltip-contentfollow.user_follow {
   left: 15%;
 } */
@@ -359,7 +369,9 @@ a.headingfollowtooltip span {
   color: #ffff;
   font-size: 14px;
   vertical-align: middle;
-  /* padding-right: 6px; */
+
+  padding-right: 6px;
+
   font-weight: 700;
   margin-left: 6px;
 }
@@ -375,9 +387,11 @@ a.headingfollowtooltip span {
 .tooltip-contentfollow.user_follow:after {
   left: 37%;
 }
+
 .experience {
   font-size: 14px;
 }
+
 .col.retail-meta {
   flex: 0 0 50%;
   max-width: 50%;
@@ -425,6 +439,7 @@ a.headingfollowtooltip span {
   left: 30%;
 }
 
+
 .col.retail-meta {
   flex: 0 0 50%;
   max-width: 50%;
@@ -452,12 +467,14 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
   font-size: 16px;
   margin-left: 10px;
 }
+
 .close-txt {
   color: #c91032;
 }
 .open-txt {
   color: #50af63;
 }
+
 
 .textcontant span {
   font-size: 14px;
@@ -694,6 +711,8 @@ a.btn.contactus {
 }
 .single-product .product .product-info .product-description {
   width: 100%;
+  margin-top: 2rem;
+
 }
 .single-product .product .product-info .product-description p {
   font-size: 14px;
@@ -996,5 +1015,119 @@ z-index: 1;
     text-transform: capitalize;
     font-size: 11px;
     margin-left: -7px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dispensary.single-product .product .product-image {
+    width: fit-content;
+    margin: auto;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0rem;
+    margin-bottom: 3rem;
+  }
+  .single-product.dispensary .product .product-image:after {
+    content: "unverified";
+    position: absolute;
+    top: 2px;
+    left: 17px;
+    font-size: 14px;
+    color: #ffffff;
+    background: rgb(0 0 0 / 40%);
+    width: 220px;
+    height: auto;
+    text-align: left;
+    padding: 5px 20px;
+    line-height: 1.6;
+    z-index: 0;
+    text-transform: capitalize;
+  }
+  .claim_listings {
+    z-index: 100;
+    position: absolute;
+    color: #ffff;
+    padding: 5px;
+    text-transform: capitalize;
+    font-size: 14px;
+    margin-left: 108px;
+  }
+  .dispensary.single-product .product .product-info {
+    max-width: 100%;
+  }
+  .single-product.dispensary .product .product-image:before {
+    left: 0px;
+  }
+  .tooltip-contentfollow {
+    top: -50px;
+    right: 18px;
+    width: fit-content;
+  }
+  .single-product .product .product-info .product-description p {
+    margin-bottom: 0;
+  }
+  .single-product .product .product-info .product-name {
+    margin-top: 0rem;
+  }
+  .review-head {
+    padding: 0;
+  }
+  #reviews .container {
+    padding: 0;
+  }
+  .blowimg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 10px;
+  }
+  .blowimg a span,
+  .blowimg div span {
+    display: none;
+  }
+  .blowimg div {
+    margin: 0 1rem 0 0;
+  }
+  .blowimg a i {
+    font-size: 20px;
+  }
+  a.write-a-review {
+    margin-top: 1rem;
+  }
+  ol.breadcrumb__list {
+    padding: 0;
+  }
+  .Write-a-review-form h3 {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .claim_listings {
+    margin-left: 112px;
+  }
+  .single-product.dispensary .product .product-image:before {
+    left: 5px;
+  }
+  .tooltip-contentfollow {
+    right: 22px;
+  }
+  .single-product .product .product-info .product-name h1 {
+    width: 100%;
+  }
+  .blowimg {
+    width: 100%;
+  }
+  .product-info .container .flfo-col {
+    flex-flow: column;
+  }
+  .col.retail-other-info {
+    width: 100%;
+    max-width: 100%;
+  }
+  .single-product .product .product-info .product-description {
+    margin-top: 1rem;
   }
 }

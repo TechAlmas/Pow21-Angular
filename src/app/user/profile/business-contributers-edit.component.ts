@@ -44,7 +44,7 @@ export class BusinessContributersEditComponent implements OnInit {
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
         this.cont_id = this.router.url.split('/').pop();
 		this.user_data = JSON.parse(localStorage.getItem('userData'));
-		//console.log(this.router.url);
+		// console.log(this.cont_id);
 		if(this.user_data == null){
 			this.router.navigate(['/']);
 		}

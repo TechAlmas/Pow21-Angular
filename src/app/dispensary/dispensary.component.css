@@ -16,8 +16,7 @@
 }
 .single-product.dispensary .product .product-image .logo-wrepper {
   /* width: 100%; */
-  /* padding: 1.92rem 1.15rem 0 1.1rem; */
-  padding: 0rem 1.15rem 0 1.1rem;
+  padding: 1.92rem 1.1rem 0 1.1rem;
 }
 .single-product.dispensary .product .product-image img {
   width: 100%;
@@ -88,7 +87,7 @@
   width: 77%;
   height: auto;
   text-align: left;
-  padding: 5px 20px;
+  padding: 5px 22px;
   line-height: 1.6;
   z-index: 0;
   /* background-image: url("/assets/images/question.svg");
@@ -123,13 +122,12 @@
   color: #1b88cc;
 }
 .dispensary.single-product .product .product-image {
-
   flex: 1;
-
   max-width: 25%;
   overflow: revert;
 }
 .dispensary.single-product .product .product-info {
+
   flex: 2;
   max-width: 100%;
   padding: 0;
@@ -189,7 +187,6 @@
 .single-product.dispensary .product .product-image:before {
   content: "";
   background: url("/assets/images/icon-verified-no.png");
-
   width: 35px;
   height: 35px;
   position: absolute;
@@ -207,11 +204,10 @@
   font-size: 14px;
   color: #ffffff;
   background: rgb(0 0 0 / 40%);
-
-  width: 77%;
+  width: 220px;
   height: auto;
   text-align: left;
-  padding: 5px 20px;
+  padding: 5px 22px;
   line-height: 1.6;
   z-index: 0;
   /* background-image: url("/assets/images/question.svg");
@@ -335,7 +331,7 @@ span.review-count {
   opacity: 1;
   position: absolute;
   background: #2384bc;
-  left: -9px;
+  /* left: -9px; */
   padding: 0px;
   margin-top: 2px;
   font-size: 15px;
@@ -345,8 +341,6 @@ span.review-count {
   top: -50px;
   padding: 3px 6px 6px 6px;
 }
-
-=======
 /* .tooltip-contentfollow.user_follow {
   left: 15%;
 } */
@@ -369,9 +363,7 @@ a.headingfollowtooltip span {
   color: #ffff;
   font-size: 14px;
   vertical-align: middle;
-
-  padding-right: 6px;
-
+  /* padding-right: 6px; */
   font-weight: 700;
   margin-left: 6px;
 }
@@ -618,6 +610,9 @@ img.img-responsive1 {
   margin-left: 14px;
 }
 
+.claim_listings span {
+  margin-left: 2px;
+}
 .claim_listings span a {
   vertical-align: baseline;
   display: flex;
@@ -709,6 +704,7 @@ a.btn.contactus {
   line-height: normal;
   color: #fff;
 }
+
 .single-product .product .product-info .product-description {
   width: 100%;
   margin-top: 2rem;
@@ -963,6 +959,7 @@ z-index: 1;
     /* background-image: url("/assets/images/question.svg");
     background-repeat: no-repeat;
     background-position-x: right;
+
     background-position-y: center; */
     text-transform: capitalize;
   }
@@ -1131,3 +1128,4 @@ z-index: 1;
     margin-top: 1rem;
   }
 }
+

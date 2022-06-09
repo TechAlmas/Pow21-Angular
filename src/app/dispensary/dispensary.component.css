@@ -7,7 +7,7 @@
   flex: 0 0 55%;
   max-width: 55%;
   padding: 0;
-  margin-top: -3rem;
+  margin-top: 0rem;
 }
 .dispensary.single-product .product .store-images {
   flex: 0 0 20%;
@@ -16,7 +16,7 @@
 }
 .single-product.dispensary .product .product-image .logo-wrepper {
   /* width: 100%; */
-  padding: 1.92rem 1.1rem 0 1.1rem;
+  padding: 0rem 2rem 0 1rem;
 }
 .single-product.dispensary .product .product-image img {
   width: 100%;
@@ -87,7 +87,7 @@
   width: 77%;
   height: auto;
   text-align: left;
-  padding: 5px 22px;
+  padding: 5px 20px;
   line-height: 1.6;
   z-index: 0;
   /* background-image: url("/assets/images/question.svg");
@@ -127,7 +127,6 @@
   overflow: revert;
 }
 .dispensary.single-product .product .product-info {
-
   flex: 2;
   max-width: 100%;
   padding: 0;
@@ -431,7 +430,6 @@ a.headingfollowtooltip span {
   left: 30%;
 }
 
-
 .col.retail-meta {
   flex: 0 0 50%;
   max-width: 50%;
@@ -444,6 +442,7 @@ a.headingfollowtooltip span {
 }
 .single-product.dispensary {
   margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 i.fas.fa-clock {
@@ -466,7 +465,9 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
 .open-txt {
   color: #50af63;
 }
-
+.breadcrumbs {
+  margin-bottom: 4rem;
+}
 
 .textcontant span {
   font-size: 14px;
@@ -603,7 +604,7 @@ img.img-responsive1 {
   padding: 5px;
   text-transform: capitalize;
   font-size: 14px;
-  margin-left: -36px;
+  margin-left: -42px;
 }
 .claim_listings a {
   color: #fff;
@@ -708,7 +709,6 @@ a.btn.contactus {
 .single-product .product .product-info .product-description {
   width: 100%;
   margin-top: 2rem;
-
 }
 .single-product .product .product-info .product-description p {
   font-size: 14px;
@@ -1128,4 +1128,3 @@ z-index: 1;
     margin-top: 1rem;
   }
 }
-

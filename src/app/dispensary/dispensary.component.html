@@ -1,5 +1,83 @@
 <div
   class="modal fade"
+  id="login_modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <form #Login="ngForm" (ngSubmit)="onLogin(Login)">
+    <div class="modal-dialog">
+      <div class="modal-body">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Login Heare</h4>
+            <button type="button" class="btn btn-close" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              You have already account with pow enter your password for login
+            </p>
+
+            <div class="form-group" *ngIf="!this.isUserLoggedIn">
+              <label for="converter-alert-email" class="sr-only">Email</label>
+              <input
+                name="email"
+                [ngModel]="this.login_alert.email"
+                required
+                [pattern]="emailPattern"
+                #uEmail="ngModel"
+                class="form-control"
+                placeholder="Enter your e-mail"
+              />
+              <div
+                *ngIf="
+                  uEmail.errors && Login.submitted && !isValidFormSubmitted
+                "
+                [ngClass]="'error'"
+              >
+                <div *ngIf="uEmail.errors.required">
+                  Please provide your password
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="!this.isUserLoggedIn">
+              <label for="converter-alert-name" class="sr-only">Name</label>
+              <input
+                name="password"
+                [ngModel]="this.login_alert.password"
+                required
+                #uPass="ngModel"
+                class="form-control"
+                placeholder="Enter your password"
+                type="password"
+              />
+              <div
+                *ngIf="uPass.errors && Login.submitted && !isValidFormSubmitted"
+                [ngClass]="'error'"
+              >
+                <div *ngIf="uName.errors.required">
+                  Please provide your name
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-link" data-dismiss="modal">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div
+  class="modal fade"
   id="myModal_paid"
   tabindex="-1"
   role="dialog"
@@ -24,7 +102,7 @@
               Close
             </button>
           </div>
-          <div class="modal-body" *ngIf="this.globals.user_data">
+          <div class="modal-body">
             <div class="form-group whitebgs">
               <div class="wait-layer" *ngIf="waitLayer"></div>
               <label for="paid-for-quality">First Name</label>
@@ -72,7 +150,7 @@
               <input
                 type="email"
                 name="email"
-                class="sm-form-control required customValidate"
+                class="sm-form-control required customValidate claimListingEmail"
                 placeholder="Enter Email Address"
                 ngModel
               />
@@ -93,89 +171,105 @@
               <input
                 type="email"
                 name="reemail"
-                class="sm-form-control required customValidate"
+                class="sm-form-control required customValidate claimListingReEmail"
                 placeholder="Re Enter Email Address"
                 ngModel
               />
               <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
+            </div>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Choose Password</label>
+              <input
+                type="password"
+                id="register-form-password"
+                name="password"
+                value=""
+                minlength="6"
+                class="form-control customValidate claimListingPassword"
+                required
+                ngModel
+              />
+            </div>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Confirm Password</label>
+              <input
+                type="password"
+                id="register-form-repassword"
+                name="cpassword"
+                value=""
+                class="form-control customValidate claimListingCPassword"
+                required
+                validateEqual="password"
+                ngModel
+              />
 
-                            </div>
-							<div class="form-group whitebgs signupFields" style="display:none;">
-								<div class="wait-layer" *ngIf="waitLayer"></div>
-								<label for="paid-for-quality">Choose Password</label>
-								<input type="password" id="register-form-password" name="password" value="" minlength="6" class="form-control customValidateSignUp" required ngModel/>
-									
-							</div>
-							<div class="form-group whitebgs signupFields" style="display:none;">
-								<div class="wait-layer" *ngIf="waitLayer"></div>
-								<label for="paid-for-quality">Confirm Password</label>
-								<input type="password" id="register-form-repassword" name="cpassword" value="" class="form-control customValidateSignUp" required validateEqual="password" ngModel />
-								
-									<div id="pcp_error" style="display: none;" class="error" > 
-											Password & Confirm password do not match.
-									</div> 
-								
-							</div>
-							<div class="form-group whitebgs signupFields" style="display:none;">
-								<div class="wait-layer" *ngIf="waitLayer"></div>
-									<label class="toggle">
-									<input type="checkbox" id="register-form-is_updates" name="is_updates"  value="1" class="form-control"ngModel>
-									<div class="slide-toggle"></div>
-									<div class="slide-toggle-content">Keep me updated on special offers and news.</div>
-								  </label>
-							</div>
-							<div class="form-group whitebgs signupFields" style="display:none;">
-								<div class="wait-layer" *ngIf="waitLayer"></div>
-									<label class="toggle">
-									<input type="checkbox" id="register-form-is_terms" name="is_terms"  value="1" class="form-control customValidateSignUp" required ngModel>                             
-	
-									<div class="slide-toggle"></div>
-									<div class="slide-toggle-content">Yes, I agree to POW's <a href="https://www.pow21.com/blog/termsofuse/" target="_blank">Terms</a> and <a href="https://www.pow21.com/blog/privacy/" target="_blank">Privacy.</a></div>
-								  </label>
-								 
-							</div>
-							<div class="form-group whitebgs signupFields" style="display:none;">
-								<div class="wait-layer" *ngIf="waitLayer"></div>
-									<label class="toggle">
-									<input type="checkbox" id="register-form-is_business_account" name="is_business_account"  value="1" class="form-control" disabled checked>
-									<div class="slide-toggle"></div>
-									<div class="slide-toggle-content">Business Account</div>
-								  </label>
-							</div>
-                            <div class="form-group whitebgs ">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Comments</label>
-                                  <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->
-                                  <textarea name="notes" class="sm-form-control required customValidate" placeholder="Enter your comments to verify ownership"></textarea>
-                            </div>
-                            <div class="form-group whitebgs">
-                              <div class="wait-layer" *ngIf="waitLayer"></div>
-                                <label for="paid-for-quality">Document</label>
-                                  <input type = "file" (change)="this.onFilechange($event)" name="file" class="sm-form-control required fileInput"  ngModel multiple>
-								  <small id="fileHelp" class="form-text text-muted"> Include any non-private business documents that shows your company name and address. This will help speed up the approval process. Each file size should not be more than 5 MB</small>
-								  <small class="form-text text-muted">You can add multiple photos at one time by pressing 'cntrl' and selecting the photos.</small>
-                            </div>
-
-							<!-- H o n e y p o t -->
-							<label class="ohnohoney" for="claim_captcha_name"></label>
-							<input class="ohnohoney honeyInput" autocomplete="off" type="text" id="claim_captcha_name" name="claim_captcha_name" placeholder="Your name here">
-							<label class="ohnohoney" for="claim_captcha_email"></label>
-							<input class="ohnohoney honeyInput" autocomplete="off" type="email" id="claim_captcha_email" name="claim_captcha_email" placeholder="Your e-mail here">
-
-							
-                    </div>
-					<div class="modal-body" *ngIf="!this.globals.user_data">
-						To claim the store <span *ngIf="!this.globals.user_data"><a class="claimModelLink" href="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a class="claimModelLink"  href="/register">Signup</a></span>.
-						
-								   
-									
-					</div>
-                    <div class="modal-footer"  *ngIf="this.globals.user_data">                        
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    </div>
+              <div id="pcp_error" style="display: none" class="error">
+                Password & Confirm password do not match.
+              </div>
+            </div>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  id="register-form-is_updates"
+                  name="is_updates"
+                  value="1"
+                  class="form-control"
+                  ngModel
+                />
+                <div class="slide-toggle"></div>
+                <div class="slide-toggle-content">
+                  Keep me updated on special offers and news.
                 </div>
+              </label>
+            </div>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  id="register-form-is_terms"
+                  name="is_terms"
+                  value="1"
+                  class="form-control customValidate"
+                  required
+                  ngModel
+                />
+
+                <div class="slide-toggle"></div>
+                <div class="slide-toggle-content">
+                  Yes, I agree to POW's
+                  <a
+                    href="https://www.pow21.com/blog/termsofuse/"
+                    target="_blank"
+                    >Terms</a
+                  >
+                  and
+                  <a href="https://www.pow21.com/blog/privacy/" target="_blank"
+                    >Privacy.</a
+                  >
+                </div>
+              </label>
+            </div>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  id="register-form-is_business_account"
+                  name="is_business_account"
+                  value="1"
+                  class="form-control"
+                  disabled
+                  checked
+                />
+                <div class="slide-toggle"></div>
+                <div class="slide-toggle-content">Business Account</div>
+              </label>
             </div>
             <div class="form-group whitebgs">
               <div class="wait-layer" *ngIf="waitLayer"></div>
@@ -229,7 +323,24 @@
               placeholder="Your e-mail here"
             />
           </div>
-          <div class="modal-body" *ngIf="!this.globals.user_data">
+
+          <!-- <div class="modal-body" *ngIf="!this.globals.user_data">
+				To claim the store <span *ngIf="!this.globals.user_data"><a class="claimModelLink" href="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a class="claimModelLink"  href="/register">Signup</a></span>.
+				
+							
+							
+			</div> -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-link" data-dismiss="modal">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="modal-body" *ngIf="!this.globals.user_data">
             To claim the store
             <span *ngIf="!this.globals.user_data"
               ><a class="claimModelLink" href="/login">Login</a></span
@@ -238,15 +349,15 @@
             <span *ngIf="!this.globals.user_data"
               ><a class="claimModelLink" href="/register">Signup</a></span
             >.
-          </div>
-          <div class="modal-footer" *ngIf="this.globals.user_data">
+          </div> -->
+    <!-- <div class="modal-footer" *ngIf="this.globals.user_data">
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-link" data-dismiss="modal">
               Cancel
             </button>
-          </div>
-        <!-- </div> -->
-      <!-- </div> -->
+          </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
     <!-- </div> -->
   </form>
   <!-- <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(claimListing.value)" >
@@ -260,7 +371,7 @@
 <div class="content-wrap product-content-wrap">
   <!-- <h1 class="page-title-heading">{{strainDetails.name}}</h1> -->
   <div class="container clearfix">
-    <div class="breadcrumbs" style="margin-bottom: 5rem">
+    <div class="breadcrumbs">
       <ol class="breadcrumb__list">
         <li><a href="https://www.pow21.com/">Home</a> ></li>
         <li>
@@ -391,23 +502,29 @@
           </div>
           <section class="blowimg">
             <div data-testid="listing-type" class="location-icon">
-              <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-              <a href="{{ this.mapUrl }}" target="_blank">Get directions</a>
+              <a href="{{ this.mapUrl }}" target="_blank">
+                <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
+                <span>Get directions</span></a
+              >
             </div>
             <div data-testid="listing-type" class="calling-icon">
-              <i class="fa fa-phone-volume" aria-hidden="true"></i>
-              <span>{{ dispDetails.phone }}</span>
+              <a href="#">
+                <i class="fa fa-phone-volume" aria-hidden="true"></i>
+                <span>{{ dispDetails.phone }}</span>
+              </a>
             </div>
-            <a
-              _ngcontent-dpg-c4=""
-              class="contact-icon"
-              data-toggle="modal"
-              data-target="#myModal_paid"
-              href="javascript:void(0)"
-            >
-              <i class="fa fa-envelope"></i>
-              <span>Contact US</span></a
-            >
+            <div class="">
+              <a
+                _ngcontent-dpg-c4=""
+                class="contact-icon"
+                data-toggle="modal"
+                data-target="#myModal_paid"
+                href="javascript:void(0)"
+              >
+                <i class="fa fa-envelope"></i>
+                <span>Contact US</span></a
+              >
+            </div>
             <br />
             <!-- <a href="{{this.image_disp}}" data-lightbox="image-1">Image #1</a>
 						<a href="{{this.image_disp}}" data-lightbox="image-1">Image #2</a> -->
@@ -457,7 +574,7 @@
 							<b style="font-size: 16px; margin-right: 10px;">Availability:</b>Coming soon
 						</div> -->
           <div class="container">
-            <div class="row">
+            <div class="row flfo-col">
               <div class="col retail-other-info">
                 <div role="button" tabindex="0" class="textcontant">
                   <i class="fa fa-archive iconboxsize" aria-hidden="true"></i>
@@ -473,7 +590,7 @@
                   <i class="fas fa-clock iconboxsize"></i>
                   <span
                     color="#e3452a"
-                    class="header-info__OpenStatusLabel-sc-1heoxjr-5 Storefrontspace hlUpkp"
+                    class="header-info__OpenStatusLabel-sc-1heoxjr-5 Storefrontspace hlUpkp close-txt"
                     >Close</span
                   ><span
                     class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH Storefrontspacecontant"
@@ -560,7 +677,7 @@
                   >
                 </div>
               </div>
-              <br /><br /><br />
+
               <div
                 class="product-description"
                 [innerHTML]="dispDetails.description"
@@ -601,7 +718,11 @@
         </div>
         <!-- images store section start -->
 
-        <div class="col store-image">
+        <div
+          class=" col {{
+            dispDetails.store_images ? 'store-image' : 'no-store-images'
+          }}"
+        >
           <div class="container">
             <div class="row" *ngIf="dispDetails.store_images">
               <h4 style="text-align: left">Browser our store</h4>
@@ -743,13 +864,13 @@
                   </div>
                   <div class="review-form-body">
                     <h3>Review Guidelines</h3>
-                    <div class="form-group" *ngIf="!this.checkUser">
+                    <div class="form-group" *ngIf="!this.isUserLoggedIn">
                       <input
                         name="name"
                         [ngModel]="this.review.name"
                         required
                         #rName="ngModel"
-                        class="form-control"
+                        class="form-control reviewName"
                         placeholder="Provide your name..."
                       />
                       <div
@@ -774,7 +895,7 @@
                         required
                         #rEmail="ngModel"
                         [pattern]="emailPattern"
-                        class="form-control"
+                        class="form-control reviewEmail"
                         placeholder="Type your email here"
                       />
                       <div
@@ -842,7 +963,7 @@
                       </div>
                     </div>
                     <div class="form-group text-center">
-                      <button class="btn postBtn">Post Comment</button>
+                      <button class="btn postBtn">Post Review</button>
                       <!-- <button type="button" class="btn btn-link" (click) = "write_review = false;" style="background: none;border:none;color:#08C;">Cancel</button> -->
                     </div>
                   </div>

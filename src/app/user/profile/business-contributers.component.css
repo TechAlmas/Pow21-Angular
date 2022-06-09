@@ -1,0 +1,47 @@
+.stores td.status img{width: auto;max-height: 50px;}
+.stores td,.stores th{text-align: center;}
+.table.table.table-striped.stores td.contantsection {text-align: left;}
+.table.table.table-striped.stores td.contantsection span {text-align: left;}
+tr td:nth-child(9){width: 10%;}
+tr td:nth-child(9) a{padding: 5px;font-size: 17px;}
+
+
+
+
+
+.table.table.table-striped.stores td.contantsection {
+    text-align: justify ;
+}
+.table.table.table-striped.stores td.contantsection span {
+    text-align: justify;
+}
+
+th.topspaccing {
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+tr td:nth-child(10) {
+    width: 9%;
+}
+i.fa.fa-edit {
+    font-size: 16px;
+}
+i.fa.fa-pause {
+    font-size: 16px;
+    padding: 0px 4px;
+}
+i.fa.fa-trash {
+    font-size: 16px;
+}
+tr td:nth-child(9) {
+    width: 7%;
+}
+th.trtopspaccings {
+    padding-bottom: 0px;
+}
+@media (min-width: 1400px) { 
+    td.imgsection a img {
+        max-width: 50%;
+       
+        }
+ }

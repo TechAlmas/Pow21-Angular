@@ -64,7 +64,7 @@ export class BusinessEditComponent implements OnInit {
 		return this._http.get<Ret[]>('businesslist?user_id='+this.user_data['id']);
 	}
 	getStoreDetails(slug){
-		return this._http.get<Ret[]>('dispensary_detail?slug='+slug);
+		return this._http.get<Ret[]>('dispensary_detail?slug='+slug+"&user_id="+this.user_data['id']);
 	}
 	getAllUsers(){
 		return this._http.get<Ret[]>('list_users');
@@ -324,14 +324,14 @@ export class BusinessEditComponent implements OnInit {
 	onFilechange(event: any) {
 		let dispId =  this.dispDetails.id;
 		jQuery('#file-upload').parent().next('.customError').remove();
-		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+		var validations = ['image/jpeg', 'image/png', 'image/jpg','image/webp'];
 		var file = event.target.files[0];
 		var fileType = file.type;
 		const fsize = event.target.files[0].size;
 		const fileSize = Math.round((fsize / 1024));
-		if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+		if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]) || (fileType == validations[3]))){
 				
-			var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+			var element = '<p class="customError" style="color:red">only JPG, JPEG,PNG & WEBP files are allowed to upload.</p>';
 			jQuery(element).insertAfter(jQuery('#file-upload').parent());
 			jQuery('#file-upload').val('');
 			return false;
@@ -358,16 +358,16 @@ export class BusinessEditComponent implements OnInit {
 	onStoreImagesUpload(event:any){
 		let dispId =  this.dispDetails.id;
 		jQuery('.fileInput').parent().next('.customError').remove();
-		var validations = ['image/jpeg', 'image/png', 'image/jpg'];
+		var validations = ['image/jpeg', 'image/png', 'image/jpg','image/webp'];
 
 		for(let i=0;i<event.target.files.length;i++){
             var file = event.target.files[i];
             var fileType = file.type;
 			const fsize = event.target.files[i].size;
 			const fileSize = Math.round((fsize / 1024));
-            if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]))){
+            if(!((fileType == validations[0]) || (fileType == validations[1]) || (fileType == validations[2]) || (fileType == validations[3]))){
 				
-				var element = '<p class="customError" style="color:red">only JPG, JPEG, & PNG files are allowed to upload.</p>';
+				var element = '<p class="customError" style="color:red">only JPG, JPEG, PNG & WEBP files are allowed to upload.</p>';
 				jQuery(element).insertAfter(jQuery('.fileInput').parent());
                 jQuery(".fileInput").val('');
                 return false;
@@ -500,7 +500,9 @@ export class BusinessEditComponent implements OnInit {
 			formData.append('store_meta[]', storeMetaValues);
 		}
 		let assignUserValues = jQuery('select[name=assign_user]').val();
-		console.log(assignUserValues)
+		if(this.user_data['id']){
+			formData.append('assign_user[]', this.user_data['id']);
+		}
 		if(assignUserValues != undefined && assignUserValues != null){
 			jQuery.each(assignUserValues, function(index,value){
 				formData.append('assign_user[]', value);

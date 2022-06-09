@@ -31,6 +31,8 @@ import { BusinessUserComponent } from './profile/business-users.component';
 import { BusinessUserEditComponent } from './profile/business-user-edit.component';
 import { BusinessFollowersComponent } from './profile/business-followers.component';
 import { BusinessInsightsComponent } from './profile/business-insights.component';
+import { BusinessContributersComponent } from './profile/business-contributers.component';
+import { BusinessContributersEditComponent } from './profile/business-contributers-edit.component';
 
 @NgModule({
   imports: [
@@ -64,7 +66,7 @@ import { BusinessInsightsComponent } from './profile/business-insights.component
     ProfileAccountComponent,
     LogoutComponent,
     ShareLinkComponent,
-    ReadMoreComponent],
+    ReadMoreComponent,BusinessContributersComponent,BusinessContributersEditComponent],
   exports: [UserComponent]
 })
 export class UserModule { }

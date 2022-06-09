@@ -130,6 +130,7 @@
   flex: 2;
   max-width: 100%;
   padding: 0;
+  margin-top: -3rem;
 }
 .dispensary.single-product .product .store-images {
   flex: 1;
@@ -282,6 +283,12 @@
 .tooltip-contentfollow.user_follow {
   padding: 5px 15px;
 }
+
+.headingfollowtooltip {
+  display: flex;
+  align-items: center;
+}
+
 .tooltip-contentfollow.user_follow .headingfollowtooltip i.fa.fa-user {
   margin-left: 0px;
 }
@@ -401,6 +408,7 @@ a.headingfollowtooltip .nocount {
   border-left: 2px solid rgba(255, 255, 255, 0.747);
   padding-left: 7px;
   padding-right: 4px;
+  font-size: 14px;
 }
 
 a.headingfollowtooltip span {
@@ -466,7 +474,7 @@ span.header-info__OpenStatusLabel-sc-1heoxjr-5.hlUpkp {
   color: #50af63;
 }
 .breadcrumbs {
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 }
 
 .textcontant span {

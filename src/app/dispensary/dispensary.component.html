@@ -597,7 +597,7 @@
         </div>
         <!-- images store section start -->
 
-        <div class="col store-image">
+        <div class="col {{(dispDetails.store_images) ? 'store-image': 'no-store-images'}}">
           <div class="container">
             <div class="row" *ngIf="dispDetails.store_images">
               <h4 style="text-align: left">Browser our store</h4>
@@ -645,7 +645,7 @@
 				  </div> -->
             </div>
 
-            <div class="row" *ngIf="!dispDetails.store_images">
+            <div class="row " *ngIf="!dispDetails.store_images">
               <h4 style="text-align: left">Browser our store</h4>
               <small style="text-align: center"
                 >Sorry, no store images found. Please come back later!

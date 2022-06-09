@@ -827,7 +827,7 @@ export class DispensaryComponent implements OnInit {
               parseInt($(".tooltip-contentfollow span").text()) - 1
             );
             $(".tooltip-contentfollow span.count").after(
-              '<span class="nocount" style="color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;">Follow</span>'
+              '<span class="nocount" style="color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 400;margin-left: 5px;">Follow</span>'
             );
           }
         },

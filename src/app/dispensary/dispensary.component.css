@@ -16,7 +16,8 @@
 }
 .single-product.dispensary .product .product-image .logo-wrepper {
   /* width: 100%; */
-  padding: 1.92rem 1.15rem 0 1.1rem;
+  /* padding: 1.92rem 1.15rem 0 1.1rem; */
+  padding: 0rem 1.15rem 0 1.1rem;
 }
 .single-product.dispensary .product .product-image img {
   width: 100%;
@@ -75,6 +76,7 @@
   left: 15px;
   z-index: 1;
 }
+
 .single-product.dispensary .product .product-image:after {
   content: "unverified";
   position: absolute;
@@ -121,7 +123,9 @@
   color: #1b88cc;
 }
 .dispensary.single-product .product .product-image {
+
   flex: 1;
+
   max-width: 25%;
   overflow: revert;
 }
@@ -138,6 +142,7 @@
 .dispensary.single-product .product .no-store-images {
   display: none;
 }
+
 .single-product.dispensary .product .product-image img {
   width: 220px;
   max-height: 220px;
@@ -184,11 +189,12 @@
 .single-product.dispensary .product .product-image:before {
   content: "";
   background: url("/assets/images/icon-verified-no.png");
-  width: 100%;
-  height: 220px;
+
+  width: 35px;
+  height: 35px;
   position: absolute;
   background-repeat: no-repeat;
-  background-size: 15%;
+  background-size: cover;
   top: -15px;
   left: 15px;
   z-index: 1;
@@ -201,16 +207,17 @@
   font-size: 14px;
   color: #ffffff;
   background: rgb(0 0 0 / 40%);
-  width: 220px;
+
+  width: 77%;
   height: auto;
   text-align: left;
-  padding: 5px 30px;
+  padding: 5px 20px;
   line-height: 1.6;
   z-index: 0;
-  background-image: url("/assets/images/question.svg");
+  /* background-image: url("/assets/images/question.svg");
   background-repeat: no-repeat;
   background-position-x: right;
-  background-position-y: center;
+  background-position-y: center; */
   text-transform: capitalize;
 }
 
@@ -338,9 +345,11 @@ span.review-count {
   top: -50px;
   padding: 3px 6px 6px 6px;
 }
-.tooltip-contentfollow.user_follow {
+
+=======
+/* .tooltip-contentfollow.user_follow {
   left: 15%;
-}
+} */
 .follow span {
   padding: 0px 0;
   cursor: pointer;
@@ -360,7 +369,9 @@ a.headingfollowtooltip span {
   color: #ffff;
   font-size: 14px;
   vertical-align: middle;
+
   padding-right: 6px;
+
   font-weight: 700;
   margin-left: 6px;
 }
@@ -839,27 +850,27 @@ z-index: 1;
   .single-product.dispensary .product .product-image:before {
     content: "";
     background: url("/assets/images/icon-verified-no.png");
-    width: 100%;
-    height: 220px;
+    width: 35px;
+    height: 35px;
     position: absolute;
     background-repeat: no-repeat;
-    background-size: 15%;
-    top: -10px;
-    left: -12px;
+    background-size: cover;
+    top: -15px;
+    left: 15px;
     z-index: 1;
   }
   .single-product.dispensary .product .product-image:after {
     content: "unverified";
     position: absolute;
     top: 0;
-    left: 0px;
-    font-size: 11px;
+    left: 32px;
+    font-size: 14px;
     color: #ffffff;
     background: rgb(0 0 0 / 40%);
-    width: 93%;
+    width: 77%;
     height: auto;
     text-align: left;
-    padding: 5px 0px 5px 23px;
+    padding: 5px 20px;
     line-height: 1.6;
     z-index: 0;
     /* background-image: url("/assets/images/question.svg");
@@ -912,13 +923,13 @@ z-index: 1;
   .single-product.dispensary .product .product-image:before {
     content: "";
     background: url("/assets/images/icon-verified-no.png");
-    width: 100%;
-    height: 220px;
+    width: 35px;
+    height: 35px;
     position: absolute;
     background-repeat: no-repeat;
-    background-size: 15%;
-    top: -10px;
-    left: -12px;
+    background-size: cover;
+    top: -15px;
+    left: 15px;
     z-index: 1;
   }
   .single-product.dispensary .product .product-image:after {
@@ -935,10 +946,10 @@ z-index: 1;
     padding: 5px 0px 5px 23px;
     line-height: 1.6;
     z-index: 0;
-    background-image: url("/assets/images/question.svg");
+    /* background-image: url("/assets/images/question.svg");
     background-repeat: no-repeat;
     background-position-x: right;
-    background-position-y: center;
+    background-position-y: center; */
     text-transform: capitalize;
   }
   .single-product.dispensary .product .product-image.Pending:after {

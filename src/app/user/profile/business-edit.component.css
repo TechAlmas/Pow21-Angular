@@ -270,7 +270,7 @@ input#sunday_end {
 .image-area img {
   max-width: 100%;
   height: auto;
-  width: auto;
+  width: 10rem;
 }
 .remove-image {
   display: none;

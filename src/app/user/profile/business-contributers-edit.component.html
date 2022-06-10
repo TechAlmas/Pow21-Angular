@@ -9,8 +9,8 @@
 	<div class="container clearfix">
 		<h2 *ngIf="contDetails.id else elseBlock">Edit a Contributer</h2>
 		<ng-template #elseBlock><h2>Add a Contributer</h2></ng-template>
-		<p *ngIf="contDetails.id else elseDesc">Contributors assigned in your account can be assigned to Store Profile listings to manage directly such as store profile content, photos, promotions and deals, products, and more.</p>
-		<ng-template #elseDesc><p >Add an unlimited number of employees or 'Contributors' to your business account. Contributors can be assigned to Store Profile listings to manage directly such as store profile content, photos, promotions and deals, products, and more.</p></ng-template>
+		<div *ngIf="contDetails.id else elseDesc" class="col-md-8">Contributors assigned in your account can be assigned to Store Profile listings to manage directly such as store profile content, photos, promotions and deals, products, and more.</div>
+		<ng-template #elseDesc><div class="col-md-8">Add an unlimited number of employees or 'Contributors' to your business account. Contributors can be assigned to Store Profile listings to manage directly such as store profile content, photos, promotions and deals, products, and more.</div></ng-template>
 		<div class="row">
 			<div class="col-md-8">
 				<div class="white-box">

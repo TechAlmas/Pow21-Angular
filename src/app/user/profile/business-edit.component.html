@@ -3,7 +3,7 @@
 <!-- Dashboard SubNav Start -->
 <mio-business-sub-menu></mio-business-sub-menu>
 
-<div class="content-wrap grey-bg">
+<div class="content-wrap grey-bg pt-5">
   <!-- Manage price Section start -->
   <div class="container clearfix">
     <h2 *ngIf="dispDetails.disp_id; else elseBlock">Edit Your store</h2>
@@ -667,7 +667,12 @@
                       Images Upload</label
                     >
                     <label class="col-md-2"></label>
-                    <div class="col-md-10"><small>*You can add multiple photos at one time by pressing 'cntrl' and selecting the photos</small></div>
+                    <div class="col-md-10">
+                      <small
+                        >*You can add multiple photos at one time by pressing
+                        'cntrl' and selecting the photos</small
+                      >
+                    </div>
                     <input
                       type="file"
                       id="store_images"

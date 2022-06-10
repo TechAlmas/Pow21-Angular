@@ -15962,6 +15962,9 @@ body:not(.no-transition) #wrapper,
 }
 
 @media (max-width: 767px) {
+  .product-content-wrap {
+    padding-top: 30px;
+  }
   .converter-box .tabs .tabs-nav-wrap {
     display: none;
   }
@@ -19801,14 +19804,8 @@ strong.select2-results__group {
   color: #0088cc;
   font-size: 0.775rem;
 }
-<<<<<<<
-  store-images-changes
-  =======>>>>>>>main
-  .single-product
-  .product
-  .product-info
-  .product-description
-  p {
+
+.single-product .product .product-info .product-description p {
   color: #000;
 }
 

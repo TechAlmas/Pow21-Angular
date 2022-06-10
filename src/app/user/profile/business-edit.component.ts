@@ -72,7 +72,7 @@ export class BusinessEditComponent implements OnInit {
     );
   }
   getStoreDetails(slug) {
-    return this._http.get<Ret[]>("dispensary_detail?slug=" + slug);
+    return this._http.get<Ret[]>("dispensary_detail?slug=" + slug+"&user_id="+this.user_data['id']);
   }
   getAllUsers() {
     return this._http.get<Ret[]>("list_users");
@@ -540,7 +540,9 @@ export class BusinessEditComponent implements OnInit {
       formData.append("store_meta[]", storeMetaValues);
     }
     let assignUserValues = jQuery("select[name=assign_user]").val();
-    console.log(assignUserValues);
+    if(this.user_data['id']){
+      formData.append("assign_user[]", this.user_data['id']);
+    }
     if (assignUserValues != undefined && assignUserValues != null) {
       jQuery.each(assignUserValues, function (index, value) {
         formData.append("assign_user[]", value);

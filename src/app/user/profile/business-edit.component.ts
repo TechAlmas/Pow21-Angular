@@ -219,6 +219,21 @@ export class BusinessEditComponent implements OnInit {
       }
     );
   }
+  onManageContributers(){
+    toastr.error('error', "Sorry, only Business Owner accounts are authorized to access this content. If you need access, please contact your Business account owner/admin or POW Team directly.", {
+      closeButton: true,
+      timeOut: "7000",
+      extendedTImeout: "0",
+      showDuration: "300",
+      hideDuration: "1000",
+      extendedTimeOut: "0",
+      showEasing: "swing",
+      hideEasing: "linear",
+      showMethod: "fadeIn",
+      hideMethod: "fadeOut",
+      positionClass: "toast-top-full-width",
+    });
+  }
   getcount() {
     return this._http.get<Ret[]>(
       "pricealertcount?email=" + this.globals.user_email

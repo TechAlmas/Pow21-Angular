@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { empty, Observable } from 'rxjs';
 import {Ret} from '../../models/ret';
 import {Router} from "@angular/router";
 import {PlatformLocation } from '@angular/common';
@@ -55,6 +55,7 @@ export class BusinessContributersEditComponent implements OnInit {
 		this.getContributersDetail();
 		this.userlist();
 		
+		
 	}
 
 	getdispList(){
@@ -85,6 +86,81 @@ export class BusinessContributersEditComponent implements OnInit {
 			tags: true // создает новые опции на лету
 		});
 
+		//Get States by Selecting Country
+		jQuery(document).on('change','#country',function(){
+			if(jQuery(this).val() != ''){
+
+				let _data = {
+					country: jQuery(this).val()
+				}
+	
+			   fetch('https://countriesnow.space/api/v0.1/countries/states', {
+				method: "POST",
+				body: JSON.stringify(_data),
+				headers: {"Content-type": "application/json; charset=UTF-8"}
+				})
+				.then(response => response.json()) 
+				.then(json =>
+					{
+						if(json.data.states && json.data.states != undefined && Array.isArray(json.data.states)){
+							let html  = "<option value=''>Select State</option>";
+							for (var i = 0; i < json.data.states.length; i++) {
+								html+= '<option value='+json.data.states[i].name+'>'+json.data.states[i].name+'</option>';
+							}
+							console.log(html)
+							jQuery('#state').html(html);
+						}else{
+							
+						}
+	
+						console.log(json)
+					}
+				)
+				.catch(err => console.log(err));
+			}
+			
+		})
+
+		//Get Cities by Selecting Country and State
+		jQuery(document).on('change','#state',function(){
+			if(jQuery(this).val() != '' && jQuery('#country').val() !=''){
+
+				let _data = {
+					country: jQuery('#country').val(),
+					state : jQuery(this).val()
+				}
+	
+			   fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
+				method: "POST",
+				body: JSON.stringify(_data),
+				headers: {"Content-type": "application/json; charset=UTF-8"}
+				})
+				.then(response => response.json()) 
+				.then(json =>
+					{
+						if(json.data && json.data != undefined && Array.isArray(json.data)){
+							let html  = "<option value=''>Select City</option>";
+							for (var i = 0; i < json.data.length; i++) {
+								html+= '<option value='+json.data[i]+'>'+json.data[i]+'</option>';
+							}
+							console.log(html)
+							jQuery('#city').html(html);
+						}else{
+							
+						}
+	
+						console.log(json)
+					}
+				)
+				.catch(err => console.log(err));
+			}
+			
+		})
+
+
+			
+		   
+		   
 	
 		
 	}
@@ -124,6 +200,7 @@ export class BusinessContributersEditComponent implements OnInit {
 		var postData = {"url":currentUrl};
 		return this._http.post<any[]>('getmetadata',postData);
 	}
+
 	Logout(){
 		// alert('hello');
 		toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Logout sucess fully !", "", {
@@ -198,6 +275,69 @@ export class BusinessContributersEditComponent implements OnInit {
                 });
                 this.retail_store = retailStoreArray; 			
               }
+			  if(data['data'].country){
+				let _data = {
+					country: data['data'].country
+				}
+	
+			   fetch('https://countriesnow.space/api/v0.1/countries/states', {
+				method: "POST",
+				body: JSON.stringify(_data),
+				headers: {"Content-type": "application/json; charset=UTF-8"}
+				})
+				.then(response => response.json()) 
+				.then(json =>
+					{
+						if(json.data.states && json.data.states != undefined && Array.isArray(json.data.states)){
+							let html  = "<option value=''>Select State</option>";
+							for (var i = 0; i < json.data.states.length; i++) {
+								html+= '<option value='+json.data.states[i].name+'>'+json.data.states[i].name+'</option>';
+							}
+							console.log(html)
+							jQuery('#state').html(html);
+						}else{
+							
+						}
+	
+						console.log(json)
+					}
+				)
+				.catch(err => console.log(err)); 
+			  }
+
+			  
+
+			  if(data['data'].state && data['data'].country){
+				let _data = {
+					country: data['data'].country,
+					state : data['data'].state
+				}
+	
+			   fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
+				method: "POST",
+				body: JSON.stringify(_data),
+				headers: {"Content-type": "application/json; charset=UTF-8"}
+				})
+				.then(response => response.json()) 
+				.then(json =>
+					{
+						if(json.data && json.data != undefined && Array.isArray(json.data)){
+							let html  = "<option value=''>Select City</option>";
+							for (var i = 0; i < json.data.length; i++) {
+								html+= '<option value='+json.data[i]+'>'+json.data[i]+'</option>';
+							}
+							console.log(html)
+							jQuery('#city').html(html);
+						}else{
+							
+						}
+	
+						console.log(json)
+					}
+				)
+				.catch(err => console.log(err));
+
+			  }
 			
 	      }),
 	      (err: any) => console.log(err),
@@ -309,6 +449,12 @@ export class BusinessContributersEditComponent implements OnInit {
 		formData.append('id', jQuery('#id').val());
         formData.append('id_cms_privileges','7');
         formData.append('parent_id',this.user_data['id']);
+		formData.append('password', jQuery('#contributor_password').val());
+		formData.append('phone', jQuery('#phone').val());
+		formData.append('position', jQuery('#position').val());
+		formData.append('country', jQuery('#country').val());
+		formData.append('state', jQuery('#state').val());
+		formData.append('city', jQuery('#city').val());
 
 		let retailStoreValues = jQuery('select[name=retail_store]').val();
 		if(retailStoreValues != undefined && retailStoreValues != null){

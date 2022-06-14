@@ -4073,7 +4073,7 @@ body.stretched .container-fullwidth .breadcrumb {
 
 .content-wrap {
   position: relative;
-  padding: 40px 0 80px 0;
+  padding: 80px 0;
 }
 .content-wrap.lesspadding {
   padding: 0px 0 40px;

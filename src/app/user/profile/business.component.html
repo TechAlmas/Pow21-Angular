@@ -23,7 +23,7 @@
 									<th class="trtopspaccings">Verified</th>
 									<th class="trtopspaccings">Status</th>
 									<th class="trtopspaccings"></th>
-									<th class="trtopspaccings">Name</th>
+									<th class="trtopspaccings">Store</th>
 									<th class="trtopspaccings">City</th>
 									<th class="trtopspaccings">Contributors</th>
 									<th colspan="2">Social</th>
@@ -37,21 +37,21 @@
 									<th></th>
 									<th></th>
 									<th></th>
-									<th class="topspaccing">Review</th>
-									<th class="topspaccing">Follow</th>
+									<th class="topspaccing">Reviews</th>
+									<th class="topspaccing">Followers</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr *ngFor="let rv of listdispLists">
 									<td class="status">
-										<div *ngIf="rv.status == 1">
+										<div *ngIf="rv.claim_status == 'Verified'">
 											<img src="/assets/images/icon-verified-yes.png">
 										</div>
-										<div *ngIf="rv.status == 2">
+										<div *ngIf="rv.claim_status == 'Pending'">
 											<img src="/assets/images/icon-verified-pending.png">
 										</div>
-										<div *ngIf="rv.status == 3">
+										<div *ngIf="rv.claim_status == 'Unverified'">
 											<a routerLink="/members/business/edit/{{rv.slug}}">
 												<img src="/assets/images/icon-verified-no.png">
 											</a>
@@ -94,8 +94,9 @@
 									</td>
 									<td class="">
 										<a class="text-primary" title="Edit your business" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
-										<a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,3)" *ngIf="this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6"><i class="fa fa-pause" ></i></a>
-										<a class="text-danger" title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv,0)" *ngIf="this.user_data.id_cms_privileges === 6"><i class="fa fa-trash" ></i></a>
+										<a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,'suspend')" *ngIf="(this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6) && rv.status != 3"><i class="fa fa-pause" ></i></a>
+										<a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,'resume')" *ngIf="(this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6) && rv.status == 3"><i class="fa fa-play" ></i></a>
+										<a class="text-danger" title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv,'delete')" *ngIf="this.user_data.id_cms_privileges === 6"><i class="fa fa-trash" ></i></a>
 									</td>
 									</tr>
 								</tbody>

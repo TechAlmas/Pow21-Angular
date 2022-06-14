@@ -3,7 +3,7 @@
 <!-- Dashboard SubNav Start -->
 <mio-business-sub-menu></mio-business-sub-menu>
 
-<div class="content-wrap grey-bg">
+<div class="content-wrap grey-bg pt-5">
   <!-- Manage price Section start -->
   <div class="container clearfix">
     <h2 *ngIf="dispDetails.disp_id; else elseBlock">Edit Your store</h2>
@@ -47,7 +47,7 @@
                 <div class="modal-body formcontant">
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
-                    <label for="paid-for-quality" class="col-md-2">Name</label>
+                    <label for="paid-for-quality" class="col-md-2">Store</label>
                     <input
                       type="text"
                       id="name"
@@ -573,7 +573,7 @@
                   </div>
                   <div class="form-group whitebgs row">
                     <label for="paid-for-quality" class="col-md-2"
-                      >Assign User</label
+                      >Assign Contributer</label
                     >
                     <select
                       id="assign_user"
@@ -593,6 +593,14 @@
                         {{ assignUser.name }}
                       </option>
                     </select>
+                    <label class="col-md-2"></label>
+                    <div class="col-md-10">
+                    <small
+                    >*Contributors are employees you authorize to manage the this Store Profile listing. A Contributor will only see Store Profiles in their account that you assign to them.</small
+                  >
+                  <a routerLink="/members/business/contributors" *ngIf="this.globals.id_cms_privileges == 6" target="_blank"> Manage Contributers</a>
+                  <a routerLink="javascript:void(0)" *ngIf="this.globals.id_cms_privileges != 6" (click)="onManageContributers()" > Manage Contributers</a>
+                  </div>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
                   </div>
                   <div class="form-group whitebgs row">
@@ -667,7 +675,12 @@
                       Images Upload</label
                     >
                     <label class="col-md-2"></label>
-                    <div class="col-md-10"><small>*You can add multiple photos at one time by pressing 'cntrl' and selecting the photos</small></div>
+                    <div class="col-md-10">
+                      <small
+                        >*You can add multiple photos at one time by pressing
+                        'cntrl' and selecting the photos</small
+                      >
+                    </div>
                     <input
                       type="file"
                       id="store_images"

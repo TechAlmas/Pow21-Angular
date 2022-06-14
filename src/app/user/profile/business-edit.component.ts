@@ -72,7 +72,7 @@ export class BusinessEditComponent implements OnInit {
     );
   }
   getStoreDetails(slug) {
-    return this._http.get<Ret[]>("dispensary_detail?slug=" + slug);
+    return this._http.get<Ret[]>("dispensary_detail?slug=" + slug+"&user_id="+this.user_data['id']);
   }
   getAllUsers() {
     return this._http.get<Ret[]>("list_users");
@@ -218,6 +218,21 @@ export class BusinessEditComponent implements OnInit {
         console.log(err.message);
       }
     );
+  }
+  onManageContributers(){
+    toastr.error('error', "Sorry, only Business Owner accounts are authorized to access this content. If you need access, please contact your Business account owner/admin or POW Team directly.", {
+      closeButton: true,
+      timeOut: "7000",
+      extendedTImeout: "0",
+      showDuration: "300",
+      hideDuration: "1000",
+      extendedTimeOut: "0",
+      showEasing: "swing",
+      hideEasing: "linear",
+      showMethod: "fadeIn",
+      hideMethod: "fadeOut",
+      positionClass: "toast-top-full-width",
+    });
   }
   getcount() {
     return this._http.get<Ret[]>(
@@ -540,7 +555,9 @@ export class BusinessEditComponent implements OnInit {
       formData.append("store_meta[]", storeMetaValues);
     }
     let assignUserValues = jQuery("select[name=assign_user]").val();
-    console.log(assignUserValues);
+    if(this.user_data['id']){
+      formData.append("assign_user[]", this.user_data['id']);
+    }
     if (assignUserValues != undefined && assignUserValues != null) {
       jQuery.each(assignUserValues, function (index, value) {
         formData.append("assign_user[]", value);

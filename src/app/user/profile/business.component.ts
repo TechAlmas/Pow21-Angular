@@ -201,29 +201,46 @@ export class BusinessComponent implements OnInit {
 	// 		});
 	// 	}
 	// }
-	suspendStore(storeset,status){
+	suspendStore(storeset,type){
+		let message = "";
+		let title = "";
+		let html = "";
+		let confirmTextYes = "";
+		if(type == 'suspend' ){
+			message = "suspended";
+			title = "Suspend your store profile?";
+			html = 'Please confirm you wish to suspend your retail store profile. The store profile will become inactive and not be accessible to any customers searching for your store, or allow to follow, browse products, leave a review and more. Please confirm below. Should you wish to delete the store listing altogether, please <a href="https://www.pow21.com/blog/contact-us">send us an email.</a>';
+			confirmTextYes = 'Yes, suspend!';
+		}else if(type=="delete"){
+			message = "removed";
+			title = "Remove your store profile?";
+			confirmTextYes = 'Yes, remove!';
+		}else if(type == 'resume'){
+			message = "resumed";
+			title = "Resume your store profile?";
+			confirmTextYes = 'Yes, resume!';
+		}
 		Swal({
-			title: 'Suspend your store profile?',
-			html: 'Please confirm you wish to suspend your retail store profile. The store profile will become inactive and not be accessible to any customers searching for your store, or allow to follow, browse products, leave a review and more. Please confirm below. Should you wish to delete the store listing altogether, please <a href="https://www.pow21.com/blog/contact-us">send us an email.</a>',
+			title: title,
+			html: html,
 			type: 'warning',
 			showCancelButton: true,
-			confirmButtonText: 'Yes, suspend!',
+			confirmButtonText: confirmTextYes,
 			cancelButtonText: 'No, keep it'
 		}).then((result) => {
 			if (result.value) {
-				var postdata = storeset;
-				postdata.status = status;
-				delete postdata["contributors"];
-				delete postdata["follow_count"];
-				postdata.id = postdata.dispansary_id;
+				const postdata = new FormData();
+				postdata.append('type',type);
+				postdata.append('id',storeset.id);
+			
+				let name = storeset.name;
 				
-				delete postdata.user_id;
-				delete postdata.dispansary_id;
+				
 				//console.log(postdata);
 				this.updateStoreDetails(postdata).subscribe(
 					data =>{
-						if(data["api_message"] == "success" && data["id"] > 0){
-							toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, Your store '"+name+"' deleted successfully", "", {
+						if(data["api_message"] == "success"){
+							toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, Your store '"+name+"' '"+message+"' successfully", "", {
 								"closeButton": true,
 								"timeOut": "7000",
 								"extendedTImeout": "0",
@@ -236,6 +253,7 @@ export class BusinessComponent implements OnInit {
 								"hideMethod": "fadeOut",
 								"positionClass": "toast-top-full-width",
 							});
+							this.listdispList();
 						}
 					},
 					(err) => {console.log(err.message);}

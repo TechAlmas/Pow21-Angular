@@ -87,73 +87,55 @@ export class BusinessContributersEditComponent implements OnInit {
 			tags: true // создает новые опции на лету
 		});
 
+		
+
 		//Get States by Selecting Country
 		jQuery(document).on('change','#country',function(){
-			if(jQuery(this).val() != ''){
+			let countryVal = jQuery(this).val();
+			if( countryVal != ''){
+				jQuery.getJSON( "assets/json/states.json", function( data ) {
 
-				let _data = {
-					country: jQuery(this).val()
-				}
-	
-			   fetch('https://countriesnow.space/api/v0.1/countries/states', {
-				method: "POST",
-				body: JSON.stringify(_data),
-				headers: {"Content-type": "application/json; charset=UTF-8"}
-				})
-				.then(response => response.json()) 
-				.then(json =>
-					{
-						if(json.data.states && json.data.states != undefined && Array.isArray(json.data.states)){
-							let html  = "<option value=''>Select State</option>";
-							for (var i = 0; i < json.data.states.length; i++) {
-								html+= '<option value='+json.data.states[i].name+'>'+json.data.states[i].name+'</option>';
+					if(data && Array.isArray(data)){
+						
+						let html  = "<option value=''>Select State</option>";
+						jQuery.each( data, function( key, val ) {
+							if(data[key].country_name == countryVal){
+
+								html+= '<option value='+data[key].name+'>'+data[key].name+'</option>';
 							}
-							console.log(html)
-							jQuery('#state').html(html);
-						}else{
-							
-						}
-	
-						console.log(json)
+
+						});
+						jQuery('#state').html(html);
 					}
-				)
-				.catch(err => console.log(err));
+				   
+				  });
+
 			}
 			
 		})
 
 		//Get Cities by Selecting Country and State
 		jQuery(document).on('change','#state',function(){
-			if(jQuery(this).val() != '' && jQuery('#country').val() !=''){
+			let stateVal = jQuery(this).val(); 
+			if(stateVal != '' && jQuery('#country').val() !=''){
+				jQuery.getJSON( "assets/json/cities.json", function( data ) {
 
-				let _data = {
-					country: jQuery('#country').val(),
-					state : jQuery(this).val()
-				}
-	
-			   fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
-				method: "POST",
-				body: JSON.stringify(_data),
-				headers: {"Content-type": "application/json; charset=UTF-8"}
-				})
-				.then(response => response.json()) 
-				.then(json =>
-					{
-						if(json.data && json.data != undefined && Array.isArray(json.data)){
-							let html  = "<option value=''>Select City</option>";
-							for (var i = 0; i < json.data.length; i++) {
-								html+= '<option value='+json.data[i]+'>'+json.data[i]+'</option>';
+					if(data && Array.isArray(data)){
+						
+						let html  = "<option value=''>Select City</option>";
+						jQuery.each( data, function( key, val ) {
+							if(data[key].country_name == jQuery('#country').val() && data[key].state_name == stateVal){
+
+								html+= '<option value='+data[key].name+'>'+data[key].name+'</option>';
 							}
-							console.log(html)
-							jQuery('#city').html(html);
-						}else{
-							
-						}
-	
-						console.log(json)
+
+						});
+						jQuery('#city').html(html);
 					}
-				)
-				.catch(err => console.log(err));
+				   
+				  });
+
+			
 			}
 			
 		})
@@ -309,75 +291,52 @@ export class BusinessContributersEditComponent implements OnInit {
               }
 			  if(data['data'].country){
 				jQuery('#country').val(data['data'].country);
-				let _data = {
-					country: data['data'].country
-				}
-	
-			   fetch('https://countriesnow.space/api/v0.1/countries/states', {
-				method: "POST",
-				body: JSON.stringify(_data),
-				headers: {"Content-type": "application/json; charset=UTF-8"}
-				})
-				.then(response => response.json()) 
-				.then(json =>
-					{
-						if(json.data.states && json.data.states != undefined && Array.isArray(json.data.states)){
-							let html  = "<option value=''>Select State</option>";
-							for (var i = 0; i < json.data.states.length; i++) {
+				jQuery.getJSON( "assets/json/states.json", function( value ) {
+
+					if(value && Array.isArray(value)){
+						
+						let html  = "<option value=''>Select State</option>";
+						jQuery.each( value, function( key, val ) {
+							if(value[key].country_name == data['data'].country){
 								let selected = '';
-								if(json.data.states[i].name == data['data'].state){
+								if(value[key].name == data['data'].state){
 									selected= 'selected';
 								}
-								html+= '<option value='+json.data.states[i].name+' '+selected+'>'+json.data.states[i].name+'</option>';
+								html+= '<option value='+value[key].name+' '+selected+'>'+value[key].name+'</option>';
 							}
-							console.log(html)
-							jQuery('#state').html(html);
-						}else{
-							
-						}
-	
-						console.log(json)
+
+						});
+						jQuery('#state').html(html);
 					}
-				)
-				.catch(err => console.log(err)); 
+				   
+				  });
+
+				
 			  }
 
 			  
 
 			  if(data['data'].state && data['data'].country){
-				let _data = {
-					country: data['data'].country,
-					state : data['data'].state
-				}
-	
-			   fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
-				method: "POST",
-				body: JSON.stringify(_data),
-				headers: {"Content-type": "application/json; charset=UTF-8"}
-				})
-				.then(response => response.json()) 
-				.then(json =>
-					{
-						if(json.data && json.data != undefined && Array.isArray(json.data)){
-							let html  = "<option value=''>Select City</option>";
-							for (var i = 0; i < json.data.length; i++) {
+				jQuery.getJSON( "assets/json/cities.json", function( value ) {
+
+					if(value && Array.isArray(value)){
+						
+						let html  = "<option value=''>Select City</option>";
+						jQuery.each( value, function( key, val ) {
+							if(value[key].country_name == data['data'].country && value[key].state_name == data['data'].state){
 								let selected = '';
-								if(json.data[i] == data['data'].city){
+								if(value[key].name == data['data'].city){
 									selected= 'selected';
 								}
-								html+= '<option value='+json.data[i]+' '+selected+'>'+json.data[i]+'</option>';
+								html+= '<option value='+value[key].name+' '+selected+'>'+value[key].name+'</option>';
 							}
-							console.log(html)
-							jQuery('#city').html(html);
-						}else{
-							
-						}
-	
-						console.log(json)
-					}
-				)
-				.catch(err => console.log(err));
 
+						});
+						jQuery('#city').html(html);
+					}
+				   
+				  });
+				
 			  }
 			
 	      }),

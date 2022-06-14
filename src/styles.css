@@ -16465,6 +16465,9 @@ input:-webkit-autofill {
   font-size: 24px;
   font-weight: bold;
 }
+.me-4 {
+  margin-right: 10px;
+}
 .converter-box
   .tabs
   .tab-content
@@ -18967,7 +18970,7 @@ ul.dash-nav li a:hover span.text {
 .table tbody td {
   border: 0;
   vertical-align: middle;
-  padding: 0.85rem;
+  padding: 7px;
 }
 
 .table tbody td.date-td {

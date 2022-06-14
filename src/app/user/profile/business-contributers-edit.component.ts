@@ -40,6 +40,7 @@ export class BusinessContributersEditComponent implements OnInit {
     retail_store :any;
     cont_id :any;
     retail_store_dropdown : any;
+	cont_email : string;
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
         this.cont_id = this.router.url.split('/').pop();
@@ -156,6 +157,34 @@ export class BusinessContributersEditComponent implements OnInit {
 			}
 			
 		})
+		let component = this;
+		//Check if email already exists or not
+		if(this.cont_id != undefined && this.cont_id == 'add'){
+
+			jQuery(document).on('blur','#email',function(){ 
+				if(jQuery(this).val() != ''){
+	
+					let formData = new FormData();
+					let elem   = jQuery(this);
+					formData.append('email',jQuery(this).val());
+					formData.append('type','check_email');
+					component.updateContDetails(formData).subscribe(
+						data =>{
+							if(data["data"] == 1){
+								var element = '<p class="customError" style="color:red">'+data['api_message']+'</p>';
+								jQuery(element).insertAfter(elem);
+								
+							}else{
+								elem.next('.customError').remove();
+							}
+						},
+						(err) => {
+						
+						}
+					);
+				}
+			});
+		}
 
 
 			
@@ -275,7 +304,11 @@ export class BusinessContributersEditComponent implements OnInit {
                 });
                 this.retail_store = retailStoreArray; 			
               }
+			  if(data['data'].email){
+              	this.cont_email = data['data'].email;
+              }
 			  if(data['data'].country){
+				jQuery('#country').val(data['data'].country);
 				let _data = {
 					country: data['data'].country
 				}
@@ -291,7 +324,11 @@ export class BusinessContributersEditComponent implements OnInit {
 						if(json.data.states && json.data.states != undefined && Array.isArray(json.data.states)){
 							let html  = "<option value=''>Select State</option>";
 							for (var i = 0; i < json.data.states.length; i++) {
-								html+= '<option value='+json.data.states[i].name+'>'+json.data.states[i].name+'</option>';
+								let selected = '';
+								if(json.data.states[i].name == data['data'].state){
+									selected= 'selected';
+								}
+								html+= '<option value='+json.data.states[i].name+' '+selected+'>'+json.data.states[i].name+'</option>';
 							}
 							console.log(html)
 							jQuery('#state').html(html);
@@ -324,7 +361,11 @@ export class BusinessContributersEditComponent implements OnInit {
 						if(json.data && json.data != undefined && Array.isArray(json.data)){
 							let html  = "<option value=''>Select City</option>";
 							for (var i = 0; i < json.data.length; i++) {
-								html+= '<option value='+json.data[i]+'>'+json.data[i]+'</option>';
+								let selected = '';
+								if(json.data[i] == data['data'].city){
+									selected= 'selected';
+								}
+								html+= '<option value='+json.data[i]+' '+selected+'>'+json.data[i]+'</option>';
 							}
 							console.log(html)
 							jQuery('#city').html(html);
@@ -445,7 +486,12 @@ export class BusinessContributersEditComponent implements OnInit {
 		formData.append('first_name',jQuery('#first_name').val());
     	formData.append('last_name', jQuery('#last_name').val());
         formData.append('name',jQuery('#first_name').val()+" "+jQuery('#last_name').val())
-		formData.append('email', jQuery('#email').val());
+		if(this.cont_id != undefined && this.cont_id == 'add'){
+
+			formData.append('email', jQuery('#email').val());
+		}else{
+			formData.append('email',this.cont_email);
+		}
 		formData.append('id', jQuery('#id').val());
         formData.append('id_cms_privileges','7');
         formData.append('parent_id',this.user_data['id']);

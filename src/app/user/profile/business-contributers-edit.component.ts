@@ -101,7 +101,7 @@ export class BusinessContributersEditComponent implements OnInit {
 						jQuery.each( data, function( key, val ) {
 							if(data[key].country_name == countryVal){
 
-								html+= '<option value='+data[key].name+'>'+data[key].name+'</option>';
+								html+= '<option value="'+data[key].name+'">'+data[key].name+'</option>';
 							}
 
 						});
@@ -117,6 +117,7 @@ export class BusinessContributersEditComponent implements OnInit {
 		//Get Cities by Selecting Country and State
 		jQuery(document).on('change','#state',function(){
 			let stateVal = jQuery(this).val(); 
+			console.log(stateVal)
 			if(stateVal != '' && jQuery('#country').val() !=''){
 				jQuery.getJSON( "assets/json/cities.json", function( data ) {
 
@@ -126,7 +127,7 @@ export class BusinessContributersEditComponent implements OnInit {
 						jQuery.each( data, function( key, val ) {
 							if(data[key].country_name == jQuery('#country').val() && data[key].state_name == stateVal){
 
-								html+= '<option value='+data[key].name+'>'+data[key].name+'</option>';
+								html+= '<option value="'+data[key].name+'">'+data[key].name+'</option>';
 							}
 
 						});
@@ -302,7 +303,7 @@ export class BusinessContributersEditComponent implements OnInit {
 								if(value[key].name == data['data'].state){
 									selected= 'selected';
 								}
-								html+= '<option value='+value[key].name+' '+selected+'>'+value[key].name+'</option>';
+								html+= '<option value="'+value[key].name+'" '+selected+'>'+value[key].name+'</option>';
 							}
 
 						});
@@ -328,7 +329,7 @@ export class BusinessContributersEditComponent implements OnInit {
 								if(value[key].name == data['data'].city){
 									selected= 'selected';
 								}
-								html+= '<option value='+value[key].name+' '+selected+'>'+value[key].name+'</option>';
+								html+= '<option value="'+value[key].name+'" '+selected+'>'+value[key].name+'</option>';
 							}
 
 						});

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { empty, Observable } from 'rxjs';
 import {Ret} from '../../models/ret';
 import {Router} from "@angular/router";
 import {PlatformLocation } from '@angular/common';
@@ -40,6 +40,7 @@ export class BusinessContributersEditComponent implements OnInit {
     retail_store :any;
     cont_id :any;
     retail_store_dropdown : any;
+	cont_email : string;
 
 	constructor(private title: Title, private meta: Meta, private platformLocation: PlatformLocation, private _http: HttpClient,private router: Router, private globals: Globals,private cookieService: CookieService) {
         this.cont_id = this.router.url.split('/').pop();
@@ -54,6 +55,7 @@ export class BusinessContributersEditComponent implements OnInit {
 		this.getuserdata();
 		this.getContributersDetail();
 		this.userlist();
+		
 		
 	}
 
@@ -85,6 +87,92 @@ export class BusinessContributersEditComponent implements OnInit {
 			tags: true // создает новые опции на лету
 		});
 
+		
+
+		//Get States by Selecting Country
+		jQuery(document).on('change','#country',function(){
+			let countryVal = jQuery(this).val();
+			if( countryVal != ''){
+				jQuery.getJSON( "assets/json/states.json", function( data ) {
+
+					if(data && Array.isArray(data)){
+						
+						let html  = "<option value=''>Select State</option>";
+						jQuery.each( data, function( key, val ) {
+							if(data[key].country_name == countryVal){
+
+								html+= '<option value="'+data[key].name+'">'+data[key].name+'</option>';
+							}
+
+						});
+						jQuery('#state').html(html);
+					}
+				   
+				  });
+
+			}
+			
+		})
+
+		//Get Cities by Selecting Country and State
+		jQuery(document).on('change','#state',function(){
+			let stateVal = jQuery(this).val(); 
+			console.log(stateVal)
+			if(stateVal != '' && jQuery('#country').val() !=''){
+				jQuery.getJSON( "assets/json/cities.json", function( data ) {
+
+					if(data && Array.isArray(data)){
+						
+						let html  = "<option value=''>Select City</option>";
+						jQuery.each( data, function( key, val ) {
+							if(data[key].country_name == jQuery('#country').val() && data[key].state_name == stateVal){
+
+								html+= '<option value="'+data[key].name+'">'+data[key].name+'</option>';
+							}
+
+						});
+						jQuery('#city').html(html);
+					}
+				   
+				  });
+
+			
+			}
+			
+		})
+		let component = this;
+		//Check if email already exists or not
+		if(this.cont_id != undefined && this.cont_id == 'add'){
+
+			jQuery(document).on('blur','#email',function(){ 
+				if(jQuery(this).val() != ''){
+	
+					let formData = new FormData();
+					let elem   = jQuery(this);
+					formData.append('email',jQuery(this).val());
+					formData.append('type','check_email');
+					component.updateContDetails(formData).subscribe(
+						data =>{
+							if(data["data"] == 1){
+								var element = '<p class="customError" style="color:red">'+data['api_message']+'</p>';
+								jQuery(element).insertAfter(elem);
+								
+							}else{
+								elem.next('.customError').remove();
+							}
+						},
+						(err) => {
+						
+						}
+					);
+				}
+			});
+		}
+
+
+			
+		   
+		   
 	
 		
 	}
@@ -124,6 +212,7 @@ export class BusinessContributersEditComponent implements OnInit {
 		var postData = {"url":currentUrl};
 		return this._http.post<any[]>('getmetadata',postData);
 	}
+
 	Logout(){
 		// alert('hello');
 		toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Logout sucess fully !", "", {
@@ -198,6 +287,58 @@ export class BusinessContributersEditComponent implements OnInit {
                 });
                 this.retail_store = retailStoreArray; 			
               }
+			  if(data['data'].email){
+              	this.cont_email = data['data'].email;
+              }
+			  if(data['data'].country){
+				jQuery('#country').val(data['data'].country);
+				jQuery.getJSON( "assets/json/states.json", function( value ) {
+
+					if(value && Array.isArray(value)){
+						
+						let html  = "<option value=''>Select State</option>";
+						jQuery.each( value, function( key, val ) {
+							if(value[key].country_name == data['data'].country){
+								let selected = '';
+								if(value[key].name == data['data'].state){
+									selected= 'selected';
+								}
+								html+= '<option value="'+value[key].name+'" '+selected+'>'+value[key].name+'</option>';
+							}
+
+						});
+						jQuery('#state').html(html);
+					}
+				   
+				  });
+
+				
+			  }
+
+			  
+
+			  if(data['data'].state && data['data'].country){
+				jQuery.getJSON( "assets/json/cities.json", function( value ) {
+
+					if(value && Array.isArray(value)){
+						
+						let html  = "<option value=''>Select City</option>";
+						jQuery.each( value, function( key, val ) {
+							if(value[key].country_name == data['data'].country && value[key].state_name == data['data'].state){
+								let selected = '';
+								if(value[key].name == data['data'].city){
+									selected= 'selected';
+								}
+								html+= '<option value="'+value[key].name+'" '+selected+'>'+value[key].name+'</option>';
+							}
+
+						});
+						jQuery('#city').html(html);
+					}
+				   
+				  });
+				
+			  }
 			
 	      }),
 	      (err: any) => console.log(err),
@@ -305,10 +446,18 @@ export class BusinessContributersEditComponent implements OnInit {
 		formData.append('first_name',jQuery('#first_name').val());
     	formData.append('last_name', jQuery('#last_name').val());
         formData.append('name',jQuery('#first_name').val()+" "+jQuery('#last_name').val())
-		formData.append('email', jQuery('#email').val());
+		if(this.cont_id != undefined && this.cont_id == 'add'){
+
+			formData.append('email', jQuery('#email').val());
+		}else{
+			formData.append('email',this.cont_email);
+		}
 		formData.append('id', jQuery('#id').val());
         formData.append('id_cms_privileges','7');
         formData.append('parent_id',this.user_data['id']);
+		formData.append('password', jQuery('#contributor_password').val());
+		formData.append('phone', jQuery('#phone').val());
+		formData.append('position', jQuery('#position').val());
 		formData.append('country', jQuery('#country').val());
 		formData.append('state', jQuery('#state').val());
 		formData.append('city', jQuery('#city').val());

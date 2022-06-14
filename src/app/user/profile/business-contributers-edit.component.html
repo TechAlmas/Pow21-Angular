@@ -7,9 +7,10 @@
 <div class="content-wrap grey-bg">
 	<!-- Manage price Section start -->
 	<div class="container clearfix">
-		<h2 *ngIf="contDetails.id else elseBlock">Edit Your Business Contributer</h2>
-		<ng-template #elseBlock><h2>Add Your Business Contributer</h2></ng-template>
-		 
+		<h2 *ngIf="contDetails.id else elseBlock">Edit a Contributer</h2>
+		<ng-template #elseBlock><h2>Add a Contributer</h2></ng-template>
+		<div *ngIf="contDetails.id else elseDesc" class="col-md-8">Contributors assigned in your account can be assigned to Store Profile listings to manage directly such as store profile content, photos, promotions and deals, products, and more.</div>
+		<ng-template #elseDesc><div class="col-md-8">Add an unlimited number of employees or 'Contributors' to your business account. Contributors can be assigned to Store Profile listings to manage directly such as store profile content, photos, promotions and deals, products, and more.</div></ng-template>
 		<div class="row">
 			<div class="col-md-8">
 				<div class="white-box">
@@ -33,7 +34,7 @@
                                     <div class="form-group whitebgs">
 										<div class="" ></div>
 										<label for="paid-for-quality">Last Name</label>
-										<input type = "text" id="last_name" name="last_name" class="sm-form-control required customInput" value="{{contDetails.last_name}}" placeholder="" ngModel>
+										<input type = "text" id="last_name" name="last_name" class="sm-form-control required " value="{{contDetails.last_name}}" placeholder="" ngModel>
 									</div>
 								
 									<div class="form-group whitebgs">
@@ -60,7 +61,6 @@
 										<input type = "text" id="position" name="position" class="sm-form-control required customInput" value="{{contDetails.position}}" placeholder="" ngModel>
 									</div>
 									
-									
 									<div class="form-group whitebgs ">
 										<!-- <div class=""></div> -->
 										<label for="paid-for-quality" 
@@ -78,6 +78,7 @@
 										<option value="Canada">Canada</option>
 										<option value="Australia">Australia</option>
 										</select>
+
 									  </div>
 
 									  <div class="form-group whitebgs ">
@@ -141,6 +142,9 @@
 									<input autocomplete="off" class="ohnohoney honeyInput" id="contributor_captcha_email" name="contributor_captcha_email" placeholder="Your e-mail here" type="email">
 		  
 								</div>
+								<small *ngIf="!contDetails.id" class="form-text text-muted">
+									*Important: Once you submit the above, you are adding a Business Contributor to your Business account. The new Contributor will automatically receive a Welcome email with their POW account information to login to your Business account and can manage store / dispensary profiles listings assigned to them.</small
+								  >
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary">Submit</button>
 									<a href="#"><button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button></a>									

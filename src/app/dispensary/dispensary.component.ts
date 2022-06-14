@@ -325,6 +325,11 @@ export class DispensaryComponent implements OnInit {
         this.schedule = JSON.parse(this.dispDetails.schedule);
         //console.log(this.dispDetails.state.replace(/\s/g, "-"));
         this.isUserReviewed = data["is_user_reviewed"];
+
+        if(this.dispDetails.status == 3){
+          this.routes.navigate(["/compare-price"]);
+          
+        }
       },
       (err: any) => console.log(err),
       () => {}
@@ -781,8 +786,8 @@ export class DispensaryComponent implements OnInit {
         (data) => {
           if (data["data"] == "follow") {
             toastr.success(
-              '<i class="icon-ok-sign"></i>&nbsp;&nbsp;PuPow! You are now following&nbsp;' +
-                this.dispDetails.name,
+              "<i class='icon-ok-sign'></i>&nbsp;&nbsp;PuPow! You are now following&nbsp;" +
+                this.dispDetails.name +". Manage stores you're following <a href='/members/dispensary-followers' target='_blank'>here</a>.",
               "",
               {
                 closeButton: true,
@@ -827,7 +832,7 @@ export class DispensaryComponent implements OnInit {
               parseInt($(".tooltip-contentfollow span").text()) - 1
             );
             $(".tooltip-contentfollow span.count").after(
-              '<span class="nocount" style="color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 700;margin-left: 5px;">Follow</span>'
+              '<span class="nocount" style="color: #ffff;font-size: 14px;vertical-align: middle;font-weight: 400;margin-left: 5px;">Follow</span>'
             );
           }
         },

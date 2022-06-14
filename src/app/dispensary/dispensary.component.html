@@ -448,7 +448,7 @@
                 routerLink="/register"
                 target="_blank"
               >
-                <div class="">
+                <div class="wrepper">
                   <i class="fa fa-user"></i
                   ><span class="count">{{ dispDetails.follow_count }}</span>
                 </div>
@@ -460,20 +460,15 @@
           </div>
 
           <div class="single_product">
-            <div class="row">
-              <div class="col-md-6 spaccing_products">
-                <!-- <div class="claim_unverified">
-								   <span>Unverified</span>
-							   </div> -->
+            <div class="wrepper">
+              <div class="spaccing_products">
+                <div class="claim_unverified">
+                  <span class=" {{ dispDetails.claim_status }} ">
+                    {{ dispDetails.claim_status }}</span
+                  >
+                </div>
               </div>
-
-              <!-- <div class="col-md-2 spaccing_products">
-							   <div class="claim_quetoimg">
-								   <img src="/assets/images/question.svg">
-							   </div>
-						   </div> -->
-
-              <div class="col-md-6 spaccing_products">
+              <div class="spaccing_products">
                 <div class="claim_listings">
                   <span
                     >|&nbsp;<a
@@ -592,7 +587,6 @@
                     color="#e3452a"
                     class="header-info__OpenStatusLabel-sc-1heoxjr-5 Storefrontspace hlUpkp close-txt"
                     >Closed</span
-
                   ><span
                     class="styled-components__HoursText-sc-1sy7kcj-10 iWfkRH Storefrontspacecontant"
                     >untill 11:00pm
@@ -718,14 +712,11 @@
           </div>
         </div>
         <!-- images store section start -->
-
-
         <div
           class=" col {{
             dispDetails.store_images ? 'store-image' : 'no-store-images'
           }}"
         >
-
           <div class="container">
             <div class="row" *ngIf="dispDetails.store_images">
               <h4 style="text-align: left">Browser our store</h4>

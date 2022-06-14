@@ -21,13 +21,13 @@
 							<thead>
 								<tr>
 									<th class="trtopspaccings">Verified</th>
-									<th class="trtopspaccings">Status</th>
 									<th class="trtopspaccings"></th>
 									<th class="trtopspaccings">Store</th>
 									<th class="trtopspaccings">City</th>
 									<th class="trtopspaccings">Contributors</th>
 									<th colspan="2">Social</th>
 									<th class="trtopspaccings">Insights</th>
+									<th class="trtopspaccings">Status</th>
 									<th class="trtopspaccings">Actions</th>
 								</tr>
 								<tr>
@@ -36,9 +36,9 @@
 									<th></th>
 									<th></th>
 									<th></th>
-									<th></th>
 									<th class="topspaccing">Reviews</th>
 									<th class="topspaccing">Followers</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</thead>
@@ -62,12 +62,7 @@
 											</a>
 										</ng-template> -->
 									</td>
-									<td>
-										<ng-container [ngTemplateOutlet]="rv.status == 0 ? first : rv.status == 1 ? second : third"></ng-container>
-										<ng-template #first>Inactive</ng-template>
-										<ng-template #second>Active</ng-template>
-										<ng-template #third>Suspended</ng-template>
-									</td>
+								
 									<td class="imgsection">
 										<a routerLink ="/{{globals.location_global_url}}/dispensary/{{rv.slug}}">
 											<img  src="https://www.pow21.com/admin/storage/app/{{rv.logoUrl}}" alt="" draggable="false" style="">
@@ -85,12 +80,18 @@
 									<td class="contantsection">
 										<span *ngFor="let cb of rv.contributors">{{cb}}, </span>
 									</td>
-									<td>{{rv.social}}<a href="#">4.7</a></td>
-									<td><a routerLink="followers/{{rv.slug}}">{{rv.follow_count}}</a></td>
+									<td>{{rv.social}}<i class="fa fa-star-half"></i><a href="#">4.7</a></td>
+									<td><a routerLink="followers/{{rv.slug}}"><i class="fa fa-user-group"></i>{{rv.follow_count}}</a></td>
 									<td class="status">
 										<a routerLink="/members/business/insights">
 											<img src="/assets/images/icon-insight.png">
 										</a>
+									</td>
+									<td>
+										<ng-container [ngTemplateOutlet]="rv.status == 0 ? first : rv.status == 1 ? second : third"></ng-container>
+										<ng-template #first>Inactive</ng-template>
+										<ng-template #second>Active</ng-template>
+										<ng-template #third>Suspended</ng-template>
 									</td>
 									<td class="">
 										<a class="text-primary" title="Edit your business" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>

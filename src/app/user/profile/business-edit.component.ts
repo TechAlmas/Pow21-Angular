@@ -132,6 +132,69 @@ export class BusinessEditComponent implements OnInit {
       }
       jQuery(this).parents(".image-area").remove();
     });
+
+
+    	
+
+		//Get States by Selecting Country
+		jQuery(document).on('change','#country',function(){
+			let countryVal = jQuery(this).val();
+			if( countryVal != ''){
+        let fieldText = 'State';
+        let ZipCodeText = 'Zip Code';
+        if(countryVal == 'Canada'){
+          fieldText = 'Province';
+          ZipCodeText = 'Postal Code';
+        }
+        jQuery('#state').parent().prev('.col-md-2').find('label').text(fieldText);
+        jQuery('#zip_code').parent().prev('.col-md-2').find('label').text(ZipCodeText);
+				jQuery.getJSON( "assets/json/states.json", function( data ) {
+
+					if(data && Array.isArray(data)){
+						
+						let html  = "<option value=''>Select "+fieldText+"</option>";
+						jQuery.each( data, function( key, val ) {
+							if(data[key].country_name == countryVal){
+
+								html+= '<option value="'+data[key].name+'">'+data[key].name+'</option>';
+							}
+
+						});
+						jQuery('#state').html(html);
+					}
+				   
+				  });
+
+			}
+			
+		})
+
+		//Get Cities by Selecting Country and State
+		jQuery(document).on('change','#state',function(){
+			let stateVal = jQuery(this).val(); 
+			console.log(stateVal)
+			if(stateVal != '' && jQuery('#country').val() !=''){
+				jQuery.getJSON( "assets/json/cities.json", function( data ) {
+
+					if(data && Array.isArray(data)){
+						
+						let html  = "<option value=''>Select City</option>";
+						jQuery.each( data, function( key, val ) {
+							if(data[key].country_name == jQuery('#country').val() && data[key].state_name == stateVal){
+
+								html+= '<option value="'+data[key].name+'">'+data[key].name+'</option>';
+							}
+
+						});
+						jQuery('#city').html(html);
+					}
+				   
+				  });
+
+			
+			}
+			
+		})
   }
   addRemovedImagesToArray($name) {
     if (this.removedImages == undefined) {
@@ -264,7 +327,64 @@ export class BusinessEditComponent implements OnInit {
         this.assign_user = data["data"].assign_user;
         this.dispDetails.schedule = JSON.parse(this.dispDetails.schedule);
         this.store_images = Object.values(data["data"].store_images);
-        console.log(this.store_images);
+      
+          if(data['data'].country){
+            jQuery('#country').val(data['data'].country);
+            let fieldText = 'State';
+            let ZipCodeText = 'Zip Code';
+            if(data['data'].country == 'Canada'){
+              fieldText = 'Province';
+              ZipCodeText = 'Postal Code';
+            }
+            jQuery('#state').parent().prev('.col-md-2').find('label').text(fieldText);
+            jQuery('#zip_code').parent().prev('.col-md-2').find('label').text(ZipCodeText);
+            jQuery.getJSON( "assets/json/states.json", function( value ) {
+    
+              if(value && Array.isArray(value)){
+                
+                let html  = "<option value=''>Select "+fieldText+"</option>";
+                jQuery.each( value, function( key, val ) {
+                  if(value[key].country_name == data['data'].country){
+                    let selected = '';
+                    if(value[key].name == data['data'].state){
+                      selected= 'selected';
+                    }
+                    html+= '<option value="'+value[key].name+'" '+selected+'>'+value[key].name+'</option>';
+                  }
+    
+                });
+                jQuery('#state').html(html);
+              }
+              
+              });
+  
+          
+          }
+  
+          
+  
+        if(data['data'].state && data['data'].country){
+          jQuery.getJSON( "assets/json/cities.json", function( value ) {
+  
+            if(value && Array.isArray(value)){
+              
+              let html  = "<option value=''>Select City</option>";
+              jQuery.each( value, function( key, val ) {
+                if(value[key].country_name == data['data'].country && value[key].state_name == data['data'].state){
+                  let selected = '';
+                  if(value[key].name == data['data'].city){
+                    selected= 'selected';
+                  }
+                  html+= '<option value="'+value[key].name+'" '+selected+'>'+value[key].name+'</option>';
+                }
+  
+              });
+              jQuery('#city').html(html);
+            }
+             
+            });
+          
+          }
         //this.dispens_id = this.dispDetails.disp_id;
         //this.dispState = data['data'].state.replace(/\s/g, "-");
         //this.dispCity = data['data'].city.replace(/\s/g, "-");
@@ -531,7 +651,11 @@ export class BusinessEditComponent implements OnInit {
     formData.append("phone", jQuery("#phone").val());
     formData.append("license_type", jQuery("#license_type").val());
     formData.append("id", jQuery("#id").val());
-    console.log(this.removedImages);
+
+    if(jQuery('#description').val() != ''){
+      formData.append('description', jQuery("<div/>").html(jQuery('#description').val()).text() )
+    }
+
     if (this.removedImages != undefined) {
       jQuery.each(this.removedImages, function (index, value) {
         formData.append("removed_images[]", value);

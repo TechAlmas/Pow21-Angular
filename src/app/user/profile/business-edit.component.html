@@ -14,7 +14,7 @@
         <div class="white-box">
           <div class="white-box-title">
             <h3>
-              Store Name
+              {{ dispDetails.name }}
               <div
                 class="btn-group-sm"
                 style="
@@ -94,43 +94,72 @@
                     </div>
                   </div>
                   <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
+										<!-- <div class=""></div> -->
                     <div class="col-md-2">
-                      <label for="paid-for-quality">City</label>
+										<label for="paid-for-quality" 
+										  >Country</label
+										>
                     </div>
                     <div class="col-md-10">
-                      <input
-                        type="text"
-                        id="city"
-                        name="city"
-                        class="sm-form-control city required"
-                        value="{{ dispDetails.city }}"
-                        placeholder=""
-                        ngModel
-                      />
+										<select
+										  id="country"
+										  name="country"
+										  class="sm-form-control country required customInput"
+										  placeholder=""
+										  ngModel
+										>
+										<option value="">Select Country</option>
+										<option value="United States">United States Of America</option>
+										<option value="Canada">Canada</option>
+										<option value="Australia">Australia</option>
+										</select>
                     </div>
-                  </div>
+
+									  </div>
+
+									  <div class="form-group whitebgs row">
+										<!-- <div class=""></div> -->
+                    <div class="col-md-2">
+										<label for="paid-for-quality" >{{(dispDetails.country == 'Canada' ? 'Province' : 'State')}}</label>
+                    </div>
+                    <div class="col-md-10">
+										<select
+										  id="state"
+										  name="state"
+										  class="sm-form-control state required customInput"
+										  placeholder=""
+										  ngModel
+										>
+										<option value="">Select State</option>
+										
+										</select>
+                    </div>
+									  </div>
+
+
+									  <div class="form-group whitebgs row">
+										<!-- <div class=""></div> -->
+                    <div class="col-md-2">
+										<label for="paid-for-quality">City</label>
+                    </div>
+                    <div class="col-md-10">
+										<select
+										  id="city"
+										  name="city"
+										  class="sm-form-control city required customInput"
+										  placeholder=""
+										  ngModel
+										>
+										<option value="">Select City</option>
+										
+										</select>
+                    </div>
+									  </div>
+									 
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
-                      <label for="paid-for-quality">State</label>
-                    </div>
-                    <div class="col-md-10">
-                      <input
-                        type="text"
-                        id="state"
-                        name="state"
-                        class="sm-form-control state required"
-                        value="{{ dispDetails.state }}"
-                        placeholder=""
-                        ngModel
-                      />
-                    </div>
-                  </div>
-                  <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
-                    <div class="col-md-2">
-                      <label for="paid-for-quality">Zip Code</label>
+                      <label for="paid-for-quality">{{(dispDetails.country == 'Canada' ? 'Postal Code' : 'Zip Code')}}</label>
                     </div>
                     <div class="col-md-10">
                       <input
@@ -145,23 +174,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
-                    <div class="col-md-2">
-                      <label for="paid-for-quality">Country</label>
-                    </div>
-                    <div class="col-md-10">
-                      <input
-                        type="text"
-                        id="country"
-                        name="country"
-                        class="sm-form-control country required"
-                        value="{{ dispDetails.country }}"
-                        placeholder=""
-                        ngModel
-                      />
-                    </div>
-                  </div>
+                 
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
@@ -707,6 +720,24 @@
                       >
                     </div>
                   </div>
+
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">About Store</label>
+                    </div>
+                    <div class="col-md-10">
+                      <textarea 
+                        id="description"
+                        name="description"
+                        class="sm-form-control description required"
+                        value="{{ dispDetails.description }}"
+                        placeholder="Tell your customers and future customers about your store or dispensary. This is not only an expectation by customers but great for Google and SEO. We recommend 400 characters or more."
+                        ngModel
+                      >{{ dispDetails.description }}</textarea>
+                    </div>
+                  </div>
+
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
@@ -717,6 +748,7 @@
                         ><i class="fa fa-cloud" aria-hidden="true"></i> Custom
                         Images Upload</label
                       >
+                      <small>*Storefronts with photos get more visitors and customer visits. Upload unlimited photos to your profile to showcase your storefront, inside layout and team members.</small><br>
                       <small
                         >*You can add multiple photos at one time by pressing
                         'cntrl' and selecting the photos</small

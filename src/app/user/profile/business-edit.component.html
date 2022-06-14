@@ -302,18 +302,28 @@
                   <div class="form-group whitebgs labelalignmentt row mt-0">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <label for="paid-for-quality"></label>
-                    <span class="dayalign col-md-2">Monday</span>
-                    <input
-                      type="time"
-                      id="monday_start"
-                      name="monday_start"
-                      class="sm-form-control monday_start required col-md-3"
-                      value="{{
-                        getTimeStringValue('monday', 'start') | date: 'HH:mm'
-                      }}"
-                      placeholder=""
-                      [disabled]="getTimeStringValue('monday', '', 1) == 'yes'"
-                    />
+                    <div
+                      class="col-md-2 d-flex align-items-center justify-content-start"
+                    >
+                      <span class="dayalign">Monday</span>
+                    </div>
+                    <div
+                      class="col-md-3 d-flex align-items-center justify-content-start p-0"
+                    >
+                      <input
+                        type="time"
+                        id="monday_start"
+                        name="monday_start"
+                        class="sm-form-control monday_start required"
+                        value="{{
+                          getTimeStringValue('monday', 'start') | date: 'HH:mm'
+                        }}"
+                        placeholder=""
+                        [disabled]="
+                          getTimeStringValue('monday', '', 1) == 'yes'
+                        "
+                      />
+                    </div>
                     <span class="col-md-1 text-center p-0">To</span>
                     <input
                       type="time"

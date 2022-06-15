@@ -11,8 +11,9 @@ import { Meta, Title } from "@angular/platform-browser";
 import { DispDetail } from "../../models/disp-detail";
 import { Pipe, PipeTransform } from "@angular/core";
 import { DatePipe } from "@angular/common";
-import { $ } from "protractor";
 
+
+declare var $: any;
 declare var toastr: any;
 declare var jQuery: any;
 declare var Swal: any;
@@ -40,6 +41,10 @@ export class BusinessEditComponent implements OnInit {
   storeImages: any;
   removedImages: any;
   store_images: any;
+  isValidFormSubmitted = false;
+  claimListingWithSignup = false;
+  expiredDate: any;
+  claim_file: any;
 
   constructor(
     private title: Title,
@@ -195,6 +200,10 @@ export class BusinessEditComponent implements OnInit {
 			}
 			
 		})
+
+    $(".customValidate").on("keyup", function () {
+      component.customValidateFields($(this));
+    });
   }
   addRemovedImagesToArray($name) {
     if (this.removedImages == undefined) {
@@ -620,7 +629,7 @@ export class BusinessEditComponent implements OnInit {
       .parent(".whitebgs")
       .find(".customError")
       .remove();
-    jQuery(".honeyInput").each(function () {
+    jQuery(".honeyInputStore").each(function () {
       if (jQuery(this).val() != "") {
         var element =
           '<p class="customError" style="color:red">Something Went Wrong.</p>';
@@ -845,6 +854,308 @@ export class BusinessEditComponent implements OnInit {
     } else {
       jQuery("#" + day + "_start").prop("disabled", false);
       jQuery("#" + day + "_end").prop("disabled", false);
+    }
+  }
+
+  review_check_email_claim_listing() {
+    return this._http.get<any[]>(
+      "review_check_email?email=" + $(document).find(".claimListingEmail").val()
+    );
+  }
+
+  customValidateFields($elem): any {
+    let error = 0;
+
+    $elem.next(".customError").remove();
+
+    if ($elem.attr("name") == "reemail" && $elem.val() != "") {
+      let regex =
+        /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!regex.test($elem.val())) {
+        var element =
+          '<p class="customError" style="color:red">' +
+          "The email should be a valid email address" +
+          "</p>";
+        $(element).insertAfter($elem);
+        error++;
+      } else if ($elem.val() != $(".claimListingEmail").val()) {
+        var element =
+          '<p class="customError" style="color:red">' +
+          "Email address does not match" +
+          "</p>";
+        $(element).insertAfter($elem);
+        error++;
+      } else {
+        $(".claimListingEmail").next(".customError").remove();
+        this.review_check_email_claim_listing().subscribe(
+          (data) => {
+            if (data["data"] > 0) {
+              jQuery(".signupFields").hide();
+              this.claimListingWithSignup = false;
+            } else {
+              jQuery(".signupFields").show();
+              this.claimListingWithSignup = true;
+            }
+          },
+          (err: any) => console.log(err),
+          () => {}
+        );
+      }
+    }
+    if ($elem.attr("name") == "email" && $elem.val() != "") {
+      let regex =
+        /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!regex.test($elem.val())) {
+        var element =
+          '<p class="customError" style="color:red">' +
+          "The email should be a valid email address" +
+          "</p>";
+        $(element).insertAfter($elem);
+        error++;
+      } else if ($elem.val() != $(".claimListingReEmail").val()) {
+        if ($(".claimListingReEmail").val() != "") {
+          var element =
+            '<p class="customError" style="color:red">' +
+            "Email address does not match" +
+            "</p>";
+          $(element).insertAfter($elem);
+          error++;
+        }
+      } else {
+        $(".claimListingReEmail").next(".customError").remove();
+        this.review_check_email_claim_listing().subscribe(
+          (data) => {
+            if (data["data"] > 0) {
+              jQuery(".signupFields").hide();
+              this.claimListingWithSignup = false;
+            } else {
+              jQuery(".signupFields").show();
+              this.claimListingWithSignup = true;
+            }
+          },
+          (err: any) => console.log(err),
+          () => {}
+        );
+      }
+    }
+
+    if ($elem.val() == "" || $elem.val() == "(___)___-____") {
+      var element =
+        '<p class="customError" style="color:red">' +
+        "The " +
+        $elem.prev().text() +
+        " field is required" +
+        "</p>";
+      $(element).insertAfter($elem);
+      error++;
+    }
+
+    if (this.claimListingWithSignup) {
+      $elem.next(".customError").remove();
+      if ($elem.attr("name") == "password" && $elem.val() != "") {
+        if ($elem.val().length < 6) {
+          var element =
+            '<p class="customError" style="color:red">' +
+            " Password must be at least 6 characters long." +
+            "</p>";
+          $(element).insertAfter($elem);
+          error++;
+        } else if ($elem.val() != $(".claimListingCPassword").val()) {
+          if ($(".claimListingCPassword").val() != "") {
+            var element =
+              '<p class="customError" style="color:red">' +
+              "Password & Confirm password do not match." +
+              "</p>";
+            $(element).insertAfter($elem);
+            error++;
+          }
+        } else {
+          $(".claimListingCPassword").next(".customError").remove();
+        }
+      }
+      if ($elem.attr("name") == "cpassword" && $elem.val() != "") {
+        if ($elem.val() != $(".claimListingPassword").val()) {
+          var element =
+            '<p class="customError" style="color:red">' +
+            "Password & Confirm password do not match." +
+            "</p>";
+          $(element).insertAfter($elem);
+          error++;
+        } else {
+          $(".claimListingPassword").next(".customError").remove();
+        }
+      }
+      if ($elem.val() == "") {
+        var element =
+          '<p class="customError" style="color:red">' +
+          "The " +
+          $elem.prev().text() +
+          " field is required" +
+          "</p>";
+        $(element).insertAfter($elem);
+        error++;
+      }
+      if ($elem.attr("name") == "is_terms" && $elem.prop("checked") == false) {
+        var element =
+          '<p class="customError" style="color:red">' +
+          "Please accept the Term & Condition." +
+          "</p>";
+        $(element).insertAfter($elem);
+        error++;
+      }
+    }
+
+    return error;
+  }
+  postPaidFor(postdata) {
+    return this._http.post<any[]>("claim_lingings", postdata);
+  }
+
+  onClickSubmit(data) {
+    let error = 0;
+    let honeyError = 0;
+
+    $(".customValidate").each(function (key, val) {
+      $(this).next(".customError").remove();
+
+      if ($(this).val() == "" || $(this).val() == "(___)___-____") {
+        var element =
+          '<p class="customError" style="color:red">' +
+          "The " +
+          $(this).prev().text() +
+          " field is required" +
+          "</p>";
+        $(element).insertAfter($(this));
+        error++;
+      }
+      if (
+        $(this).attr("name") == "is_terms" &&
+        $(this).prop("checked") == false
+      ) {
+        var element =
+          '<p class="customError" style="color:red">' +
+          "Please accept the Term & Condition." +
+          "</p>";
+        $(element).insertAfter($(this));
+        error++;
+      }
+    });
+
+    // Honeypot Implementation
+    $(".honeyInput").each(function (key, val) {
+      if ($(this).val() != "") {
+        $(".fileInput").next(".customError").remove();
+        var element =
+          '<p class="customError" style="color:red">Something Went Wrong</p>';
+        $(element).insertAfter($(".fileInput"));
+        honeyError++;
+      }
+    });
+
+    const formData = new FormData();
+    $.each(this.claim_file, function (index, value) {
+      formData.append("file[]", value);
+    });
+
+    formData.append("listing_id", this.dispDetails.id);
+    formData.append("first_name", data.fname);
+    formData.append("last_name", data.lname);
+    formData.append("telephone", $("input[name=telnum]").val());
+    formData.append("e_mail", data.email);
+    formData.append("verification_details", $("textarea[name=notes]").val());
+
+    if (error == 0 && honeyError == 0) {
+      this.isValidFormSubmitted = true;
+      formData.append("password", data.password);
+      formData.append("is_updates", data.is_updates);
+      formData.append("status", "1");
+      formData.append("id_cms_privileges", "4");
+      formData.append(
+        "referrer_id",
+        this.cookieService.get("_mio_user_referral_id")
+      );
+      formData.append("claim_listing_with_signup", "1");
+
+      this.postPaidFor(formData).subscribe(
+        (data) => {
+          if (data["api_message"] == "success" && data["id"] > 0) {
+            toastr.success(
+              "<i class='icon-ok-sign'></i>&nbsp;&nbsp;Congrats, you'r provided information received successfully...Thanks",
+              "",
+              {
+                closeButton: true,
+                timeOut: "8000",
+                extendedTImeout: "0",
+                showDuration: "300",
+                hideDuration: "1000",
+                extendedTimeOut: "0",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut",
+                positionClass: "toast-top-full-width",
+              }
+            );
+          }
+
+          this.expiredDate = new Date();
+          this.expiredDate.setDate(this.expiredDate.getDate() + 1000);
+          this.cookieService.set(
+            "_mio_user_id",
+            data["user_id"],
+            this.expiredDate,
+            "/"
+          );
+
+          $("#myModal_paid").modal("hide");
+        },
+        (err: any) => {
+          console.log(err);
+          toastr.error(err.message, "", {
+            closeButton: true,
+            timeOut: "8000",
+            extendedTImeout: "0",
+            showDuration: "300",
+            hideDuration: "1000",
+            extendedTimeOut: "0",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+            positionClass: "toast-top-full-width",
+          });
+        },
+        () => {
+          console.log("err.message");
+        }
+      );
+    }
+  }
+
+  onClaimFilechange(event: any) {
+    jQuery(".fileInput").parent().find(".customError").remove();
+    let error = 0;
+    for (let i = 0; i < event.target.files.length; i++) {
+      var file = event.target.files[i];
+      var fileType = file.type;
+      const fileName = event.target.files[i].name;
+      const fsize = event.target.files[i].size;
+      const fileSize = Math.round(fsize / 1024);
+
+      if (fileSize >= 5120) {
+        var element =
+          '<p class="customError mb-0" style="color:red">' +
+          fileName +
+          "  size is more than 5MB please reduce size.</p>";
+        jQuery(element).insertAfter(jQuery(".fileInput").next().next());
+        error++;
+      }
+    }
+    if (error > 0) {
+      jQuery(".fileInput").val("");
+      return false;
+    } else {
+      this.claim_file = event.target.files;
     }
   }
 

@@ -14,7 +14,7 @@
         <div class="white-box">
           <div class="white-box-title">
             <h3>
-              Store Name
+              Store / Dispensary Name
               <div
                 class="btn-group-sm"
                 style="
@@ -46,17 +46,55 @@
                 />
                 <div class="modal-body formcontant">
                   <div class="form-group whitebgs row">
+                    <!-- <div class="statustop"></div> -->
+                    <div class="col-md-2">
+                      <label for="paid-for-quality statuslabel ">Status </label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        id="status_active"
+                        class="radio-style"
+                        name="status "
+                        type="radio"
+                        value="active"
+                        required
+                      />
+                      <label
+                        for="status_active "
+                        class="radio-style-2-label p-0"
+                        >Active</label
+                      >
+                      <input
+                        id="status_suspend"
+                        class="radio-style"
+                        name="status"
+                        type="radio"
+                        value="suspend"
+                        required
+                      />
+                      <label
+                        for="status_suspend "
+                        class="radio-style-2-label p-0"
+                        >Suspend</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
-                    <label for="paid-for-quality" class="col-md-2">Store</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      class="sm-form-control required col-md-10"
-                      value="{{ dispDetails.name }}"
-                      placeholder=""
-                      ngModel
-                    />
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">Store</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="sm-form-control required"
+                        value="{{ dispDetails.name }}"
+                        placeholder=""
+                        ngModel
+                      />
+                    </div>
                   </div>
                   <!-- Add new form fields here -->
                   <div class="form-group whitebgs row">
@@ -69,7 +107,7 @@
                         type="text"
                         id="address"
                         name="address"
-                        class="sm-form-control address required"
+                        class="sm-form-control address required w-100"
                         value="{{ dispDetails.address }}"
                         placeholder=""
                         ngModel
@@ -194,6 +232,11 @@
                         placeholder=""
                         ngModel
                       />
+                      <small
+                        ><a href="www.domain.com/" class="text-dark"
+                          >www.domain.com</a
+                        ></small
+                      >
                     </div>
                   </div>
                   <div class="form-group whitebgs row">
@@ -639,9 +682,26 @@
                           {{ assignUser.name }}
                         </option>
                       </select>
-                      <small>*Contributors are employees you authorize to manage the this Store Profile listing. A Contributor will only see Store Profiles in their account that you assign to them.</small>
-                      <a routerLink="/members/business/contributors" *ngIf="this.globals.id_cms_privileges == 6" target="_blank"> Manage Contributers</a>
-                      <a routerLink="javascript:void(0)" *ngIf="this.globals.id_cms_privileges != 6" (click)="onManageContributers()" > Manage Contributers</a>
+                      <small
+                        >*Contributors are employees you authorize to manage the
+                        this Store Profile listing. A Contributor will only see
+                        Store Profiles in their account that you assign to
+                        them.</small
+                      >
+                      <a
+                        routerLink="/members/business/contributors"
+                        *ngIf="this.globals.id_cms_privileges == 6"
+                        target="_blank"
+                      >
+                        Manage Contributers</a
+                      >
+                      <a
+                        routerLink="javascript:void(0)"
+                        *ngIf="this.globals.id_cms_privileges != 6"
+                        (click)="onManageContributers()"
+                      >
+                        Manage Contributers</a
+                      >
                     </div>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
                   </div>
@@ -672,40 +732,6 @@
                       </select>
                     </div>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
-                  </div>
-                  <div class="form-group whitebgs row">
-                    <!-- <div class="statustop"></div> -->
-                    <div class="col-md-2">
-                      <label for="paid-for-quality statuslabel ">Status </label>
-                    </div>
-                    <div class="col-md-10 p-0 pt-1">
-                      <input
-                        id="status_active"
-                        class="radio-style"
-                        name="status "
-                        type="radio"
-                        value="active"
-                        required
-                      />
-                      <label
-                        for="status_active "
-                        class="radio-style-2-label p-0"
-                        >Active</label
-                      >
-                      <input
-                        id="status_suspend"
-                        class="radio-style"
-                        name="status"
-                        type="radio"
-                        value="suspend"
-                        required
-                      />
-                      <label
-                        for="status_suspend "
-                        class="radio-style-2-label p-0"
-                        >Suspend</label
-                      >
-                    </div>
                   </div>
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->

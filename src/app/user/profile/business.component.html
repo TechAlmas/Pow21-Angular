@@ -83,8 +83,8 @@
 									<td class="contantsection">
 										<span *ngFor="let cb of rv.contributors">{{cb}}, </span>
 									</td>
-									<td>{{rv.social}}<i class="fa fa-star-half"></i><a href="#">4.7</a></td>
-									<td><a routerLink="followers/{{rv.slug}}"><i class="fa fa-user-group"></i>{{rv.follow_count}}</a></td>
+									<td>{{rv.social}} <span><i class="fa fa-star"></i></span><a href="#">4.7</a></td>
+									<td><a routerLink="followers/{{rv.slug}}"> <span><i class="fa fa-user"></i></span> {{rv.follow_count}}</a></td>
 									<td class="status">
 										<a routerLink="/members/business/insights">
 											<img src="/assets/images/icon-insight.png">

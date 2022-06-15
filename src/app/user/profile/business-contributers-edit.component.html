@@ -40,52 +40,78 @@
 									<div class="form-group whitebgs">
 										<div class="" ></div>
 										<label for="paid-for-quality">Email</label>
-										<input type = "email" id="email" name="email" class="sm-form-control email required customInput" value="{{contDetails.email}}"  placeholder="" ngModel>
+										<input type = "email" id="email" name="email" class="sm-form-control email required customInput" value="{{contDetails.email}}"  placeholder="" [readonly]="this.cont_id != 'add'" ngModel>
 									</div>
-									
+									<div class="form-group whitebgs ">
+										<!-- <div class=""></div> -->
+										<label for="paid-for-quality" >Phone</label>
+										<input
+										  type="number"
+										  id="phone"
+										  name="phone"
+										  class="sm-form-control phone required "
+										  value="{{ contDetails.phone }}"
+										  placeholder=""
+										  ngModel
+										/>
+									  </div>
+									  <div class="form-group whitebgs">
+										<div class="" ></div>
+										<label for="paid-for-quality">Position</label>
+										<input type = "text" id="position" name="position" class="sm-form-control required customInput" value="{{contDetails.position}}" placeholder="" ngModel>
+									</div>
 									
 									<div class="form-group whitebgs ">
 										<!-- <div class=""></div> -->
 										<label for="paid-for-quality" 
 										  >Country</label
 										>
-										<input
-										  type="text"
+										<select
 										  id="country"
 										  name="country"
 										  class="sm-form-control country required customInput"
-										  value="{{ contDetails.country }}"
 										  placeholder=""
 										  ngModel
-										/>
+										>
+										<option value="">Select Country</option>
+										<option value="United States">United States Of America</option>
+										<option value="Canada">Canada</option>
+										<option value="Australia">Australia</option>
+										</select>
+
 									  </div>
-									  <div class="form-group whitebgs ">
-										<!-- <div class=""></div> -->
-										<label for="paid-for-quality">City</label>
-										<input
-										  type="text"
-										  id="city"
-										  name="city"
-										  class="sm-form-control city required customInput"
-										  value="{{ contDetails.city }}"
-										  placeholder=""
-										  ngModel
-										/>
-									  </div>
+
 									  <div class="form-group whitebgs ">
 										<!-- <div class=""></div> -->
 										<label for="paid-for-quality" >State</label>
-										<input
-										  type="text"
+										<select
 										  id="state"
 										  name="state"
 										  class="sm-form-control state required customInput"
-										  value="{{ contDetails.state }}"
 										  placeholder=""
 										  ngModel
-										/>
+										>
+										<option value="">Select State</option>
+										
+										</select>
 									  </div>
 
+
+									  <div class="form-group whitebgs ">
+										<!-- <div class=""></div> -->
+										<label for="paid-for-quality">City</label>
+										<select
+										  id="city"
+										  name="city"
+										  class="sm-form-control city required customInput"
+										  placeholder=""
+										  ngModel
+										>
+										<option value="">Select City</option>
+										
+										</select>
+									  </div>
+									 
                                     <div class="form-group whitebgs retail_store">
 										<div class="storetopcms" ></div>
 										<label for="paid-for-quality storelabel">Retail Stores</label>

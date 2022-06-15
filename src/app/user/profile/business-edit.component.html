@@ -306,21 +306,19 @@
       <div class="col-md-8">
         <div class="white-box">
           <div class="white-box-title" *ngIf="dispDetails.disp_id;">
-            <h3>
-              {{ dispDetails.name }} <br>
-              <a *ngIf="dispDetails.claim_status == 'Unverified'; else elseStatusBlock"
+            <div *ngIf="dispDetails.claim_status == 'Unverified'; else elseStatusBlock">
+              <h3>{{ dispDetails.name }}</h3> <br>
+              <p >
+              Your store profile and listing is unverified. To verify you are the correct owner or operator, contact the POW Team <a 
                       href="javascript:void(0)"
                       data-toggle="modal"
                       data-target="#myModal_paid"
-                      >{{dispDetails.claim_status}}
+                      >here
                      </a
-                  >
-                  <ng-template #elseStatusBlock><a 
-                    href="javascript:void(0)" 
-                    >{{dispDetails.claim_status}}
-                   </a
-                ></ng-template>
-              <div
+                  ></p>
+                  
+              
+              <!-- <div
                 class="btn-group-sm"
                 style="
                   display: inline;
@@ -328,10 +326,33 @@
                   vertical-align: middle;
                 "
               >
-                <!-- <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> -->
-              </div>
-              <i class="icon-angle-right"></i>
-            </h3>
+                 <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> 
+              </div> -->
+              <!-- <i class="icon-angle-right"></i> -->
+            </div>
+            <ng-template #elseStatusBlock>
+            <div >
+              <h3>{{ dispDetails.name }}</h3> <br>
+                  <p><a 
+                    href="javascript:void(0)" 
+                    >{{dispDetails.claim_status}}
+                   </a
+                ></p>
+              
+              <!-- <div
+                class="btn-group-sm"
+                style="
+                  display: inline;
+                  margin-left: 10px;
+                  vertical-align: middle;
+                "
+              >
+                <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> 
+              </div> -->
+              <!-- <i class="icon-angle-right"></i> -->
+            </div>
+          </ng-template>
+
           </div>
           <div class="white-box-content">
             <form
@@ -489,7 +510,7 @@
 										<select
 										  id="city"
 										  name="city"
-										  class="sm-form-control city required customInput"
+										  class="sm-form-control city selectCity required customInput"
 										  placeholder=""
 										  ngModel
 										>
@@ -1060,10 +1081,10 @@
                       <input
                         id="status_active"
                         class="radio-style"
-                        name="status "
+                        name="status"
                         type="radio"
-                        value="active"
-                        required
+                        value="1"
+                        required [checked]="dispDetails.status == 1"
                       />
                       <label
                         for="status_active "
@@ -1071,12 +1092,25 @@
                         >Active</label
                       >
                       <input
+                      id="status_inactive"
+                      class="radio-style"
+                      name="status"
+                      type="radio"
+                      value="0"
+                      required [checked]="dispDetails.status == 0"
+                    />
+                    <label
+                      for="status_inactive "
+                      class="radio-style-2-label p-0"
+                      >Inactive</label
+                    >
+                      <input
                         id="status_suspend"
                         class="radio-style"
                         name="status"
                         type="radio"
-                        value="suspend"
-                        required
+                        value="3"
+                        required [checked]="dispDetails.status == 3"
                       />
                       <label
                         for="status_suspend "
@@ -1097,9 +1131,10 @@
                         name="description"
                         class="sm-form-control description required"
                         value="{{ dispDetails.description }}"
-                        placeholder="Tell your customers and future customers about your store or dispensary. This is not only an expectation by customers but great for Google and SEO. We recommend 400 characters or more."
+                        placeholder=""
                         ngModel
                       >{{ dispDetails.description }}</textarea>
+                      <small>*Tell your customers and future customers about your store or dispensary. This is not only an expectation by customers but great for Google and SEO. We recommend 400 characters or more.</small>
                     </div>
                   </div>
 

@@ -184,14 +184,26 @@ export class BusinessEditComponent implements OnInit {
 					if(data && Array.isArray(data)){
 						
 						let html  = "<option value=''>Select City</option>";
+            let cityDataCount = 0;
 						jQuery.each( data, function( key, val ) {
 							if(data[key].country_name == jQuery('#country').val() && data[key].state_name == stateVal){
 
 								html+= '<option value="'+data[key].name+'">'+data[key].name+'</option>';
+                cityDataCount++;
 							}
 
 						});
-						jQuery('#city').html(html);
+            if(cityDataCount == 0){
+              let element = '<input type="text" id="city" name="city" class="sm-form-control inputCity required" value="" placeholder="" ngModel />';
+              $(element).insertAfter($('.selectCity'));
+              $('.selectCity').prop('disabled',true);
+              $('.selectCity').hide();
+            }else{
+              $('.selectCity').prop('disabled',false);
+              $('.selectCity').show();
+              $('.inputCity').remove();
+              jQuery('#city').html(html);
+            }
 					}
 				   
 				  });
@@ -378,6 +390,7 @@ export class BusinessEditComponent implements OnInit {
             if(value && Array.isArray(value)){
               
               let html  = "<option value=''>Select City</option>";
+              let cityDataCount = 0;
               jQuery.each( value, function( key, val ) {
                 if(value[key].country_name == data['data'].country && value[key].state_name == data['data'].state){
                   let selected = '';
@@ -385,10 +398,22 @@ export class BusinessEditComponent implements OnInit {
                     selected= 'selected';
                   }
                   html+= '<option value="'+value[key].name+'" '+selected+'>'+value[key].name+'</option>';
+                  cityDataCount++;
                 }
   
               });
-              jQuery('#city').html(html);
+              if(cityDataCount == 0 && data['data'].city != null){
+                let element = '<input type="text" id="city" name="city" class="sm-form-control inputCity required" value="'+data['data'].city+'" placeholder="" ngModel />';
+                $(element).insertAfter($('.selectCity'));
+                $('.selectCity').prop('disabled',true);
+                $('.selectCity').hide();
+              }else{
+                $('.selectCity').prop('disabled',false);
+                $('.selectCity').show();
+                $('.inputCity').remove();
+                jQuery('#city').html(html);
+              }
+             
             }
              
             });
@@ -650,7 +675,13 @@ export class BusinessEditComponent implements OnInit {
     formData.append("name", jQuery("#name").val());
     formData.append("address", jQuery("#address").val());
     formData.append("address2", jQuery("#address2").val());
-    formData.append("city", jQuery("#city").val());
+    let cityVal = ';'
+    if(jQuery("#city").prop('disabled') == true){
+      cityVal = jQuery('.inputCity').val();
+    }else{
+      cityVal = jQuery('.selectCity').val();
+    }
+    formData.append("city", cityVal);
     formData.append("state", jQuery("#state").val());
     formData.append("zip_code", jQuery("#zip_code").val());
     formData.append("country", jQuery("#country").val());
@@ -719,7 +750,7 @@ export class BusinessEditComponent implements OnInit {
           if (data["api_message"] == "success") {
             toastr.success(
               "<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, Your store '" +
-                name +
+                data['data'].name +
                 "' updated successfully",
               "",
               {

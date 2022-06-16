@@ -692,6 +692,11 @@ export class BusinessEditComponent implements OnInit {
     formData.append("license_type", jQuery("#license_type").val());
     formData.append("id", jQuery("#id").val());
 
+    if($('input[name=status]:checked').val().length > 0){
+      formData.append('status',$('input[name=status]:checked').val());
+    }
+   
+
     if(jQuery('#description').val() != ''){
       formData.append('description', jQuery("<div/>").html(jQuery('#description').val()).text() )
     }

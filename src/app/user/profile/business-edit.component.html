@@ -376,35 +376,49 @@
                     <div class="col-md-2">
                       <label for="paid-for-quality statuslabel ">Status </label>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-10 p-0 pt-1">
                       <input
                         id="status_active"
                         class="radio-style"
-                        name="status "
+                        name="status"
                         type="radio"
-                        value="active"
-                        required
+                        value="1"
+                        required [checked]="dispDetails.status == 1"
                       />
                       <label
-                        for="status_active "
+                        for="status_active"
                         class="radio-style-2-label p-0"
                         >Active</label
                       >
+                      <input
+                      id="status_inactive"
+                      class="radio-style"
+                      name="status"
+                      type="radio"
+                      value="0"
+                      required [checked]="dispDetails.status == 0"
+                    />
+                    <label
+                      for="status_inactive"
+                      class="radio-style-2-label p-0"
+                      >Inactive</label
+                    >
                       <input
                         id="status_suspend"
                         class="radio-style"
                         name="status"
                         type="radio"
-                        value="suspend"
-                        required
+                        value="3"
+                        required [checked]="dispDetails.status == 3"
                       />
                       <label
-                        for="status_suspend "
+                        for="status_suspend"
                         class="radio-style-2-label p-0"
                         >Suspend</label
                       >
                     </div>
                   </div>
+
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
@@ -1072,54 +1086,7 @@
                     </div>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
                   </div>
-                  <div class="form-group whitebgs row">
-                    <!-- <div class="statustop"></div> -->
-                    <div class="col-md-2">
-                      <label for="paid-for-quality statuslabel ">Status </label>
-                    </div>
-                    <div class="col-md-10 p-0 pt-1">
-                      <input
-                        id="status_active"
-                        class="radio-style"
-                        name="status"
-                        type="radio"
-                        value="1"
-                        required [checked]="dispDetails.status == 1"
-                      />
-                      <label
-                        for="status_active "
-                        class="radio-style-2-label p-0"
-                        >Active</label
-                      >
-                      <input
-                      id="status_inactive"
-                      class="radio-style"
-                      name="status"
-                      type="radio"
-                      value="0"
-                      required [checked]="dispDetails.status == 0"
-                    />
-                    <label
-                      for="status_inactive "
-                      class="radio-style-2-label p-0"
-                      >Inactive</label
-                    >
-                      <input
-                        id="status_suspend"
-                        class="radio-style"
-                        name="status"
-                        type="radio"
-                        value="3"
-                        required [checked]="dispDetails.status == 3"
-                      />
-                      <label
-                        for="status_suspend "
-                        class="radio-style-2-label p-0"
-                        >Suspend</label
-                      >
-                    </div>
-                  </div>
-
+                  
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">

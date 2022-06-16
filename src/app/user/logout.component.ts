@@ -28,7 +28,7 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit() {
 
-    toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Logout sucess fully !", "", {
+    toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Logout sucess fully!", "", {
                  "closeButton": true,
                   "timeOut": "1000",
                   "extendedTImeout": "0",

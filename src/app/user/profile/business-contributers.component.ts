@@ -64,6 +64,80 @@ export class BusinessContributersComponent implements OnInit {
 	ngOnInit() {
 		window.scrollTo(0, 0);
 
+		let component = this;
+		//Change Status on toggle
+		jQuery(document).on('change','.contStatus',function(){
+			let successMessage = "";
+			let formData = new FormData();
+			formData.append('type','status_change');
+			formData.append('id',jQuery(this).val());
+			if(jQuery(this).prop('checked') == true){
+				formData.append('status','Active');
+				successMessage = "Contributer Profile Activated Successfully.";
+			}else{
+				formData.append('status','Inactive');
+				successMessage = "Contributer Profile Deactivated Successfully.";
+			}
+			component.updateContDetails(formData).subscribe(
+				data =>{
+					if(data["data"] == 1){
+                        
+						toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, "+successMessage+"", "", {
+							"closeButton": true,
+							"timeOut": "7000",
+							"extendedTImeout": "0",
+							"showDuration": "300",
+							"hideDuration": "1000",
+							"extendedTimeOut": "0",
+							"showEasing": "swing",
+							"hideEasing": "linear",
+							"showMethod": "fadeIn",
+							"hideMethod": "fadeOut",
+							"positionClass": "toast-top-full-width",
+						});
+						if(jQuery(this).prop('checked') == true){
+							jQuery(this).next().next('.slide-toggle-content').text('Active');
+						}else{
+							jQuery(this).next().next('.slide-toggle-content').text('Inactive');
+						}
+						component.listContList();
+						
+					}else{
+						toastr.error(data["api_message"], "", {
+							"closeButton": true,
+							"timeOut": "7000",
+							"extendedTImeout": "0",
+							"showDuration": "300",
+							"hideDuration": "1000",
+							"extendedTimeOut": "0",
+							"showEasing": "swing",
+							"hideEasing": "linear",
+							"showMethod": "fadeIn",
+							"hideMethod": "fadeOut",
+							"positionClass": "toast-top-full-width",
+						});
+						//jQuery('#add_edit_store').modal('hide');
+					}
+				},
+				(err) => {
+					toastr.danger(err.message, "", {
+						"closeButton": true,
+						"timeOut": "7000",
+						"extendedTImeout": "0",
+						"showDuration": "300",
+						"hideDuration": "1000",
+						"extendedTimeOut": "0",
+						"showEasing": "swing",
+						"hideEasing": "linear",
+						"showMethod": "fadeIn",
+						"hideMethod": "fadeOut",
+						"positionClass": "toast-top-full-width",
+					});
+					console.log(err.message);
+				}
+			);
+
+		})
 		
 		//this.loadMetaData();
 	}

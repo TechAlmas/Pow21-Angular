@@ -178,6 +178,7 @@
               <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
             </div>
+            <p class="signupFields">New Member?: We couldn't find an existing account with your email address. Add the following information to create a new account for your Claim a Listing submission.</p>
             <div class="form-group whitebgs signupFields" style="display: none">
               <div class="wait-layer" *ngIf="waitLayer"></div>
               <label for="paid-for-quality">Choose Password</label>
@@ -210,6 +211,39 @@
                 Password & Confirm password do not match.
               </div>
             </div>
+
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Comments</label>
+              <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->
+              <textarea
+                name="notes"
+                class="sm-form-control required customValidate"
+                placeholder="Enter your comments to verify ownership"
+              ></textarea>
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Document</label>
+              <input
+                type="file"
+                (change)="this.onFilechange($event)"
+                name="file"
+                class="sm-form-control required fileInput"
+                ngModel
+                multiple
+              />
+              <small id="fileHelp" class="form-text text-muted">
+                Include any non-private business documents that shows your
+                company name and address. This will help speed up the approval
+                process. Each file size should not be more than 5 MB</small
+              >
+              <small class="form-text text-muted"
+                >You can add multiple photos at one time by pressing 'cntrl' and
+                selecting the photos.</small
+              >
+            </div>
+
             <div class="form-group whitebgs signupFields" style="display: none">
               <div class="wait-layer" *ngIf="waitLayer"></div>
               <label class="toggle">
@@ -271,37 +305,7 @@
                 <div class="slide-toggle-content">Business Account</div>
               </label>
             </div>
-            <div class="form-group whitebgs">
-              <div class="wait-layer" *ngIf="waitLayer"></div>
-              <label for="paid-for-quality">Comments</label>
-              <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->
-              <textarea
-                name="notes"
-                class="sm-form-control required customValidate"
-                placeholder="Enter your comments to verify ownership"
-              ></textarea>
-            </div>
-            <div class="form-group whitebgs">
-              <div class="wait-layer" *ngIf="waitLayer"></div>
-              <label for="paid-for-quality">Document</label>
-              <input
-                type="file"
-                (change)="this.onFilechange($event)"
-                name="file"
-                class="sm-form-control required fileInput"
-                ngModel
-                multiple
-              />
-              <small id="fileHelp" class="form-text text-muted">
-                Include any non-private business documents that shows your
-                company name and address. This will help speed up the approval
-                process. Each file size should not be more than 5 MB</small
-              >
-              <small class="form-text text-muted"
-                >You can add multiple photos at one time by pressing 'cntrl' and
-                selecting the photos.</small
-              >
-            </div>
+            
 
             <!-- H o n e y p o t -->
             <label class="ohnohoney" for="claim_captcha_name"></label>

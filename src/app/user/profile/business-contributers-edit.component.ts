@@ -79,6 +79,8 @@ export class BusinessContributersEditComponent implements OnInit {
 	}
 	ngOnInit() {
 		window.scrollTo(0, 0);
+		const element = document.getElementsByClassName("content-wrap")[0];
+		element.scrollIntoView();
 		jQuery(".js-select2").select2({
 			closeOnSelect : false,
 			placeholder : "Select Retail Store",
@@ -149,6 +151,7 @@ export class BusinessContributersEditComponent implements OnInit {
 	
 					let formData = new FormData();
 					let elem   = jQuery(this);
+					elem.next('.customError').remove();
 					formData.append('email',jQuery(this).val());
 					formData.append('type','check_email');
 					component.updateContDetails(formData).subscribe(
@@ -461,7 +464,9 @@ export class BusinessContributersEditComponent implements OnInit {
 		formData.append('country', jQuery('#country').val());
 		formData.append('state', jQuery('#state').val());
 		formData.append('city', jQuery('#city').val());
-
+		if(this.cont_id == 'add'){
+			formData.append('status','Active');
+		}
 		let retailStoreValues = jQuery('select[name=retail_store]').val();
 		if(retailStoreValues != undefined && retailStoreValues != null){
 			jQuery.each(retailStoreValues, function(index,value){

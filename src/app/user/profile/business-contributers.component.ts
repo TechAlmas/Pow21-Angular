@@ -100,6 +100,7 @@ export class BusinessContributersComponent implements OnInit {
 						}else{
 							jQuery(this).next().next('.slide-toggle-content').text('Inactive');
 						}
+						jQuery(this).parents('td').prev('td').text(data['updated_at']);
 						component.listContList();
 						
 					}else{

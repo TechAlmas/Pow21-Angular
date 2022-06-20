@@ -1,6 +1,6 @@
 #Folder
 dist/*
 node_modules/*
+src/environments/*
 **/.DS_Store
 .DS_Store
-src/environments/environment.prod.ts

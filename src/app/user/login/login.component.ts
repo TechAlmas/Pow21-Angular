@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       			console.log(data);
       			if (data["api_status"]==1)
                 {
-                   toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Login sucess fully !", "", {
+                   toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Login sucess fully!", "", {
 			           "closeButton": true,
                   "timeOut": "7000",
                   "extendedTImeout": "0",

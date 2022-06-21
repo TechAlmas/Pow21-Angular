@@ -59,172 +59,207 @@
                 <div class="modal-body formcontant">
                   <div class="form-group whitebgs row">
                     <!-- <div class="" ></div> -->
-                    <label for="paid-for-quality" class="col-md-3"
-                      >First Name</label
-                    >
-                    <input
-                      type="text"
-                      id="first_name"
-                      name="first_name"
-                      class="sm-form-control required customInput col-md-9"
-                      value="{{ contDetails.first_name }}"
-                      placeholder=""
-                      ngModel
-                    />
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">First Name</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        type="text"
+                        id="first_name"
+                        name="first_name"
+                        class="sm-form-control required customInput"
+                        value="{{ contDetails.first_name }}"
+                        placeholder=""
+                        ngModel
+                      />
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs row">
-                    <!-- <div class="" ></div> -->
-                    <label for="paid-for-quality " class="col-md-3"
-                      >Last Name</label
-                    >
-                    <input
-                      type="text"
-                      id="last_name"
-                      name="last_name"
-                      class="sm-form-control required col-md-9"
-                      value="{{ contDetails.last_name }}"
-                      placeholder=""
-                      ngModel
-                    />
+                    <div class="col-md-2">
+                      <label for="paid-for-quality ">Last Name</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        type="text"
+                        id="last_name"
+                        name="last_name"
+                        class="sm-form-control required"
+                        value="{{ contDetails.last_name }}"
+                        placeholder=""
+                        ngModel
+                      />
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs row">
-                    <!-- <div class="" ></div> -->
-                    <label for="paid-for-quality" class="col-md-3">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      class="sm-form-control email required customInput col-md-9"
-                      value="{{ contDetails.email }}"
-                      placeholder=""
-                      [readonly]="this.cont_id != 'add'"
-                      ngModel
-                    />
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">Email</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="sm-form-control email required customInput"
+                        value="{{ contDetails.email }}"
+                        placeholder=""
+                        [readonly]="this.cont_id != 'add'"
+                        ngModel
+                      />
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
-                    <label for="paid-for-quality" class="col-md-3">Phone</label>
-                    <input
-                      type="number"
-                      id="phone"
-                      name="phone"
-                      class="sm-form-control phone required col-md-9"
-                      value="{{ contDetails.phone }}"
-                      placeholder=""
-                      ngModel
-                    />
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">Phone</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        type="number"
+                        id="phone"
+                        name="phone"
+                        class="sm-form-control phone required"
+                        value="{{ contDetails.phone }}"
+                        placeholder=""
+                        ngModel
+                      />
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs row">
-                    <!-- <div class="" ></div> -->
-                    <label for="paid-for-quality" class="col-md-3"
-                      >Position</label
-                    >
-                    <input
-                      type="text"
-                      id="position"
-                      name="position"
-                      class="sm-form-control required customInput col-md-9"
-                      value="{{ contDetails.position }}"
-                      placeholder=""
-                      ngModel
-                    />
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">Position</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        type="text"
+                        id="position"
+                        name="position"
+                        class="sm-form-control required customInput"
+                        value="{{ contDetails.position }}"
+                        placeholder=""
+                        ngModel
+                      />
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
-                    <label for="paid-for-quality" class="col-md-3"
-                      >Country</label
-                    >
-                    <select
-                      id="country"
-                      name="country"
-                      class="sm-form-control country required customInput col-md-9"
-                      placeholder=""
-                      ngModel
-                    >
-                      <option value="">Select Country</option>
-                      <option value="United States">
-                        United States Of America
-                      </option>
-                      <option value="Canada">Canada</option>
-                      <option value="Australia">Australia</option>
-                    </select>
+                    <div class="col-md-2">
+                      <label for="paid-for-quality" class="">Country</label>
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        id="country"
+                        name="country"
+                        class="sm-form-control country required customInput"
+                        placeholder=""
+                        ngModel
+                      >
+                        <option value="">Select Country</option>
+                        <option value="United States">
+                          United States Of America
+                        </option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                      </select>
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
-                    <label for="paid-for-quality" class="col-md-3">State</label>
-                    <select
-                      id="state"
-                      name="state"
-                      class="sm-form-control state required customInput col-md-9"
-                      placeholder=""
-                      ngModel
-                    >
-                      <option value="">Select State</option>
-                    </select>
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">State</label>
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        id="state"
+                        name="state"
+                        class="sm-form-control state required customInput"
+                        placeholder=""
+                        ngModel
+                      >
+                        <option value="">Select State</option>
+                      </select>
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
-                    <label for="paid-for-quality" class="col-md-3">City</label>
-                    <select
-                      id="city"
-                      name="city"
-                      class="sm-form-control city required customInput col-md-9"
-                      placeholder=""
-                      ngModel
-                    >
-                      <option value="">Select City</option>
-                    </select>
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">City</label>
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        id="city"
+                        name="city"
+                        class="sm-form-control city required customInput"
+                        placeholder=""
+                        ngModel
+                      >
+                        <option value="">Select City</option>
+                      </select>
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs retail_store row">
                     <div class="storetopcms"></div>
-                    <label for="paid-for-quality storelabel" class="col-md-3"
-                      >Retail Stores</label
-                    >
-                    <select
-                      class="js-select2 sm-form-control cmsspaccing col-md-9"
-                      name="retail_store"
-                      multiple="multiple"
-                    >
-                      <option
-                        *ngFor="let storeMeta of retail_store_dropdown"
-                        value="{{ storeMeta.id }}"
-                        [selected]="
-                          checkRetailStoreSelectStatus(storeMeta.id) == 'yes'
-                        "
+                    <div class="col-md-2">
+                      <label for="paid-for-quality storelabel"
+                        >Retail Stores</label
                       >
-                        {{ storeMeta.name }}
-                      </option>
-                    </select>
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        class="js-select2 sm-form-control cmsspaccing"
+                        name="retail_store"
+                        multiple="multiple"
+                      >
+                        <option
+                          *ngFor="let storeMeta of retail_store_dropdown"
+                          value="{{ storeMeta.id }}"
+                          [selected]="
+                            checkRetailStoreSelectStatus(storeMeta.id) == 'yes'
+                          "
+                        >
+                          {{ storeMeta.name }}
+                        </option>
+                      </select>
+                    </div>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs signupFields row">
-                    <label for="paid-for-quality " class="col-md-3"
-                      >Choose Password</label
-                    >
-                    <input
-                      type="password"
-                      id="contributor_password"
-                      name="password"
-                      value=""
-                      minlength="6"
-                      class="sm-form-control customInput contributorPassword col-md-9"
-                      required
-                      ngModel
-                    />
+                    <div class="col-md-2">
+                      <label for="paid-for-quality ">Choose Password</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        type="password"
+                        id="contributor_password"
+                        name="password"
+                        value=""
+                        minlength="6"
+                        class="sm-form-control customInput contributorPassword"
+                        required
+                        ngModel
+                      />
+                    </div>
                   </div>
+                  <!-- row -->
                   <div class="form-group whitebgs signupFields row">
-                    <label for="paid-for-quality" class="col-md-3"
-                      >Confirm Password</label
-                    >
-                    <input
-                      type="password"
-                      id="contributor_repassword"
-                      name="cpassword"
-                      value=""
-                      class="sm-form-control customInput contributorCPassword col-md-9"
-                      required
-                      ngModel
-                    />
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">Confirm Password</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input
+                        type="password"
+                        id="contributor_repassword"
+                        name="cpassword"
+                        value=""
+                        class="sm-form-control customInput contributorCPassword"
+                        required
+                        ngModel
+                      />
+                    </div>
                   </div>
 
                   <label

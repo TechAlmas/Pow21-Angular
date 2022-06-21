@@ -3,177 +3,114 @@
 <!-- Dashboard SubNav Start -->
 <mio-business-sub-menu></mio-business-sub-menu>
 <div class="content-wrap grey-bg">
-  <!-- Manage price Section start -->
-  <div class="container clearfix">
-    <h2>Manage Your Stores</h2>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="white-box">
-          <div class="white-box-title">
-            <h3>
-              Business List
-              <div
-                class="btn-group-sm"
-                style="
-                  display: inline;
-                  margin-left: 10px;
-                  vertical-align: middle;
-                "
-              >
-                <button
-                  class="btn btn-primary save-btn"
-                  style="width: 10%"
-                  routerLink="/members/business/add"
-                >
-                  Add
-                </button>
-              </div>
-              <i class="icon-angle-right"></i>
-            </h3>
-          </div>
-          <div class="white-box-content">
-            <table class="table table-striped stores">
-              <thead>
-                <tr>
-                  <th class="trtopspaccings">Verified</th>
-                  <th class="trtopspaccings">Status</th>
-                  <th class="trtopspaccings"></th>
-                  <th class="trtopspaccings">Store</th>
-                  <th class="trtopspaccings">City</th>
-                  <th class="trtopspaccings">Contributors</th>
-                  <th colspan="2">Social</th>
-                  <th class="trtopspaccings">Insights</th>
-                  <th class="trtopspaccings">Actions</th>
-                </tr>
-                <tr>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th class="topspaccing">Reviews</th>
-                  <th class="topspaccing">Followers</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let rv of listdispLists">
-                  <td class="status">
-                    <div *ngIf="rv.claim_status == 'Verified'">
-                      <img src="/assets/images/icon-verified-yes.png" />
-                    </div>
-                    <div *ngIf="rv.claim_status == 'Pending'">
-                      <img src="/assets/images/icon-verified-pending.png" />
-                    </div>
-                    <div *ngIf="rv.claim_status == 'Unverified'">
-                      <a routerLink="/members/business/edit/{{ rv.slug }}">
-                        <img src="/assets/images/icon-verified-no.png" />
-                      </a>
-                    </div>
-                    <!-- <ng-template #elseBlock>
+
+	<!-- Manage price Section start -->
+	<div class="container clearfix">
+		<h2>Manage Your Stores</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="white-box">
+					<div class="white-box-title">
+						<h3>Business List
+							<div class="btn-group-sm" style="display: inline;margin-left: 10px;vertical-align: middle;">
+								<button class="btn btn-primary save-btn" style="width: 10%;" routerLink="/members/business/add">Add</button>
+							</div><i class="icon-angle-right"></i>
+						</h3>
+					</div>
+					<div class="white-box-content">
+						<table class="table table-striped stores">
+							<thead>
+								<tr>
+									<th class="trtopspaccings">Verified</th>
+									<th class="trtopspaccings"></th>
+									<th class="trtopspaccings">Store</th>
+									<th class="trtopspaccings">City</th>
+									<th class="trtopspaccings">Contributors</th>
+									<th colspan="2">Social</th>
+									<th class="trtopspaccings">Insights</th>
+									<th class="trtopspaccings">Status</th>
+									<th class="trtopspaccings">Actions</th>
+								</tr>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th class="topspaccing">Reviews</th>
+									<th class="topspaccing">Followers</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let rv of listdispLists">
+									<td class="status">
+										<div *ngIf="rv.claim_status == 'Verified'">
+											<img src="/assets/images/icon-verified-yes.png">
+										</div>
+										<div *ngIf="rv.claim_status == 'Pending'">
+											<img src="/assets/images/icon-verified-pending.png">
+										</div>
+										<div *ngIf="rv.claim_status == 'Unverified'">
+											<a routerLink="/members/business/edit/{{rv.slug}}">
+												<img src="/assets/images/icon-verified-no.png">
+											</a>
+										</div>
+										<!-- <ng-template #elseBlock>
+
 											<a routerLink="/members/business/edit/{{rv.slug}}">
 												<img src="/assets/images/icon-verified-no.png" >
 											</a>
 										</ng-template> -->
-                  </td>
-                  <td>
-                    <ng-container
-                      [ngTemplateOutlet]="
-                        rv.status == 0 ? first : rv.status == 1 ? second : third
-                      "
-                    ></ng-container>
-                    <ng-template #first>Inactive</ng-template>
-                    <ng-template #second>Active</ng-template>
-                    <ng-template #third>Suspended</ng-template>
-                  </td>
-                  <td class="imgsection">
-                    <a
-                      routerLink="/{{
-                        globals.location_global_url
-                      }}/dispensary/{{ rv.slug }}"
-                    >
-                      <img
-                        src="https://www.pow21.com/admin/storage/app/{{
-                          rv.logoUrl
-                        }}"
-                        alt=""
-                        draggable="false"
-                        style=""
-                      />
-                    </a>
-                  </td>
-                  <td class="contantsection">{{ rv.name }}</td>
-                  <!-- <td></td> -->
-                  <td class="contantsection">
-                    {{ rv.city }}, {{ rv.state }} <br />
-                    ({{ rv.address }}, {{ rv.zip_code }})
-                  </td>
-                  <!-- <td></td>
+
+									</td>
+								
+									<td class="imgsection">
+										<a routerLink ="/{{globals.location_global_url}}/dispensary/{{rv.slug}}">
+											<img  src="https://www.pow21.com/admin/storage/app/{{rv.logoUrl}}" alt="" draggable="false" style="">
+										</a>
+									</td>
+									<td class="contantsection">{{rv.name}}</td>
+									<!-- <td></td> -->
+									<td class="contantsection">
+										{{rv.city}}, {{rv.state}} <br/>
+										({{rv.address}}, {{rv.zip_code}})
+									</td>
+									<!-- <td></td>
 									<td></td> -->
-                  <!-- <td class="contantsection">{{rv.country}}</td> -->
-                  <td class="contantsection">
-                    <span *ngFor="let cb of rv.contributors">{{ cb }}, </span>
-                  </td>
-                  <td>{{ rv.social }}<a href="#">4.7</a></td>
-                  <td>
-                    <a routerLink="followers/{{ rv.slug }}">{{
-                      rv.follow_count
-                    }}</a>
-                  </td>
-                  <td class="status">
-                    <a routerLink="/members/business/insights">
-                      <img src="/assets/images/icon-insight.png" />
-                    </a>
-                  </td>
-                  <td class="">
-                    <a
-                      class="text-primary me-4"
-                      title="Edit your business"
-                      routerLink="/members/business/edit/{{ rv.slug }}"
-                      (click)="editStore(rv.id, rv.slug)"
-                      ><i class="fa fa-edit"></i
-                    ></a>
-                    <a
-                      class="text-warning me-4"
-                      href="javascript:void(0)"
-                      (click)="suspendStore(rv, 'suspend')"
-                      *ngIf="
-                        (this.user_data.id_cms_privileges == 7 ||
-                          this.user_data.id_cms_privileges == 6) &&
-                        rv.status != 3
-                      "
-                      ><i class="fa fa-pause"></i
-                    ></a>
-                    <a
-                      class="text-warning me-4"
-                      href="javascript:void(0)"
-                      (click)="suspendStore(rv, 'resume')"
-                      *ngIf="
-                        (this.user_data.id_cms_privileges == 7 ||
-                          this.user_data.id_cms_privileges == 6) &&
-                        rv.status == 3
-                      "
-                      ><i class="fa fa-play"></i
-                    ></a>
-                    <a
-                      class="text-danger"
-                      title="Delete your business"
-                      href="javascript:void(0)"
-                      (click)="suspendStore(rv, 'delete')"
-                      *ngIf="this.user_data.id_cms_privileges === 6"
-                      ><i class="fa fa-trash"></i
-                    ></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Manage price Section End -->
+									<!-- <td class="contantsection">{{rv.country}}</td> -->
+									<td class="contantsection">
+										<span *ngFor="let cb of rv.contributors">{{cb}}, </span>
+									</td>
+									<td><a href="#">{{rv.social}} <span><i class="fa fa-star"></i></span>4.7</a></td>
+									<td><a routerLink="followers/{{rv.slug}}"> <span><i class="fa fa-user"></i></span> {{rv.follow_count}}</a></td>
+									<td class="status">
+										<a routerLink="/members/business/insights">
+											<img src="/assets/images/icon-insight.png">
+										</a>
+									</td>
+									<td>
+										<ng-container [ngTemplateOutlet]="rv.status == 0 ? first : rv.status == 1 ? second : third"></ng-container>
+										<ng-template #first>Inactive</ng-template>
+										<ng-template #second>Active</ng-template>
+										<ng-template #third>Suspended</ng-template>
+									</td>
+									<td class="">
+										<a class="text-primary" title="Edit your business" routerLink="/members/business/edit/{{rv.slug}}" (click)="editStore(rv.id,rv.slug)"><i class="fa fa-edit" ></i></a>
+										<a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,'suspend')" *ngIf="(this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6) && rv.status != 3"><i class="fa fa-pause" ></i></a>
+										<a class="text-warning" href="javascript:void(0)" (click)="suspendStore(rv,'resume')" *ngIf="(this.user_data.id_cms_privileges == 7 || this.user_data.id_cms_privileges == 6) && rv.status == 3"><i class="fa fa-play" ></i></a>
+										<a class="text-danger" title="Delete your business" href="javascript:void(0)" (click)="suspendStore(rv,'delete')" *ngIf="this.user_data.id_cms_privileges === 6"><i class="fa fa-trash" ></i></a>
+									</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Manage price Section End -->
 </div>
 <!-- <div class="modal fade" id="add_edit_store" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog">

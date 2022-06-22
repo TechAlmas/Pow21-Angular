@@ -179,6 +179,7 @@ export class BusinessEditComponent implements OnInit {
 			let stateVal = jQuery(this).val(); 
 			console.log(stateVal)
 			if(stateVal != '' && jQuery('#country').val() !=''){
+        $('.loader-container').show();
 				jQuery.getJSON( "assets/json/cities.json", function( data ) {
 
 					if(data && Array.isArray(data)){
@@ -204,6 +205,7 @@ export class BusinessEditComponent implements OnInit {
               $('.inputCity').remove();
               jQuery('#city').html(html);
             }
+            $('.loader-container').hide();
 					}
 				   
 				  });
@@ -385,6 +387,7 @@ export class BusinessEditComponent implements OnInit {
           
   
         if(data['data'].state && data['data'].country){
+          $('.loader-container').show();
           jQuery.getJSON( "assets/json/cities.json", function( value ) {
   
             if(value && Array.isArray(value)){
@@ -413,6 +416,7 @@ export class BusinessEditComponent implements OnInit {
                 $('.inputCity').remove();
                 jQuery('#city').html(html);
               }
+              $('.loader-container').hide();
              
             }
              

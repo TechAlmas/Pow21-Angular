@@ -325,7 +325,7 @@ export class DispensaryComponent implements OnInit {
         this.schedule = JSON.parse(this.dispDetails.schedule);
         //console.log(this.dispDetails.state.replace(/\s/g, "-"));
         this.isUserReviewed = data["is_user_reviewed"];
-
+     
         if(this.dispDetails.status == 3){
           this.routes.navigate(["/compare-price"]);
           

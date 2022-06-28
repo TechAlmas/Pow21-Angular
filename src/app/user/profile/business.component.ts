@@ -202,23 +202,24 @@ export class BusinessComponent implements OnInit {
 	// 	}
 	// }
 	suspendStore(storeset,type){
-		let message = "";
+		let name = storeset.name;
 		let title = "";
 		let html = "";
 		let confirmTextYes = "";
+		let successMessage = "";
 		if(type == 'suspend' ){
-			message = "suspended";
 			title = "Suspend your store profile?";
 			html = 'Please confirm you wish to suspend your retail store profile. The store profile will become inactive and not be accessible to any customers searching for your store, or allow to follow, browse products, leave a review and more. Please confirm below. Should you wish to delete the store listing altogether, please <a href="https://www.pow21.com/blog/contact-us">send us an email.</a>';
 			confirmTextYes = 'Yes, suspend!';
+			successMessage = "'"+name+"' is now paused. Customers (and Google) will NOT find your listing or store profile until you re-active it.";
 		}else if(type=="delete"){
-			message = "removed";
 			title = "Remove your store profile?";
 			confirmTextYes = 'Yes, remove!';
+			successMessage = "Confirm, Your Store removed successfully";
 		}else if(type == 'resume'){
-			message = "resumed";
 			title = "Resume your store profile?";
 			confirmTextYes = 'Yes, resume!';
+			successMessage = "Your store '"+name+"' profile and listing is now active for customers." ;
 		}
 		Swal({
 			title: title,
@@ -233,14 +234,14 @@ export class BusinessComponent implements OnInit {
 				postdata.append('type',type);
 				postdata.append('id',storeset.id);
 			
-				let name = storeset.name;
+				
 				
 				
 				//console.log(postdata);
 				this.updateStoreDetails(postdata).subscribe(
 					data =>{
 						if(data["api_message"] == "success"){
-							toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;Confirm, Your store '"+name+"' '"+message+"' successfully", "", {
+							toastr.success("<i class='icon-ok-sign'></i>&nbsp;&nbsp;"+successMessage, "", {
 								"closeButton": true,
 								"timeOut": "7000",
 								"extendedTImeout": "0",

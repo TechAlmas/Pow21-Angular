@@ -105,7 +105,11 @@
               <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
                                 </div> -->
             </div>
-            <p class="signupFields">New Member?: We couldn't find an existing account with your email address. Add the following information to create a new account for your Claim a Listing submission.</p>
+            <p class="signupFields">
+              New Member?: We couldn't find an existing account with your email
+              address. Add the following information to create a new account for
+              your Claim a Listing submission.
+            </p>
             <div class="form-group whitebgs signupFields" style="display: none">
               <div class="wait-layer" *ngIf="waitLayer"></div>
               <label for="paid-for-quality">Choose Password</label>
@@ -158,7 +162,8 @@
                 name="file"
                 class="sm-form-control required fileInput"
                 ngModel
-                multiple style="display:block !important;"
+                multiple
+                style="display: block !important"
               />
               <small id="fileHelp" class="form-text text-muted">
                 Include any non-private business documents that shows your
@@ -232,7 +237,6 @@
                 <div class="slide-toggle-content">Business Account</div>
               </label>
             </div>
-           
 
             <!-- H o n e y p o t -->
             <label class="ohnohoney" for="claim_captcha_name"></label>
@@ -309,19 +313,26 @@
     <div class="row">
       <div class="col-md-8">
         <div class="white-box">
-          <div class="white-box-title" *ngIf="dispDetails.disp_id;">
-            <div *ngIf="dispDetails.claim_status == 'Unverified'; else elseStatusBlock">
-              <h3>{{ dispDetails.name }}</h3> <br>
-              <p >
-              Your store profile and listing is unverified. To verify you are the correct owner or operator, contact the POW Team <a 
-                      href="javascript:void(0)"
-                      data-toggle="modal"
-                      data-target="#myModal_paid"
-                      >here
-                     </a
-                  ></p>
-                  
-              
+          <div class="white-box-title" *ngIf="dispDetails.disp_id">
+            <div
+              *ngIf="
+                dispDetails.claim_status == 'Unverified';
+                else elseStatusBlock
+              "
+            >
+              <h3>{{ dispDetails.name }}</h3>
+              <br />
+              <p>
+                Your store profile and listing is unverified. To verify you are
+                the correct owner or operator, contact the POW Team
+                <a
+                  href="javascript:void(0)"
+                  data-toggle="modal"
+                  data-target="#myModal_paid"
+                  >here
+                </a>
+              </p>
+
               <!-- <div
                 class="btn-group-sm"
                 style="
@@ -335,15 +346,16 @@
               <!-- <i class="icon-angle-right"></i> -->
             </div>
             <ng-template #elseStatusBlock>
-            <div >
-              <h3>{{ dispDetails.name }}</h3> <br>
-                  <p><a 
-                    href="javascript:void(0)" 
-                    >{{dispDetails.claim_status}}
-                   </a
-                ></p>
-              
-              <!-- <div
+              <div>
+                <h3>{{ dispDetails.name }}</h3>
+                <br />
+                <p>
+                  <a href="javascript:void(0)"
+                    >{{ dispDetails.claim_status }}
+                  </a>
+                </p>
+
+                <!-- <div
                 class="btn-group-sm"
                 style="
                   display: inline;
@@ -353,10 +365,9 @@
               >
                 <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> 
               </div> -->
-              <!-- <i class="icon-angle-right"></i> -->
-            </div>
-          </ng-template>
-
+                <!-- <i class="icon-angle-right"></i> -->
+              </div>
+            </ng-template>
           </div>
           <div class="white-box-content">
             <form
@@ -387,33 +398,34 @@
                         name="status"
                         type="radio"
                         value="1"
-                        required [checked]="dispDetails.status == 1"
+                        required
+                        [checked]="dispDetails.status == 1"
                       />
-                      <label
-                        for="status_active"
-                        class="radio-style-2-label p-0"
+                      <label for="status_active" class="radio-style-2-label p-0"
                         >Active</label
                       >
                       <input
-                      id="status_inactive"
-                      class="radio-style"
-                      name="status"
-                      type="radio"
-                      value="0"
-                      required [checked]="dispDetails.status == 0"
-                    />
-                    <label
-                      for="status_inactive"
-                      class="radio-style-2-label p-0"
-                      >Delete</label
-                    >
+                        id="status_inactive"
+                        class="radio-style"
+                        name="status"
+                        type="radio"
+                        value="0"
+                        required
+                        [checked]="dispDetails.status == 0"
+                      />
+                      <label
+                        for="status_inactive"
+                        class="radio-style-2-label p-0"
+                        >Delete</label
+                      >
                       <input
                         id="status_suspend"
                         class="radio-style"
                         name="status"
                         type="radio"
                         value="3"
-                        required [checked]="dispDetails.status == 3"
+                        required
+                        [checked]="dispDetails.status == 3"
                       />
                       <label
                         for="status_suspend"
@@ -426,7 +438,9 @@
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
-                      <label for="paid-for-quality">Store/Dispensary Name</label>
+                      <label for="paid-for-quality"
+                        >Store/Dispensary Name</label
+                      >
                     </div>
                     <div class="col-md-10">
                       <input
@@ -476,72 +490,74 @@
                     </div>
                   </div>
                   <div class="form-group whitebgs row">
-										<!-- <div class=""></div> -->
+                    <!-- <div class=""></div> -->
                     <div class="col-md-2">
-										<label for="paid-for-quality" 
-										  >Country</label
-										>
+                      <label for="paid-for-quality">Country</label>
                     </div>
                     <div class="col-md-10">
-										<select
-										  id="country"
-										  name="country"
-										  class="sm-form-control country required customInput"
-										  placeholder=""
-										  ngModel
-										>
-										<option value="">Select Country</option>
-										<option value="United States">United States Of America</option>
-										<option value="Canada">Canada</option>
-										<option value="Australia">Australia</option>
-										</select>
+                      <select
+                        id="country"
+                        name="country"
+                        class="sm-form-control country required customInput"
+                        placeholder=""
+                        ngModel
+                      >
+                        <option value="">Select Country</option>
+                        <option value="United States">
+                          United States Of America
+                        </option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                      </select>
                     </div>
+                  </div>
 
-									  </div>
-
-									  <div class="form-group whitebgs row">
-										<!-- <div class=""></div> -->
-                    <div class="col-md-2">
-										<label for="paid-for-quality" >{{(dispDetails.country == 'Canada' ? 'Province' : 'State')}}</label>
-                    </div>
-                    <div class="col-md-10">
-										<select
-										  id="state"
-										  name="state"
-										  class="sm-form-control state required customInput"
-										  placeholder=""
-										  ngModel
-										>
-										<option value="">Select State</option>
-										
-										</select>
-                    </div>
-									  </div>
-
-
-									  <div class="form-group whitebgs row">
-										<!-- <div class=""></div> -->
-                    <div class="col-md-2">
-										<label for="paid-for-quality">City</label>
-                    </div>
-                    <div class="col-md-10">
-										<select
-										  id="city"
-										  name="city"
-										  class="sm-form-control city selectCity required customInput"
-										  placeholder=""
-										  ngModel
-										>
-										<option value="">Select City</option>
-										
-										</select>
-                    </div>
-									  </div>
-									 
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
-                      <label for="paid-for-quality">{{(dispDetails.country == 'Canada' ? 'Postal Code' : 'Zip Code')}}</label>
+                      <label for="paid-for-quality">{{
+                        dispDetails.country == "Canada" ? "Province" : "State"
+                      }}</label>
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        id="state"
+                        name="state"
+                        class="sm-form-control state required customInput"
+                        placeholder=""
+                        ngModel
+                      >
+                        <option value="">Loading...</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">City</label>
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        id="city"
+                        name="city"
+                        class="sm-form-control city selectCity required customInput"
+                        placeholder=""
+                        ngModel
+                      >
+                        <option value="">Loading...</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">{{
+                        dispDetails.country == "Canada"
+                          ? "Postal Code"
+                          : "Zip Code"
+                      }}</label>
                     </div>
                     <div class="col-md-10">
                       <input
@@ -556,7 +572,6 @@
                     </div>
                   </div>
 
-                 
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
@@ -1090,22 +1105,28 @@
                     </div>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
                   </div>
-                  
+
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
                       <label for="paid-for-quality">About Store</label>
                     </div>
                     <div class="col-md-10">
-                      <textarea 
+                      <textarea
                         id="description"
                         name="description"
                         class="sm-form-control description required"
                         value="{{ dispDetails.description }}"
                         placeholder=""
                         ngModel
-                      >{{ dispDetails.description }}</textarea>
-                      <small>*Tell your customers and future customers about your store or dispensary. This is not only an expectation by customers but great for Google and SEO. We recommend 400 characters or more.</small>
+                        >{{ dispDetails.description }}</textarea
+                      >
+                      <small
+                        >*Tell your customers and future customers about your
+                        store or dispensary. This is not only an expectation by
+                        customers but great for Google and SEO. We recommend 400
+                        characters or more.</small
+                      >
                     </div>
                   </div>
 
@@ -1119,7 +1140,12 @@
                         ><i class="fa fa-cloud" aria-hidden="true"></i> Custom
                         Images Upload</label
                       >
-                      <small>*Storefronts with photos get more visitors and customer visits. Upload unlimited photos to your profile to showcase your storefront, inside layout and team members.</small><br>
+                      <small
+                        >*Storefronts with photos get more visitors and customer
+                        visits. Upload unlimited photos to your profile to
+                        showcase your storefront, inside layout and team
+                        members.</small
+                      ><br />
                       <small
                         >*You can add multiple photos at one time by pressing
                         'cntrl' and selecting the photos</small

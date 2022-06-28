@@ -3,6 +3,303 @@
 <!-- Dashboard SubNav Start -->
 <mio-business-sub-menu></mio-business-sub-menu>
 
+<div
+  class="modal fade"
+  id="myModal_paid"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
+  <form
+    #claimListing="ngForm"
+    (ngSubmit)="onClickSubmit(claimListing.value)"
+    autocomplete="off"
+  >
+    <div class="modal-dialog">
+      <div class="modal-body">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">
+              Claim your listing now!
+            </h4>
+            <button type="button" class="btn btn-close" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">First Name</label>
+              <input
+                type="text"
+                name="fname"
+                class="sm-form-control required customValidate"
+                placeholder="Enter First Name"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Last Name</label>
+              <input
+                type="text"
+                name="lname"
+                class="sm-form-control required customValidate"
+                placeholder="Enter Last Name"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Telephone Number</label>
+              <input
+                type="tel"
+                name="telnum"
+                id="telnum"
+                class="sm-form-control required customValidate masked-phone"
+                data-phonemask="(___)___-____"
+                placeholder="Enter Telephone Number"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                class="sm-form-control required customValidate claimListingEmail"
+                placeholder="Enter Email Address"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                            </div>
+                            <div class="form-group whitebgs">
+                              <div class="wait-layer" *ngIf="waitLayer"></div>
+                                <label for="paid-for-quality">Email Address</label>
+                                  <input type = "email" name = "email" class="sm-form-control required customValidate" placeholder="Enter Email Address" ngModel >
+							
+									
+                                <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Re Enter Email Address</label>
+              <input
+                type="email"
+                name="reemail"
+                class="sm-form-control required customValidate claimListingReEmail"
+                placeholder="Re Enter Email Address"
+                ngModel
+              />
+              <!-- <div *ngIf="this.checkPaid" [ngClass] = "'error'">
+                                </div> -->
+            </div>
+            <p class="signupFields" style="display: none"><b>Not a member?</b><br> We couldn't find an existing account with your email address. Add the following information to create a new account for your Claim a Listing submission.</p>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Choose Password</label>
+              <input
+                type="password"
+                id="register-form-password"
+                name="password"
+                value=""
+                minlength="6"
+                class="form-control customValidate claimListingPassword"
+                required
+                ngModel
+              />
+            </div>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Confirm Password</label>
+              <input
+                type="password"
+                id="register-form-repassword"
+                name="cpassword"
+                value=""
+                class="form-control customValidate claimListingCPassword"
+                required
+                validateEqual="password"
+                ngModel
+              />
+
+              <div id="pcp_error" style="display: none" class="error">
+                Password & Confirm password do not match.
+              </div>
+            </div>
+
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Comments</label>
+              <!-- <input type = "text" name = "notes" class="sm-form-control required" placeholder="Enter your notes to verify ownership" ngModel> -->
+              <textarea
+                name="notes"
+                class="sm-form-control required customValidate"
+                placeholder="Enter your comments to verify ownership"
+              ></textarea>
+            </div>
+            <div class="form-group whitebgs">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label for="paid-for-quality">Document</label>
+              <input
+                type="file"
+                (change)="this.onClaimFilechange($event)"
+                name="file"
+                class="sm-form-control required fileInput"
+                ngModel
+                multiple
+                style="display: block !important"
+              />
+              <small id="fileHelp" class="form-text text-muted">
+                Include any non-private business documents that shows your
+                company name and address. This will help speed up the approval
+                process. Each file size should not be more than 5 MB</small
+              >
+              <small class="form-text text-muted"
+                >You can add multiple photos at one time by pressing 'cntrl' and
+                selecting the photos.</small
+              >
+            </div>
+
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  id="register-form-is_updates"
+                  name="is_updates"
+                  value="1"
+                  class="form-control"
+                  ngModel
+                />
+                <div class="slide-toggle"></div>
+                <div class="slide-toggle-content">
+                  Keep me updated on special offers and news.
+                </div>
+              </label>
+            </div>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  id="register-form-is_terms"
+                  name="is_terms"
+                  value="1"
+                  class="form-control customValidate"
+                  required
+                  ngModel
+                />
+
+                <div class="slide-toggle"></div>
+                <div class="slide-toggle-content">
+                  Yes, I agree to POW's
+                  <a
+                    href="https://www.pow21.com/blog/termsofuse/"
+                    target="_blank"
+                    >Terms</a
+                  >
+                  and
+                  <a href="https://www.pow21.com/blog/privacy/" target="_blank"
+                    >Privacy.</a
+                  >
+                </div>
+              </label>
+            </div>
+            <div class="form-group whitebgs signupFields" style="display: none">
+              <div class="wait-layer" *ngIf="waitLayer"></div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  id="register-form-is_business_account"
+                  name="is_business_account"
+                  value="1"
+                  class="form-control"
+                  disabled
+                  checked
+                />
+                <div class="slide-toggle"></div>
+                <div class="slide-toggle-content">Business Account</div>
+              </label>
+            </div>
+
+            <!-- H o n e y p o t -->
+            <label class="ohnohoney" for="claim_captcha_name"></label>
+            <input
+              class="ohnohoney honeyInput"
+              autocomplete="off"
+              type="text"
+              id="claim_captcha_name"
+              name="claim_captcha_name"
+              placeholder="Your name here"
+            />
+            <label class="ohnohoney" for="claim_captcha_email"></label>
+            <input
+              class="ohnohoney honeyInput"
+              autocomplete="off"
+              type="email"
+              id="claim_captcha_email"
+              name="claim_captcha_email"
+              placeholder="Your e-mail here"
+            />
+          </div>
+
+          <!-- <div class="modal-body" *ngIf="!this.globals.user_data">
+				To claim the store <span *ngIf="!this.globals.user_data"><a class="claimModelLink" href="/login" >Login</a></span> into account or <span *ngIf="!this.globals.user_data"><a class="claimModelLink"  href="/register">Signup</a></span>.
+				
+							
+							
+			</div> -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-link" data-dismiss="modal">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="modal-body" *ngIf="!this.globals.user_data">
+            To claim the store
+            <span *ngIf="!this.globals.user_data"
+              ><a class="claimModelLink" href="/login">Login</a></span
+            >
+            into account or
+            <span *ngIf="!this.globals.user_data"
+              ><a class="claimModelLink" href="/register">Signup</a></span
+            >.
+          </div> -->
+    <!-- <div class="modal-footer" *ngIf="this.globals.user_data">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-link" data-dismiss="modal">
+              Cancel
+            </button>
+          </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+  </form>
+  <!-- <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(claimListing.value)" >
+	   
+	   <br/>
+	   <input type = "password" name = "passwd" placeholder = "passwd" ngModel>
+	   <br/>
+	   <input type = "submit" value = "submit">
+	</form> -->
+</div>
+
 <div class="content-wrap grey-bg pt-5">
   <!-- Manage price Section start -->
   <div class="container clearfix">
@@ -12,10 +309,27 @@
     <div class="row">
       <div class="col-md-8">
         <div class="white-box">
-          <div class="white-box-title">
-            <h3>
-              Store / Dispensary Name
-              <div
+          <div class="white-box-title" *ngIf="dispDetails.disp_id">
+            <div
+              *ngIf="
+                dispDetails.claim_status == 'Unverified';
+                else elseStatusBlock
+              "
+            >
+              <h3>{{ dispDetails.name }}</h3>
+              <br />
+              <p>
+                Your store profile and listing is unverified. To verify you are
+                the correct owner or operator, contact the POW Team
+                <a
+                  href="javascript:void(0)"
+                  data-toggle="modal"
+                  data-target="#myModal_paid"
+                  >here
+                </a>
+              </p>
+
+              <!-- <div
                 class="btn-group-sm"
                 style="
                   display: inline;
@@ -23,10 +337,33 @@
                   vertical-align: middle;
                 "
               >
-                <!-- <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> -->
+                 <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> 
+              </div> -->
+              <!-- <i class="icon-angle-right"></i> -->
+            </div>
+            <ng-template #elseStatusBlock>
+              <div>
+                <h3>{{ dispDetails.name }}</h3>
+                <br />
+                <p>
+                  <a href="javascript:void(0)"
+                    >{{ dispDetails.claim_status }}
+                  </a>
+                </p>
+
+                <!-- <div
+                class="btn-group-sm"
+                style="
+                  display: inline;
+                  margin-left: 10px;
+                  vertical-align: middle;
+                "
+              >
+                <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> 
+              </div> -->
+                <!-- <i class="icon-angle-right"></i> -->
               </div>
-              <i class="icon-angle-right"></i>
-            </h3>
+            </ng-template>
           </div>
           <div class="white-box-content">
             <form
@@ -50,39 +387,56 @@
                     <div class="col-md-2">
                       <label for="paid-for-quality statuslabel ">Status </label>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-10 p-0 pt-1">
                       <input
                         id="status_active"
                         class="radio-style"
-                        name="status "
+                        name="status"
                         type="radio"
-                        value="active"
+                        value="1"
                         required
+                        [checked]="dispDetails.status == 1"
+                      />
+                      <label for="status_active" class="radio-style-2-label p-0"
+                        >Active</label
+                      >
+                      <input
+                        id="status_inactive"
+                        class="radio-style"
+                        name="status"
+                        type="radio"
+                        value="0"
+                        required
+                        [checked]="dispDetails.status == 0"
                       />
                       <label
-                        for="status_active "
+                        for="status_inactive"
                         class="radio-style-2-label p-0"
-                        >Active</label
+                        >Delete</label
                       >
                       <input
                         id="status_suspend"
                         class="radio-style"
                         name="status"
                         type="radio"
-                        value="suspend"
+                        value="3"
                         required
+                        [checked]="dispDetails.status == 3"
                       />
                       <label
-                        for="status_suspend "
+                        for="status_suspend"
                         class="radio-style-2-label p-0"
                         >Suspend</label
                       >
                     </div>
                   </div>
+
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
-                      <label for="paid-for-quality">Store</label>
+                      <label for="paid-for-quality"
+                        >Store/Dispensary Name</label
+                      >
                     </div>
                     <div class="col-md-10">
                       <input
@@ -134,41 +488,72 @@
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
+                      <label for="paid-for-quality">Country</label>
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        id="country"
+                        name="country"
+                        class="sm-form-control country required customInput"
+                        placeholder=""
+                        ngModel
+                      >
+                        <option value="">Select Country</option>
+                        <option value="United States">
+                          United States Of America
+                        </option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">{{
+                        dispDetails.country == "Canada" ? "Province" : "State"
+                      }}</label>
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        id="state"
+                        name="state"
+                        class="sm-form-control state required customInput"
+                        placeholder=""
+                        ngModel
+                      >
+                        <option value="">Loading...</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <div class="col-md-2">
                       <label for="paid-for-quality">City</label>
                     </div>
                     <div class="col-md-10">
-                      <input
-                        type="text"
+                      <select
                         id="city"
                         name="city"
-                        class="sm-form-control city required"
-                        value="{{ dispDetails.city }}"
+                        class="sm-form-control city selectCity required customInput"
                         placeholder=""
                         ngModel
-                      />
+                      >
+                        <option value="">Loading...</option>
+                      </select>
                     </div>
                   </div>
+
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
-                      <label for="paid-for-quality">State</label>
-                    </div>
-                    <div class="col-md-10">
-                      <input
-                        type="text"
-                        id="state"
-                        name="state"
-                        class="sm-form-control state required"
-                        value="{{ dispDetails.state }}"
-                        placeholder=""
-                        ngModel
-                      />
-                    </div>
-                  </div>
-                  <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
-                    <div class="col-md-2">
-                      <label for="paid-for-quality">Zip Code</label>
+                      <label for="paid-for-quality">{{
+                        dispDetails.country == "Canada"
+                          ? "Postal Code"
+                          : "Zip Code"
+                      }}</label>
                     </div>
                     <div class="col-md-10">
                       <input
@@ -183,23 +568,6 @@
                     </div>
                   </div>
 
-                  <div class="form-group whitebgs row">
-                    <!-- <div class=""></div> -->
-                    <div class="col-md-2">
-                      <label for="paid-for-quality">Country</label>
-                    </div>
-                    <div class="col-md-10">
-                      <input
-                        type="text"
-                        id="country"
-                        name="country"
-                        class="sm-form-control country required"
-                        value="{{ dispDetails.country }}"
-                        placeholder=""
-                        ngModel
-                      />
-                    </div>
-                  </div>
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
@@ -661,7 +1029,7 @@
                   </div>
                   <div class="form-group whitebgs row">
                     <div class="col-md-2">
-                      <label for="paid-for-quality">Assign User</label>
+                      <label for="paid-for-quality">Assign Contributer</label>
                     </div>
                     <div class="col-md-10">
                       <select
@@ -733,6 +1101,31 @@
                     </div>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
                   </div>
+
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <div class="col-md-2">
+                      <label for="paid-for-quality">About Store</label>
+                    </div>
+                    <div class="col-md-10">
+                      <textarea
+                        id="description"
+                        name="description"
+                        class="sm-form-control description required"
+                        value="{{ dispDetails.description }}"
+                        placeholder=""
+                        ngModel
+                        >{{ dispDetails.description }}</textarea
+                      >
+                      <small
+                        >*Tell your customers and future customers about your
+                        store or dispensary. This is not only an expectation by
+                        customers but great for Google and SEO. We recommend 400
+                        characters or more.</small
+                      >
+                    </div>
+                  </div>
+
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
@@ -743,6 +1136,12 @@
                         ><i class="fa fa-cloud" aria-hidden="true"></i> Custom
                         Images Upload</label
                       >
+                      <small
+                        >*Storefronts with photos get more visitors and customer
+                        visits. Upload unlimited photos to your profile to
+                        showcase your storefront, inside layout and team
+                        members.</small
+                      ><br />
                       <small
                         >*You can add multiple photos at one time by pressing
                         'cntrl' and selecting the photos</small
@@ -796,21 +1195,21 @@
                     </div>
                     <!--  -->
                   </div>
-                  <label class="ohnohoney" for="claim_captcha_name"></label>
+                  <label class="ohnohoney" for="store_captcha_name"></label>
                   <input
                     autocomplete="off"
-                    class="ohnohoney honeyInput"
-                    id="claim_captcha_name"
-                    name="claim_captcha_name"
+                    class="ohnohoney honeyInputStore"
+                    id="store_captcha_name"
+                    name="store_captcha_name"
                     placeholder="Your name here"
                     type="text"
                   />
-                  <label class="ohnohoney" for="claim_captcha_email"></label>
+                  <label class="ohnohoney" for="store_captcha_email"></label>
                   <input
                     autocomplete="off"
-                    class="ohnohoney honeyInput"
-                    id="claim_captcha_email"
-                    name="claim_captcha_email"
+                    class="ohnohoney honeyInputStore"
+                    id="store_captcha_email"
+                    name="store_captcha_email"
                     placeholder="Your e-mail here"
                     type="email"
                   />

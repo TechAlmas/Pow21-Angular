@@ -145,6 +145,8 @@ export class BusinessEditComponent implements OnInit {
 		jQuery(document).on('change','#country',function(){
 			let countryVal = jQuery(this).val();
 			if( countryVal != ''){
+        component.showLoader('state');
+
         let fieldText = 'State';
         let ZipCodeText = 'Zip Code';
         if(countryVal == 'Canada'){
@@ -179,7 +181,7 @@ export class BusinessEditComponent implements OnInit {
 			let stateVal = jQuery(this).val(); 
 			console.log(stateVal)
 			if(stateVal != '' && jQuery('#country').val() !=''){
-        $('.loader-container').show();
+        component.showLoader('city');
 				jQuery.getJSON( "assets/json/cities.json", function( data ) {
 
 					if(data && Array.isArray(data)){
@@ -205,7 +207,7 @@ export class BusinessEditComponent implements OnInit {
               $('.inputCity').remove();
               jQuery('#city').html(html);
             }
-            $('.loader-container').hide();
+           
 					}
 				   
 				  });
@@ -218,6 +220,11 @@ export class BusinessEditComponent implements OnInit {
     $(".customValidate").on("keyup", function () {
       component.customValidateFields($(this));
     });
+  }
+
+  showLoader(elem:any){
+    let html  = "<option value=''>Loading....</option>";
+    $('#'+elem).html(html);
   }
   addRemovedImagesToArray($name) {
     if (this.removedImages == undefined) {
@@ -352,6 +359,7 @@ export class BusinessEditComponent implements OnInit {
         this.store_images = Object.values(data["data"].store_images);
       
           if(data['data'].country){
+            this.showLoader('state');
             jQuery('#country').val(data['data'].country);
             let fieldText = 'State';
             let ZipCodeText = 'Zip Code';
@@ -387,7 +395,7 @@ export class BusinessEditComponent implements OnInit {
           
   
         if(data['data'].state && data['data'].country){
-          $('.loader-container').show();
+          this.showLoader('city');
           jQuery.getJSON( "assets/json/cities.json", function( value ) {
   
             if(value && Array.isArray(value)){
@@ -416,7 +424,7 @@ export class BusinessEditComponent implements OnInit {
                 $('.inputCity').remove();
                 jQuery('#city').html(html);
               }
-              $('.loader-container').hide();
+            
              
             }
              

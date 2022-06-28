@@ -38,6 +38,8 @@
                   <th class="trtopspaccings">Name</th>
                   <th class="trtopspaccings">Email</th>
                   <th class="trtopspaccings">Retail Stores</th>
+                  <th class="trtopspaccings">Created Date</th>
+                  <th class="trtopspaccings">Last Update Date</th>
 
                   <th class="trtopspaccings">Actions</th>
                 </tr>
@@ -53,6 +55,29 @@
                     <span *ngFor="let rs of rv.retail_store">{{ rs }}, </span>
                   </td>
                   <td class="">
+                    {{ rv.created_at }}
+                  </td>
+                  <td class="">
+                    {{ rv.updated_at }}
+                  </td>
+                  <td class="">
+                    <label class="toggle">
+                      <div class="togglebox">
+                        <input
+                          type="checkbox"
+                          name="cont_status"
+                          value="{{rv.id}}"
+                          class="form-control contStatus"
+                          [checked]="
+                                rv.status =='Active'
+                              "
+                        />
+                        <div class="slide-toggle"></div>
+                        <div class="slide-toggle-content text-sm">
+                          {{rv.status}}
+                        </div>
+                      </div>
+                    </label>
                     <a
                       class="text-primary me-4"
                       title="Edit your business contributer"

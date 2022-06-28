@@ -37,8 +37,8 @@
 									<th></th>
 									<th></th>
 									<th></th>
-									<th class="topspaccing">Reviews</th>
-									<th class="topspaccing">Followers</th>
+									<th class="topspaccing"><a href="javascript:void(0)"><span><i class="fa fa-star"></i></span></a>Reviews</th>
+									<th class="topspaccing"><a href="javascript:void(0)"><img src="/assets/icons/icon-follower-blue-sml.png" height="15" alt=""></a> Followers</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -83,8 +83,10 @@
 									<td class="contantsection">
 										<span *ngFor="let cb of rv.contributors">{{cb}}, </span>
 									</td>
-									<td><a href="#">{{rv.social}} <span><i class="fa fa-star"></i></span>4.7</a></td>
-									<td><a routerLink="followers/{{rv.slug}}"> <span><i class="fa fa-user"></i></span> {{rv.follow_count}}</a></td>
+									<td><a href="#">{{rv.social}} 4.7</a></td>
+									<td><a routerLink="followers/{{rv.slug}}"> 
+										<!-- <span><i class="fa fa-user"></i></span>  -->
+										{{rv.follow_count}}</a></td>
 									<td class="status">
 										<a routerLink="/members/business/insights">
 											<img src="/assets/images/icon-insight.png">

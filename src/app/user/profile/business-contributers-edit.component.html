@@ -8,7 +8,11 @@
   <div class="container clearfix">
     <h2 *ngIf="contDetails.id; else elseBlock">Edit a Contributer</h2>
     <ng-template #elseBlock><h2>Add a Contributer</h2></ng-template>
+<<<<<<< contributor-form-structure
     <div *ngIf="contDetails.id; else elseDesc" class="col-md-8 mb-3">
+=======
+    <div *ngIf="contDetails.id; else elseDesc" class="col-md-8">
+>>>>>>> main
       Contributors assigned in your account can be assigned to Store Profile
       listings to manage directly such as store profile content, photos,
       promotions and deals, products, and more.
@@ -57,6 +61,7 @@
                   ngModel
                 />
                 <div class="modal-body formcontant">
+<<<<<<< contributor-form-structure
                   <div class="form-group whitebgs row">
                     <!-- <div class="" ></div> -->
                     <div class="col-md-2">
@@ -316,6 +321,225 @@
     <!-- Manage price Section End -->
   </div>
 
+=======
+                  <div class="form-group whitebgs">
+                    <div class=""></div>
+                    <label for="paid-for-quality">First Name</label>
+                    <input
+                      type="text"
+                      id="first_name"
+                      name="first_name"
+                      class="sm-form-control required customInput"
+                      value="{{ contDetails.first_name }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs">
+                    <div class=""></div>
+                    <label for="paid-for-quality">Last Name</label>
+                    <input
+                      type="text"
+                      id="last_name"
+                      name="last_name"
+                      class="sm-form-control required"
+                      value="{{ contDetails.last_name }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+
+                  <div class="form-group whitebgs">
+                    <div class=""></div>
+                    <label for="paid-for-quality">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="sm-form-control email required customInput"
+                      value="{{ contDetails.email }}"
+                      placeholder=""
+                      [readonly]="this.cont_id != 'add'"
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality">Phone</label>
+                    <input
+                      type="number"
+                      id="phone"
+                      name="phone"
+                      class="sm-form-control phone required"
+                      value="{{ contDetails.phone }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs">
+                    <div class=""></div>
+                    <label for="paid-for-quality">Position</label>
+                    <input
+                      type="text"
+                      id="position"
+                      name="position"
+                      class="sm-form-control required customInput"
+                      value="{{ contDetails.position }}"
+                      placeholder=""
+                      ngModel
+                    />
+                  </div>
+
+                  <div class="form-group whitebgs">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality">Country</label>
+                    <select
+                      id="country"
+                      name="country"
+                      class="sm-form-control country required customInput"
+                      placeholder=""
+                      ngModel
+                    >
+                      <option value="">Select Country</option>
+                      <option value="United States">
+                        United States Of America
+                      </option>
+                      <option value="Canada">Canada</option>
+                      <option value="Australia">Australia</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group whitebgs">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality">State</label>
+                    <select
+                      id="state"
+                      name="state"
+                      class="sm-form-control state required customInput"
+                      placeholder=""
+                      ngModel
+                    >
+                      <option value="">Loading...</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group whitebgs">
+                    <!-- <div class=""></div> -->
+                    <label for="paid-for-quality">City</label>
+                    <select
+                      id="city"
+                      name="city"
+                      class="sm-form-control city required customInput"
+                      placeholder=""
+                      ngModel
+                    >
+                      <option value="">Loading...</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group whitebgs retail_store">
+                    <div class="storetopcms"></div>
+                    <label for="paid-for-quality storelabel"
+                      >Retail Stores</label
+                    >
+                    <select
+                      class="js-select2 sm-form-control cmsspaccing"
+                      name="retail_store"
+                      multiple="multiple"
+                    >
+                      <option
+                        *ngFor="let storeMeta of retail_store_dropdown"
+                        value="{{ storeMeta.id }}"
+                        [selected]="
+                          checkRetailStoreSelectStatus(storeMeta.id) == 'yes'
+                        "
+                      >
+                        {{ storeMeta.name }}
+                      </option>
+                    </select>
+                    <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
+                  </div>
+                  <div class="form-group whitebgs signupFields">
+                    <label for="paid-for-quality">Choose Password</label>
+                    <input
+                      type="password"
+                      id="contributor_password"
+                      name="password"
+                      value=""
+                      minlength="6"
+                      class="sm-form-control customInput contributorPassword"
+                      required
+                      ngModel
+                    />
+                  </div>
+                  <div class="form-group whitebgs signupFields">
+                    <label for="paid-for-quality">Confirm Password</label>
+                    <input
+                      type="password"
+                      id="contributor_repassword"
+                      name="cpassword"
+                      value=""
+                      class="sm-form-control customInput contributorCPassword"
+                      required
+                      ngModel
+                    />
+                  </div>
+
+                  <label
+                    class="ohnohoney"
+                    for="contributor_captcha_name"
+                  ></label>
+                  <input
+                    autocomplete="off"
+                    class="ohnohoney honeyInput"
+                    id="contributor_captcha_name"
+                    name="contributor_captcha_name"
+                    placeholder="Your name here"
+                    type="text"
+                  />
+                  <label
+                    class="ohnohoney"
+                    for="contributor_captcha_email"
+                  ></label>
+                  <input
+                    autocomplete="off"
+                    class="ohnohoney honeyInput"
+                    id="contributor_captcha_email"
+                    name="contributor_captcha_email"
+                    placeholder="Your e-mail here"
+                    type="email"
+                  />
+                </div>
+                <small *ngIf="!contDetails.id" class="form-text text-muted">
+                  *Important: Once you submit the above, you are adding a
+                  Business Contributor to your Business account. The new
+                  Contributor will automatically receive a Welcome email with
+                  their POW account information to login to your Business
+                  account and can manage store / dispensary profiles listings
+                  assigned to them.</small
+                >
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <a href="#"
+                    ><button
+                      type="button"
+                      class="btn btn-link"
+                      data-dismiss="modal"
+                    >
+                      Cancel
+                    </button></a
+                  >
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Manage price Section End -->
+  </div>
+
+>>>>>>> main
   <script>
     jQuery(document).ready(function () {
       setTimeout(

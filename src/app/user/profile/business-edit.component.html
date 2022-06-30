@@ -314,25 +314,22 @@
     <div class="row">
       <div class="col-md-8">
         <div class="white-box">
-          <div class="white-box-title" *ngIf="dispDetails.disp_id">
-            <div
-              *ngIf="
-                dispDetails.claim_status == 'Unverified';
-                else elseStatusBlock
-              "
-            >
-              <h3>{{ dispDetails.name }}</h3>
-              <br />
-              <p>
-                Your store profile and listing is unverified. To verify you are
-                the correct owner or operator, contact the POW Team
-                <a
+
+          <div class="white-box-title" *ngIf="dispDetails.disp_id;">
+            <div *ngIf="dispDetails.claim_status == 'Unverified'">
+              <h3>{{ dispDetails.name }}</h3> <br>
+              <div class="row">
+                <div class="col-md-1"><img src="/assets/images/icon-verified-no.png"></div>
+                <div class="col-md-11"><p >Oh snap! {{ dispDetails.name }}’s profile and listing is “unverified”. It’s super important your store profile and retail brand is verified on POW to authenticate ownership and show customers your store and brand is genuine. Verified store and brand listings also receive stronger authority and exposure to customers on POW. Verify you are the correct owner or operator and contact the POW Team <a 
                   href="javascript:void(0)"
                   data-toggle="modal"
                   data-target="#myModal_paid"
                   >here
-                </a>
-              </p>
+                 </a
+              ></p></div>
+              </div>
+              
+                  
 
               <!-- <div
                 class="btn-group-sm"
@@ -346,17 +343,17 @@
               </div> -->
               <!-- <i class="icon-angle-right"></i> -->
             </div>
-            <ng-template #elseStatusBlock>
-              <div>
-                <h3>{{ dispDetails.name }}</h3>
-                <br />
-                <p>
-                  <a href="javascript:void(0)"
-                    >{{ dispDetails.claim_status }}
-                  </a>
-                </p>
 
-                <!-- <div
+            
+            <div *ngIf="dispDetails.claim_status == 'Verified'">
+              <h3>{{ dispDetails.name }}</h3> <br>
+              <div class="row">
+                <div class="col-md-1"><img src="/assets/images/icon-verified-yes.png"></div>
+                <div class="col-md-11"><p>PuPow! {{ dispDetails.name }}’s profile and listing is verified. Customers can now find your store on POW and is receiving brand authority with customers when searching for local stores or dispensaries. No further action required.</p></div>
+              </div>
+              
+              
+              <!-- <div
                 class="btn-group-sm"
                 style="
                   display: inline;
@@ -366,9 +363,32 @@
               >
                 <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> 
               </div> -->
-                <!-- <i class="icon-angle-right"></i> -->
+              <!-- <i class="icon-angle-right"></i> -->
+            </div>
+
+            <div *ngIf="dispDetails.claim_status == 'Pending'">
+              <h3>{{ dispDetails.name }}</h3> <br>
+              <div class="row">
+                <div class="col-md-1"><img src="/assets/images/icon-verified-pending.png"></div>
+                <div class="col-md-11"><p>You’re almost there! {{ dispDetails.name }}’s profile and listing on POW is pending review to authenticate that you are the correct owner of the profile and listing. A POW Team member will send an email on your account within 48-72 hours with an update.</p></div>
               </div>
-            </ng-template>
+                  
+              
+              <!-- <div
+
+                class="btn-group-sm"
+                style="
+                  display: inline;
+                  margin-left: 10px;
+                  vertical-align: middle;
+                "
+              >
+                <button class="btn btn-primary save-btn" style="width: 10%;" (click)="editStore()">Add</button> 
+              </div> -->
+
+              <!-- <i class="icon-angle-right"></i> -->
+            </div>
+
           </div>
           <div class="white-box-content">
             <form
@@ -705,6 +725,72 @@
                     </div>
                     <!-- <input  class="form-control" type="file" id="formFile"> -->
                   </div>
+
+                  <div class="form-group whitebgs row">
+                    <!-- <div class=""></div> -->
+                    <div class="col-md-2">
+                      <label for="store_images ">Store Images</label>
+                    </div>
+                    <div class="col-md-10">
+                      <label for="store_images" class="custom-file-upload"
+                        ><i class="fa fa-cloud" aria-hidden="true"></i> Custom
+                        Images Upload</label
+                      >
+                      <small>*Storefronts with photos get more visitors and customer visits. Upload unlimited photos to your profile to showcase your storefront, inside layout and team members.</small><br>
+                      <small
+                        >*You can add multiple photos at one time by pressing
+                        'cntrl' and selecting the photos</small
+                      >
+                    </div>
+                    <input
+                      type="file"
+                      id="store_images"
+                      class="fileInput col-md-2"
+                      name="store_images"
+                      (change)="this.onStoreImagesUpload($event)"
+                      multiple
+                    />
+                    <!-- <input  class="form-control" type="file" id="formFile"> -->
+                    <div class="image-container mt-3 col-md-12">
+                      <div
+                        class="image-area"
+                        *ngFor="let storeImage of store_images"
+                      >
+                        <img
+                          src="{{ storeImage.link }}"
+                          width="100"
+                          height="100"
+                          alt=""
+                        /><a
+                          class="remove-image"
+                          href="javascript:void(0)"
+                          data-name="{{ storeImage.name }}"
+                          style="display: inline"
+                          >x</a
+                        >
+                        <label class="toggle">
+                          <div class="togglebox">
+                            <input
+                              type="radio"
+                              name="is_thumbnail"
+                              value="{{ storeImage.name }}"
+                              class="form-control isThumbnail"
+                              [checked]="
+                                storeImage.name ==
+                                dispDetails.store_thumbnail_image
+                              "
+                            />
+                            <div class="slide-toggle"></div>
+                            <div class="slide-toggle-content text-sm">
+                              Thumbnail
+                            </div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                    <!--  -->
+                  </div>
+
                   <div class="form-group whitebgs row">
                     <div class="wait-layer" *ngIf="waitLayer"></div>
                     <h4 for="paid-for-quality" class="w-100 mb-0 text-center">
@@ -1032,8 +1118,39 @@
                       <div class="slide-toggle-content">Close</div>
                     </label>
                   </div>
+                  
+                  <div class="form-group whitebgs row">
+                    <!-- <div class="storetopcms"></div> -->
+                    <div class="col-md-2">
+                      <label for="paid-for-quality storelabel"
+                        >Store Tags</label
+                      >
+                    </div>
+                    <div class="col-md-10">
+                      <select
+                        class="js-select2 sm-form-control cmsspaccing"
+                        name="store_meta"
+                        multiple="multiple"
+                      >
+                        <option
+                          *ngFor="
+                            let storeMeta of dispDetails.store_meta_dropdown
+                          "
+                          value="{{ storeMeta.id }}"
+                          [selected]="
+                            checkStoreMetaSelectStatus(storeMeta.id) == 'yes'
+                          "
+                        >
+                          {{ storeMeta.title }}
+                        </option>
+                      </select>
+                    </div>
+                    <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
+                  </div>
+
                   <div class="form-group whitebgs row">
                     <div class="col-md-2">
+
                       <label for="paid-for-quality">Assign Contributer</label>
                     </div>
                     <div class="col-md-10">
@@ -1078,34 +1195,8 @@
                     </div>
                     <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
                   </div>
-                  <div class="form-group whitebgs row">
-                    <!-- <div class="storetopcms"></div> -->
-                    <div class="col-md-2">
-                      <label for="paid-for-quality storelabel"
-                        >Store Meta</label
-                      >
-                    </div>
-                    <div class="col-md-10">
-                      <select
-                        class="js-select2 sm-form-control cmsspaccing"
-                        name="store_meta"
-                        multiple="multiple"
-                      >
-                        <option
-                          *ngFor="
-                            let storeMeta of dispDetails.store_meta_dropdown
-                          "
-                          value="{{ storeMeta.id }}"
-                          [selected]="
-                            checkStoreMetaSelectStatus(storeMeta.id) == 'yes'
-                          "
-                        >
-                          {{ storeMeta.title }}
-                        </option>
-                      </select>
-                    </div>
-                    <!-- <input type = "text" id="assign_user" name="assign_user" class="sm-form-control assign_user required" placeholder="" ngModel> -->
-                  </div>
+
+                  
 
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
@@ -1134,72 +1225,24 @@
                   <div class="form-group whitebgs row">
                     <!-- <div class=""></div> -->
                     <div class="col-md-2">
-                      <label for="store_images ">Store Images</label>
+                      <label for="paid-for-quality">License #</label>
                     </div>
                     <div class="col-md-10">
-                      <label for="store_images" class="custom-file-upload"
-                        ><i class="fa fa-cloud" aria-hidden="true"></i> Custom
-                        Images Upload</label
-                      >
-                      <small
-                        >*Storefronts with photos get more visitors and customer
-                        visits. Upload unlimited photos to your profile to
-                        showcase your storefront, inside layout and team
-                        members.</small
-                      ><br />
-                      <small
-                        >*You can add multiple photos at one time by pressing
-                        'cntrl' and selecting the photos</small
-                      >
+
+                      <input
+                        type="text"
+                        id="license_number"
+                        name="license_number"
+                        class="sm-form-control required"
+                        value="{{ dispDetails.license_number }}"
+                        placeholder=""
+                        ngModel
+                      />
+
                     </div>
-                    <input
-                      type="file"
-                      id="store_images"
-                      class="fileInput col-md-2"
-                      name="store_images"
-                      (change)="this.onStoreImagesUpload($event)"
-                      multiple
-                    />
-                    <!-- <input  class="form-control" type="file" id="formFile"> -->
-                    <div class="image-container mt-3 col-md-12">
-                      <div
-                        class="image-area"
-                        *ngFor="let storeImage of store_images"
-                      >
-                        <img
-                          src="{{ storeImage.link }}"
-                          width="100"
-                          height="100"
-                          alt=""
-                        /><a
-                          class="remove-image"
-                          href="javascript:void(0)"
-                          data-name="{{ storeImage.name }}"
-                          style="display: inline"
-                          >x</a
-                        >
-                        <label class="toggle">
-                          <div class="togglebox">
-                            <input
-                              type="radio"
-                              name="is_thumbnail"
-                              value="{{ storeImage.name }}"
-                              class="form-control isThumbnail"
-                              [checked]="
-                                storeImage.name ==
-                                dispDetails.store_thumbnail_image
-                              "
-                            />
-                            <div class="slide-toggle"></div>
-                            <div class="slide-toggle-content text-sm">
-                              Thumbnail
-                            </div>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                    <!--  -->
                   </div>
+
+                 
                   <label class="ohnohoney" for="store_captcha_name"></label>
                   <input
                     autocomplete="off"
